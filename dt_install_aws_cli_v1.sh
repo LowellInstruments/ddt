@@ -9,11 +9,11 @@ clear && echo && set -e
 trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
 
 
-# unzip our file in _dt_files
+# unzip our file inside _dt_files in folder ddt
 cd _dt_files && unzip awscli-bundle.zip
 
 
 # install it
 echo; echo 'I > install AWS cli v1'
-sudo ./_dt_files/awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 aws --version
