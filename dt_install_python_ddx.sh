@@ -3,7 +3,7 @@
 
 FI=/home/pi/li
 VENV=$FI/venv
-VPIP=$VENV/bin/pip
+VPIP=$VENV/bin/pip3
 FH=/home/pi/li/ddh
 FS=/home/pi/li/dds
 TH=/tmp/git_ddh
