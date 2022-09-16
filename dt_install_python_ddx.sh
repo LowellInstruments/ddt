@@ -33,9 +33,7 @@ cp $FS/settings/_macs_to_sn.yml $FB || true
 printf 'U > clone from github\n'
 rm -rf /tmp/git* || true
 git clone -b v4 https://github.com/lowellinstruments/ddh.git "$TH"
-$VPIP install -r $FH/requirements.txt
 git clone https://github.com/lowellinstruments/dds.git "$TS"
-$VPIP install -r $FS/requirements.txt
 
 
 # restore configuration we backed up before
@@ -52,6 +50,8 @@ rm -rf $FH
 rm -rf $FS
 mv $TH $FH
 mv $TS $FS
+$VPIP install -r $FH/requirements.txt
+$VPIP install -r $FS/requirements.txt
 
 
 printf 'I > ensuring resolv.conf \n'
