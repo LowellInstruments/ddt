@@ -3,12 +3,16 @@
 
 VENV=/home/pi/li/venv
 VPIP=$VENV/bin/pip
+TM=/tmp/lowell-mat
+
 
 
 printf '\n\n\n---- Install MAT ----\n'
 
 printf '\nI > MAT library...\n'
 source $VENV/bin/activate
-$VPIP install --no-deps --force-reinstall git+https://github.com/LowellInstruments/lowell-mat.git@v4
+
+git clone -b v4 https://github.com/lowellinstruments/lowell-mat.git "$TM"
+$VPIP install -r $TM/requirements.txt
 
 printf 'I > MAT library OK\n'
