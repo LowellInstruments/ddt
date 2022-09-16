@@ -1,7 +1,6 @@
 # our own stuff
 .idea/
 *.so
-*.zip
 _vessel_files/
 _vessel_files/*
 
