@@ -30,14 +30,14 @@ cp $FS/settings/_macs_to_sn.yml $FB || true
 
 
 # try to pull DDH & DDS from git
-printf 'U > clone from github\n'
+printf 'I > clone from github\n'
 rm -rf /tmp/git* || true
 git clone -b v4 https://github.com/lowellinstruments/ddh.git "$TH"
 git clone https://github.com/lowellinstruments/dds.git "$TS"
 
 
 # restore configuration we backed up before
-printf 'U > restore backup\n'
+printf 'I > restore backup\n'
 cp -r $FB/dl_files $TS
 cp $FB/dds_run.sh "$TS"/dds_run.sh
 cp $FB/ddh.json "$TS"/settings
@@ -45,7 +45,7 @@ cp $FB/_macs_to_sn.yml "$TS"/settings 2> /dev/null || true
 
 
 # we reached here, we are doing well
-printf 'U > install\n'
+printf 'I > install\n'
 rm -rf $FH
 rm -rf $FS
 mv $TH $FH
@@ -61,4 +61,4 @@ sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf"
 sudo chattr +i /etc/resolv.conf
 
 
-echo; echo 'U > DDH and DDS finished'
+echo; echo 'I > DDX finished'
