@@ -31,15 +31,6 @@ printf 'I > uninstalling old DDS \n '
 rm -rf $FOL_DDS || true
 
 
-# on RPi, venv needs to inherit PyQt5 installed via apt
-printf 'I > virtualenv \n'
-rm -rf $VENV || true
-python3 -m venv $VENV --system-site-packages
-source $VENV/bin/activate
-$VPIP install --upgrade pip
-$VPIP install wheel
-
-
 printf 'I > clone DDH from github and install \n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL_DDH -b v4
 $VPIP install -r $FOL_DDH/requirements.txt
