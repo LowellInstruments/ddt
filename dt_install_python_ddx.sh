@@ -38,9 +38,9 @@ git clone https://github.com/lowellinstruments/dds.git "$TS"
 
 # restore configuration we backed up before
 printf 'I > restore backup\n'
-cp -r $FB/dl_files $TS
-cp $FB/dds_run.sh "$TS"/dds_run.sh
-cp $FB/ddh.json "$TS"/settings
+if [ -d $FB/dl_files ]; then cp -r $FB/dl_files $TS; fi
+if [ -t $FB/dds_run.sh ]; then cp $FB/dds_run.sh $TS; fi
+if [ -t $FB/settings/ddh.json ]; then cp $FB/settings/ddh.json $TS/settings; fi
 cp $FB/_macs_to_sn.yml "$TS"/settings 2> /dev/null || true
 
 
