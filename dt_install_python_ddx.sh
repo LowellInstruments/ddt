@@ -47,6 +47,7 @@ $VPIP install -r $FOL_DDH/requirements.txt
 
 printf 'I > clone DDS from github and install \n'
 git clone https://github.com/LowellInstruments/dds.git $FOL_DDS
+$VPIP install -r $FOL_DDS/requirements.txt
 
 
 # X/. means the content excluding the folder X
