@@ -18,7 +18,7 @@ sudo apt-get update
 sudo apt-get -y install xscreensaver matchbox-keyboard ifmetric joe git \
 libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
 libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
-libcurl4-gnutls-dev gnutls-dev python3-pycurl
+libcurl4-gnutls-dev gnutls-dev python3-pycurl awscli
 
 
 printf 'I > juice4halt\n'
