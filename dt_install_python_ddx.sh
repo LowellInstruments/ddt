@@ -16,11 +16,11 @@ echo && echo && set -e
 trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 
 
-printf '\n\n\n---- Install / Update DDH and DDS ----\n'
+printf '\n\n\n---- Install / Update DDX ----\n'
 
 
 # backup existing DDH configuration
-printf 'U > backup\n'
+printf 'I > backup\n'
 rm -rf $FB || true
 mkdir -p $FB
 if [ -d $FS/dl_files ]; then cp -r $FS/dl_files $FB; fi
@@ -30,11 +30,8 @@ cp $FS/settings/_macs_to_sn.yml $FB || true
 
 
 # try to pull DDH & DDS from git
-printf 'U > uninstall\n'
-rm -rf /tmp/git* || true
-
-
 printf 'U > clone from github\n'
+rm -rf /tmp/git* || true
 git clone -b v4 https://github.com/lowellinstruments/ddh.git "$TH"
 $VPIP install -r $FH/requirements.txt
 git clone https://github.com/lowellinstruments/dds.git "$TS"
