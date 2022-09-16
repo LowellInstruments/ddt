@@ -8,8 +8,8 @@ ping -q -c 1 -W 1 www.google.com
 rv=$?
 if [ $rv -eq 0 ]; then
     echo;  echo 'R > we have internet, updating...'
-    $FT/dt_update_python_mat.sh
-    $FT/dt_update_python_ddx.sh
+    $FT/dt_install_python_mat.sh
+    $FT/dt_install_python_ddx.sh
 else
     echo; echo 'R > NO internet, NO updating'
 fi
