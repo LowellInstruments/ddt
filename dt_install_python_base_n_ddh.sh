@@ -43,17 +43,10 @@ $VPIP install wheel
 printf 'I > clone DDH from github and install \n'
 git clone https://github.com/LowellInstruments/ddh.git $FOL_DDH -b v4
 $VPIP install -r $FOL_DDH/requirements.txt
-$VPIP uninstall --yes bluepy
-$VPIP install git+https://github.com/LowellInstruments/bluepy.git
 
 
 printf 'I > clone DDS from github and install \n'
 git clone https://github.com/LowellInstruments/dds.git $FOL_DDS
-
-
-printf 'I > set bluepy permissions, also done other places \n'
-BLUEPY_HELPER=$VENV/lib/python3.7/site-packages/bluepy/bluepy-helper
-sudo setcap 'cap_net_raw,cap_net_admin+eip' $BLUEPY_HELPER
 
 
 # X/. means the content excluding the folder X
