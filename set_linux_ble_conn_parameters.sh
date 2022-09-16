@@ -2,8 +2,8 @@
 
 
 # remember to add to /etc/sudoers
-# kaz ALL=(ALL) NOPASSWD: /home/kaz/PycharmProjects/ddh_tools/set_linux_ble_conn_parameters.sh
-# pi ALL=(ALL) NOPASSWD: /home/pi/li/ddh/ddh_tools/set_linux_ble_conn_parameters.sh
+# kaz ALL=(ALL) NOPASSWD: /home/kaz/PycharmProjects/ddt/set_linux_ble_conn_parameters.sh
+# pi ALL=(ALL) NOPASSWD: /home/pi/li/ddt/set_linux_ble_conn_parameters.sh
 
 
 

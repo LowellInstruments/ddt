@@ -21,9 +21,8 @@ echo 'RC_LOCAL -> asserting RPi NTP true'
 timedatectl set-ntp true
 
 printf "RC_LOCAL -> dt_tools_update.sh\n"
-FT=/home/pi/li/ddh_tools
+FT=/home/pi/li/ddt
 cd $FT || false
-# todo: check if we have internet
 $FT/dt_update_python_all.sh &
 rv=$?
 if [ $rv -ne 0 ]; then

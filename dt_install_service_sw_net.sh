@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 LI=/home/pi/li
-DDT=$LI/ddh_tools
+DDT=$LI/ddt
 
 
 # abort upon any error

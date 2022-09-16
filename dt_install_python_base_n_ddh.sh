@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 LI=/home/pi/li
-FOL_DDT=$LI/ddh_tools
+FOL_DDT=$LI/ddt
 FOL_DDS=$LI/dds
 FOL_DDH=$LI/ddh
 FOL_DLF=$FOL_DDS/dl_files

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-FT=/home/pi/li/ddh_tools
+FT=/home/pi/li/ddt
 
 
 ping -q -c 1 -W 1 www.google.com
