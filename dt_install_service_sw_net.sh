@@ -23,5 +23,9 @@ sudo systemctl disable unit_dds_switch_net.service
 sudo systemctl enable unit_dds_switch_net.service
 sudo systemctl start unit_dds_switch_net.service
 
+# get rid of any other version
+sudo systemctl disable unit_switch_net.service || true
+
+
 echo 'I > SW-NET service OK'
 echo 'I > check w/ sudo systemctl status unit_dds_switch_net.service'
