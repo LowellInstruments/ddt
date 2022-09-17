@@ -12,9 +12,10 @@ from bleak.backends.scanner import AdvertisementData
 from bleak.backends.device import BLEDevice
 from datetime import datetime
 from enum import Enum
-
+import pathlib
 from ddh.threads.back import back
 from ddh.threads.utils_core import core_set_state, STATE_BLE_DL_ONGOING
+
 
 NAME_FILTER = 'ZT-MOANA-0051'
 VSP_RX_CHAR_UUID = '569a2001-b87f-490c-92cb-11ba5ea5167c'
@@ -55,7 +56,7 @@ class MoanaBle:
         self.offload_file = None
         self.offload_file_name = ''
         self.offload_file_size = 0
-        self.path = '/home/kaz/Downloads/'
+        self.path = str(pathlib.Path.home() / 'Downloads')
         self.offload_file_path = self.path
 
     async def packet_write(self, data: str):
@@ -310,10 +311,6 @@ class MoanaBle:
             if offload_state == OffloadState.AUTHENTICATE:
                 print('Status file changed to 0')
 
-                g = open(self.path + 'status.txt', 'w')
-                g.write('0')
-                g.close()
-
                 status = await self.authenticate()
                 offload_state = OffloadState.SYNC_TIME
             elif offload_state == OffloadState.SYNC_TIME:
@@ -345,9 +342,6 @@ class MoanaBle:
 
             # todo > why this? it was sleep 20
             time.sleep(5)
-            g = open(self.path + 'status.txt', 'w')
-            g.write('1')
-            g.close()
             print('Offload succeeded')
             return True
         else:
@@ -400,3 +394,4 @@ if __name__ == '__main__':
 
 
 # tests, several runs in a row
+
