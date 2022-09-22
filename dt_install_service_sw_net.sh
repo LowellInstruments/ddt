@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-LI=/home/pi/li
-DDT=$LI/ddt
+
+
+# grab variables from other script
+. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
 # abort upon any error
 clear && echo && set -e
-trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
+trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 
 
 printf '\n\n\n---- Install SW-NET service ----\n'
@@ -16,7 +18,7 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
 
 printf 'I > LI switch_net service \n'
 sudo systemctl stop unit_switch_net.service || true
-sudo cp $DDT/_dt_files/unit_switch_net.service /etc/systemd/system/
+sudo cp "$F_DT"/_dt_files/unit_switch_net.service /etc/systemd/system/
 sudo chmod 644 /etc/systemd/system/unit_switch_net.service
 sudo systemctl daemon-reload
 sudo systemctl disable unit_switch_net.service

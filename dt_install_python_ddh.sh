@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
 
-FI=/home/pi/li
-VENV="$FI"/venv
-VPIP="$VENV"/bin/pip3
-FH=/home/pi/li/ddh
-FS="$FH"/dds
-TH=/tmp/ddh
+# grab variables from file
+. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
 # abort upon any error
@@ -19,25 +15,25 @@ printf '\n\n\n---- Install / Update DDH ----\n'
 
 # clone DDH from git -> /tmp
 printf 'I > clone from github\n'
-rm -rf "$TH" || true
-git clone https://github.com/lowellinstruments/ddh_v4.git "$TH"
+rm -rf "$F_TA" || true
+git clone https://github.com/lowellinstruments/ddh_v4.git "$F_TA"
 
 
 
 # backup existing DDH configuration -> /tmp
 printf 'I > backup\n'
-if [ -d "$FH"/dl_files ]; then cp -r "$FH"/dl_files "$TH"; fi
-if [ -t "$FS"/dds_run.sh ]; then cp "$FS"/dds_run.sh "$TH"/dds; fi
-if [ -t "$FH"/settings/ddh.json ]; then cp "$FH"/settings/ddh.json "$TH"/settings; fi
-cp "$FH"/settings/_macs_to_sn.yml "$TH"/settings || true
+if [ -d "$F_DA"/dl_files ]; then cp -r "$F_DA"/dl_files "$F_TA"; fi
+if [ -t "$F_DA"/dds/dds_run.sh ]; then cp "$F_DA"/dds/dds_run.sh "$F_TA"/dds; fi
+if [ -t "$F_DA"/settings/ddh.json ]; then cp "$F_DA"/settings/ddh.json "$F_TA"/settings; fi
+cp "$F_DA"/settings/_macs_to_sn.yml "$F_TA"/settings || true
 
 
 
 # we reached here, we are doing well
 printf 'I > install\n'
-rm -rf $FH
-mv $TH $FH
-$VPIP install -r $FH/requirements.txt
+rm -rf "$F_DA"
+mv "$F_TA" "$F_DA"
+$VPIP install -r "$F_DA"/requirements.txt
 
 
 printf 'I > ensuring resolv.conf \n'

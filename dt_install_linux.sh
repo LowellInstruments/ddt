@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
-LI=/home/pi/li
-DDT=$LI/ddt
+
+
+# grab variables from file
+. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 J4H=$LI/juice4halt
 
 
 # abort upon any error
 clear && echo && set -e
-trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
-if [ $PWD != $DDT ]; then echo 'wrong starting folder'; exit 1; fi
+trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
+if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 printf '\n\n\n---- Install Linux ----\n'
@@ -22,13 +24,13 @@ libcurl4-gnutls-dev gnutls-dev python3-pycurl awscli
 
 
 printf 'I > juice4halt\n'
-rm -rf $J4H
-mkdir -p $J4H/bin
-cp _dt_files/shutdown_script.py $J4H/bin/
+rm -rf "$J4H"
+mkdir -p "$J4H"/bin
+cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
 
 
 printf 'I > rc.local\n'
-sudo cp _dt_files/rc.local /etc/rc.local
+sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
 sudo chmod +x /etc/rc.local
 sudo systemctl enable rc-local
 

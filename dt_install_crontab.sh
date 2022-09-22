@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 
-LI=/home/pi/li
-DDT=$LI/ddt
+# grab variables from file
+. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
 # abort upon any error
 clear && echo && set -e
-trap 'echo ‘$BASH_COMMAND’ TRAPPED! rv $?' EXIT
+trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 
 
 echo; echo 'I > crontab'
-sudo cp $DDT/_dt_files/crontab /etc/crontab
+sudo cp "$F_DT"/_dt_files/crontab /etc/crontab
 sudo chmod 644 /etc/crontab
 sudo service cron reload
