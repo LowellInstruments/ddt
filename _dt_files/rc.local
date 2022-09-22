@@ -3,19 +3,21 @@
 # This script is executed at the end of each multiuser runlevel.
 # Make sure that the script will "exit 0" on success or any other
 # value on error.
-#
 # In order to enable this script just change the execution bits.
 
 
 echo 'RC_LOCAL -> delete flag run'
 rm -f /home/pi/rc-local-ran.ok || true
 
+
 echo 'RC_LOCAL -> Allow brightness control by non-root users'
 chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
 chmod 777 /sys/class/backlight/10-0045/brightness || true
 
+
 echo 'RC_LOCAL -> run juice4halt script'
 /home/pi/li/juice4halt/bin/shutdown_script.py &
+
 
 echo 'RC_LOCAL -> asserting RPi NTP true'
 timedatectl set-ntp true
@@ -28,6 +30,7 @@ rv=$?
 if [ $rv -ne 0 ]; then
     printf "RC_LOCAL could not run dt_tools_update!\n"
 fi
+
 
 echo 'RC_LOCAL -> set flag run'
 touch /home/pi/rc-local-ran.ok

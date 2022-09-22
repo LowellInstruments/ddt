@@ -18,6 +18,7 @@ if [ "$1" != "slow" -a "$1" != 'fast' ]; then
     exit 2
 fi
 
+
 rv="$(cat /sys/kernel/debug/bluetooth/hci0/conn_min_interval)"
 printf "current BLE conn_min_interval is %d", "$rv"
 rv="$(cat /sys/kernel/debug/bluetooth/hci0/conn_max_interval)"
