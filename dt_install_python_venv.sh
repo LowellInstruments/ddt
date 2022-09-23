@@ -18,3 +18,5 @@ python3 -m venv "$VENV" --system-site-packages
 source "$VENV"/bin/activate
 "$VPIP" install --upgrade pip
 "$VPIP" install wheel
+
+printf '\n\n --- done venv --- \n'

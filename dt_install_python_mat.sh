@@ -10,6 +10,6 @@ printf '\n\n\n---- Install MAT ----\n'
 printf '\nI > MAT library...\n'
 source "$VENV"/bin/activate
 
-pip install https://github.com/lowellinstruments/lowell-mat.git@v4
+pip install git+https://github.com/lowellinstruments/lowell-mat.git@v4
 
 printf 'I > MAT library OK\n'
