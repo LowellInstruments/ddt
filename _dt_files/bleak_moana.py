@@ -7,21 +7,25 @@ import re
 import struct
 import time
 import traceback
-from bleak import BleakScanner, BleakClient, BleakError
-from bleak.backends.scanner import AdvertisementData
-from bleak.backends.device import BLEDevice
+from bleak import BleakClient, BleakError
 from datetime import datetime
 from enum import Enum
-import pathlib
 from ddh.threads.back import back
 from ddh.threads.utils_core import core_set_state, STATE_BLE_DL_ONGOING
+from ddh.threads.utils_ddh import get_dl_folder_path_from_mac, create_folder_logger_by_mac
+from ddh.threads.utils_logs import l_i_, l_e_, l_d_
 
 
-NAME_FILTER = 'ZT-MOANA-0051'
 VSP_RX_CHAR_UUID = '569a2001-b87f-490c-92cb-11ba5ea5167c'
 VSP_TX_CHAR_UUID = '569a2000-b87f-490c-92cb-11ba5ea5167c'
 
 _sk = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+_g_data_progress = 0
+
+
+# -----------------------------------
+# Moana file for old version of DDH
+# -----------------------------------
 
 
 class OffloadState(Enum):
@@ -56,8 +60,7 @@ class MoanaBle:
         self.offload_file = None
         self.offload_file_name = ''
         self.offload_file_size = 0
-        self.path = str(pathlib.Path.home() / 'Downloads')
-        self.offload_file_path = self.path
+        self.mac = ''
 
     async def packet_write(self, data: str):
         self.packet_reset()
@@ -122,66 +125,53 @@ class MoanaBle:
             if self.packet_length <= 0:
                 self.packet_state = PacketState.COMPLETE
 
-    async def connect(self):
-        def name_filter(_: BLEDevice, adv: AdvertisementData):
-            if adv.local_name and adv.local_name.startswith(NAME_FILTER):
-                return True
-            return False
+    async def connect(self, mac):
 
         def handle_disconnect(_: BleakClient):
-            print("Disconnected")
+            l_i_("[ BLE ] moana disconnected")
 
         def handle_rx(_: int, data: bytearray):
             for i in data:
                 self.packet_parse(i)
 
         try:
-            # print('Scanning...')
-            device = await BleakScanner.find_device_by_filter(name_filter, timeout=40)
+            l_i_('[ BLE ] Connecting to {}'.format(mac))
+            self.client = BleakClient(mac, disconnected_callback=handle_disconnect)
+            if await self.client.connect():
+                self.mac = mac
+                await self.client.start_notify(VSP_TX_CHAR_UUID, handle_rx)
+                l_i_('[ BLE ] Connected')
+                return True
+            l_e_('[ BLE ] Failed to connect to Moana sensor {}'.format(mac))
         except (asyncio.TimeoutError, BleakError, OSError):
-            print('An error occurred while scanning - check Bluetooth')
-            return False
-        try:
-            if device:
-                print(f'Connecting to {device.name}')
-                self.client = BleakClient(device, disconnected_callback=handle_disconnect)
-                if await self.client.connect():
-                    await self.client.start_notify(VSP_TX_CHAR_UUID, handle_rx)
-                    print('Connected')
-                    return True
-                print(f'Failed to connect to Moana sensor {device.name}')
-            else:
-                pass
-                # print('Failed to find a Moana sensor')
-        except (asyncio.TimeoutError, BleakError, OSError):
-            print(f'An error occurred while connecting to Moana sensor {device.name}')
+            l_e_('[ BLE ] An error occurred while connecting to Moana sensor {}'.format(mac))
         return False
 
     async def disconnect(self):
         if self.client and self.client.is_connected:
-            print('Disconnecting')
+            l_i_('[ BLE ] Disconnecting')
             await self.packet_write('.')
             await self.client.disconnect()
 
     async def authenticate(self):
-        print('Authenticating')
+        l_i_('[ BLE ] authenticating')
         await self.packet_write('A123')
         if await self.packet_read('a') == '{"Authenticated":true}':
             return True
-        print('Failed to authenticate')
+        l_e_('[ BLE ] error to moana authenticate')
         return False
 
     async def sync_time(self):
-        print('Syncing time')
+        l_i_('Syncing time')
         self.time_sync = int(time.time())
         await self.packet_write(f'T{self.time_sync}')
         if await self.packet_read('t') == f'{{"Synchronized":{self.time_sync}}}':
             return True
-        print('Failed to sync time')
+        l_e_('[ BLE ] failed to sync time')
         return False
 
     async def file_info(self):
-        print('Retrieving file info')
+        l_i_('Retrieving file info')
         await self.packet_write('F')
         rsp = await self.packet_read('F')
         match = re.search(r'{"FileName":"(.*)","FileSizeEstimate":(.*),"ArchiveBit":"(.*)"}', rsp)
@@ -192,42 +182,44 @@ class MoanaBle:
             self.offload_file_name = f'{file_name_parts[0]}_{time_str}.bin'
             rsp_as_dict = json.loads(rsp)
             self.offload_file_size = int(rsp_as_dict['FileSizeEstimate'])
-            print('file size', self.offload_file_size)
-            print(f'Offloading to file: {self.offload_file_name}')
+            l_i_('[ BLE ] moana offloading to {} size {}'.format(self.offload_file_name, self.offload_file_size))
             try:
-                v = self.offload_file_path + self.offload_file_name
-                print('---', v)
-                self.offload_file = open(self.offload_file_path + self.offload_file_name, 'wb')
+                v = str(get_dl_folder_path_from_mac(self.mac)) + '/' + self.offload_file_name
+                create_folder_logger_by_mac(self.mac)
+                self.offload_file = open(v, 'wb')
                 return True
             except OSError:
-                print(f'Failed to open offload file {self.offload_file_name}')
+                l_e_('failed to open offload file {}'.format(self.offload_file_name))
         return False
 
     async def read_data(self):
         await self.packet_write('B')
         data = await self.packet_read_binary('D')
         if len(data) > 0:
+            # moana sizes from file_info() is of the CSV file (~5 factor)
+            global _g_data_progress
+            _g_data_progress += (len(data) * 5)
             self.offload_file.write(data)
             # progress bar
-            print('.')
-            v = 100 * (len(data) / self.offload_file_size)
-            print('{}%'.format(v))
+            v = 100 * (_g_data_progress / self.offload_file_size)
+            l_d_('[ BLE ] moana file download progress {}%'.format(int(v)))
             _sk.sendto(str(v).encode(), ('127.0.0.1', 12349))
-
+            # still more file to receive
             return False
-        else:
-            print(f'\rRead {self.offload_file.tell()} Bytes')
-            self.close_file()
-            return True
+
+        # end receiving
+        self.close_file()
+        return True
 
     async def file_checksum(self):
-        print('Checking checksum')
+        l_i_('[ BLE ] moana checking checksum')
         await self.packet_write('Z')
         moana_checksum_str = await self.packet_read('z')
         moana_checksum = int(moana_checksum_str, 16)
         file_checksum = 0
 
-        self.offload_file = open(self.offload_file_path + self.offload_file_name, 'rb')
+        v = str(get_dl_folder_path_from_mac(self.mac)) + '/' + self.offload_file_name
+        self.offload_file = open(v, 'rb')
         while True:
             byte = self.offload_file.read(1)
             if not byte:
@@ -239,13 +231,12 @@ class MoanaBle:
         self.offload_file.close()
 
         if file_checksum != moana_checksum:
-            print('File checksum does not match')
+            l_e_('[ BLE ] moana File checksum does not match')
             return False
-        print('File checksum matches')
         return True
 
     async def clear_data(self):
-        print('Clearing file from Moana')
+        l_d_('[ BLE ] clearing file from Moana')
         await self.packet_write('C')
         return await self.packet_read('c') == '{"ArchiveBit":false}'
 
@@ -254,9 +245,11 @@ class MoanaBle:
             self.offload_file.close()
 
     def decode(self):
-        with open(self.offload_file_path + self.offload_file_name, 'rb') as bin_file:
-            csv_file_name = self.path + os.path.splitext(self.offload_file_name)[0] + '.csv'
-            print(f'Decoding to file: {csv_file_name}')
+
+        v = str(get_dl_folder_path_from_mac(self.mac)) + '/' + self.offload_file_name
+        with open(v, 'rb') as bin_file:
+            csv_file_name = v[:-3] + 'csv'
+            l_i_('[ BLE ] decoding moana file {}'.format(csv_file_name))
             with open(csv_file_name, 'wb') as csv_file:
                 # header
                 data = bin_file.read(1)
@@ -270,7 +263,7 @@ class MoanaBle:
                 data = bin_file.read(6)
                 while data:
                     if len(data) != 6:
-                        print('Unexpected number of bytes')
+                        l_e_('[ BLE ] moana Unexpected number of bytes')
                         break
                     values = struct.unpack('<3H', data)
 
@@ -284,15 +277,15 @@ class MoanaBle:
                     csv_file.write(f'{temp:.3f}\n'.encode())
 
                     data = bin_file.read(6)
-        print(f'Decoding finished')
+        l_i_('[ BLE ] decoding finished')
 
-    async def download_recipe(self):
+    async def download_recipe(self, mac):
 
         # for GUI refresh
         back['ble']['downloading'] = True
 
         # call connect to logger
-        status = await self.connect()
+        status = await self.connect(mac)
         last_state = OffloadState.CONNECT
         offload_state = OffloadState.AUTHENTICATE
         state_time = datetime.now()
@@ -305,12 +298,10 @@ class MoanaBle:
                 state_time = datetime.now()
             else:
                 if (datetime.now() - state_time).total_seconds() > 600:
-                    print('Timed out during offload')
+                    l_e_('[ BLE ] moana error: Timed out during offload')
                     break
 
             if offload_state == OffloadState.AUTHENTICATE:
-                print('Status file changed to 0')
-
                 status = await self.authenticate()
                 offload_state = OffloadState.SYNC_TIME
             elif offload_state == OffloadState.SYNC_TIME:
@@ -319,6 +310,8 @@ class MoanaBle:
             elif offload_state == OffloadState.FILE_INFO:
                 status = await self.file_info()
                 offload_state = OffloadState.READ_DATA
+                global _g_data_progress
+                _g_data_progress = 0
             elif offload_state == OffloadState.READ_DATA:
                 if await self.read_data():
                     offload_state = OffloadState.CHECKSUM
@@ -330,68 +323,41 @@ class MoanaBle:
                 # await self.clear_data()
                 await self.disconnect()
                 offload_state = OffloadState.COMPLETE
-                # todo > remove this
                 break
 
         if offload_state == OffloadState.COMPLETE:
             self.decode()
             # progress bar
             v = 100
-            print('{}%'.format(v))
+            l_d_('[ BLE ] moana file download progress {}%'.format(int(v)))
             _sk.sendto(str(v).encode(), ('127.0.0.1', 12349))
 
             # todo > why this? it was sleep 20
             time.sleep(5)
-            print('Offload succeeded')
+            l_i_('[ BLE ] Offload succeeded')
             return True
-        else:
-            await self.disconnect()
-            self.close_file()
-            # print('Offload failed')
 
-        # progress bar
+        # did not go well
+        await self.disconnect()
+        self.close_file()
+        l_e_('[ BLE ] moana Offload failed')
+
+        # progress bar reset
         v = 0
-        print('{}%'.format(v))
         _sk.sendto(str(v).encode(), ('127.0.0.1', 12349))
         return False
 
 
-# def bleak_moana():
-#     try:
-#         moana_ble = MoanaBle()
-#         rv = asyncio.run(moana_ble.download_recipe())
-#         print('bye, bye')
-#         return rv
-#     except Exception as e:
-#         logging.error(traceback.format_exc())
-
-
-async def bleak_moana():
+async def bleak_moana(mac):
     try:
         moana_ble = MoanaBle()
-        rv = await moana_ble.download_recipe()
-        print('bye, bye', rv)
+        rv = await moana_ble.download_recipe(mac)
+        l_d_('[ BLE ] moana download_recipe rv = {}'.format(rv))
         return rv
+
     except Exception as e:
         logging.error(traceback.format_exc())
 
 
-async def bleak_moana_main():
-    return await bleak_moana()
-
-# todo >test icons
-# todo > test several exes in a row async
-
-if __name__ == '__main__':
-    loop = asyncio.get_event_loop()
-    coroutine = bleak_moana_main()
-    loop.run_until_complete(coroutine)
-    time.sleep(1)
-    print('puta')
-    coroutine = bleak_moana_main()
-    loop.run_until_complete(coroutine)
-
-
-
-# tests, several runs in a row
-
+async def bleak_moana_main(mac):
+    return await bleak_moana(mac)
