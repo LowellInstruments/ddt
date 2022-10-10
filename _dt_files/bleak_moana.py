@@ -319,8 +319,7 @@ class MoanaBle:
                 status = await self.file_checksum()
                 offload_state = OffloadState.CLEAR_DATA
             elif offload_state == OffloadState.CLEAR_DATA:
-                # todo > reenable these
-                # await self.clear_data()
+                await self.clear_data()
                 await self.disconnect()
                 offload_state = OffloadState.COMPLETE
                 break
@@ -332,7 +331,6 @@ class MoanaBle:
             l_d_('[ BLE ] moana file download progress {}%'.format(int(v)))
             _sk.sendto(str(v).encode(), ('127.0.0.1', 12349))
 
-            # todo > why this? it was sleep 20
             time.sleep(5)
             l_i_('[ BLE ] Offload succeeded')
             return True
