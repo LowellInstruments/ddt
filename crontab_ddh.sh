@@ -18,7 +18,7 @@ if [ $rv -ne 0 ]; then
     exit 1
 fi
 
-"$F_DA"/dds/dds_run.sh&
+"$F_DA"/dds_run.sh&
 rv=$?
 if [ $rv -ne 0 ]; then
     printf "crontab could not run DDS!"
