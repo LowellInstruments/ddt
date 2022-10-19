@@ -4,23 +4,10 @@
 # dt_update_x is called at rc.local
 
 
-# grab variables from file
+# grab, aka 'source', variables from file
 . ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
-printf "crontab -> ddh_run.sh\n"
-
-
-"$F_DA"/ddh_run.sh&
-rv=$?
-if [ $rv -ne 0 ]; then
-    printf "crontab could not run DDH!"
-    exit 1
-fi
-
-"$F_DA"/dds_run.sh&
-rv=$?
-if [ $rv -ne 0 ]; then
-    printf "crontab could not run DDS!"
-    exit 1
-fi
+printf "running crontab_ddh.sh\n"
+"$F_DA"/run_ddh.sh&
+"$F_DA"/run_dds.sh&
