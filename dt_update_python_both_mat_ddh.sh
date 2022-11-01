@@ -19,7 +19,7 @@ echo
 
 
 # uncomment if testing on laptop
-F_DA=/home/kaz/PycharmProjects/ddh/
+F_DA=/home/kaz/PycharmProjects/ddx/
 
 
 
@@ -27,7 +27,7 @@ F_DA=/home/kaz/PycharmProjects/ddh/
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 if [ $? -ne 0 ]; then echo 'U > error doing remote ID'; exit 1; fi
 if [ ${#_RCID} -ne 40 ]; then echo 'U > bad remote ID'; exit 1; fi
-_LCID=$(cd $F_DA && git rev-parse loop)
+_LCID=$(cd $F_DA && git rev-parse master)
 if [ $? -ne 0 ]; then echo 'U > error doing local ID'; exit 1; fi
 if [ ${#_LCID} -ne 40 ]; then echo 'U > bad local ID'; exit 1; fi
 printf 'U > DDH last remote commit ID %s\n' $_RCID
@@ -37,10 +37,10 @@ printf 'U > DDH last local  commit ID %s\n' $_LCID
 
 # update or not
 if [ $_RCID == $_LCID ]; then
-    echo 'U > DDH has the latest version'
+    echo 'U > DDX has the latest version'
     exit 0
 fi
-echo 'U > DDH needs an update	'
+echo 'U > warning: DDX local commit != remote'
 
 
 
