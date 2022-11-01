@@ -18,13 +18,13 @@ fi
 echo
 
 
-# todo remove this
+# uncomment if testing on laptop
 F_DA=/home/kaz/PycharmProjects/ddh/
 
 
 
 # get remote and local commit IDs
-_RCID=$(git ls-remote https://github.com/lowellinstruments/ddh.git master | awk '{ print $1 }')
+_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 if [ $? -ne 0 ]; then echo 'U > error doing remote ID'; exit 1; fi
 if [ ${#_RCID} -ne 40 ]; then echo 'U > bad remote ID'; exit 1; fi
 _LCID=$(cd $F_DA && git rev-parse loop)
@@ -44,6 +44,7 @@ echo 'U > DDH needs an update	'
 
 
 
+# comment if testing on laptop
 #"$F_DT"/dt_install_python_mat.sh
 #"$F_DT"/dt_install_python_ddh.sh
 
