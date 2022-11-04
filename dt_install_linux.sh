@@ -35,6 +35,7 @@ printf 'I > rc.local\n'
 sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
 sudo chmod +x /etc/rc.local
 sudo systemctl enable rc-local
+sudo systemctl status rc-local
 
 
 printf 'I > linux OK!\n'

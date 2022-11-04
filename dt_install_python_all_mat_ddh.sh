@@ -27,25 +27,28 @@ echo
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 if [ $? -ne 0 ]; then echo 'U > error doing remote ID'; exit 1; fi
 if [ ${#_RCID} -ne 40 ]; then echo 'U > bad remote ID'; exit 1; fi
-_LCID=$(cd $F_DA && git rev-parse master)
-if [ $? -ne 0 ]; then echo 'U > error doing local ID'; exit 1; fi
-if [ ${#_LCID} -ne 40 ]; then echo 'U > bad local ID'; exit 1; fi
-printf 'U > DDH last remote commit ID %s\n' $_RCID
-printf 'U > DDH last local  commit ID %s\n' $_LCID
 
 
+# does the DDH app folder exist
+if [ -d "$F_DA" ]; then
+    _LCID=$(cd "$F_DA" && git rev-parse master)
+    if [ $? -ne 0 ]; then echo 'U > error doing local ID'; exit 1; fi
+    if [ ${#_LCID} -ne 40 ]; then echo 'U > bad local ID'; exit 1; fi
+    printf 'U > DDH last remote commit ID %s\n' "$_RCID"
+    printf 'U > DDH last local  commit ID %s\n' "$_LCID"
 
-# update or not
-if [ $_RCID == $_LCID ]; then
-    echo 'U > DDX has the latest version'
-    exit 0
+    # update or not
+    if [ "$_RCID" == "$_LCID" ]; then
+        echo 'U > DDX has the latest version'
+        exit 0
+    else
+        echo 'U > warning: DDX local commit != remote'
+    fi
+else
+    echo 'U > DDH app folder does not prior exist'
 fi
-echo 'U > warning: DDX local commit != remote'
-
 
 
 # uncomment on RPi, comment when testing on laptop
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh
-
-
