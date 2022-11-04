@@ -3,7 +3,7 @@
 
 
 # grab vars from other script
-. ./dt_variables.sh || (echo 'fail dt_vars'; exit 1)
+. ./_dt_files/dt_variables.sh || (echo 'fail dt_vars'; exit 1)
 echo
 
 
@@ -18,8 +18,8 @@ fi
 echo
 
 
-# uncomment if testing on laptop
-F_DA=/home/kaz/PycharmProjects/ddx/
+# comment on RPi, uncomment when testing on laptop
+# F_DA=/home/kaz/PycharmProjects/ddx/
 
 
 
@@ -44,8 +44,8 @@ echo 'U > warning: DDX local commit != remote'
 
 
 
-# comment if testing on laptop
-#"$F_DT"/dt_install_python_mat.sh
-#"$F_DT"/dt_install_python_ddh.sh
+# uncomment on RPi, comment when testing on laptop
+"$F_DT"/dt_install_python_mat.sh
+"$F_DT"/dt_install_python_ddh.sh
 
 

@@ -2,7 +2,7 @@
 
 
 # grab vars from other script
-. ./dt_variables.sh || (echo 'fail dt_vars'; exit 1)
+. ./_dt_files/dt_variables.sh || (echo 'fail dt_vars'; exit 1)
 
 
 # abort upon any error

@@ -2,7 +2,7 @@
 
 
 # grab variables from file
-. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
 # abort upon any error
@@ -16,7 +16,7 @@ printf '\n\n\n---- Install / Update DDH ----\n'
 # clone DDH from git -> /tmp
 printf 'I > clone from github\n'
 rm -rf "$F_TA" || true
-git clone https://github.com/lowellinstruments/ddh_v4.git "$F_TA"
+git clone https://github.com/lowellinstruments/ddx.git "$F_TA"
 
 
 

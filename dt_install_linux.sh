@@ -2,7 +2,7 @@
 
 
 # grab variables from file
-. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 J4H="$F_LI"/juice4halt
 
 
