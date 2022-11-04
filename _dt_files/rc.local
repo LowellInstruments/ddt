@@ -22,15 +22,6 @@ echo 'RC_LOCAL -> run juice4halt script'
 echo 'RC_LOCAL -> asserting RPi NTP true'
 timedatectl set-ntp true
 
-printf "RC_LOCAL -> dt_tools_update.sh\n"
-FT=/home/pi/li/ddt
-cd $FT || false
-$FT/dt_update_python_all.sh &
-rv=$?
-if [ $rv -ne 0 ]; then
-    printf "RC_LOCAL could not run dt_tools_update!\n"
-fi
-
 
 echo 'RC_LOCAL -> set flag run'
 touch /home/pi/rc-local-ran.ok
