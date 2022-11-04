@@ -8,16 +8,18 @@ echo
 
 
 read -r -p "This will uninstall DDH. Are you sure? [y/N] " choice
-if [ "$choice" == "y" ]; then
-    printf '[ DDH ] uninstall, activating virtualenv \n'
-else
+if [ "$choice" != "y" ]; then
     printf 'bye'
+    exit 0
 fi
 
 
 
 # uninstalling
+printf '[ DDH ] activating virtualenv to uninstall lowell-mat... \n'
 source "$VENV"/bin/activate
-"$VPIP" uninstall lowell-mat
+printf '[ DDH ] uninstalling lowell-mat... \n'
+"$VPIP" uninstall lowell-mat || true
+printf '[ DDH ] uninstalling DDH application... \n'
 rm -rf "$F_DA" || true
 
