@@ -13,7 +13,7 @@ trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 printf '\n\n\n---- Install SW-NET service ----\n'
 
 
-printf 'I > permissions ifmetric \n'
+printf '[ DDH ] ensuring permissions ifmetric \n'
 sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
 
 printf 'I > LI switch_net service \n'
@@ -26,5 +26,5 @@ sudo systemctl enable unit_switch_net.service
 sudo systemctl start unit_switch_net.service
 
 
-echo 'I > SW-NET service OK'
-echo 'I > check w/ sudo systemctl status unit_switch_net.service'
+echo '[ DDH ] checking status of the service right now'
+systemctl status unit_switch_net.service
