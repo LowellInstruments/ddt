@@ -12,7 +12,7 @@ echo
 ping -q -c 1 -W 1 www.google.com
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo 'U > NO internet, NO updating'
+    echo '[ DDH ] install_all --> NO internet, NO updating'
     exit 1
 fi
 echo
@@ -24,31 +24,34 @@ echo
 
 
 # get remote and local commit IDs
-_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
-if [ $? -ne 0 ]; then echo 'U > error doing remote ID'; exit 1; fi
-if [ ${#_RCID} -ne 40 ]; then echo 'U > bad remote ID'; exit 1; fi
+printf '\n------ running DDH install_all ------\n'
+(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
+_RCID=$?
+if [ "$_RCID" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
+if [ ${#_RCID} -ne 40 ]; then echo '[ DDH ] error: bad git remote commit ID'; exit 1; fi
 
 
 # does the DDH app folder exist
-if [ -d "$F_DA" ]; then
-    _LCID=$(cd "$F_DA" && git rev-parse master)
-    if [ $? -ne 0 ]; then echo 'U > error doing local ID'; exit 1; fi
-    if [ ${#_LCID} -ne 40 ]; then echo 'U > bad local ID'; exit 1; fi
-    printf 'U > DDH last remote commit ID %s\n' "$_RCID"
-    printf 'U > DDH last local  commit ID %s\n' "$_LCID"
-
-    # update or not
-    if [ "$_RCID" == "$_LCID" ]; then
-        echo 'U > DDX has the latest version'
-        exit 0
-    else
-        echo 'U > warning: DDX local commit != remote'
-    fi
-else
-    echo 'U > DDH app folder does not prior exist'
+if [ ! -d "$F_DA" ]; then
+    printf '[ DDH ] %s folder does not prior exist' "$F_DA"
+    exit 2
 fi
 
 
+# get remote and local git commit ID
+(cd "$F_DA" && git rev-parse master)
+_LCID=$?
+if [ "$_LCID" -ne 0 ]; then echo '[ DDH ] error: getting git local commit ID'; exit 1; fi
+if [ ${#_LCID} -ne 40 ]; then echo '[ DDH ] error: bad git local commit ID'; exit 1; fi
+printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
+printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
+
+
+# decide we update or not
+if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; exit 0; fi
+
+
 # uncomment on RPi, comment when testing on laptop
+echo '[ DDH ] needs an update'
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh
