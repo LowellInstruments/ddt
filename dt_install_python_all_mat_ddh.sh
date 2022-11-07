@@ -25,9 +25,9 @@ echo
 
 # get remote and local commit IDs
 printf '\n------ running DDH install_all ------\n'
-(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
-_RCID=$?
-if [ "$_RCID" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
+_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
+rv=$?
+if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
 if [ ${#_RCID} -ne 40 ]; then echo '[ DDH ] error: bad git remote commit ID'; exit 1; fi
 
 
@@ -39,9 +39,8 @@ fi
 
 
 # get remote and local git commit ID
-(cd "$F_DA" && git rev-parse master)
-_LCID=$?
-if [ "$_LCID" -ne 0 ]; then echo '[ DDH ] error: getting git local commit ID'; exit 1; fi
+_LCID=$(cd "$F_DA" && git rev-parse master)
+if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git local commit ID'; exit 1; fi
 if [ ${#_LCID} -ne 40 ]; then echo '[ DDH ] error: bad git local commit ID'; exit 1; fi
 printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
 printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
