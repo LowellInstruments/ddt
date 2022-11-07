@@ -24,7 +24,7 @@ echo
 
 
 # get remote and local commit IDs
-printf '\n------ running DDH install_all ------\n'
+printf '\n------ running DDH install_all ------\n\n'
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 rv=$?
 if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
