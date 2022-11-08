@@ -7,10 +7,14 @@
 
 printf '\n\n\n---- Install MAT ----\n'
 
-printf '\nI > MAT library...\n'
+
+printf '\n[ MAT ] activating venv\n'
 source "$VENV"/bin/activate
 
+
+printf '\n[ MAT ] installing library...\n'
 #pip install --upgrade --force-reinstall git+https://github.com/lowellinstruments/lowell-mat.git@v4
 pip install --upgrade git+https://github.com/lowellinstruments/lowell-mat.git@v4
 
-printf 'I > MAT library OK\n'
+
+printf '[ MAT ] installation OK\n'

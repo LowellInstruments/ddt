@@ -42,7 +42,12 @@ if [ -d "$F_DA" ]; then
     printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
 
     # decide we update or not
-    if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; exit 0; fi
+    if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; fi
+    if [ "$1" != "force" ]; then
+        exit 1
+    fi
+    echo '[ DDH ] forced update detected'
+
 else
     printf '[ DDH ] %s folder did not exist\n' "$F_DA"
 fi
