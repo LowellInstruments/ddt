@@ -31,23 +31,21 @@ if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exi
 if [ ${#_RCID} -ne 40 ]; then echo '[ DDH ] error: bad git remote commit ID'; exit 1; fi
 
 
-# does the DDH app folder exist
-if [ ! -d "$F_DA" ]; then
-    printf '[ DDH ] %s folder does not prior exist' "$F_DA"
-    exit 2
+# check DDH app folder exist
+if [ -d "$F_DA" ]; then
+
+    # get remote and local git commits ID
+    _LCID=$(cd "$F_DA" && git rev-parse master)
+    if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git local commit ID'; exit 1; fi
+    if [ ${#_LCID} -ne 40 ]; then echo '[ DDH ] error: bad git local commit ID'; exit 1; fi
+    printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
+    printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
+
+    # decide we update or not
+    if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; exit 0; fi
+else
+    printf '[ DDH ] %s folder did not exist\n' "$F_DA"
 fi
-
-
-# get remote and local git commit ID
-_LCID=$(cd "$F_DA" && git rev-parse master)
-if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git local commit ID'; exit 1; fi
-if [ ${#_LCID} -ne 40 ]; then echo '[ DDH ] error: bad git local commit ID'; exit 1; fi
-printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
-printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
-
-
-# decide we update or not
-if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; exit 0; fi
 
 
 # uncomment on RPi, comment when testing on laptop
