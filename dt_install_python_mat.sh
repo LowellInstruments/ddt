@@ -10,6 +10,11 @@ printf '\n\n\n---- Install MAT ----\n'
 
 printf '\n[ MAT ] activating venv\n'
 source "$VENV"/bin/activate
+rv=$?
+if [ "$rv" -ne 0 ]; then
+    echo '[ MAT ] cannot activate VENV, quitting'
+    exit 1
+fi
 
 
 printf '\n[ MAT ] installing library...\n'
