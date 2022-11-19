@@ -27,14 +27,6 @@ if [ ! -d "$VENV" ]; then
 fi
 
 
-# try to accelerate the process
-if [ -d "$F_DT" ]; then
-    echo "[ DDH ] trying to install from "$F_DT"/wheels"
-    "$VPIP" install "$F_DT"/wheels/*.whl
-fi
-
-
-
 # comment on RPi, uncomment when testing on laptop
 # F_DA=/home/kaz/PycharmProjects/ddx/
 
