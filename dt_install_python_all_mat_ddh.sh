@@ -18,6 +18,16 @@ fi
 echo
 
 
+
+# see we have a venv present
+if [ ! -d "$VENV" ]; then
+    echo "[ DDH ] no virtual environment found in "$VENV""
+    echo '[ DDH ] first run ddt/dt_install_python_venv.sh'
+    exit 1
+fi
+
+
+
 # comment on RPi, uncomment when testing on laptop
 # F_DA=/home/kaz/PycharmProjects/ddx/
 
