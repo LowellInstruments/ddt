@@ -20,7 +20,7 @@ fi
 # try to accelerate the process
 if [ -d "$F_DT" ]; then
     echo "[ DDH ] trying to install from "$F_DT"/_wheels"
-    "$VPIP" install "$F_DT"/wheels/*.whl
+    "$VPIP" install "$F_DT"/_wheels/*.whl
 fi
 
 
