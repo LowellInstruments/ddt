@@ -18,7 +18,7 @@ sudo chattr +i /etc/resolv.conf
 
 
 # abort upon any error
-echo && echo && set -e
+set -e
 trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 
 
