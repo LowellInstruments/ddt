@@ -7,6 +7,9 @@
 echo
 
 
+printf '\n[ DDH ] --- running install_all.sh ---\n\n'
+
+
 
 # see we have internet access
 ping -q -c 1 -W 1 www.google.com
@@ -33,7 +36,6 @@ fi
 
 
 # get remote and local commit IDs
-printf '\n------ running DDH install_all ------\n\n'
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 rv=$?
 if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
@@ -60,11 +62,11 @@ if [ -d "$F_DA" ]; then
         fi
     fi
 else
-    printf '[ DDH ] %s folder did not exist\n' "$F_DA"
+    printf '[ DDH ] %s folder did not exist\n\n' "$F_DA"
 fi
 
 
 # uncomment on RPi, comment when testing on laptop
-echo '[ DDH ] needs an update'
+echo '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh

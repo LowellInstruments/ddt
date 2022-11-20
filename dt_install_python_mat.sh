@@ -5,7 +5,7 @@
 . ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
-printf '\n\n\n---- Install MAT ----\n'
+printf '\n[ MAT ] --- running install_mat.sh ---\n\n'
 
 
 printf '\n[ MAT ] activating venv\n\n'
@@ -29,4 +29,4 @@ printf '\n[ MAT ] installing library\n\n'
 "$VPIP" install --upgrade git+https://github.com/lowellinstruments/lowell-mat.git@v4
 
 
-printf '\n[ MAT ] installed OK\n\n'
+printf '\n[ MAT ] installed OK!\n\n'

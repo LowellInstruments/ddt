@@ -5,6 +5,10 @@
 . ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
 
 
+printf '\n[ DDH ] --- running install_ddh.sh ---\n\n'
+
+
+
 # nice environment
 printf '[ DDH ] ensuring good DNS entries in resolv.conf \n\n'
 sudo chattr -i /etc/resolv.conf
@@ -16,9 +20,6 @@ sudo chattr +i /etc/resolv.conf
 # abort upon any error
 echo && echo && set -e
 trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
-
-
-printf '\n\n\n---- Install / Update DDH ----\n\n'
 
 
 # clone DDH from git -> /tmp
@@ -45,4 +46,4 @@ mv "$F_TA" "$F_DA"
 $VPIP install -r "$F_DA"/requirements.txt
 
 
-printf '\n[ DDH ] installing app finished\n\n'
+printf '\n[ DDH ] installed app OK!\n\n'
