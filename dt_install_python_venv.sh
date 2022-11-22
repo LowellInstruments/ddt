@@ -12,7 +12,7 @@ if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
 
 
 # on RPi, venv needs to inherit PyQt5 installed via apt
-printf 'I > virtualenv \n'
+printf '\n[ VENV ] installing ... \n\n'
 rm -rf "$VENV" || true
 rm -rf "$HOME"/.cache/pip || true
 python3 -m venv "$VENV" --system-site-packages
@@ -20,4 +20,4 @@ source "$VENV"/bin/activate
 "$VPIP" install --upgrade pip
 "$VPIP" install wheel
 
-printf '\n\n --- done venv --- \n'
+printf '\n[ VENV ] installed! \n\n'

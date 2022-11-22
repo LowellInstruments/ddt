@@ -7,6 +7,9 @@
 echo
 
 
+printf '\n[ DDH ] --- running install_all.sh ---\n\n'
+
+
 
 # see we have internet access
 ping -q -c 1 -W 1 www.google.com
@@ -18,13 +21,21 @@ fi
 echo
 
 
+
+# see we have a venv present
+if [ ! -d "$VENV" ]; then
+    echo "[ DDH ] no virtual environment found in "$VENV""
+    echo '[ DDH ] first run ddt/dt_install_python_venv.sh'
+    exit 1
+fi
+
+
 # comment on RPi, uncomment when testing on laptop
 # F_DA=/home/kaz/PycharmProjects/ddx/
 
 
 
 # get remote and local commit IDs
-printf '\n------ running DDH install_all ------\n\n'
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
 rv=$?
 if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
@@ -41,19 +52,21 @@ if [ -d "$F_DA" ]; then
     printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
     printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
 
-    # decide we update or not
-    if [ "$_RCID" == "$_LCID" ]; then echo '[ DDH ] is up-to-date'; fi
-    if [ "$1" != "force" ]; then
-        exit 1
-    fi
-    echo '[ DDH ] forced update detected'
 
+    if [ "$1" == "force" ]; then
+        echo '[ DDH ] forced update detected'
+    else
+        if [ "$_RCID" == "$_LCID" ]; then
+          echo '[ DDH ] is up-to-date';
+          exit 0;
+        fi
+    fi
 else
-    printf '[ DDH ] %s folder did not exist\n' "$F_DA"
+    printf '[ DDH ] %s folder did not exist\n\n' "$F_DA"
 fi
 
 
 # uncomment on RPi, comment when testing on laptop
-echo '[ DDH ] needs an update'
+echo '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh

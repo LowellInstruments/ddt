@@ -4,19 +4,13 @@
 import time
 import subprocess as sp
 import sys
-import socket
 
 
-# make this code independent of mat library
-DDH_GUI_UDP_PORT = 12349
-STATE_DDS_NOTIFY_NET_VIA = 'net_via'
-
-
-_sk = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-
-def _u(s):
-    _sk.sendto(str(s).encode(), ('127.0.0.1', DDH_GUI_UDP_PORT))
+# ----------------------------------------
+# last version of net service
+# for sixfab ppp0 interfaces
+# it doest NOT feature UDP capabilities
+# ----------------------------------------
 
 
 def _p(s):
@@ -32,46 +26,41 @@ def _sh(s: str) -> bool:
 
 def main():
 
-    # wi-fi can go internet and we already use it
+    # wi-fi can go internet and we are already using it
     wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
         _p('wi-fi')
-        _u('{}/{}'.format(STATE_DDS_NOTIFY_NET_VIA, 'wifi'))
         time.sleep(60)
         return
 
-    # wi-fi cannot go internet, are we really using it
+    # wi-fi cannot go internet, ensure we are really using it
     if not _sh('/usr/sbin/ifmetric ppp0 400'):
-        _p('ifmetric error ppp0 400')
+        _p('ensuring we are trying wi-fi')
         time.sleep(2)
 
     # wi-fi, try again
     wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
         _p('* wi-fi *')
-        _u('{}/{}'.format(STATE_DDS_NOTIFY_NET_VIA, 'wifi'))
         time.sleep(60)
         return
 
-    # wi-fi does NOT work, make sure we try cell
+    # wi-fi does NOT work, ensure we are trying cell
     if not _sh('/usr/sbin/ifmetric ppp0 0'):
-        _p('ifmetric error ppp0 0')
+        _p('error ifmetric ppp0')
         time.sleep(2)
 
     # check cell can go to internet
     ppp_has_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
     if ppp_has_via and _sh('ip route get 8.8.8.8 | grep ppp0'):
         _p('cell')
-        _u('{}/{}'.format(STATE_DDS_NOTIFY_NET_VIA, 'cell'))
         # longer
         time.sleep(300)
         return
 
     _p('-')
-    _u('{}/{}'.format(STATE_DDS_NOTIFY_NET_VIA, 'none'))
 
 
 if __name__ == '__main__':
-    # see all services -> systemctl list-units --type=service
     while 1:
         main()
