@@ -17,6 +17,7 @@ printf '\n\n\n---- Install Linux ----\n'
 
 printf 'I > apt-get\n'
 sudo apt-get update
+sudo apt remove python3-numpy
 sudo apt-get -y install xscreensaver matchbox-keyboard ifmetric joe git \
 libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
 libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
