@@ -36,6 +36,7 @@ if [ -d "$F_DA"/logs ]; then cp -r "$F_DA"/logs "$F_TA"; fi
 if [ -f "$F_DA"/run_dds.sh ]; then cp "$F_DA"/run_dds.sh "$F_TA"; fi
 if [ -f "$F_DA"/settings/ddh.json ]; then cp "$F_DA"/settings/ddh.json "$F_TA"/settings; fi
 cp "$F_DA"/settings/_macs_to_sn.yml "$F_TA"/settings || true
+cp "$F_DA"/settings/_li_all_macs_to_sn.yml "$F_TA"/settings || true
 
 
 
