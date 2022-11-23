@@ -43,7 +43,7 @@ The ``dt_install_python_venv.sh`` creates a python virtual environment the DDH r
 $ ./dt_install_python_venv.sh
 ```
 The environment resides in ``/home/pi/li/venv``.
-Finally, the script ``dt_install_service_sw_net.sh`` installs and enables a ``systemctl`` service which switches from cell to wifi interfaces to save money.
+Finally, the script ``dt_install_service_sw_net.sh`` installs and enables a ``systemctl`` service which switches from cell to wifi interfaces to save cellular data.
  
 ```console
 $ ./dt_install_service_sw_net.sh
