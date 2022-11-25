@@ -67,6 +67,6 @@ fi
 
 
 # uncomment on RPi, comment when testing on laptop
-echo '[ DDH ] needs an update\n'
+printf '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh

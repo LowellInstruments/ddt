@@ -7,3 +7,5 @@ VPIP="$VENV"/bin/pip
 
 F_TA=/tmp/ddh
 F_TM=/tmp/lowell-mat
+
+FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag

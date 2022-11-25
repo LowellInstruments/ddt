@@ -47,4 +47,5 @@ mv "$F_TA" "$F_DA"
 $VPIP install -r "$F_DA"/requirements.txt
 
 
+touch "$FLAG_DDH_UPDATED"
 printf '\n[ DDH ] installed app OK!\n\n'

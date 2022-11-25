@@ -29,4 +29,5 @@ printf '\n[ MAT ] installing library\n\n'
 "$VPIP" install --upgrade git+https://github.com/lowellinstruments/lowell-mat.git@v4
 
 
+touch "$FLAG_DDH_UPDATED"
 printf '\n[ MAT ] installed OK!\n\n'
