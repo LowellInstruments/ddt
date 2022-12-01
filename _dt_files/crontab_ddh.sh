@@ -17,5 +17,5 @@ fi
 
 
 printf "[ DDH ] running crontab_ddh.sh\n"
-"$F_DA"/run_ddh.sh&
-"$F_DA"/run_dds.sh&
+/home/pi/li/ddh/run_ddh.sh&
+/home/pi/li/ddh/run_dds.sh&
