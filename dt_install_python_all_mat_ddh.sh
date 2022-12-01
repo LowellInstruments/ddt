@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 
-
-# grab vars from other script
-. ./_dt_files/dt_variables.sh || (echo 'fail dt_vars'; exit 1)
-echo
+F_LI=/home/pi/li
+F_DA="$F_LI"/ddh
+F_DT="$F_LI"/ddt
+VENV="$F_LI"/venv
 
 
 printf '\n[ DDH ] --- running install_all.sh ---\n\n'
@@ -24,7 +24,7 @@ echo
 
 # see we have a venv present
 if [ ! -d "$VENV" ]; then
-    echo "[ DDH ] no virtual environment found in "$VENV""
+    echo "[ DDH ] no virtual environment found"
     echo '[ DDH ] first run ddt/dt_install_python_venv.sh'
     exit 1
 fi

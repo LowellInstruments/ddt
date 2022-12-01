@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 
-# grab vars from other script
-. ./_dt_files/dt_variables.sh || (echo 'fail dt_vars'; exit 1)
+F_LI=/home/pi/li
+F_DT="$F_LI"/ddt
+VENV="$F_LI"/venv
+VPIP="$VENV"/bin/pip
 
 
 # abort upon any error

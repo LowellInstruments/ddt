@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
 
-# grab variables from file
-. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+F_LI=/home/pi/li
+F_DA="$F_LI"/ddh
+VPIP="$F_LI"/venv/bin/pip
+F_TA=/tmp/ddh
+FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
 printf '\n[ DDH ] --- running install_ddh.sh ---\n\n'

@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 
-# grab variables from file
-. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+F_DT=/home/pi/li/ddt
 
 
 # abort upon any error

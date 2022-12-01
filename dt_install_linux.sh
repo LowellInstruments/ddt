@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 
-# grab variables from file
-. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+F_LI=/home/pi/li
+F_DT="$F_LI"/ddt
 J4H="$F_LI"/juice4halt
 
 

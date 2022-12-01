@@ -1,16 +1,12 @@
 #!/usr/bin/env bash
 
 
-# grab, aka 'source', variables from file
-. ./dt_variables.sh || (echo 'dt_vars fail'; exit 1)
-clear
-
-
 # once every boot
-if [ ! -f /tmp/flag_ddh_update ]; then
+if [ ! -f /tmp/flag_ddh_update_for_crontab ]; then
+    # calls script ALL == MAT + DDH
     echo '[ DDH ] trying update once per day is OK'
     ./dt_install_python_all_mat_ddh.sh
-    touch /tmp/flag_ddh_update
+    touch /tmp/flag_ddh_update_for_crontab
 else
     echo '[ DDH ] flag found, NOT performing update'
 fi

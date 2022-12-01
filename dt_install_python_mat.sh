@@ -1,18 +1,26 @@
 #!/usr/bin/env bash
 
 
-# grab variables from file
-. ./_dt_files/dt_variables.sh || (echo 'dt_vars fail'; exit 1)
+F_LI=/home/pi/li
+F_DT="$F_LI"/ddt
+VPIP="$F_LI"/venv/bin/pip
+FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
+
+
+# ==========================================================
+# called by crontab_ddh.sh once per day or manually
+# internet connectivity is checked at dt_install_python_all
+# ==========================================================
 
 
 printf '\n[ MAT ] --- running install_mat.sh ---\n\n'
 
 
 printf '\n[ MAT ] activating venv\n\n'
-source "$VENV"/bin/activate
+source "$F_LI"/venv/bin/activate
 rv=$?
 if [ "$rv" -ne 0 ]; then
-    printf '\n[ MAT ] cannot activate VENV, quitting.\n\n'
+    printf '\n[ MAT ] cannot activate venv, quitting.\n\n'
     exit 1
 fi
 
