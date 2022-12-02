@@ -71,7 +71,7 @@ With the ``ddt`` utilities, we try to minimize manual interaction with the ``/ho
 
 The most important point is the ``crontab``. The new  content is as follows:
 ```
-1 * * * * pi /home/pi/li/ddt/_dt_files/crontab_ddh.sh
+* * * * * pi /home/pi/li/ddt/_dt_files/crontab_ddh.sh
 ```
 As we can see, we no longer run anything directly within the ``ddh`` folder. Instead, we call ``crontab_ddh.sh`` inside the ``ddt`` folder. 
 
