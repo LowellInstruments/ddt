@@ -77,6 +77,6 @@ As we can see, we no longer run anything directly within the ``ddh`` folder. Ins
 
 What does ``crontab_ddh.sh`` do? It checks for internet connectivity, it calls ``dt_install_python_all_mat_ddh.sh`` to update the DDH software and runs the ``/home/pi/li/ddh/run_all.sh`` command. This last one is, finally, the only one which is part of the DDH folder.
 
-The ``/home/pi/li/ddh/run_all.sh`` runs 2 scripts that take care of both parts of a DDH. The GUI part is managed by the script ``/home/pi/li/ddh/run_ddh.sh``. The BLE part is managed by the script.``/home/pi/li/ddh/run_dds.sh``. The latter also manages AWS credentials (how are AWS credentials set?).
+The ``/home/pi/li/ddh/run_all.sh`` runs 2 scripts that take care of both parts of a DDH. The GUI part is managed by the script ``/home/pi/li/ddh/run_ddh.sh``. The BLE part is managed by the script.``/home/pi/li/ddh/run_dds.sh``. The latter also contains the AWS credentials.
 
 
