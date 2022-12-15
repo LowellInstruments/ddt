@@ -4,9 +4,10 @@
 # once every boot
 if [ ! -f /tmp/flag_ddh_update_for_crontab ]; then
     # calls script ALL == MAT + DDH
-    echo '[ DDH ] trying update once per day is OK'
-    ./dt_install_python_all_mat_ddh.sh
-    touch /tmp/flag_ddh_update_for_crontab
+    # echo '[ DDH ] trying update once per day is OK'
+    # ./dt_install_python_all_mat_ddh.sh
+    # touch /tmp/flag_ddh_update_for_crontab
+    echo '[ DDH ] will test this auto-update soon'
 else
     echo '[ DDH ] flag found, NOT performing update'
 fi
