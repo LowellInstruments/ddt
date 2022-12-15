@@ -27,7 +27,7 @@ libudev-dev libical-dev libreadline-dev
 
 
 printf 'I > juice4halt\n'
-rm -rf "$J4H"
+sudo rm -rf "$J4H"
 mkdir -p "$J4H"/bin
 cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
 
