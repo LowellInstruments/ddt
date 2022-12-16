@@ -36,7 +36,9 @@ fi
 
 
 # get remote and local commit IDs
-_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
+#_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
+_RCID=$(git ls-remote git@github.com:lowellinstruments/ddx.git master | awk '{ print $1 }')
+
 rv=$?
 if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi
 if [ ${#_RCID} -ne 40 ]; then echo '[ DDH ] error: bad git remote commit ID'; exit 1; fi
