@@ -25,11 +25,11 @@ if [ "$rv" -ne 0 ]; then
 fi
 
 
-# try to accelerate the process
-if [ -d "$F_DT" ]; then
-    printf "\n[ MAT ] trying to install from %s/_wheels\n\n" "$F_DT"
-    "$VPIP" install "$F_DT"/_wheels/*.whl
-fi
+# wheels: try to accelerate the process
+# if [ -d "$F_DT" ]; then
+#     printf "\n[ MAT ] trying to install from %s/_wheels\n\n" "$F_DT"
+#     "$VPIP" install "$F_DT"/_wheels/*.whl
+# fi
 
 
 printf '\n[ MAT ] installing library\n\n'
