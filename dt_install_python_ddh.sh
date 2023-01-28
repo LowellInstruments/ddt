@@ -47,7 +47,7 @@ cp "$F_DA"/settings/_li_all_macs_to_sn.yml "$F_TA"/settings || true
 printf "\n[ DDH ] removing current DDH, copying %s as current \n\n" "$F_TA"
 rm -rf "$F_DA"
 mv "$F_TA" "$F_DA"
-$VPIP install -r "$F_DA"/requirements.txt
+$VPIP install -r "$F_DA"/requirements_37.txt
 
 
 # this will be checked by GUI to show the nice STAR icon
