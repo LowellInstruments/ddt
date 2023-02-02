@@ -35,7 +35,7 @@ fi
 printf '\n[ MAT ] installing library\n\n'
 # todo > test this
 #"$VPIP" install --upgrade --force-reinstall git+https://github.com/lowellinstruments/lowell-mat.git@v4
-"$VPIP" uninstall lowell-mat
+"$VPIP" uninstall -y lowell-mat
 "$VPIP" install --upgrade git+https://github.com/lowellinstruments/lowell-mat.git@v4
 
 
