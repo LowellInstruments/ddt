@@ -22,6 +22,9 @@ else
 fi
 
 
+# ------------------------------------------------------------------
+# this tries to run both, if one already running, it does not harm
+# ------------------------------------------------------------------
 printf "[ DDH ] running crontab_ddh.sh\n"
 /home/pi/li/ddh/run_ddh.sh&
 /home/pi/li/ddh/run_dds.sh&
