@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+F_LI=/home/pi/li
 VPIP=/home/pi/li/venv/bin/pip
 
 
