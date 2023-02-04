@@ -1,16 +1,20 @@
 #!/usr/bin/env bash
 
 
+# ==========================================================
+# called by dt_install_python_all_mat_ddh.sh once per day,
+# which also checks for internet connectivity
+# ==========================================================
+
+
 F_LI=/home/pi/li
-F_DT="$F_LI"/ddt
 VPIP="$F_LI"/venv/bin/pip
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
-# ==========================================================
-# called by crontab_ddh.sh once per day or manually
-# internet connectivity is checked at dt_install_python_all
-# ==========================================================
+# abort upon any error
+set -e
+trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 
 
 printf '\n[ MAT ] --- running install_mat.sh ---\n\n'
@@ -18,24 +22,16 @@ printf '\n[ MAT ] --- running install_mat.sh ---\n\n'
 
 printf '\n[ MAT ] activating venv\n\n'
 source "$F_LI"/venv/bin/activate
-rv=$?
-if [ "$rv" -ne 0 ]; then
-    printf '\n[ MAT ] cannot activate venv, quitting.\n\n'
-    exit 1
-fi
 
 
-# wheels: try to accelerate the process
-# if [ -d "$F_DT" ]; then
-#     printf "\n[ MAT ] trying to install from %s/_wheels\n\n" "$F_DT"
-#     "$VPIP" install "$F_DT"/_wheels/*.whl
-# fi
+printf '\n[ MAT ] cloning library\n\n'
+"$VPIP" clone https://github.com/lowellinstruments/lowell-mat.git -b v4
+cp lowell-mat/tools/_setup_wo_reqs.py lowell-mat/setup.py
 
 
 printf '\n[ MAT ] installing library\n\n'
-"$VPIP" uninstall -y lowell-mat
-"$VPIP" install --upgrade git+https://github.com/lowellinstruments/lowell-mat.git@v4
-
-
+"$VPIP" uninstall -y lowell-mat || true
+"$VPIP" install ./lowell-mat
+rm -rf ./lowell-mat || true
 touch "$FLAG_DDH_UPDATED"
 printf '\n[ MAT ] installed OK!\n\n'

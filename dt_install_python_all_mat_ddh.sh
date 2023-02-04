@@ -68,7 +68,10 @@ else
 fi
 
 
+# =================================================
+# update both parts of DDH
 # uncomment on RPi, comment when testing on laptop
+# =================================================
 printf '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
 "$F_DT"/dt_install_python_ddh.sh
