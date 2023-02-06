@@ -25,7 +25,7 @@ source "$F_LI"/venv/bin/activate
 
 
 printf '\n[ MAT ] cloning library\n\n'
-"$VPIP" clone https://github.com/lowellinstruments/lowell-mat.git -b v4
+git clone https://github.com/lowellinstruments/lowell-mat.git -b v4
 cp lowell-mat/tools/_setup_wo_reqs.py lowell-mat/setup.py
 
 
