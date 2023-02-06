@@ -26,6 +26,9 @@ source "$F_LI"/venv/bin/activate
 
 printf '\n[ MAT ] cloning library\n\n'
 git clone https://github.com/lowellinstruments/lowell-mat.git -b v4
+
+
+printf '\n[ MAT ] emptying setup.py from requirements\n\n'
 cp lowell-mat/tools/_setup_wo_reqs.py lowell-mat/setup.py
 
 
