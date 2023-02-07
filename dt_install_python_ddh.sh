@@ -49,8 +49,17 @@ rm -rf "$F_DA"
 mv "$F_TA" "$F_DA"
 
 
-# todo > detect python 3.9 or 3.7
-$VPIP install -r "$F_DA"/requirements_rpi_39.txt
+# detect python version on Rpi DDH
+$VPIP -V | grep '3.9'; rv=$?
+if [ "$rv" -eq 0 ]; then
+    printf '\n[ DDH ] detected python 3.9 \n'
+    $VPIP install -r "$F_DA"/requirements_rpi_39.txt
+fi
+$VPIP -V | grep '3.7'; rv=$?
+if [ "$rv" -eq 0 ]; then
+    printf '\n[ DDH ] detected python 3.7 \n'
+    $VPIP install -r "$F_DA"/requirements_rpi_37.txt
+fi
 
 
 # this will be checked by GUI to show the nice STAR icon
