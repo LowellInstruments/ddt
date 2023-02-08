@@ -19,6 +19,7 @@ chmod 777 /sys/class/backlight/10-0045/brightness || true
 
 
 if ! test -f $EMOLT_FILE_FLAG; then
+    # should ONLY run on DDH boxes
     echo 'RC_LOCAL -> run juice4halt script'
     /home/pi/li/juice4halt/bin/shutdown_script.py &
 fi
