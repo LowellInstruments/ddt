@@ -4,7 +4,7 @@
 F_LI=/home/pi/li
 F_DT="$F_LI"/ddt
 J4H="$F_LI"/juice4halt
-EMOLT_FILE_FLAG=/home/pi/li/.emolt_file_flag
+EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 
 # abort upon any error
