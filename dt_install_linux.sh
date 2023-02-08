@@ -32,6 +32,8 @@ if ! test -f $EMOLT_FILE_FLAG; then
     sudo rm -rf "$J4H"
     mkdir -p "$J4H"/bin
     cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
+else
+    echo 'not installing juice4halt plugin'
 fi
 
 
