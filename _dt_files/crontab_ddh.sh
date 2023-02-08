@@ -6,13 +6,13 @@
 # --------------------------------
 
 
-# once per boot
-if [ ! -f /tmp/flag_ddh_update_for_crontab ]; then
+# this will only run once per boot
+if [ ! -f /tmp/ddh_got_update_file.flag ]; then
     # option 1
     # --------
     # echo '[ DDH ] trying update once per day is OK'
     # ./dt_install_python_all_mat_ddh.sh
-    # touch /tmp/flag_ddh_update_for_crontab
+    # touch /tmp/ddh_got_update_file.flag
 
     # option 2
     # --------

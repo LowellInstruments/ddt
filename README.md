@@ -17,61 +17,126 @@ First, we are going to explain the scripts individually. In another section of t
 These commands should be executed from the folder ``/home/pi/li/ddt`` in the DDH.
 
 Let's start explaining each one of the scripts.
+
+
 ```console
-$ ./dt_install_crontab.sh
+$ ./dt_install_emolt.sh
 ```
+
+The ``dt_install_emolt_flag.sh`` script marks this box to be treated as eMolt one. In case of doubt, simply do not run.
+
+$ ./dt_install_crontab.sh
 The ``dt_install_crontab.sh`` script installs a crontab which monitors the DDH to be run every minute.
+
+
 ```console
 $ ./dt_install_linux.sh
 ```
+
+
 The ``dt_install_linux.sh`` script installs dependencies at the linux level. 
 Nothing specific to DDH here yet. 
 For example, it copies the ``rc.local`` file from the ``utils`` folder to the
 Linux installation and also takes care of the ``juice4halt`` feature.
+
+
+```console
+$ ./dt_install_liu.sh
+```
+
+
+The ``dt_install_liu.sh`` script install the lightweight library liu.
+
+
 ```console
 $ ./dt_install_python_all_mat_ddh.sh
 ```
+
 This ``dt_install_python_all_mat_ddh.sh`` script compares the local DDH version versus the one in the github repository. If they match, it ends. Otherwise, it runs the following 2 scripts.
+
+
 ```console
 $ ./dt_install_python_mat.sh
 ```
+
+
 This script updates the python MAT library in the DDH virtual environment.
+
+
 ```console
 $ ./dt_install_python_ddh.sh
 ```
+
+
 This script updates the software in the DDH folder ``/home/pi/li/ddh``.
 
 Even if the ``dt_install_python_all_mat_ddh.sh`` determines there is no need to install new software, you can force a reinstall by doing:
+
+
 ```console
 $ ./dt_install_python_all_mat_ddh.sh force
 ```
+
+
 The ``dt_install_python_venv.sh`` creates a python virtual environment the DDH runs into
+
+
 ```console
 $ ./dt_install_python_venv.sh
 ```
+
+
 The environment resides in ``/home/pi/li/venv``.
 
+
+```console
+$ ./dt_install_icons.sh
+```
+The ``dt_install_icons.sh`` populates the DDH desktop with useful shortcuts.
+
+
 Finally, the script ``dt_install_service_sw_net.sh`` installs and enables a ``systemctl`` service which switches from cell to wifi interfaces to save cellular data.
+
  
 ```console
 $ ./dt_install_service_sw_net.sh
 ```
 
+
 ## Important notes
 In a Raspberry with nothing installed, a good order or running would be.
+
+
 ```console
 $ cd /home/pi/li/ddh/utils
 $ ./ppp_install_standalone.sh
 ```
-This gives Raspberry cellullar modem capabilities. After this, the following convert a Raspberry into a DDH.
+
+
+This gives Raspberry cell modem capabilities. After this, the following convert a Raspberry into a DDH.
+
+
 ```console
 $ cd /home/pi/li/ddt
 $ ./dt_install_linux.sh
 $ ./dt_install_python_venv.sh
+$ ./dt_install_python_liu.sh
 $ ./dt_install_python_all_mat_ddh.sh
 $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
+$ ./dt_install_icons.sh
 ```
+
+
+Also run at your discretion:
+
+
+```console
+$ ./dt_install_emolt_flag.sh
+```
+
+
+
 Please note most of these commands are only supposed to be run once in the life of a DDH. The only  you might need to run more than once in a DDH life is probably ``./dt_install_python_all_mat_ddh.sh`` to update a DDH manually. However, as explained in the following section, the crontab automatically takes care of updates.
 
 ## Relation to the DDH software
