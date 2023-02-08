@@ -50,13 +50,10 @@ mv "$F_TA" "$F_DA"
 
 
 # detect python version on Rpi DDH
-$VPIP -V | grep '3.9'; rv=$?
-if [ "$rv" -eq 0 ]; then
+if $VPIP -V | grep '3.9' -eq 0; then
     printf '\n[ DDH ] detected python 3.9 \n'
     $VPIP install -r "$F_DA"/requirements_rpi_39.txt
-fi
-$VPIP -V | grep '3.7'; rv=$?
-if [ "$rv" -eq 0 ]; then
+elif $VPIP -V | grep '3.7' -eq 0; then
     printf '\n[ DDH ] detected python 3.7 \n'
     $VPIP install -r "$F_DA"/requirements_rpi_37.txt
 fi

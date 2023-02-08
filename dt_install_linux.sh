@@ -4,6 +4,7 @@
 F_LI=/home/pi/li
 F_DT="$F_LI"/ddt
 J4H="$F_LI"/juice4halt
+EMOLT_FILE_FLAG=/home/pi/li/.emolt_file_flag
 
 
 # abort upon any error
@@ -25,11 +26,13 @@ libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \
 libudev-dev libical-dev libreadline-dev
 
 
-
-printf 'I > juice4halt\n'
-sudo rm -rf "$J4H"
-mkdir -p "$J4H"/bin
-cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
+# juice4halt only on pure Lowell Instruments DDH
+if ! test -f $EMOLT_FILE_FLAG; then
+    printf 'I > juice4halt\n'
+    sudo rm -rf "$J4H"
+    mkdir -p "$J4H"/bin
+    cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
+fi
 
 
 printf 'I > rc.local\n'
