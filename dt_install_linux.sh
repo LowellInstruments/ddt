@@ -13,10 +13,10 @@ trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
 
 
-printf '\n\n\n---- Install Linux ----\n'
+printf '\n\n\n---- dt_install_linux ----\n'
 
 
-printf 'I > apt-get\n'
+printf '\n\n>>> running apt-get\n'
 sudo apt-get update
 sudo apt remove python3-numpy
 sudo apt-get -y install xscreensaver matchbox-keyboard ifmetric joe git \
@@ -28,20 +28,20 @@ libudev-dev libical-dev libreadline-dev
 
 # juice4halt only on pure Lowell Instruments DDH
 if ! test -f $EMOLT_FILE_FLAG; then
-    printf 'I > juice4halt\n'
+    printf '\n\n>>> installing juice4halt\n'
     sudo rm -rf "$J4H"
     mkdir -p "$J4H"/bin
     cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
 else
-    echo 'not installing juice4halt plugin'
+    printf '\n\n>>> not installing juice4halt\n'
 fi
 
 
-printf 'I > rc.local\n'
+printf '\n\n>>> installing rc.local\n'
 sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
 sudo chmod +x /etc/rc.local
 sudo systemctl enable rc-local
 sudo systemctl status rc-local
 
 
-printf 'I > linux OK!\n'
+printf '\n\n>>> dt_install_linux = OK\n'

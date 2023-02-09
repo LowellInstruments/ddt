@@ -6,6 +6,7 @@
 # In order to enable this script just change the execution bits.
 
 
+# must match the value in dt_install_emolt_flag.sh
 EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 
@@ -19,7 +20,7 @@ chmod 777 /sys/class/backlight/10-0045/brightness || true
 
 
 if ! test -f $EMOLT_FILE_FLAG; then
-    # should ONLY run on DDH boxes
+    # should ONLY run on pure DDH boxes
     echo 'RC_LOCAL -> run juice4halt script'
     /home/pi/li/juice4halt/bin/shutdown_script.py &
 fi
