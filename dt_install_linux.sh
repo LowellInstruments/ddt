@@ -33,7 +33,7 @@ if ! test -f $EMOLT_FILE_FLAG; then
     mkdir -p "$J4H"/bin
     cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
 else
-    printf '\n\n>>> not installing juice4halt\n'
+    printf '\n\n>>> not installing juice4halt, this is emolt box\n'
 fi
 
 

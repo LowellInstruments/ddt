@@ -9,7 +9,7 @@ echo; echo;
 read -rp "Set this DDH as emolt? (y/n) " choice
 case "$choice" in
     # create both files
-    y|Y ) touch $EMOLT_FILE_FLAG; touch $USING_GPS_EXTERNAL;;
+    y|Y ) touch $EMOLT_FILE_FLAG; touch $USING_GPS_EXTERNAL; printf 'set OK';;
 esac
 echo
 
