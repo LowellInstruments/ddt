@@ -27,4 +27,4 @@ make -j4 && \
 sudo make install
 
 
-printf '\n\n>>> dt_install_bluez = OK, you should reboot now'
+printf '\n\n>>> dt_install_bluez = OK, you should reboot now\n'
