@@ -19,11 +19,11 @@ printf '\n\n\n---- dt_install_linux ----\n'
 printf '\n\n>>> running apt-get\n'
 sudo apt-get update
 sudo apt remove python3-numpy
-sudo apt-get -y install xscreensaver matchbox-keyboard ifmetric joe git \
+sudo apt-get --yes --force-yes install xscreensaver matchbox-keyboard ifmetric joe git \
 libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
 libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
 libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \
-libudev-dev libical-dev libreadline-dev
+libudev-dev libical-dev libreadline-dev libcap-dev awscli
 
 
 # juice4halt only on pure Lowell Instruments DDH
@@ -35,6 +35,17 @@ if ! test -f $EMOLT_FILE_FLAG; then
 else
     printf '\n\n>>> not installing juice4halt, this is emolt box\n'
 fi
+
+
+printf '\n\ncleaning up...\n'
+sudo apt autoremove
+sudo apt-get clean
+
+
+#printf '\n\n>>> installing rust\n'
+#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#source "$HOME"/.profile
+#source "$HOME"/.cargo/env
 
 
 printf '\n\n>>> installing rc.local\n'

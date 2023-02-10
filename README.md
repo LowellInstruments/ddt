@@ -8,7 +8,6 @@ This repository contains tools to install the DDH software to a Raspberry, as we
 The root folder contains installation scripts. 
 Their name ends in `.sh` extension. 
 The ``_dt_files`` folder contains support files. 
-The ``_wheels`` folder is never to be touched, it just accelerates installations. 
 The ``utils`` folder contains complementary utilities which are rarely used.
 
 ## Running the scripts
