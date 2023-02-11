@@ -3,6 +3,7 @@
 
 F_LI=/home/pi/li
 F_DT="$F_LI"/ddt
+EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 
 # abort upon any error
@@ -15,6 +16,15 @@ printf '\n\n\n---- Install SW-NET service ----\n'
 
 printf '[ DDH ] ensuring permissions ifmetric \n\n'
 sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
+
+
+# LI switch_net_service only on pure DDH
+if test -f $EMOLT_FILE_FLAG; then
+    printf '\n\n>>> not installing LI switch_net_service on emolt boxes\n'
+    exit 0
+fi
+
+
 
 printf '[ DDH ] installing LI switch_net service \n\n'
 sudo systemctl stop unit_switch_net.service || true
