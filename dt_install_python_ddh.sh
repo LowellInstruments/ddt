@@ -4,6 +4,7 @@
 F_LI=/home/pi/li
 F_DA="$F_LI"/ddh
 VPIP="$F_LI"/venv/bin/pip
+VPYT="$F_LI"/venv/bin/python3
 F_TA=/tmp/ddh
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
@@ -50,10 +51,11 @@ mv "$F_TA" "$F_DA"
 
 
 # detect python version on Rpi DDH
-if $VPIP -V | grep '3.9' -eq 0; then
+
+if $VPYT -V | grep '3.9' -eq 0; then
     printf '\n[ DDH ] detected python 3.9 \n'
     $VPIP install -r "$F_DA"/requirements_rpi_39.txt
-elif $VPIP -V | grep '3.7' -eq 0; then
+elif $VPYT -V | grep '3.7' -eq 0; then
     printf '\n[ DDH ] detected python 3.7 \n'
     $VPIP install -r "$F_DA"/requirements_rpi_37.txt
 fi
