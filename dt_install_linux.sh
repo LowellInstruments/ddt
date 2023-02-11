@@ -16,6 +16,10 @@ if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
 printf '\n\n\n---- dt_install_linux ----\n'
 
 
+printf '\n\n>>> preventing bluez from ever upgrading\n'
+sudo apt-mark hold bluez
+
+
 printf '\n\n>>> running apt-get\n'
 sudo apt-get update
 sudo apt remove python3-numpy
@@ -40,12 +44,6 @@ fi
 printf '\n\ncleaning up...\n'
 sudo apt autoremove
 sudo apt-get clean
-
-
-#printf '\n\n>>> installing rust\n'
-#curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#source "$HOME"/.profile
-#source "$HOME"/.cargo/env
 
 
 printf '\n\n>>> installing rc.local\n'
