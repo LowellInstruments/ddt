@@ -42,7 +42,7 @@ fi
 
 
 printf '\n\ncleaning up...\n'
-sudo apt autoremove
+sudo apt autoremove -y
 sudo apt-get clean
 
 
