@@ -20,7 +20,7 @@ printf '\n\n>>> preventing bluez from ever upgrading\n'
 sudo apt-mark hold bluez
 
 
-printf '\n\n>>> running apt-get\n'
+printf '\n\n>>> running linux apt-get\n'
 sudo apt-get update
 sudo apt remove python3-numpy
 sudo apt-get --yes --force-yes install xscreensaver matchbox-keyboard ifmetric joe git \
@@ -30,8 +30,10 @@ libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \
 libudev-dev libical-dev libreadline-dev libcap-dev awscli
 
 
-# juice4halt only on pure Lowell Instruments DDH
+# install stuff only on pure Lowell Instruments DDH such as wiringpi and juice4halt
 if ! test -f $EMOLT_FILE_FLAG; then
+    printf '\n\n>>> installing wiringpi\n'
+    sudo dpkg -i ./_dt_files/wiringpi-latest.deb
     printf '\n\n>>> installing juice4halt\n'
     sudo rm -rf "$J4H"
     mkdir -p "$J4H"/bin
