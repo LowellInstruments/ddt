@@ -114,7 +114,9 @@ In a Raspberry with nothing installed, a good order or running would be.
 
 ```console
 $ cd /home/pi/li/ddt
-run this only on emolt_ddh boxes -> $ ./dt_install_emolt_flag.sh
+
+(only on emolt_ddh boxes) -> $ ./dt_install_emolt_flag.sh
+
 $ ./dt_install_linux.sh
 $ ./dt_install_python_venv.sh
 $ ./dt_install_python_liu.sh
@@ -123,6 +125,9 @@ $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
 $ ./dt_install_icons.sh
 $ ./_dt_files/ppp_install_standalone.sh
+
+(custom edit the ddh.json file with boat information)
+(custom edit the run_dds.sh file with AWS credentials)
 ```
 
 Please note most of these commands are only supposed to be run once in the life of a DDH. The only  you might need to run more than once in a DDH life is probably ``./dt_install_python_all_mat_ddh.sh`` to update a DDH manually. However, as explained in the following section, the crontab automatically takes care of updates.
