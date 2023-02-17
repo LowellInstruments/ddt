@@ -3,6 +3,14 @@
 ## Introduction
 This repository contains tools to install the DDH software to a Raspberry, as well as to manage its updates.
 
+The base image is ```2022-09-22-raspios-bullseye-armhf.img``` and is in our GDrive.
+
+Flash it and do NOT update ```apt-get upgrade``` ever. We take care of this in our scripts.
+
+---
+
+Remember: Download and install DWService.
+
 ## Folder structure
 
 The root folder contains installation scripts. 
@@ -11,7 +19,6 @@ The ``_dt_files`` folder contains support files.
 The ``utils`` folder contains complementary utilities which are rarely used.
 
 ## Running the scripts
-First, we are going to explain the scripts individually. In another section of this document, we will explain one logical order the scripts should be executed. 
 
 These commands should be executed from the folder ``/home/pi/li/ddt`` in the DDH.
 
@@ -84,15 +91,13 @@ The ``dt_install_python_venv.sh`` creates a python virtual environment the DDH r
 $ ./dt_install_python_venv.sh
 ```
 
-
 The environment resides in ``/home/pi/li/venv``.
-
 
 ```console
 $ ./dt_install_icons.sh
 ```
-The ``dt_install_icons.sh`` populates the DDH desktop with useful shortcuts.
 
+The ``dt_install_icons.sh`` populates the DDH desktop with useful shortcuts.
 
 Finally, the script ``dt_install_service_sw_net.sh`` installs and enables a ``systemctl`` service which switches from cell to wifi interfaces to save cellular data.
 
@@ -103,20 +108,13 @@ $ ./dt_install_service_sw_net.sh
 
 
 ## Important notes
+
 In a Raspberry with nothing installed, a good order or running would be.
 
 
 ```console
-$ cd /home/pi/li/ddh/utils
-$ ./ppp_install_standalone.sh
-```
-
-
-This gives Raspberry cell modem capabilities. After this, the following convert a Raspberry into a DDH.
-
-
-```console
 $ cd /home/pi/li/ddt
+run this only on emolt_ddh boxes -> $ ./dt_install_emolt_flag.sh
 $ ./dt_install_linux.sh
 $ ./dt_install_python_venv.sh
 $ ./dt_install_python_liu.sh
@@ -124,21 +122,19 @@ $ ./dt_install_python_all_mat_ddh.sh
 $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
 $ ./dt_install_icons.sh
+$ ./_dt_files/ppp_install_standalone.sh
 ```
-
-
-Also run at your discretion:
-
-
-```console
-$ ./dt_install_emolt_flag.sh
-```
-
-
 
 Please note most of these commands are only supposed to be run once in the life of a DDH. The only  you might need to run more than once in a DDH life is probably ``./dt_install_python_all_mat_ddh.sh`` to update a DDH manually. However, as explained in the following section, the crontab automatically takes care of updates.
 
+---
+
+Remember: disable the screensaver, remove the Bluetooth and software update icons from the panel.
+
+
+
 ## Relation to the DDH software
+
 With the ``ddt`` utilities, we minimize manual interaction with the ``/home/pi/li/ddh`` folder. Also, having a separate folder allows us to update a DDH more easily than updating a folder from itself, like previous versions.
 
 The most important point is the ``crontab``. The new  content is as follows:
