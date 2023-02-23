@@ -20,7 +20,7 @@ unxz bluez-5.66.tar.xz
 tar xvf bluez-5.66.tar
 
 
-printf '\n\n configuring and building bluez\n'
+printf '\n\n>>> configuring and building bluez\n'
 cd bluez-5.66
 ./configure
 make
