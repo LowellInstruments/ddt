@@ -32,8 +32,9 @@ libudev-dev libical-dev libreadline-dev libcap-dev awscli
 
 # install stuff only on pure Lowell Instruments DDH such as wiringpi and juice4halt
 if ! test -f $EMOLT_FILE_FLAG; then
-    printf '\n\n>>> installing wiringpi\n'
-    sudo dpkg -i ./_dt_files/wiringpi-latest.deb
+    # already done by ppp_install_standalone.sh
+    # printf '\n\n>>> installing wiringpi\n'
+    # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
     printf '\n\n>>> installing juice4halt\n'
     sudo rm -rf "$J4H"
     mkdir -p "$J4H"/bin
