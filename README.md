@@ -46,6 +46,16 @@ For example, it copies the ``rc.local`` file from the ``utils`` folder to the
 Linux installation and also takes care of the ``juice4halt`` feature.
 
 
+
+```console
+$ ./dt_install_linux_bluez.sh
+```
+
+
+Bleak on Raspberry is picky. For version bleak==0.19.5, seems bluez==5.6.6 works fine.
+
+
+
 ```console
 $ ./dt_install_liu.sh
 ```
@@ -118,6 +128,7 @@ $ cd /home/pi/li/ddt
 (only on emolt_ddh boxes) -> $ ./dt_install_emolt_flag.sh
 
 $ ./dt_install_linux.sh
+$ ./dt_install_linux_bluez.sh
 $ ./dt_install_python_venv.sh
 $ ./dt_install_python_liu.sh
 $ ./dt_install_python_all_mat_ddh.sh
