@@ -4,9 +4,16 @@
 
 ## Introduction
 
-Tools to install and update the DDH software.
+Tools to install and update DDH.
 
 Base image: ```2022-09-22-raspios-bullseye-armhf.img``` from Lowell Instruments' GDrive.
+
+On RPi3, we need to use the legacy display driver to prevent hang on boot.
+
+```console
+$ sudo nano /boot/config.txt
+$ # dtoverlay=vc4-fkms-v3d # disable by commenting it
+```
 
 Do NOT update ```apt-get upgrade```.
 
