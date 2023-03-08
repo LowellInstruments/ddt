@@ -66,7 +66,7 @@ $ ./dt_install_python_mat.sh
 $ ./dt_install_python_ddh.sh
 $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
-$ ./_dt_files/ppp_install_standalone.sh
+$ sudo ./_dt_files/ppp_install_standalone.sh
 ( maybe yes, maybe not) -> $ ./dt_install_icons.sh
 
 (custom edit the ddh.json file with boat information)
@@ -81,7 +81,7 @@ $ ./_dt_files/ppp_install_standalone.sh
 Some additional useful things to do for better DDH behavior:
 
 - Disable the screensaver.
-- Remove the Bluetooth and software update icons from the panel.
+- Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
 - Update DWS credentials if they were cloned.
 
