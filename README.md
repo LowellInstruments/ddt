@@ -80,7 +80,7 @@ $ sudo ./_dt_files/ppp_install_standalone.sh
 
 Some additional useful things to do for better DDH behavior:
 
-- Disable the screensaver.
+- Disable ``xscreensaver``.
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
 - Update DWS credentials if they were cloned.
