@@ -15,12 +15,15 @@ $ sudo nano /boot/config.txt
 $ # dtoverlay=vc4-fkms-v3d # disable by commenting it
 ```
 
-Do NOT update ```apt-get upgrade```.
+Do NOT update via GUI or apt.
 
 Install DWService.
 
 ```console
+$ cd /home/pi/Downloads
 $ wget https://www.dwservice.net/download/dwagent.sh
+$ chmod +x /home/pi/Downloads/dwagent.sh
+$ sudo ./dwagent.sh
 ```
 
 
@@ -52,15 +55,17 @@ Linux installation and also takes care of the ``juice4halt`` feature.
 - The ``dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
 
 - The ``dt_install_service_sw_net.sh`` scripts installs and enables a ``systemctl`` service which switches
-from cell to wifi interfaces to save cellular data.
+from cell to wi-fi interfaces to save cellular data.
 
  
 
 ## Installation
 
-In a Raspberry with nothing installed, a good order or running would be:
+In a Raspberry with nothing installed, do the following:
 
 ```console
+$ cd /home/pi; mkdir li; cd li
+$ git clone https://github.com/lowellinstruments/ddt.git
 $ cd /home/pi/li/ddt
 
 (only on emolt_ddh boxes) -> $ ./dt_install_emolt_flag.sh
@@ -74,6 +79,7 @@ $ ./dt_install_python_ddh.sh
 $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
 $ sudo ./_dt_files/ppp_install_standalone.sh
+
 ( maybe yes, maybe not) -> $ ./dt_install_icons.sh
 
 (custom edit the ddh.json file with boat information)
