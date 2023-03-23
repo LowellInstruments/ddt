@@ -9,7 +9,7 @@ import sys
 # ----------------------------------------
 # last version of net service
 # for sixfab ppp0 interfaces
-# it doest NOT feature UDP capabilities
+# it does NOT feature UDP capabilities
 # ----------------------------------------
 
 
@@ -34,9 +34,9 @@ def main():
         return
 
     # wi-fi cannot go internet, ensure we are really using it
-    if not _sh('/usr/sbin/ifmetric ppp0 400'):
-        _p('ensuring we are trying wi-fi')
-        time.sleep(2)
+    _sh('/usr/sbin/ifmetric ppp0 400')
+    _p('ensuring we are trying wi-fi')
+    time.sleep(2)
 
     # wi-fi, try again
     wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
@@ -45,10 +45,11 @@ def main():
         time.sleep(60)
         return
 
-    # wi-fi does NOT work, ensure we are trying cell
-    if not _sh('/usr/sbin/ifmetric ppp0 0'):
+    # wi-fi does DEFINITELY NOT work, ensure we are trying cell
+    rv = _sh('/usr/sbin/ifmetric ppp0 0')
+    if not rv:
         _p('error ifmetric ppp0')
-        time.sleep(2)
+    time.sleep(2)
 
     # check cell can go to internet
     ppp_has_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
