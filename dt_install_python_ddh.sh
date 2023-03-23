@@ -10,7 +10,7 @@ F_TA=/tmp/ddh
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
-printf '\n[ DDH ] --- running install_ddh.sh ---\n\n'
+printf '\n[ DDH ] --- running install_python_ddh.sh ---\n\n'
 
 
 
