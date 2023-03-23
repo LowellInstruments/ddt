@@ -24,44 +24,54 @@ def _sh(s: str) -> bool:
     return rv.returncode == 0
 
 
-def main():
+def main() -> int:
 
-    # wi-fi can go internet and we are already using it
-    wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
-    if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
+    wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
+    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
+    wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
+    cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
+
+    if wlan_via and wlan_used:
         _p('wi-fi')
-        time.sleep(60)
-        return
+        return 60
 
-    # wi-fi cannot go internet, ensure we are really using it
-    _sh('/usr/sbin/ifmetric ppp0 400')
-    _p('ensuring we are trying wi-fi')
-    time.sleep(2)
+    if wlan_via and not wlan_used:
+        # ensure we are using wi-fi interface as default
+        _sh('/usr/sbin/ifmetric ppp0 400')
+        _sh('/usr/sbin/ifmetric wlan0 0')
+        time.sleep(2)
+        # check call to 'ifmetric' worked
+        wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
+        if wlan_used:
+            _p('* wi-fi *')
+            return 60
 
-    # wi-fi, try again
-    wlan_has_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
-    if wlan_has_via and _sh('ip route get 8.8.8.8 | grep wlan0'):
-        _p('* wi-fi *')
-        time.sleep(60)
-        return
+    # wi-fi definitely NOT working
+    if not cell_via:
+        _p('none')
+        return 60
 
-    # wi-fi does DEFINITELY NOT work, ensure we are trying cell
-    rv = _sh('/usr/sbin/ifmetric ppp0 0')
-    if not rv:
-        _p('error ifmetric ppp0')
-    time.sleep(2)
-
-    # check cell can go to internet
-    ppp_has_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
-    if ppp_has_via and _sh('ip route get 8.8.8.8 | grep ppp0'):
+    # CELL might be just working fine
+    if cell_used:
         _p('cell')
-        # longer
-        time.sleep(300)
-        return
+        return 300
 
-    _p('-')
+    # CELL not working, but might need adjust
+    _sh('/usr/sbin/ifmetric ppp0 0')
+    _sh('/usr/sbin/ifmetric wlan0 400')
+    time.sleep(2)
+    # check call to 'ifmetric' worked
+    cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
+    if cell_used:
+        _p('* cell *')
+        return 300
+
+    # should never reach here
+    _p('* none *')
+    return 60
 
 
 if __name__ == '__main__':
     while 1:
-        main()
+        rv_secs = main()
+        time.sleep(rv_secs)
