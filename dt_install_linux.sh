@@ -20,6 +20,10 @@ printf '\n\n>>> preventing bluez from ever upgrading\n'
 sudo apt-mark hold bluez
 
 
+printf '\n\n>>> removing modemmanager\n'
+sudo apt remove modemmanager
+
+
 printf '\n\n>>> running linux apt-get\n'
 sudo apt-get update
 sudo apt remove python3-numpy
