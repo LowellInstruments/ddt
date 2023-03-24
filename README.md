@@ -51,8 +51,10 @@ Linux installation and also takes care of the ``juice4halt`` feature.
 - The ``dt_install_python_mat.sh`` script updates python MAT library in the virtual environment.
 
 - The ``dt_install_python_ddh.sh`` script updates the software in the DDH folder ``/home/pi/li/ddh``.
-- 
+
 - The ``dt_install_python_ddh_moana.sh`` script enables DDH to works with moana loggers.
+
+- The ``dt_install_python_ddh_settings.sh`` script grabs settings for this DDH box from DDN.
 
 - The ``dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
 
@@ -79,6 +81,7 @@ $ ./dt_install_python_liu.sh
 $ ./dt_install_python_mat.sh
 $ ./dt_install_python_ddh.sh
 $ ./dt_install_python_ddh_moana.sh
+$ ./dt_install_python_ddh_settings.sh <box_SN> <ddh.json/run_dds.sh>
 $ ./dt_install_service_sw_net.sh
 $ ./dt_install_crontab.sh
 $ sudo ./_dt_files/ppp_install_standalone.sh
