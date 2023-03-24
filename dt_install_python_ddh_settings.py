@@ -12,11 +12,12 @@ def _is_rpi():
     rv = sp.run(c, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     return rv.returncode == 0
 
+
 def _p(s):
     print('[ DDH ] REQ settings | {}'.format(s))
 
 
-def ddh_req_settings(fol, filename):
+def ddh_req_settings(ip, port, fol, filename):
 
     # parameter check and banner
     assert filename in ('run_dds.sh', 'ddh.json')
@@ -25,8 +26,11 @@ def ddh_req_settings(fol, filename):
     _p('getting file {} from vessel SN {}'.format(fol, filename))
     prs = {'fol': fol, 'filename': filename}
 
+    # -------------------------
     # send HTTP request to DDN
-    rsp = requests.get('http://0.0.0.0:8000/ddh_conf', params=prs)
+    # -------------------------
+    url = 'http://{}:{}/ddh_conf'.format(ip, port)
+    rsp = requests.get(url, params=prs)
     if rsp.status_code != 200:
         s = 'error: cannot get file {} from vessel SN {}'
         _p(s.format(filename, fol, rsp.status_code))
@@ -40,7 +44,6 @@ def ddh_req_settings(fol, filename):
     # for testing
     if not _is_rpi():
         _p('OK: file {} downloaded but no RPI, quit\n'.format(filename))
-        os.unlink(filename)
         return 0
 
     # install files
@@ -60,7 +63,7 @@ def ddh_req_settings(fol, filename):
 
 
 if __name__ == '__main__':
-    # $ python3 dt_install_python_ddh_settings.py 1234567 ddh.json
+    # $ python3 dt_install_python_ddh_settings.py <ip> <port> 1234567 ddh.json
     ddh_req_settings(*sys.argv[1:])
     # or test as typical python function
-    # ddh_req_settings('1234567', 'ddh.json')
+    # ddh_req_settings('<ip>', port, '1234567', 'ddh.json')
