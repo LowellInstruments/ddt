@@ -4,6 +4,8 @@
 import os
 import sys
 import subprocess as sp
+import time
+
 import requests
 
 
@@ -43,7 +45,10 @@ def ddh_req_settings(ip, port, fol, filename):
 
     # for testing
     if not _is_rpi():
-        _p('OK: file {} downloaded but no RPI, quit\n'.format(filename))
+        _p('OK: file {} downloaded but no RPI'.format(filename))
+        time.sleep(5)
+        os.unlink(filename)
+        _p('OK: file {} deleted after 5 seconds\n'.format(filename))
         return 0
 
     # install files
@@ -51,7 +56,7 @@ def ddh_req_settings(ip, port, fol, filename):
         'run_dds.sh': '/home/pi/li/ddh',
         'ddh.json': '/home/pi/li/ddh/settings',
     }
-    c = 'cp run_dds.sh {}'.format(path)
+    c = 'mv {} {}'.format(filename, path)
     rv = sp.run(c, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     if rv.returncode:
         _p('error: installing downloaded file {}\n'.format(filename))
