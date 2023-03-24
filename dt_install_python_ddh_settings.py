@@ -55,7 +55,8 @@ def ddh_req_settings(fol, filename):
         return 1
 
     # show a nice message
-    _p('OK: file {} installed\n'.format(filename))
+    s = 'OK: file {} installed in {}\n'
+    _p(s.format(filename, path[filename]))
 
 
 if __name__ == '__main__':
