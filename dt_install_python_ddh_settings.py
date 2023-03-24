@@ -5,7 +5,6 @@ import os
 import sys
 import subprocess as sp
 import time
-
 import requests
 
 
@@ -41,7 +40,6 @@ def ddh_req_settings(ip, port, fol, filename):
     # save content from HTTP answer
     with open(filename, 'w') as f:
         f.write(rsp.content.decode())
-        _p('OK: file {} downloaded'.format(filename))
 
     # for testing
     if not _is_rpi():
@@ -51,18 +49,21 @@ def ddh_req_settings(ip, port, fol, filename):
         _p('OK: file {} deleted after 5 seconds\n'.format(filename))
         return 0
 
-    # install files
+    # banner downloaded fine before installation
+    _p('OK: file {} downloaded'.format(filename))
+
+    # move downloaded files to proper folder in DDH
     path = {
         'run_dds.sh': '/home/pi/li/ddh',
         'ddh.json': '/home/pi/li/ddh/settings',
     }
-    c = 'mv {} {}'.format(filename, path)
+    c = 'mv {} {}'.format(filename, path[filename])
     rv = sp.run(c, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
     if rv.returncode:
         _p('error: installing downloaded file {}\n'.format(filename))
         return 1
 
-    # show a nice message
+    # show a nice 'installation done' message
     s = 'OK: file {} installed in {}\n'
     _p(s.format(filename, path[filename]))
 
