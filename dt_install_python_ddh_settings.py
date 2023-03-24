@@ -31,7 +31,7 @@ def ddh_req_settings(ip, port, fol, filename):
     # send HTTP request to DDN
     # -------------------------
     url = 'http://{}:{}/ddh_conf'.format(ip, port)
-    rsp = requests.get(url, params=prs)
+    rsp = requests.get(url, params=prs, timeout=10)
     if rsp.status_code != 200:
         s = 'error: cannot get file {} from vessel SN {}'
         _p(s.format(filename, fol, rsp.status_code))
