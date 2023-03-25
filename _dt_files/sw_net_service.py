@@ -28,7 +28,6 @@ def main() -> int:
 
     wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
-    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
 
     if wlan_via and wlan_used:
         _p('wi-fi')
@@ -44,17 +43,13 @@ def main() -> int:
             _p('* wi-fi *')
             return 60
 
-    # wi-fi definitely NOT working, let's try cell
-    if not cell_via:
-        _p('none')
-        return 60
-
     # ensure we are using cell interface as default
+    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
     _sh('/usr/sbin/ifmetric wlan0 400')
     _sh('/usr/sbin/ifmetric ppp0 0')
     time.sleep(2)
     cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
-    if cell_used:
+    if cell_via and cell_used:
         _p('cell')
         return 300
 
