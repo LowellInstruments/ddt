@@ -26,15 +26,15 @@ def _sh(s: str) -> bool:
 
 def main() -> int:
 
+    # the best wi-fi case ever
     wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
     wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
-
     if wlan_via and wlan_used:
         _p('wi-fi')
         return 60
 
+    # seems no wi-fi, but maybe wi-fi just needs some adjustment
     if wlan_via and not wlan_used:
-        # ensure we are using wi-fi interface as default
         _sh('/usr/sbin/ifmetric ppp0 400')
         _sh('/usr/sbin/ifmetric wlan0 0')
         time.sleep(2)
@@ -43,19 +43,26 @@ def main() -> int:
             _p('* wi-fi *')
             return 60
 
-    # ensure we are using cell interface as default
+    # no wi-fi, try the best cell case ever
     cell_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
-    _sh('/usr/sbin/ifmetric wlan0 400')
-    _sh('/usr/sbin/ifmetric ppp0 0')
-    time.sleep(2)
     cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
     if cell_via and cell_used:
         _p('cell')
         return 300
 
-    # should never reach here
+    # seems no cell, but maybe cell just needs some adjustment
+    if cell_via and not cell_used:
+        _sh('/usr/sbin/ifmetric wlan0 400')
+        _sh('/usr/sbin/ifmetric ppp0 0')
+        time.sleep(2)
+        cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
+        if cell_used:
+            _p('* cell *')
+            return 300
+
+    # no internet connection of any kind
     _p('none')
-    return 60
+    return 30
 
 
 if __name__ == '__main__':
