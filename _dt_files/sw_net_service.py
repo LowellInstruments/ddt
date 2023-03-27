@@ -6,6 +6,9 @@ import subprocess as sp
 import sys
 
 
+IP = '8.8.8.8'
+
+
 # ----------------------------------------
 # last version of net service
 # for sixfab ppp0 interfaces
@@ -24,10 +27,11 @@ def _sh(s: str) -> bool:
     return rv.returncode == 0
 
 
-g_sleep_debug = True
+g_debug = True
+
 
 def _z(s):
-    if g_sleep_debug:
+    if g_debug:
         return 10
     if s in 'wifi':
         return 60
@@ -40,8 +44,8 @@ def _z(s):
 def main() -> int:
 
     # the best wifi case ever
-    wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 www.google.com')
-    wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
+    wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 {}'.format(IP))
+    wlan_used = _sh('ip route get {} | grep wlan0'.format(IP))
     if wlan_via and wlan_used:
         _p('wifi')
         return _z('wifi')
@@ -51,14 +55,23 @@ def main() -> int:
         _sh('/usr/sbin/ifmetric ppp0 400')
         _sh('/usr/sbin/ifmetric wlan0 0')
         time.sleep(2)
-        wlan_used = _sh('ip route get 8.8.8.8 | grep wlan0')
+        wlan_used = _sh('ip route get {} | grep wlan0'.format(IP))
         if wlan_used:
             _p('* wifi *')
             return _z('wifi')
 
     # no wifi, try the best cell case ever
-    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 www.google.com')
-    cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
+    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 {}'.format(IP))
+    cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
+
+    # debug
+    if g_debug:
+        _p('cell_via = {}'.format(cell_via))
+        _p('cell_used = {}'.format(cell_used))
+        _p('wlan_via = {}'.format(wlan_via))
+        _p('wlan_used = {}'.format(wlan_used))
+
+    # maybe we can switch to cell w/ no problems
     if cell_via and cell_used:
         _p('cell')
         return _z('cell')
@@ -68,7 +81,7 @@ def main() -> int:
         _sh('/usr/sbin/ifmetric wlan0 400')
         _sh('/usr/sbin/ifmetric ppp0 0')
         time.sleep(2)
-        cell_used = _sh('ip route get 8.8.8.8 | grep ppp0')
+        cell_used = _sh('ip route {} | grep ppp0'.format(IP))
         if cell_used:
             _p('* cell *')
             return _z('cell')
