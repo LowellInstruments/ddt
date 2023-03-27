@@ -66,15 +66,10 @@ def main() -> int:
 
     # debug
     if g_debug:
-        _p('cell_via = {}'.format(cell_via))
-        _p('cell_used = {}'.format(cell_used))
         _p('wlan_via = {}'.format(wlan_via))
         _p('wlan_used = {}'.format(wlan_used))
-
-    # maybe we can switch to cell w/ no problems
-    if cell_via and cell_used:
-        _p('cell')
-        return _z('cell')
+        _p('cell_via = {}'.format(cell_via))
+        _p('cell_used = {}'.format(cell_used))
 
     # seems no cell, but maybe cell just needs some adjustment
     if cell_via and not cell_used:
@@ -82,9 +77,11 @@ def main() -> int:
         _sh('/usr/sbin/ifmetric ppp0 0')
         time.sleep(2)
         cell_used = _sh('ip route {} | grep ppp0'.format(IP))
-        if cell_used:
-            _p('* cell *')
-            return _z('cell')
+
+    # maybe we can switch to cell w/ no problems
+    if cell_via and cell_used:
+        _p('cell')
+        return _z('cell')
 
     # no internet connection of any kind
     _p('none')
