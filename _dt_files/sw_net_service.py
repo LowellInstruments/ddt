@@ -75,10 +75,9 @@ def main() -> int:
     if cell_via and not cell_used:
         _sh('/usr/sbin/ifmetric wlan0 400')
         _sh('/usr/sbin/ifmetric ppp0 0')
-        cell_used = _sh('ip route {} | grep ppp0'.format(IP))
-        time.sleep(2)
 
     # maybe we can switch to cell w/ no problems
+    cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
     if cell_via and cell_used:
         _p('cell')
         return _z('cell')
