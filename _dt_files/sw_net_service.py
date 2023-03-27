@@ -27,7 +27,7 @@ def _sh(s: str) -> bool:
     return rv.returncode == 0
 
 
-g_debug = True
+g_debug = False
 
 
 def _z(s):
