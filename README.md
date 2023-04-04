@@ -26,22 +26,29 @@ $ chmod +x /home/pi/Downloads/dwagent.sh
 $ sudo ./dwagent.sh
 ```
 
-Install Nomachine.
+Install Nomachine for RPi.
+
 ```console
 $ cd /home/pi/Downloads
-$ wget
-$ sudo dpkg -i 
+$ wget https://download.nomachine.com/download/8.4/Raspberry/nomachine_8.4.2_1_armhf.deb
+$ sudo dpkg -i nomachine_8.4.2_1_armhf.deb
 ```
 
 Get the DDH Tools repository, a.k.a. ``ddt``:
 
 ```console
-$ cd /home/pi; mkdir li; cd li
+$ cd /home/pi
+$ mkdir li
+$ cd li
 $ git clone https://github.com/lowellinstruments/ddt.git
 $ cd /home/pi/li/ddt
 ```
 
+Optional. Install Wireguard VPN. Credentials are in our private repository.
 
+```console
+$ sudo apt install wireguard
+```
 
 ## Description of the scripts
 
@@ -54,17 +61,17 @@ Nothing specific to DDH here yet.
 For example, it copies the ``rc.local`` file from the ``utils`` folder to the
 Linux installation and also takes care of the ``juice4halt`` feature.
 
-- The ``dt_install_linux_bluez.sh`` installs bluez==5.6.6 which works better with bleak 0.20.1.
+- The ``dt_install_linux_bluez.sh`` installs bluez v5.6.6 which works better with bleak v0.20.1.
 
 - The ``dt_install_python_venv.sh`` creates a python virtual environment the DDH runs in.
 
-- The ``dt_install_liu.sh`` script install the Lowell Instruments' lightweight library liu.
+- The ``dt_install_python_liu.sh`` script install the Lowell Instruments' lightweight library LIU in the venv.
 
-- The ``dt_install_python_mat.sh`` script updates python MAT library in the virtual environment.
+- The ``dt_install_python_mat.sh`` script install the Lowell Instruments' library MAT in the venv.
 
 - The ``dt_install_python_ddh.sh`` script updates the software in the DDH folder ``/home/pi/li/ddh``.
 
-- The ``dt_install_python_ddh_moana.sh`` script enables DDH to works with moana loggers.
+- The ``dt_install_python_ddh_moana.sh`` script enables DDH to works with moana loggers. In beta.
 
 - The ``dt_install_python_ddh_settings.py`` python script grabs settings for this DDH box from DDN. In beta.
 
@@ -93,7 +100,7 @@ Some additional useful things to do for better DDH behavior:
 - Disable ``xscreensaver``.
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
-- Replace DWS credentials if they come frmo a cloned DDH.
+- Replace DWS credentials if they come from a cloned DDH.
 
 
 
