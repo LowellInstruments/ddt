@@ -15,8 +15,8 @@ rm -f /home/pi/rc-local-ran.ok || true
 
 
 echo 'RC_LOCAL -> Allow brightness control by non-root users'
-chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
-chmod 777 /sys/class/backlight/10-0045/brightness || true
+sudo chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
+sudo chmod 777 /sys/class/backlight/10-0045/brightness || true
 
 
 if ! test -f $EMOLT_FILE_FLAG; then
@@ -27,7 +27,7 @@ fi
 
 
 echo 'RC_LOCAL -> asserting RPi NTP true'
-timedatectl set-ntp true
+sudo timedatectl set-ntp true
 
 
 echo 'RC_LOCAL -> set flag run'
