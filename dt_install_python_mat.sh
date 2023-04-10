@@ -25,16 +25,16 @@ source "$F_LI"/venv/bin/activate
 
 
 printf '\n[ MAT ] cloning library\n\n'
-git clone https://github.com/lowellinstruments/lowell-mat.git -b v4
+git clone https://github.com/lowellinstruments/mat.git
 
 
 printf '\n[ MAT ] emptying setup.py from requirements\n\n'
-cp lowell-mat/tools/_setup_wo_reqs.py lowell-mat/setup.py
+cp mat/tools/_setup_wo_reqs.py mat/setup.py
 
 
 printf '\n[ MAT ] installing library\n\n'
-"$VPIP" uninstall -y lowell-mat || true
-"$VPIP" install ./lowell-mat
-rm -rf ./lowell-mat || true
+"$VPIP" uninstall -y mat || true
+"$VPIP" install ./mat
+rm -rf ./mat || true
 touch "$FLAG_DDH_UPDATED"
 printf '\n[ MAT ] installed OK!\n\n'
