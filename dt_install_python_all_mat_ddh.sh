@@ -31,13 +31,12 @@ fi
 
 
 # comment on RPi, uncomment when testing on laptop
-# F_DA=/home/kaz/PycharmProjects/ddx/
+# F_DA=/home/kaz/PycharmProjects/ddh/
 
 
 
 # get remote and local commit IDs
-#_RCID=$(git ls-remote https://github.com/lowellinstruments/ddx.git master | awk '{ print $1 }')
-_RCID=$(git ls-remote git@github.com:lowellinstruments/ddx.git master | awk '{ print $1 }')
+_RCID=$(git ls-remote git@github.com:lowellinstruments/ddh.git master | awk '{ print $1 }')
 
 rv=$?
 if [ "$rv" -ne 0 ]; then echo '[ DDH ] error: getting git remote commit ID'; exit 1; fi

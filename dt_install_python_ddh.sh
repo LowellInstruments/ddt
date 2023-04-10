@@ -30,7 +30,7 @@ trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
 # clone DDH from git -> /tmp
 printf "\n[ DDH ] clone app from github to %s \n\n" "$F_TA"
 rm -rf "$F_TA" || true
-git clone https://github.com/lowellinstruments/ddx.git "$F_TA"
+git clone https://github.com/lowellinstruments/ddh.git "$F_TA"
 
 
 
