@@ -16,6 +16,12 @@ printf '\n\n\n---- dt_install_linux_bluez ----\n'
 
 printf '\n\n>>> uncompressing bluez from _dt_files folder\n'
 cd _dt_files
+wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
+rv=$?
+if [ $rv -ne 0]; then
+    echo 'error wget bluez'
+    exit 1
+fi
 unxz bluez-5.66.tar.xz
 tar xvf bluez-5.66.tar
 
