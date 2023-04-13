@@ -14,7 +14,7 @@ if [ ! -f /tmp/ddh_got_update_file.flag ]; then
 
     if [ $ENABLE_UPDATE -eq 1 ]; then
       echo '[ DDH ] trying update once per day is OK'
-      ./dt_install_python_all_mat_ddh.sh
+      ../dt_install_python_all_mat_ddh.sh
       rv=$?
       if [ $rv -ne 0 ]; then
           echo '[ DDH ] error -> ./dt_install_python_all_mat_ddh.sh did not go OK'
