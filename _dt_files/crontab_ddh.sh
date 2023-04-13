@@ -6,19 +6,29 @@
 # --------------------------------
 
 
-# this will only run once per boot
-if [ ! -f /tmp/ddh_got_update_file.flag ]; then
-    # option 1
-    # --------
-    # echo '[ DDH ] trying update once per day is OK'
-    # ./dt_install_python_all_mat_ddh.sh
-    # touch /tmp/ddh_got_update_file.flag
+ENABLE_UPDATE=0
 
-    # option 2
-    # --------
-    echo '[ DDH ] will test this auto-update soon'
+
+# this runs only once per boot
+if [ ! -f /tmp/ddh_got_update_file.flag ]; then
+
+    if [ $ENABLE_UPDATE -eq 1 ]; then
+      echo '[ DDH ] trying update once per day is OK'
+      ./dt_install_python_all_mat_ddh.sh
+      rv=$?
+      if [ $rv -ne 0 ]; then
+          echo '[ DDH ] error -> ./dt_install_python_all_mat_ddh.sh did not go OK'
+          exit 1
+      fi
+      echo '[ DDH ] creating file flag updating'
+      touch /tmp/ddh_got_update_file.flag
+
+    else
+      echo '[ DDH ] will test this auto-update soon'
+    fi
+
 else
-    echo '[ DDH ] flag already present, NOT performing update'
+    echo '[ DDH ] update flag already present, NOT performing update'
 fi
 
 

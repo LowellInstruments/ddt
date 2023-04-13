@@ -73,4 +73,14 @@ fi
 # =================================================
 printf '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    printf '[ DDH ] error installing all, precisely MAT library'
+    exit 2
+fi
 "$F_DT"/dt_install_python_ddh.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    printf '[ DDH ] error installing all, precisely DDH application'
+    exit 3
+fi
