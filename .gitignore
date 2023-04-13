@@ -3,6 +3,9 @@
 *.so
 _vessel_files/
 _vessel_files/*
+_dt_files/*.tar
+_dt_files/*.xz
+_dt_files/*.gz
 
 
 # Byte-compiled / optimized / DLL files
