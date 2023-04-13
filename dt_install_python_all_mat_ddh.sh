@@ -24,8 +24,8 @@ echo
 
 # see we have a venv present
 if [ ! -d "$VENV" ]; then
-    printf "[ DDH ] no virtual environment found"
-    printf '[ DDH ] first run ddt/dt_install_python_venv.sh'
+    printf "[ DDH ] no virtual environment found \n"
+    printf '[ DDH ] first run ddt/dt_install_python_venv.sh \n'
     exit 1
 fi
 
@@ -38,8 +38,8 @@ fi
 # get remote and local commit IDs
 _RCID=$(git ls-remote https://github.com/lowellinstruments/ddh.git master | awk '{ print $1 }')
 rv=$?
-if [ "$rv" -ne 0 ]; then printf '[ DDH ] error: getting git remote commit ID'; exit 1; fi
-if [ ${#_RCID} -ne 40 ]; then printf '[ DDH ] error: bad git remote commit ID'; exit 1; fi
+if [ "$rv" -ne 0 ]; then printf '[ DDH ] error: getting git remote commit ID \n'; exit 1; fi
+if [ ${#_RCID} -ne 40 ]; then printf '[ DDH ] error: bad git remote commit ID \n'; exit 1; fi
 
 
 # check DDH app folder exist
@@ -47,17 +47,17 @@ if [ -d "$F_DA" ]; then
 
     # get remote and local git commits ID
     _LCID=$(cd "$F_DA" && git rev-parse master)
-    if [ "$rv" -ne 0 ]; then printf '[ DDH ] error: getting git local commit ID'; exit 1; fi
-    if [ ${#_LCID} -ne 40 ]; then printf '[ DDH ] error: bad git local commit ID'; exit 1; fi
+    if [ "$rv" -ne 0 ]; then printf '[ DDH ] error: getting git local commit ID \n'; exit 1; fi
+    if [ ${#_LCID} -ne 40 ]; then printf '[ DDH ] error: bad git local commit ID \n'; exit 1; fi
     printf '[ DDH ] git remote commit ID %s\n' "$_RCID"
     printf '[ DDH ] git local  commit ID %s\n' "$_LCID"
 
 
     if [ "$1" == "force" ]; then
-        printf '[ DDH ] forced update detected'
+        printf '[ DDH ] forced update detected \n'
     else
         if [ "$_RCID" == "$_LCID" ]; then
-          printf '[ DDH ] is up-to-date';
+          printf '[ DDH ] is up-to-date \n';
           exit 0;
         fi
     fi
@@ -74,12 +74,12 @@ printf '[ DDH ] needs an update\n'
 "$F_DT"/dt_install_python_mat.sh
 rv=$?
 if [ $rv -ne 0 ]; then
-    printf '[ DDH ] error installing all, precisely MAT library'
+    printf '[ DDH ] error installing all, precisely MAT library \n'
     exit 2
 fi
 "$F_DT"/dt_install_python_ddh.sh
 rv=$?
 if [ $rv -ne 0 ]; then
-    printf '[ DDH ] error installing all, precisely DDH application'
+    printf '[ DDH ] error installing all, precisely DDH application \n'
     exit 3
 fi

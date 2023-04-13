@@ -13,22 +13,22 @@ ENABLE_UPDATE=0
 if [ ! -f /tmp/ddh_got_update_file.flag ]; then
 
     if [ $ENABLE_UPDATE -eq 1 ]; then
-      printf '[ DDH ] trying update once per day is OK'
+      printf '[ DDH ] trying update once per day is OK \n'
       ../dt_install_python_all_mat_ddh.sh
       rv=$?
       if [ $rv -ne 0 ]; then
-          printf '[ DDH ] error -> ./dt_install_python_all_mat_ddh.sh did not go OK'
+          printf '[ DDH ] error -> ./dt_install_python_all_mat_ddh.sh did not go OK \n'
           exit 1
       fi
-      printf '[ DDH ] creating file flag updating'
+      printf '[ DDH ] creating file flag updating \n'
       touch /tmp/ddh_got_update_file.flag
 
     else
-      printf '[ DDH ] will test this auto-update soon'
+      printf '[ DDH ] will test this auto-update soon \n'
     fi
 
 else
-    printf '[ DDH ] update flag already present, NOT performing update'
+    printf '[ DDH ] update flag already present, NOT performing update \n'
 fi
 
 
