@@ -5,36 +5,41 @@
 # update and run DDH from crontab
 # --------------------------------
 
-
+printf "[ DDH ] running crontab_ddh.sh\n"
 ENABLE_UPDATE=0
+RV=0
 
 
 # this runs only once per boot
 if [ ! -f /tmp/ddh_got_update_file.flag ]; then
 
+    # =================================
+    # will NOT run if flag above is 0
+    # =================================
+
     if [ $ENABLE_UPDATE -eq 1 ]; then
       printf '[ DDH ] trying update once per day is OK \n'
-      ../dt_install_python_all_mat_ddh.sh
-      rv=$?
-      if [ $rv -ne 0 ]; then
-          printf '[ DDH ] error -> ./dt_install_python_all_mat_ddh.sh did not go OK \n'
-          exit 1
-      fi
+      ../dt_update_all_ddh.sh
+      RV=$?
       printf '[ DDH ] creating file flag updating \n'
       touch /tmp/ddh_got_update_file.flag
 
     else
-      printf '[ DDH ] will test this auto-update soon \n'
+      printf '[ DDH ] ENABLE_UPDATE is off, NOT updating at this boot\n'
     fi
 
 else
-    printf '[ DDH ] update flag already present, NOT performing update \n'
+    printf '[ DDH ] update flag present, NOT updating at this boot\n'
 fi
 
 
 # ------------------------------------------------------------------
 # this tries to run both, if one already running, it does not harm
 # ------------------------------------------------------------------
-printf "[ DDH ] running crontab_ddh.sh\n"
+if [ $RV -ne 0 ]; then
+    printf '[ DDH ] ERROR updating DDH\n'
+fi
+
+
 /home/pi/li/ddh/run_ddh.sh&
 /home/pi/li/ddh/run_dds.sh&

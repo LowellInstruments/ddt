@@ -2,7 +2,7 @@
 
 
 # ==========================================================
-# called by dt_install_python_all_mat_ddh.sh once per day,
+# called by dt_update_all_ddh.sh once per day,
 # which also checks for internet connectivity
 # ==========================================================
 
@@ -12,29 +12,35 @@ VPIP="$F_LI"/venv/bin/pip
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
-# abort upon any error
-set -e
-trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
-
-
 printf '\n[ MAT ] --- running install_mat.sh ---\n\n'
 
 
 printf '\n[ MAT ] activating venv\n\n'
 source "$F_LI"/venv/bin/activate
+rv=$?
+if [ $rv -ne 0 ]; then printf "[ MAT ] failed sourcing venv"; exit 1; fi
 
 
 printf '\n[ MAT ] cloning library\n\n'
 git clone https://github.com/lowellinstruments/mat.git
+rv=$?
+if [ $rv -ne 0 ]; then printf "[ MAT ] failed cloning"; exit 1; fi
 
 
 printf '\n[ MAT ] emptying setup.py from requirements\n\n'
 cp mat/tools/_setup_wo_reqs.py mat/setup.py
+rv=$?
+if [ $rv -ne 0 ]; then printf "[ MAT ] failed installing empty setup.py"; exit 1; fi
 
 
 printf '\n[ MAT ] installing library\n\n'
 "$VPIP" uninstall -y mat || true
 "$VPIP" install ./mat
+rv=$?
+if [ $rv -ne 0 ]; then printf "[ MAT ] failed installing library core"; exit 1; fi
 rm -rf ./mat || true
 touch "$FLAG_DDH_UPDATED"
+rv=$?
+if [ $rv -ne 0 ]; then printf "[ MAT ] failed installing DDH_UPDATED file flag"; exit 1; fi
 printf '\n[ MAT ] installed OK!\n\n'
+exit 0
