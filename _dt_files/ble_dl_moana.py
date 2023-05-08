@@ -1,5 +1,5 @@
 import asyncio
-# these are relative to DDH app, not DDT, don't worry if they appear wrong
+# these are relative to DDH, don't worry if appear wrong for DDT
 from utils.ddh_shared import (
     send_ddh_udp_gui as _u,
     STATE_DDS_BLE_ERROR_MOANA_PLUGIN,
