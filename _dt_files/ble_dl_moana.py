@@ -296,9 +296,10 @@ class MoanaBle:
         idx_data = lines.index(cols)
         lines_data = lines[idx_data + 1 :]
         for i in lines_data:
+            # Moana format is ddmmyyy
             i = i.replace("\n", "")
-            mmddyyyy, hhmmss, p, t = i.split(",")
-            mm, dd, yyyy = mmddyyyy.split("/")
+            ddmmyyyy, hhmmss, p, t = i.split(",")
+            dd, mm, yyyy = ddmmyyyy.split("/")
             _ = "{}-{}-{}T{}.000".format(yyyy, mm, dd, hhmmss)
             # split and write proper data rows to destination files
             ft.write("{},{}\n".format(_, t))
