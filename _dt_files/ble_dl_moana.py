@@ -375,7 +375,7 @@ class MoanaBle:
                 last_state = offload_state
                 state_time = datetime.now()
             else:
-                if (datetime.now() - state_time).total_seconds() > 600:
+                if (datetime.now() - state_time).total_seconds() > 3600:
                     print("Timed out during offload")
                     break
 

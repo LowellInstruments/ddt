@@ -20,10 +20,10 @@ $ # dtoverlay=vc4-fkms-v3d # disable by commenting it
 Install DWService, or skip this step.
 
 ```console
-$ cd /home/pi/Downloads
-$ wget https://www.dwservice.net/download/dwagent.sh
-$ chmod +x /home/pi/Downloads/dwagent.sh
-$ sudo ./dwagent.sh
+cd /home/pi/Downloads;
+wget https://www.dwservice.net/download/dwagent.sh;
+chmod +x /home/pi/Downloads/dwagent.sh;
+sudo /home/pi/Downloads/dwagent.sh;
 ```
 
 Install Nomachine for RPi.
@@ -34,15 +34,6 @@ $ wget https://download.nomachine.com/download/8.4/Raspberry/nomachine_8.4.2_1_a
 $ sudo dpkg -i nomachine_8.4.2_1_armhf.deb
 ```
 
-Get the DDH Tools repository, a.k.a. ``ddt``:
-
-```console
-$ cd /home/pi
-$ mkdir li
-$ cd li
-$ git clone https://github.com/lowellinstruments/ddt.git
-$ cd /home/pi/li/ddt
-```
 
 Optional. Install Wireguard VPN. Credentials are in our private repository.
 
@@ -50,35 +41,45 @@ Optional. Install Wireguard VPN. Credentials are in our private repository.
 $ sudo apt install wireguard
 ```
 
+Get the DDH Tools repository, a.k.a. ``ddt``:
+
+```console
+cd /home/pi;
+mkdir li;
+cd li;
+git clone https://github.com/lowellinstruments/ddt.git;
+cd /home/pi/li/ddt;
+```
+
 ## Description of the scripts
 
 Each script has a purpose. They are described next. This list also indicates suggested installation order.
 
-- The ``dt_install_emolt_flag.sh`` script marks this box as eMolt one. In doubt, do NOT run.
+- The ``./dt_install_emolt_flag.sh`` script marks this box as eMolt one. In doubt, do NOT run.
 
-- The ``dt_install_linux.sh`` script installs dependencies at the linux level. 
+- The ``./dt_install_linux.sh`` script installs dependencies at the linux level. 
 Nothing specific to DDH here yet. 
 For example, it copies the ``rc.local`` file from the ``utils`` folder to the
 Linux installation and also takes care of the ``juice4halt`` feature.
 
-- The ``dt_install_linux_bluez.sh`` installs bluez v5.6.6 which works better with bleak v0.20.1.
+- The ``./dt_install_linux_bluez.sh`` installs bluez v5.6.6 which works better with bleak v0.20.1.
 
-- The ``dt_install_python_venv.sh`` creates a python virtual environment the DDH runs in.
+- The ``./dt_install_python_venv.sh`` creates a python virtual environment the DDH runs in.
 
-- The ``dt_install_python_liu.sh`` script install the Lowell Instruments' lightweight library LIU in the venv.
+- The ``./dt_install_python_liu.sh`` script install the Lowell Instruments' lightweight library LIU in the venv.
 
-- The ``dt_install_python_mat.sh`` script install the Lowell Instruments' library MAT in the venv.
+- The ``./dt_install_python_mat.sh`` script install the Lowell Instruments' library MAT in the venv.
 
-- The ``dt_install_python_ddh.sh`` script updates the software in the DDH folder ``/home/pi/li/ddh``.
+- The ``./dt_install_python_ddh.sh`` script updates the software in the DDH folder ``/home/pi/li/ddh``.
 
-- The ``dt_install_python_ddh_moana.sh`` script enables DDH to works with moana loggers. In beta.
+- The ``./dt_install_python_ddh_moana.sh`` script enables DDH to works with moana loggers. In beta.
 
-- The ``dt_install_python_ddh_settings.py`` python script grabs settings for this DDH box from DDN. In beta.
+- The ``./dt_install_python_ddh_settings.py`` python script grabs settings for this DDH box from DDN. In beta.
 
-- The ``dt_install_service_sw_net.sh`` scripts installs and enables a ``systemctl`` service which switches
+- The ``./dt_install_service_sw_net.sh`` scripts installs and enables a ``systemctl`` service which switches
 from cell to wi-fi interfaces to save cellular data.
 
-- The ``dt_install_crontab.sh`` script installs a crontab which monitors the DDH to be run every minute.
+- The ``./dt_install_crontab.sh`` script installs a crontab that monitors the DDH runs.
 
 - The cell capabilities are installed by doing:
 
@@ -86,7 +87,7 @@ from cell to wi-fi interfaces to save cellular data.
 $ sudo ./_dt_files/ppp_install_standalone.sh
 ```
 
-- The ``dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts. Optional step.
+- The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts. Optional step.
 
 
 
