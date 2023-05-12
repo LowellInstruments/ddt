@@ -40,7 +40,7 @@ _st() {
 }
 
 _e() {
-    _s "error: ""$1"; sleep 2; read -r; exit 1
+    _s "error: ""$1"; sleep 2; exit 1
 }
 
 _check_ddh_update_flag() {
@@ -187,6 +187,8 @@ _done()
   --text="starting DDH updater"
 
 # so terminal is left open for a couple ENTER keys
-read -r; read -r
+if [ $FLAG_DEBUG -eq 1 ]; then
+    read -r; read -r
+fi
 
 # implicit exit 0 :)
