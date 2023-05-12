@@ -8,6 +8,7 @@ _is_rpi() {
 
 
 FLAG_DEBUG=0
+FLAG_WE_RUN_THIS_SCRIPT=/tmp/ddh_we_ran_this.flag
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
@@ -28,6 +29,12 @@ F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
 F_VE=/tmp/venv
 VPIP=$F_VE/bin/pip
+
+
+_flag_we_run_this() {
+    rm $FLAG_WE_RUN_THIS_SCRIPT
+    touch $FLAG_WE_RUN_THIS_SCRIPT
+}
 
 
 _s() {
@@ -173,6 +180,7 @@ _done()
 }
 
 
+_flag_we_run_this
 _check_ddh_update_flag
 (
   sleep 1; # so we can see first text
