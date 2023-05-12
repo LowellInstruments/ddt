@@ -181,4 +181,7 @@ _done()
   --icon-name="dialog-info" --window-icon="coffee.png" \
   --text="starting DDH updater"
 
+# so terminal is left open for a couple ENTER keys
+read -r; read -r
+
 # implicit exit 0 :)
