@@ -7,7 +7,7 @@ _is_rpi() {
 }; _is_rpi
 
 
-FLAG_DEBUG=1
+FLAG_DEBUG=0
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
