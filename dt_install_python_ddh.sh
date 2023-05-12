@@ -115,7 +115,7 @@ _ddh_update() {
     rm -rf $F_CLONE_DDH; git clone $GH_REPO_DDH $F_CLONE_DDH; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot clone DDH"; fi
 
-    _s "Installing DDH requirements file"
+    _s "Installing DDH file $DDH_REQS_TXT"
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
 
