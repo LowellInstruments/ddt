@@ -51,9 +51,9 @@ _check_ddh_update_flag() {
     if [ $IS_RPI -eq 0 ]; then return; fi
     if [ $FLAG_DEBUG -eq 1 ]; then rm $FLAG_DDH_UPDATED; fi
     if [ -f $FLAG_DDH_UPDATED ]; then
-      _st "Already ran updater today, leaving!";
-      exit 1
-      fi
+        printf "Already ran updater today, leaving!";
+        exit 1
+    fi
     touch $FLAG_DDH_UPDATED
 }
 
@@ -173,9 +173,9 @@ _done()
 }
 
 
+_check_ddh_update_flag
 (
   sleep 1; # so we can see first text
-  echo 1; _check_ddh_update_flag
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
