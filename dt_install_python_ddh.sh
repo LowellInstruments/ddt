@@ -15,6 +15,9 @@ GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
 if [ $IS_RPI -eq 1 ]; then
     F_LI=/home/pi/li
     DDH_REQS_TXT=requirements_rpi_39.txt
+    # needed for crontab to access the X-window system
+    export XAUTHORITY=/home/pi/.Xauthority
+    export DISPLAY=:0
 else
     F_LI=/home/kaz/PycharmProjects
     DDH_REQS_TXT=requirements_dev_39.txt
