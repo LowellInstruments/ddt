@@ -181,7 +181,7 @@ _done()
   echo 60; _ddh_update
   echo 98; _ddh_resolv_conf
   echo 99; _done
-) | zenity --width=400 --title "-- DDH INSTALLER --" \
+) | zenity --width=400 --title "DDH Installer" \
   --progress --auto-kill --auto-close \
   --icon-name="dialog-info" --window-icon="coffee.png" \
   --text="starting DDH updater"
