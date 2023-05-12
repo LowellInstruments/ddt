@@ -8,7 +8,7 @@ _is_rpi() {
 
 
 FLAG_DEBUG=0
-FLAG_WE_RUN_THIS_SCRIPT=/tmp/ddh_we_ran_this.flag
+FLAG_WE_RUN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
