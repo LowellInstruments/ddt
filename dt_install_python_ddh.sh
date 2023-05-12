@@ -7,6 +7,7 @@ _is_rpi() {
 }; _is_rpi
 
 
+FLAG_DEBUG=1
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
@@ -45,8 +46,8 @@ _e() {
 _check_ddh_update_flag() {
     # on laptop, keep going
     if [ $IS_RPI -eq 0 ]; then return; fi
-    if [ -f $FLAG_DDH_UPDATED ]; then
-      _st "updater already ran today";
+    if [ -f $FLAG_DDH_UPDATED ] && [ $FLAG_DEBUG -ne 1 ]; then
+      _st "Already ran updater today, leaving!";
       exit 1
       fi
     touch $FLAG_DDH_UPDATED
@@ -95,7 +96,7 @@ _virtual_env() {
 
 _ddh_update() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $IS_RPI -eq 1 ]; then _st "Latest DDH version present:)"; exit 0; fi
+        if [ $IS_RPI -eq 1 ]; then _st "Already latest DDH :)"; exit 0; fi
         # on laptop, we keep going
     fi
 
