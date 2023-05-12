@@ -45,7 +45,7 @@ _e() {
 _check_ddh_update_flag() {
     # on laptop, keep going
     if [ $IS_RPI -eq 0 ]; then return; fi
-    if [ -f $FLAG_DDH_UPDATED ]; then _e "NO NEED\n updater already ran today"; fi
+    if [ -f $FLAG_DDH_UPDATED ]; then _st "updater already ran today"; fi
     touch $FLAG_DDH_UPDATED
 }
 
