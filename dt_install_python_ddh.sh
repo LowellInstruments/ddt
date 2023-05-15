@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+
 # create + call it
 _is_rpi() {
     grep Raspberry /proc/cpuinfo; rv=$?
@@ -7,8 +8,28 @@ _is_rpi() {
 }; _is_rpi
 
 
+F_DA="$F_LI"/ddh
+F_DT="$F_LI"/ddt
+F_VE="$F_LI"/venv
+F_TV=tmp/venv
+VPIP=$F_TV/bin/pip
+F_CLONE_MAT=/tmp/mat
+F_CLONE_DDH=/tmp/ddh
+
+
+_is_update_or_install() {
+    if [ -d "$F_VE" ]; then
+        IS_UPDATE=1
+    else
+        IS_UPDATE=0
+    fi
+}; _is_update_or_install
+
+
+
+
 FLAG_DEBUG=0
-FLAG_WE_RUN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
+FLAG_WE_RAN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
@@ -23,17 +44,14 @@ else
     F_LI=/home/kaz/PycharmProjects
     DDH_REQS_TXT=requirements_dev_39.txt
 fi
-F_DA="$F_LI"/ddh
-F_DT="$F_LI"/ddt
-F_CLONE_MAT=/tmp/mat
-F_CLONE_DDH=/tmp/ddh
-F_VE=/tmp/venv
-VPIP=$F_VE/bin/pip
+
+
 
 
 _flag_we_run_this() {
-    rm $FLAG_WE_RUN_THIS_SCRIPT
-    touch $FLAG_WE_RUN_THIS_SCRIPT
+    # useful when debugging to know if this is being launched
+    rm $FLAG_WE_RAN_THIS_SCRIPT || true
+    touch $FLAG_WE_RAN_THIS_SCRIPT
 }
 
 
@@ -42,20 +60,27 @@ _s() {
     # src: https://funprojects.blog/2021/01/25/zenity-command-line-dialogs/
     # echo "#""${1^^}";
     # normal case
-    echo "#""${1}";
+    echo "#""${1}"
 }
 
 _st() {
-    _s "$1"; sleep 2
+    _s "$1"
+    sleep 2
 }
 
 _e() {
-    _s "error: ""$1"; sleep 2; exit 1
+    # both GUI and console
+    _s "error: ""$1"
+    echo "error: ""$1"
+    sleep 2
+    exit 1
 }
 
 _check_ddh_update_flag() {
-    # on laptop, keep going
+    # on laptop, we leave
     if [ $IS_RPI -eq 0 ]; then return; fi
+
+    # debug always clears the flag
     if [ $FLAG_DEBUG -eq 1 ]; then rm $FLAG_DDH_UPDATED; fi
     if [ -f $FLAG_DDH_UPDATED ]; then
         printf "Already ran updater today, leaving!";
@@ -66,7 +91,7 @@ _check_ddh_update_flag() {
 
 _kill_ddh() {
     _st "killing running DDH, if any"
-    $F_DA/scripts/kill_ddh.sh
+    "$F_DA"/scripts/kill_ddh.sh
 }
 
 _internet() {
@@ -97,22 +122,28 @@ _get_local_commit_ddh() {
 }
 
 _virtual_env() {
-    if [ -d $F_VE ]; then _st "Re-using existing VENV folder"; return; fi
-    _s "VENV generating folder $F_VE"
-    rm -rf "$F_VE"
+    if [ $IS_UPDATE -eq 1 ]; then
+        _st "Re-using existing VENV $F_VE folder";
+        return;
+    fi
+
+    _s "VENV generating temporary folder $F_TV"
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
-    python3 -m venv "$F_VE" --system-site-packages; rv=$?
-    if [ $rv -ne 0 ]; then _e "VENV cannot create folder $F_VE"; fi
-    source "$F_VE"/bin/activate; rv=$?
+    python3 -m venv "$F_TV" --system-site-packages; rv=$?
+    if [ $rv -ne 0 ]; then _e "VENV cannot create folder $F_TV"; fi
+    source "$F_TV"/bin/activate; rv=$?
     if [ $rv -ne 0 ]; then _e "VENV cannot activate"; fi
     "$VPIP" install --upgrade pip
     "$VPIP" install wheel
 }
 
-_ddh_update() {
+_ddh_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $IS_RPI -eq 1 ]; then _st "Already latest DDH :)"; exit 0; fi
+        if [ $IS_RPI -eq 1 ]; then
+            _st "Already latest DDH :)"
+            exit 0
+        fi
         # on laptop, we keep going
     fi
 
@@ -157,14 +188,24 @@ _ddh_update() {
     fi
 
     _s "Uninstalling old DDH folder"
-    if [ -d $F_DA ]; then
+    if [ -d "$F_DA" ]; then
         rm -rf "$F_DA"; rv=$?
-        if [ $rv -ne 0 ]; then _e "cannot delete old DDH folder"; fi
+        if [ $rv -ne 0 ]; then
+            _e "cannot delete old DDH folder";
+        fi
     fi
 
     _s "Installing new DDH folder"
     mv "$F_CLONE_DDH" "$F_DA"; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot install new DDH folder"; fi
+    if [ $rv -ne 0 ]; then
+        _e "cannot install new DDH folder";
+    fi
+
+    _s "Installing new VENV folder"
+    mv "$F_TV" "$F_DA"; rv=$?
+    if [ $rv -ne 0 ]; then
+        _e "cannot install new VENV folder";
+    fi
 }
 
 _ddh_resolv_conf() {
@@ -195,7 +236,7 @@ _check_ddh_update_flag
   echo 15; _get_gh_commit_ddh
   echo 20; _get_local_commit_ddh
   echo 30; _virtual_env
-  echo 60; _ddh_update
+  echo 60; _ddh_install
   echo 98; _ddh_resolv_conf
   echo 99; _done
 ) | zenity --width=400 --title "DDH Installer" \
