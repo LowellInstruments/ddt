@@ -91,7 +91,7 @@ _check_ddh_update_flag() {
 
 _check_debug_flag() {
     if [ $FLAG_DEBUG -eq 0 ]; then return; fi
-    _st "Flag Debug detected"
+    _st "FLAG_DEBUG detected"
 }
 
 _kill_ddh() {
