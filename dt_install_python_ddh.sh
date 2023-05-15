@@ -15,20 +15,10 @@ else
 fi
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
-F_VE="$F_LI"/venv
-F_TV=tmp/venv
+F_TV=/tmp/venv
 VPIP=$F_TV/bin/pip
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-
-
-_is_update_or_install() {
-    if [ -d "$F_VE" ]; then
-        IS_UPDATE=1
-    else
-        IS_UPDATE=0
-    fi
-}; _is_update_or_install
 
 
 FLAG_DEBUG=0
@@ -76,7 +66,7 @@ _e() {
 }
 
 _check_ddh_update_flag() {
-    # on laptop, we leave
+    # on laptop, we leave, we always act
     if [ $IS_RPI -eq 0 ]; then return; fi
 
     # debug always clears the flag
@@ -90,7 +80,7 @@ _check_ddh_update_flag() {
 
 _kill_ddh() {
     _st "killing running DDH, if any"
-    "$F_DA"/scripts/kill_ddh.sh
+    "$F_DA"/scripts/kill_ddh.sh 2> /dev/null
 }
 
 _internet() {
@@ -121,12 +111,13 @@ _get_local_commit_ddh() {
 }
 
 _virtual_env() {
-    if [ $IS_UPDATE -eq 1 ]; then
-        _st "Re-using existing VENV $F_VE folder";
+    if [ -d $F_TV ]; then
+        # mostly only happens when debugging installer
+        _st "Re-using found VENV temporary folder $F_TV";
         return;
     fi
 
-    _s "VENV generating temporary folder $F_TV"
+    _s "VENV generating new VENV temporary folder $F_TV"
     rm -rf $F_TV || true
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
@@ -141,10 +132,10 @@ _virtual_env() {
 _ddh_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
         if [ $IS_RPI -eq 1 ] && [ $FLAG_DEBUG -eq 0 ]; then
-            _st "Already latest DDH :)"
+            _st "Already latest DDH on RPi :)"
             exit 0
         fi
-        # on laptop, we keep going
+        # on laptop, or when debugging, we keep going
     fi
 
     _s "Installing LIU library"
@@ -170,8 +161,7 @@ _ddh_install() {
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
 
-
-    if [ $IS_UPDATE -eq 1 ]; then
+    if [ -d "$F_DA" ]; then
         _st "Saving current DDH settings"
         cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
         cp -r "$F_DA"/logs "$F_CLONE_DDH"
@@ -183,8 +173,7 @@ _ddh_install() {
         cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
     fi
 
-
-    # on laptop, we end here
+    # on laptop, we end here, we don't really install
     if [ $IS_RPI -eq 0 ]; then
         _st "Detected non-rpi, leaving"
         return;
