@@ -194,6 +194,7 @@ _ddh_install() {
     fi
 
     _s "VENV: installing new folder"
+    rm -rf "$F_LI"/venv
     mv "$F_TV" "$F_LI"; rv=$?
     if [ $rv -ne 0 ]; then
         _e "cannot install new VENV folder";
