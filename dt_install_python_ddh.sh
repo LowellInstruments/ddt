@@ -13,20 +13,28 @@ if [ $IS_RPI -eq 1 ]; then
 else
     F_LI=$HOME/PycharmProjects/
 fi
+
+
+# variables for paths of folders and executables
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
 F_TV=/tmp/venv
 VPIP=$F_TV/bin/pip
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-
-
-FLAG_DEBUG=0
-FLAG_WE_RAN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
-FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
+
+
+# variables for flags
+if [ "$1" == "force" ]; then
+    FLAG_DEBUG=1
+else
+    FLAG_DEBUG=0
+fi
+FLAG_WE_RAN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
+FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 if [ $IS_RPI -eq 1 ]; then
     DDH_REQS_TXT=requirements_rpi_39.txt
     # needed for crontab to access the X-window system
@@ -39,7 +47,7 @@ fi
 
 _flag_we_run_this() {
     # useful when debugging to know if this is being launched
-    rm $FLAG_WE_RAN_THIS_SCRIPT || true
+    rm $FLAG_WE_RAN_THIS_SCRIPT 2> /dev/null
     touch $FLAG_WE_RAN_THIS_SCRIPT
 }
 
@@ -66,11 +74,13 @@ _e() {
 }
 
 _check_ddh_update_flag() {
-    # on laptop, we leave, we always act
+    # on laptop, we leave now so we will always run this updater
     if [ $IS_RPI -eq 0 ]; then return; fi
 
-    # debug always clears the flag
-    if [ $FLAG_DEBUG -eq 1 ]; then rm $FLAG_DDH_UPDATED; fi
+    # debug clears the flag
+    if [ $FLAG_DEBUG -eq 1 ]; then
+        rm $FLAG_DDH_UPDATED
+    fi
     if [ -f $FLAG_DDH_UPDATED ]; then
         printf "Already ran updater today, leaving!\n";
         exit 1
