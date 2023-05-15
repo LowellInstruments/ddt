@@ -8,6 +8,11 @@ _is_rpi() {
 }; _is_rpi
 
 
+if [ $IS_RPI -eq 1 ]; then
+    F_LI=/home/pi/li
+else
+    F_LI=$HOME/PycharmProjects/
+fi
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
 F_VE="$F_LI"/venv
@@ -26,8 +31,6 @@ _is_update_or_install() {
 }; _is_update_or_install
 
 
-
-
 FLAG_DEBUG=0
 FLAG_WE_RAN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
@@ -35,17 +38,13 @@ GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
 if [ $IS_RPI -eq 1 ]; then
-    F_LI=/home/pi/li
     DDH_REQS_TXT=requirements_rpi_39.txt
     # needed for crontab to access the X-window system
     export XAUTHORITY=/home/pi/.Xauthority
     export DISPLAY=:0
 else
-    F_LI=/home/kaz/PycharmProjects
     DDH_REQS_TXT=requirements_dev_39.txt
 fi
-
-
 
 
 _flag_we_run_this() {
@@ -170,16 +169,19 @@ _ddh_install() {
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
 
-    if [ -d "$F_DA" ]; then _st "Saving current DDH settings"; fi
-    # it just works OK either already there or not
-    cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
-    cp -r "$F_DA"/logs "$F_CLONE_DDH"
-    cp "$F_DA"/run_dds.sh "$F_CLONE_DDH"
-    cp "$F_DA"/settings/ddh.json "$F_CLONE_DDH"/settings
-    cp "$F_DA"/settings/ctx.py "$F_CLONE_DDH"/settings
-    cp "$F_DA"/settings/_macs_to_sn.yml "$F_CLONE_DDH"/settings
-    cp "$F_DA"/settings/_li_all_macs_to_sn.yml "$F_CLONE_DDH"/settings
-    cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
+
+    if [ $IS_UPDATE -eq 1 ]; then
+        _st "Saving current DDH settings"
+        cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
+        cp -r "$F_DA"/logs "$F_CLONE_DDH"
+        cp "$F_DA"/run_dds.sh "$F_CLONE_DDH"
+        cp "$F_DA"/settings/ddh.json "$F_CLONE_DDH"/settings
+        cp "$F_DA"/settings/ctx.py "$F_CLONE_DDH"/settings
+        cp "$F_DA"/settings/_macs_to_sn.yml "$F_CLONE_DDH"/settings
+        cp "$F_DA"/settings/_li_all_macs_to_sn.yml "$F_CLONE_DDH"/settings
+        cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
+    fi
+
 
     # on laptop, we end here
     if [ $IS_RPI -eq 0 ]; then
