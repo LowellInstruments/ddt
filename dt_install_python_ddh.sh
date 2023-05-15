@@ -82,7 +82,7 @@ _check_ddh_update_flag() {
     # debug always clears the flag
     if [ $FLAG_DEBUG -eq 1 ]; then rm $FLAG_DDH_UPDATED; fi
     if [ -f $FLAG_DDH_UPDATED ]; then
-        printf "Already ran updater today, leaving!";
+        printf "Already ran updater today, leaving!\n";
         exit 1
     fi
     touch $FLAG_DDH_UPDATED
@@ -139,7 +139,7 @@ _virtual_env() {
 
 _ddh_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $IS_RPI -eq 1 ]; then
+        if [ $IS_RPI -eq 1 ] && [ $FLAG_DEBUG -eq 0 ]; then
             _st "Already latest DDH :)"
             exit 0
         fi
