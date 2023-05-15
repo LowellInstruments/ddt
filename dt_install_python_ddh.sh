@@ -88,6 +88,12 @@ _check_ddh_update_flag() {
     touch $FLAG_DDH_UPDATED
 }
 
+
+_check_debug_flag() {
+    if [ $FLAG_DEBUG -eq 0 ]; then return; fi
+    _st "Flag Debug detected"
+}
+
 _kill_ddh() {
     _st "killing running DDH, if any"
     "$F_DA"/scripts/kill_ddh.sh 2> /dev/null
@@ -234,6 +240,7 @@ _check_ddh_update_flag
 (
   sleep 1; # so we can see first text
   echo 1; _kill_ddh
+  echo 3; _check_debug_flag
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
