@@ -91,11 +91,11 @@ _check_ddh_update_flag() {
 
 _check_debug_flag() {
     if [ $FLAG_DEBUG -eq 0 ]; then return; fi
-    _st "FLAG_DEBUG forced to 1"
+    _st "FLAG_DEBUG - forced to 1"
 }
 
 _kill_ddh() {
-    _st "killing running DDH, if any"
+    _st "DDH - killing any currently running"
     "$F_DA"/scripts/kill_ddh.sh 2> /dev/null
 }
 
@@ -129,18 +129,18 @@ _get_local_commit_ddh() {
 _virtual_env() {
     if [ -d $F_TV ]; then
         # mostly only happens when debugging installer
-        _st "VENV: re-using found temporary folder $F_TV";
+        _st "VENV - reusing found temporary folder $F_TV";
         return;
     fi
 
-    _s "VENV: generating new temporary folder $F_TV"
+    _s "VENV - generating new temporary folder $F_TV"
     rm -rf $F_TV || true
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
     python3 -m venv "$F_TV" --system-site-packages; rv=$?
-    if [ $rv -ne 0 ]; then _e "VENV cannot create folder $F_TV"; fi
+    if [ $rv -ne 0 ]; then _e "cannot create folder $F_TV"; fi
     source "$F_TV"/bin/activate; rv=$?
-    if [ $rv -ne 0 ]; then _e "VENV cannot activate"; fi
+    if [ $rv -ne 0 ]; then _e "cannot activate VENV in folder $F_TV"; fi
     "$VPIP" install --upgrade pip
     "$VPIP" install wheel
 }
@@ -148,37 +148,37 @@ _virtual_env() {
 _ddh_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
         if [ $IS_RPI -eq 1 ] && [ $FLAG_DEBUG -eq 0 ]; then
-            _st "DDH: newest app already on RPi :)"
+            _st "DDH - newest app already on RPi :)"
             exit 0
         fi
         # on laptop, or when debugging, we keep going
     fi
 
-    _s "LIU library: installing"
+    _s "LIU library - installing"
     "$VPIP" uninstall -y liu
     "$VPIP" install --upgrade git+$GH_REPO_LIU; rv=$?
     if [ "$rv" -ne 0 ]; then _e "cannot install LIU library"; fi
 
-    _s "MAT library: cloning"
+    _s "MAT library - cloning"
     rm -rf $F_CLONE_MAT; git clone $GH_REPO_MAT $F_CLONE_MAT; rv=$?
     if [ "$rv" -ne 0 ]; then _e "cannot clone MAT repository"; fi
 
-    _s "MAT library: installing"
+    _s "MAT library - installing"
     cp $F_CLONE_MAT/tools/_setup_wo_reqs.py $F_CLONE_MAT/setup.py; rv=$?
     if [ "$rv" -ne 0 ]; then _e "cannot copy MAT empty setup.py"; fi
     "$VPIP" uninstall -y mat; "$VPIP" install $F_CLONE_MAT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install MAT library"; fi
 
-    _s "DDH: cloning"
+    _s "DDH - cloning"
     rm -rf $F_CLONE_DDH; git clone $GH_REPO_DDH $F_CLONE_DDH; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot clone DDH"; fi
 
-    _s "DDH: installing file $DDH_REQS_TXT"
+    _s "DDH - installing file $DDH_REQS_TXT"
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
 
     if [ -d "$F_DA" ]; then
-        _st "DDH: saving existing settings"
+        _st "DDH - saving existing settings"
         cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
         cp -r "$F_DA"/logs "$F_CLONE_DDH"
         cp "$F_DA"/run_dds.sh "$F_CLONE_DDH"
@@ -191,25 +191,25 @@ _ddh_install() {
 
     # on laptop, we end here, we don't really install
     if [ $IS_RPI -eq 0 ]; then
-        _st "DDH: detected non-rpi, leaving"
+        _st "DDH - detected non-rpi, leaving"
         return;
     fi
 
     if [ -d "$F_DA" ]; then
-        _s "DDH: deleting old application folder"
+        _s "DDH - deleting old application folder"
         rm -rf "$F_DA"; rv=$?
         if [ $rv -ne 0 ]; then
             _e "cannot delete old DDH folder";
         fi
     fi
 
-    _s "DDH: installing new application folder"
+    _s "DDH - installing new application folder"
     mv "$F_CLONE_DDH" "$F_DA"; rv=$?
     if [ $rv -ne 0 ]; then
         _e "cannot install new DDH folder";
     fi
 
-    _s "VENV: installing new folder"
+    _s "VENV - installing new folder"
     rm -rf "$F_LI"/venv
     mv "$F_TV" "$F_LI"; rv=$?
     if [ $rv -ne 0 ]; then
