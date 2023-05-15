@@ -170,7 +170,7 @@ _ddh_install() {
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
 
-    if [ -d $F_DA ]; then _st "Saving current DDH settings"; fi
+    if [ -d "$F_DA" ]; then _st "Saving current DDH settings"; fi
     # it just works OK either already there or not
     cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
     cp -r "$F_DA"/logs "$F_CLONE_DDH"
