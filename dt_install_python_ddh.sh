@@ -127,6 +127,7 @@ _virtual_env() {
     fi
 
     _s "VENV generating temporary folder $F_TV"
+    rm -rf $F_TV || true
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
     python3 -m venv "$F_TV" --system-site-packages; rv=$?
@@ -204,7 +205,7 @@ _ddh_install() {
     fi
 
     _s "Installing new VENV folder"
-    mv "$F_TV" "$F_DA"; rv=$?
+    mv "$F_TV" "$F_LI"; rv=$?
     if [ $rv -ne 0 ]; then
         _e "cannot install new VENV folder";
     fi
