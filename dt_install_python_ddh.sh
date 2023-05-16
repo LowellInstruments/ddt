@@ -1,13 +1,24 @@
 #!/usr/bin/env bash
 
 
-# create + call it
+# am I already running
+S_ME=$(basename "$0")
+N_ME=$(pgrep -afc "$S_ME")
+if [ "$N_ME" -ne 1 ]; then
+    echo "error: $S_ME already running, leaving"
+    exit 1
+fi
+
+
+# detect if we are a raspberry
 _is_rpi() {
     grep Raspberry /proc/cpuinfo; rv=$?
     if [ $rv -eq 0 ]; then IS_RPI=1; else IS_RPI=0; fi
-}; _is_rpi
+}
+_is_rpi
 
 
+# set LI folder
 if [ $IS_RPI -eq 1 ]; then
     F_LI=/home/pi/li
 else
@@ -25,16 +36,15 @@ F_CLONE_DDH=/tmp/ddh
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
+FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
 # variables for flags
-if [ "$1" == "force" ]; then
+if [ "$1" == "debug" ]; then
     FLAG_DEBUG=1
 else
     FLAG_DEBUG=0
 fi
-FLAG_WE_RAN_THIS_SCRIPT=/tmp/ddh_we_ran_update_script.flag
-FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 if [ $IS_RPI -eq 1 ]; then
     DDH_REQS_TXT=requirements_rpi_39.txt
     # needed for crontab to access the X-window system
@@ -45,15 +55,8 @@ else
 fi
 
 
-_flag_we_run_this() {
-    # useful when debugging to know if this is being launched
-    rm $FLAG_WE_RAN_THIS_SCRIPT 2> /dev/null
-    touch $FLAG_WE_RAN_THIS_SCRIPT
-}
-
-
 _s() {
-    # a progress bar dialog cannot change font size :( let's uppercase
+    # progress bar dialog cannot change font size :( let's uppercase
     # src: https://funprojects.blog/2021/01/25/zenity-command-line-dialogs/
     # echo "#""${1^^}";
     # normal case
@@ -74,11 +77,8 @@ _e() {
 }
 
 _check_ddh_update_flag() {
-    # on laptop, we leave now so we will always run this updater
-    if [ $IS_RPI -eq 0 ]; then return; fi
-
-    # debug clears the flag
-    if [ $FLAG_DEBUG -eq 1 ]; then
+    # debug or laptop forces the updater to run
+    if [ $FLAG_DEBUG -eq 1 ] || [ $IS_RPI -eq 0 ]; then
         rm $FLAG_DDH_UPDATED
     fi
     if [ -f $FLAG_DDH_UPDATED ]; then
@@ -89,13 +89,13 @@ _check_ddh_update_flag() {
 }
 
 
-_check_debug_flag() {
+_display_debug_flag() {
     if [ $FLAG_DEBUG -eq 0 ]; then return; fi
-    _st "FLAG_DEBUG - forced to 1"
+    _st "FLAG_DEBUG - set to 1"
 }
 
 _kill_ddh() {
-    _st "DDH - killing any currently running"
+    _st "DDH - killing any currently running application"
     "$F_DA"/scripts/kill_ddh.sh 2> /dev/null
 }
 
@@ -189,7 +189,7 @@ _ddh_install() {
         cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
     fi
 
-    # on laptop, we end here, we don't really install
+    # on laptop we stop here, we don't really install
     if [ $IS_RPI -eq 0 ]; then
         _st "DDH - detected non-rpi, leaving"
         return;
@@ -218,7 +218,8 @@ _ddh_install() {
 }
 
 _ddh_resolv_conf() {
-    if [ "$IS_RPI" -eq 0 ]; then return; fi
+    # we don't do this on laptop
+    if [ "$IS_RPI" -ne 1 ]; then return; fi
     sudo chattr -i /etc/resolv.conf; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot chattr -i resolv.conf"; fi
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"; rv=$?
@@ -235,12 +236,11 @@ _done()
 }
 
 
-_flag_we_run_this
 _check_ddh_update_flag
 (
   sleep 1; # so we can see first text
   echo 1; _kill_ddh
-  echo 3; _check_debug_flag
+  echo 3; _display_debug_flag
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
@@ -255,7 +255,7 @@ _check_ddh_update_flag
   --text="starting DDH updater"
 
 
-# so terminal is left open for a couple ENTER keys
+# when debugging, left terminal open for a couple ENTER keys
 if [ $FLAG_DEBUG -eq 1 ]; then
     read -r; read -r
 fi
