@@ -363,7 +363,7 @@ class MoanaBle:
                     break
             except (Exception,) as ex:
                 lg.a("error: moana connect exception {}".format(ex))
-                time.sleep(1)
+                await asyncio.sleep(2)
 
         status = True
         last_state = OffloadState.CONNECT
