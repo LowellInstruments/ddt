@@ -7,11 +7,9 @@ import re
 import struct
 import time
 import traceback
-
 from bleak import BleakClient, BleakError
 from datetime import datetime
 from enum import Enum
-
 from dds.emolt import (
     file_moana_raw_csv_to_emolt_csv,
     ddh_is_emolt_box,
@@ -21,10 +19,12 @@ from dds.emolt import (
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
 from utils.ddh_shared import (
-    create_folder_logger_by_mac,
+    create_folder_logger_by_mac, STATE_DDS_REQUEST_PLOT,
+    send_ddh_udp_gui as _u
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
+
 
 
 VSP_RX_CHAR_UUID = "569a2001-b87f-490c-92cb-11ba5ea5167c"
@@ -84,9 +84,9 @@ class MoanaBle:
 
     async def packet_complete(self, timeout: int = 60):
         while (
-            (self.packet_state != PacketState.COMPLETE)
-            and (self.cli and self.cli.is_connected)
-            and (timeout > 0)
+                (self.packet_state != PacketState.COMPLETE)
+                and (self.cli and self.cli.is_connected)
+                and (timeout > 0)
         ):
             await asyncio.sleep(0.1)
             timeout -= 0.1
@@ -294,7 +294,7 @@ class MoanaBle:
 
         # grab only the data rows of source file
         idx_data = lines.index(cols)
-        lines_data = lines[idx_data + 1 :]
+        lines_data = lines[idx_data + 1:]
         for i in lines_data:
             # Moana format is ddmmyyy
             i = i.replace("\n", "")
@@ -433,6 +433,9 @@ class MoanaBle:
             ble_mat_progress_dl(v, v)
             time.sleep(5)
             print("Offload succeeded")
+
+            # try to plot
+            _u("{}/{}".format(STATE_DDS_REQUEST_PLOT, mac))
             return True
 
         # went south
