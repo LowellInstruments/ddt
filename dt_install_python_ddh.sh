@@ -130,7 +130,10 @@ _restore_old_venv() {
 
 
 _detect_need() {
-    if [ "$1" == "force" ]; then return; fi
+    if [ "$1" == "force" ]; then
+        _st "DDH - detected FORCE flag"
+        return
+    fi
 
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
         # on laptop testing, we keep going
