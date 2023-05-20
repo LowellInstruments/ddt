@@ -76,7 +76,7 @@ _e() {
 
 _check_flag_venv_keep()
 {
-    _st "VENV - FLAG_VENV_KEEP set to $FLAG_VENV_KEEP"
+    _st "VENV - FLAG_VENV_KEEP is $FLAG_VENV_KEEP"
 }
 
 
