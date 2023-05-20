@@ -10,7 +10,7 @@ if [ "$N_ME" -ne 1 ]; then
 fi
 
 
-# detect we are Raspberry pi
+# detect we are on Raspberry pi
 _is_rpi() {
     grep Raspberry /proc/cpuinfo; rv=$?
     if [ $rv -eq 0 ]; then FLAG_IS_RPI=1; else FLAG_IS_RPI=0; fi
@@ -19,14 +19,14 @@ _is_rpi
 
 
 # detect run parameters
-if [ "$1" == "venv_keep" ]; then
+if [ "$1" == "venv_keep" ] || [ "$1" == "keep_venv" ]; then
     FLAG_VENV_KEEP=1
 else
     FLAG_VENV_KEEP=0
 fi
 
 
-# set dynamic variables
+# specific laptop vs RPi variables
 if [ $FLAG_IS_RPI -eq 1 ]; then
     F_LI=/home/pi/li
     DDH_REQS_TXT=requirements_rpi_39.txt
@@ -39,7 +39,7 @@ else
 fi
 
 
-# variables for paths of folders and executables
+# common variables for laptop and RPi
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
 F_VE="$F_LI"/venv
@@ -81,7 +81,7 @@ _check_flag_venv_keep()
 
 
 _check_flag_ddh_update() {
-    # on laptop, force updater to run
+    # on laptop, updater always runs
     if [ $FLAG_IS_RPI -eq 0 ]; then
         printf "not RPi, forcing updater to run \n";
         rm $FLAG_DDH_UPDATED
@@ -99,10 +99,12 @@ _kill_ddh() {
     "$F_DA"/scripts/kill_ddh.sh 2> /dev/null
 }
 
+
 _internet() {
     ping -q -c 1 -W 2 www.google.com; rv=$?;
     if [ $rv -ne 0 ]; then _e "no internet"; fi
 }
+
 
 _get_gh_commit_ddh() {
     COM_DDH_GH=$(git ls-remote $GH_REPO_DDH master | awk '{ print $1 }'); rv=$?;
@@ -119,7 +121,9 @@ _get_gh_commit_mat() {
 }
 
 _get_local_commit_ddh() {
-    if [ ! -d "$F_DA" ]; then return; fi
+    if [ ! -d "$F_DA" ]; then
+        return
+    fi
     COM_DDH_LOC=$(cd "$F_DA" && git rev-parse master); rv=$?;
     if [ "$rv" -ne 0 ]; then _e "cannot get DDH local version"; fi
     if [ ${#COM_DDH_LOC} -ne 40 ]; then _e "bad DDH local version"; fi
@@ -129,7 +133,7 @@ _get_local_commit_ddh() {
 _virtual_env() {
     if [ -d "$F_VE" ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
         _st "VENV - reusing folder $F_VE";
-        return;
+        return
     fi
 
     _s "VENV - creating folder $F_VE"
