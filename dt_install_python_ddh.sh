@@ -19,10 +19,10 @@ _is_rpi
 
 
 # detect run parameters
-if [ "$1" == "venv_keep" ] || [ "$1" == "keep_venv" ]; then
-    FLAG_VENV_KEEP=1
+if [ "$1" == "venv_new" ] || [ "$1" == "new_venv" ]; then
+    FLAG_VENV_RECREATE=1
 else
-    FLAG_VENV_KEEP=0
+    FLAG_VENV_RECREATE=0
 fi
 
 
@@ -60,10 +60,12 @@ _s() {
     echo "#""${1}"
 }
 
+
 _st() {
     _s "$1"
     sleep 2
 }
+
 
 _e() {
     # both GUI and console
@@ -74,9 +76,9 @@ _e() {
 }
 
 
-_check_flag_venv_keep()
+_check_flag_venv_recreate()
 {
-    _st "VENV - FLAG_VENV_KEEP is $FLAG_VENV_KEEP"
+    _st "VENV - FLAG_VENV_RECREATE = $FLAG_VENV_RECREATE"
 }
 
 
@@ -113,12 +115,14 @@ _get_gh_commit_ddh() {
     # _s "got DDH github commit \n""$COM_DDH_GH"
 }
 
+
 _get_gh_commit_mat() {
     COM_MAT_GH=$(git ls-remote $GH_REPO_MAT master | awk '{ print $1 }'); rv=$?;
     if [ "$rv" -ne 0 ]; then _e "cannot get MAT github version"; fi
     if [ ${#COM_MAT_GH} -ne 40 ]; then _e "bad MAT github version"; fi
     # _s "got MAT github commit \n""$COM_MAT_GH"
 }
+
 
 _get_local_commit_ddh() {
     if [ ! -d "$F_DA" ]; then
@@ -130,8 +134,9 @@ _get_local_commit_ddh() {
     # _s "got local DDH commit \n""$COM_DDH_LOC"
 }
 
-_virtual_env() {
-    if [ -d "$F_VE" ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
+
+_install_venv() {
+    if [ -d "$F_VE" ] && [ $FLAG_VENV_RECREATE -eq 0 ]; then
         _st "VENV - reusing folder $F_VE";
         return
     fi
@@ -148,13 +153,14 @@ _virtual_env() {
     "$VPIP" install wheel
 }
 
-_ddh_install() {
+
+_install_ddh() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $FLAG_IS_RPI -eq 1 ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
+        if [ $FLAG_IS_RPI -eq 1 ] && [ $FLAG_VENV_RECREATE -eq 0 ]; then
             _st "DDH - newest app already on RPi :)"
             exit 0
         fi
-        # on laptop, or when not VENV_KEEP, we keep going
+        # on laptop, or when we need to re-create VENV, we keep going
     fi
 
     _s "LIU library - installing"
@@ -213,8 +219,9 @@ _ddh_install() {
     fi
 }
 
-_ddh_resolv_conf() {
-    # we don't do this on laptop
+
+_install_resolv_conf() {
+    # on laptop, don't mess with resolv.conf
     if [ "$FLAG_IS_RPI" -eq 0 ]; then
         return
     fi
@@ -228,24 +235,26 @@ _ddh_resolv_conf() {
     if [ $rv -ne 0 ]; then _e "cannot chattr +i resolv.conf"; fi
 }
 
+
 _done()
 {
     _st "Done!"
 }
 
 
+
 _check_flag_ddh_update
 (
   sleep 1; # so we can see first text
   echo 1; _kill_ddh
-  echo 3; _check_flag_venv_keep
+  echo 3; _check_flag_venv_recreate
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
   echo 20; _get_local_commit_ddh
-  echo 30; _virtual_env
-  echo 60; _ddh_install
-  echo 98; _ddh_resolv_conf
+  echo 30; _install_venv
+  echo 60; _install_ddh
+  echo 98; _install_resolv_conf
   echo 99; _done
 ) | zenity --width=400 --title "DDH Installer" \
   --progress --auto-kill --auto-close \
