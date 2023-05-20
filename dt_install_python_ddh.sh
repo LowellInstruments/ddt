@@ -128,11 +128,11 @@ _get_local_commit_ddh() {
 
 _virtual_env() {
     if [ -d "$F_VE" ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
-        _st "VENV - reusing found temporary folder $F_VE";
+        _st "VENV - reusing folder $F_VE";
         return;
     fi
 
-    _s "VENV - generating new temporary folder $F_VE"
+    _s "VENV - creating folder $F_VE"
     rm -rf "$F_VE" || true
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
@@ -248,10 +248,5 @@ _check_flag_ddh_update
   --icon-name="dialog-info" --window-icon="coffee.png" \
   --text="starting DDH updater"
 
-
-# when debugging, left terminal open for a couple ENTER keys
-if [ $FLAG_VENV_KEEP -eq 1 ]; then
-    read -r; read -r
-fi
 
 # implicit exit 0 :)
