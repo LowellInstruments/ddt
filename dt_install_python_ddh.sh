@@ -31,6 +31,11 @@ else
 fi
 
 
+if [ "$1" == "force" ]; then
+    FLAG_FORCE=1;
+fi
+
+
 # common variables for laptop and RPi
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
@@ -70,7 +75,7 @@ _e() {
 
 
 _check_flag_ddh_update() {
-    if [ -f $FLAG_DDH_UPDATED ]; then
+    if [ -f $FLAG_DDH_UPDATED ] && [ $FLAG_FORCE -eq 0 ]; then
         printf "Already ran updater today, leaving \n";
         exit 1
     fi
@@ -130,7 +135,7 @@ _restore_old_venv() {
 
 
 _detect_need() {
-    if [ "$1" == "force" ]; then
+    if [ $FLAG_FORCE -eq 1 ]; then
         _st "DDH - detected FORCE flag"
         return
     fi
