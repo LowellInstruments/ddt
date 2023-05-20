@@ -76,7 +76,7 @@ _e() {
 
 _check_flag_ddh_update() {
     if [ -f $FLAG_DDH_UPDATED ] && [ $FLAG_FORCE -eq 0 ]; then
-        printf "Already ran updater today, leaving \n";
+        printf "bye! already ran updater today \n";
         exit 1
     fi
     touch $FLAG_DDH_UPDATED
@@ -143,7 +143,7 @@ _detect_need() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
         # on laptop testing, we keep going
         if [ $FLAG_IS_RPI -eq 1 ]; then
-            _st "DDH - newest app already on RPi :)"
+            _st "DDH - bye! newest app already installed"
             exit 0
         fi
     fi
@@ -223,7 +223,7 @@ _install() {
         _restore_old_venv
     fi
 
-    _s "VENV - installing file $DDH_REQS_TXT"
+    _s "VENV - installing $DDH_REQS_TXT"
     "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT
     rv=$?
     if [ $rv -ne 0 ]; then
@@ -231,7 +231,7 @@ _install() {
         _restore_old_venv
     fi
 
-    _s "VENV - remove old $F_VO"
+    _s "VENV - removing old $F_VO"
     rm "$F_VO" 2> /dev/null
 
     if [ -d "$F_DA" ]; then
