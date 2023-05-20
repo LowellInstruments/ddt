@@ -18,14 +18,6 @@ _is_rpi() {
 _is_rpi
 
 
-# detect run parameters
-if [ "$1" == "venv_new" ] || [ "$1" == "new_venv" ]; then
-    FLAG_VENV_RECREATE=1
-else
-    FLAG_VENV_RECREATE=0
-fi
-
-
 # specific laptop vs RPi variables
 if [ $FLAG_IS_RPI -eq 1 ]; then
     F_LI=/home/pi/li
@@ -43,6 +35,7 @@ fi
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
 F_VE="$F_LI"/venv
+F_VO="$F_LI"/venv_old
 VPIP=$F_VE/bin/pip
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
@@ -76,18 +69,7 @@ _e() {
 }
 
 
-_check_flag_venv_recreate()
-{
-    _st "VENV - FLAG_VENV_RECREATE = $FLAG_VENV_RECREATE"
-}
-
-
 _check_flag_ddh_update() {
-    # on laptop, updater always runs
-    if [ $FLAG_IS_RPI -eq 0 ]; then
-        printf "not RPi, forcing updater to run \n";
-        rm $FLAG_DDH_UPDATED
-    fi
     if [ -f $FLAG_DDH_UPDATED ]; then
         printf "Already ran updater today, leaving \n";
         exit 1
@@ -135,56 +117,109 @@ _get_local_commit_ddh() {
 }
 
 
-_install_venv() {
-    if [ -d "$F_VE" ] && [ $FLAG_VENV_RECREATE -eq 0 ]; then
-        _st "VENV - reusing folder $F_VE";
-        return
+_restore_old_venv() {
+    # this only gets called on error
+    _st "VENV - restoring $F_VO"
+    rm -r "$F_VE"
+    mv "$F_VO" "$F_VE"
+    if [ $rv -ne 0 ]; then
+        _e "cannot restore old VENV";
+    fi
+    exit 1
+}
+
+
+_create_venv() {
+    if [ -d "$F_VE" ]; then
+        _st "VENV - stashing old to $F_VO";
+        mv "$F_VE" "$F_VO"
+        if [ $rv -ne 0 ]; then
+            _e "cannot stash old $F_VE";
+        fi
     fi
 
-    _s "VENV - creating folder $F_VE"
-    rm -rf "$F_VE" || true
-    rm -rf "$HOME"/.cache/pip
-    # on RPi, venv needs to inherit PyQt5 installed via apt
-    python3 -m venv "$F_VE" --system-site-packages; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot create folder $F_VE"; fi
-    source "$F_VE"/bin/activate; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot activate VENV in folder $F_VE"; fi
+    # create VENV, inherit PyQt5 installed via apt
+    _s "VENV - creating $F_VE"
+    rm -rf "$HOME"/.cache/pip 2> /dev/null
+    python3 -m venv "$F_VE" --system-site-packages
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        _st "error: cannot create $F_VE"
+        _restore_old_venv
+    fi
+
+    source "$F_VE"/bin/activate
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        _st "error: cannot activate $F_VE"
+        _restore_old_venv
+    fi
     "$VPIP" install --upgrade pip
     "$VPIP" install wheel
 }
 
 
-_install_ddh() {
+_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $FLAG_IS_RPI -eq 1 ] && [ $FLAG_VENV_RECREATE -eq 0 ]; then
+        # on laptop testing, we keep going
+        if [ $FLAG_IS_RPI -eq 1 ]; then
             _st "DDH - newest app already on RPi :)"
             exit 0
         fi
-        # on laptop, or when we need to re-create VENV, we keep going
     fi
 
-    _s "LIU library - installing"
+    _s "VENV - installing LIU library"
     "$VPIP" uninstall -y liu
-    "$VPIP" install --upgrade git+$GH_REPO_LIU; rv=$?
-    if [ "$rv" -ne 0 ]; then _e "cannot install LIU library"; fi
+    "$VPIP" install --upgrade git+$GH_REPO_LIU
+    rv=$?
+    if [ "$rv" -ne 0 ]; then
+        _st "error: cannot install LIU library";
+        _restore_old_venv
+    fi
 
-    _s "MAT library - cloning"
-    rm -rf $F_CLONE_MAT; git clone $GH_REPO_MAT $F_CLONE_MAT; rv=$?
-    if [ "$rv" -ne 0 ]; then _e "cannot clone MAT repository"; fi
+    _s "VENV - cloning MAT library"
+    rm -rf $F_CLONE_MAT 2> /dev/null
+    git clone $GH_REPO_MAT $F_CLONE_MAT
+    rv=$?
+    if [ "$rv" -ne 0 ]; then
+        _st "error: cannot clone MAT repository";
+        _restore_old_venv
+    fi
 
-    _s "MAT library - installing"
-    cp $F_CLONE_MAT/tools/_setup_wo_reqs.py $F_CLONE_MAT/setup.py; rv=$?
-    if [ "$rv" -ne 0 ]; then _e "cannot copy MAT empty setup.py"; fi
-    "$VPIP" uninstall -y mat; "$VPIP" install $F_CLONE_MAT; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot install MAT library"; fi
+    _s "VENV - installing MAT library"
+    cp $F_CLONE_MAT/tools/_setup_wo_reqs.py $F_CLONE_MAT/setup.py
+    rv=$?
+    if [ "$rv" -ne 0 ]; then
+        _st "error: cannot copy MAT empty setup.py";
+        _restore_old_venv
+    fi
+    "$VPIP" uninstall -y mat
+    "$VPIP" install $F_CLONE_MAT
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        _st "error: cannot install MAT library";
+        _restore_old_venv
+    fi
 
-    _s "DDH - cloning"
-    rm -rf $F_CLONE_DDH; git clone $GH_REPO_DDH $F_CLONE_DDH; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot clone DDH"; fi
+    _s "VENV - cloning DDH"
+    rm -rf $F_CLONE_DDH
+    git clone $GH_REPO_DDH $F_CLONE_DDH
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        _st "error: cannot clone DDH";
+        _restore_old_venv
+    fi
 
-    _s "DDH - installing file $DDH_REQS_TXT"
-    "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot install DDH requirements"; fi
+    _s "VENV - installing file $DDH_REQS_TXT"
+    "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        _st "error: cannot install DDH requirements";
+        _restore_old_venv
+    fi
+
+    _s "VENV - remove old $F_VO"
+    rm "$F_VO" 2> /dev/null
 
     if [ -d "$F_DA" ]; then
         _st "DDH - saving existing settings"
@@ -206,25 +241,25 @@ _install_ddh() {
 
     if [ -d "$F_DA" ]; then
         _s "DDH - deleting old application folder"
-        rm -rf "$F_DA"; rv=$?
+        rm -rf "$F_DA"
+        rv=$?
         if [ $rv -ne 0 ]; then
             _e "cannot delete old DDH folder";
         fi
     fi
 
     _s "DDH - installing new application folder"
-    mv "$F_CLONE_DDH" "$F_DA"; rv=$?
+    mv "$F_CLONE_DDH" "$F_DA"
+    rv=$?
     if [ $rv -ne 0 ]; then
         _e "cannot install new DDH folder";
     fi
 }
 
 
-_install_resolv_conf() {
+_resolv_conf() {
     # on laptop, don't mess with resolv.conf
-    if [ "$FLAG_IS_RPI" -eq 0 ]; then
-        return
-    fi
+    if [ "$FLAG_IS_RPI" -eq 0 ]; then return; fi
     sudo chattr -i /etc/resolv.conf; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot chattr -i resolv.conf"; fi
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"; rv=$?
@@ -247,19 +282,19 @@ _check_flag_ddh_update
 (
   sleep 1; # so we can see first text
   echo 1; _kill_ddh
-  echo 3; _check_flag_venv_recreate
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
   echo 20; _get_local_commit_ddh
-  echo 30; _install_venv
-  echo 60; _install_ddh
-  echo 98; _install_resolv_conf
+  echo 30; _create_venv
+  echo 60; _install
+  echo 98; _resolv_conf
   echo 99; _done
+  echo 100; _done
 ) | zenity --width=400 --title "DDH Installer" \
   --progress --auto-kill --auto-close \
   --icon-name="dialog-info" --window-icon="coffee.png" \
-  --text="starting DDH updater"
+  --text="DDH Installer"
 
 
 # implicit exit 0 :)
