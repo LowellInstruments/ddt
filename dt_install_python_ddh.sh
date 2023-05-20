@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# am I already running
+# check this script is already running
 S_ME=$(basename "$0")
 N_ME=$(pgrep -afc "$S_ME")
 if [ "$N_ME" -ne 1 ]; then
@@ -10,49 +10,46 @@ if [ "$N_ME" -ne 1 ]; then
 fi
 
 
-# detect if we are a raspberry
+# detect we are Raspberry pi
 _is_rpi() {
     grep Raspberry /proc/cpuinfo; rv=$?
-    if [ $rv -eq 0 ]; then IS_RPI=1; else IS_RPI=0; fi
+    if [ $rv -eq 0 ]; then FLAG_IS_RPI=1; else FLAG_IS_RPI=0; fi
 }
 _is_rpi
 
 
-# set LI folder
-if [ $IS_RPI -eq 1 ]; then
+# detect run parameters
+if [ "$1" == "venv_keep" ]; then
+    FLAG_VENV_KEEP=1
+else
+    FLAG_VENV_KEEP=0
+fi
+
+
+# set dynamic variables
+if [ $FLAG_IS_RPI -eq 1 ]; then
     F_LI=/home/pi/li
+    DDH_REQS_TXT=requirements_rpi_39.txt
+    # needed for crontab to access the X-window system
+    export XAUTHORITY=/home/pi/.Xauthority
+    export DISPLAY=:0
 else
     F_LI=$HOME/PycharmProjects/
+    DDH_REQS_TXT=requirements_dev_39.txt
 fi
 
 
 # variables for paths of folders and executables
 F_DA="$F_LI"/ddh
 F_DT="$F_LI"/ddt
-F_TV=/tmp/venv
-VPIP=$F_TV/bin/pip
+F_VE="$F_LI"/venv
+VPIP=$F_VE/bin/pip
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
-
-
-# variables for flags
-if [ "$1" == "debug" ]; then
-    FLAG_DEBUG=1
-else
-    FLAG_DEBUG=0
-fi
-if [ $IS_RPI -eq 1 ]; then
-    DDH_REQS_TXT=requirements_rpi_39.txt
-    # needed for crontab to access the X-window system
-    export XAUTHORITY=/home/pi/.Xauthority
-    export DISPLAY=:0
-else
-    DDH_REQS_TXT=requirements_dev_39.txt
-fi
 
 
 _s() {
@@ -76,23 +73,26 @@ _e() {
     exit 1
 }
 
-_check_ddh_update_flag() {
-    # debug or laptop forces the updater to run
-    if [ $FLAG_DEBUG -eq 1 ] || [ $IS_RPI -eq 0 ]; then
+
+_check_flag_venv_keep()
+{
+    _st "VENV - FLAG_VENV_KEEP set to 1"
+}
+
+
+_check_flag_ddh_update() {
+    # on laptop, force updater to run
+    if [ $FLAG_IS_RPI -eq 0 ]; then
+        printf "not RPi, forcing updater to run \n";
         rm $FLAG_DDH_UPDATED
     fi
     if [ -f $FLAG_DDH_UPDATED ]; then
-        printf "Already ran updater today, leaving!\n";
+        printf "Already ran updater today, leaving \n";
         exit 1
     fi
     touch $FLAG_DDH_UPDATED
 }
 
-
-_display_debug_flag() {
-    if [ $FLAG_DEBUG -eq 0 ]; then return; fi
-    _st "FLAG_DEBUG - set to 1"
-}
 
 _kill_ddh() {
     _st "DDH - killing any currently running application"
@@ -127,31 +127,30 @@ _get_local_commit_ddh() {
 }
 
 _virtual_env() {
-    if [ -d $F_TV ]; then
-        # mostly only happens when debugging installer
-        _st "VENV - reusing found temporary folder $F_TV";
+    if [ -d "$F_VE" ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
+        _st "VENV - reusing found temporary folder $F_VE";
         return;
     fi
 
-    _s "VENV - generating new temporary folder $F_TV"
-    rm -rf $F_TV || true
+    _s "VENV - generating new temporary folder $F_VE"
+    rm -rf "$F_VE" || true
     rm -rf "$HOME"/.cache/pip
     # on RPi, venv needs to inherit PyQt5 installed via apt
-    python3 -m venv "$F_TV" --system-site-packages; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot create folder $F_TV"; fi
-    source "$F_TV"/bin/activate; rv=$?
-    if [ $rv -ne 0 ]; then _e "cannot activate VENV in folder $F_TV"; fi
+    python3 -m venv "$F_VE" --system-site-packages; rv=$?
+    if [ $rv -ne 0 ]; then _e "cannot create folder $F_VE"; fi
+    source "$F_VE"/bin/activate; rv=$?
+    if [ $rv -ne 0 ]; then _e "cannot activate VENV in folder $F_VE"; fi
     "$VPIP" install --upgrade pip
     "$VPIP" install wheel
 }
 
 _ddh_install() {
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        if [ $IS_RPI -eq 1 ] && [ $FLAG_DEBUG -eq 0 ]; then
+        if [ $FLAG_IS_RPI -eq 1 ] && [ $FLAG_VENV_KEEP -eq 1 ]; then
             _st "DDH - newest app already on RPi :)"
             exit 0
         fi
-        # on laptop, or when debugging, we keep going
+        # on laptop, or when not VENV_KEEP, we keep going
     fi
 
     _s "LIU library - installing"
@@ -189,8 +188,8 @@ _ddh_install() {
         cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
     fi
 
-    # on laptop we stop here, we don't really install
-    if [ $IS_RPI -eq 0 ]; then
+    # on laptop we stop here, don't really install
+    if [ $FLAG_IS_RPI -eq 0 ]; then
         _st "DDH - detected non-rpi, leaving"
         return;
     fi
@@ -208,18 +207,13 @@ _ddh_install() {
     if [ $rv -ne 0 ]; then
         _e "cannot install new DDH folder";
     fi
-
-    _s "VENV - installing new folder"
-    rm -rf "$F_LI"/venv
-    mv "$F_TV" "$F_LI"; rv=$?
-    if [ $rv -ne 0 ]; then
-        _e "cannot install new VENV folder";
-    fi
 }
 
 _ddh_resolv_conf() {
     # we don't do this on laptop
-    if [ "$IS_RPI" -ne 1 ]; then return; fi
+    if [ "$FLAG_IS_RPI" -eq 0 ]; then
+        return
+    fi
     sudo chattr -i /etc/resolv.conf; rv=$?
     if [ $rv -ne 0 ]; then _e "cannot chattr -i resolv.conf"; fi
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf"; rv=$?
@@ -236,11 +230,11 @@ _done()
 }
 
 
-_check_ddh_update_flag
+_check_flag_ddh_update
 (
   sleep 1; # so we can see first text
   echo 1; _kill_ddh
-  echo 3; _display_debug_flag
+  echo 3; _check_flag_venv_keep
   echo 5; _internet
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
@@ -256,7 +250,7 @@ _check_ddh_update_flag
 
 
 # when debugging, left terminal open for a couple ENTER keys
-if [ $FLAG_DEBUG -eq 1 ]; then
+if [ $FLAG_VENV_KEEP -eq 1 ]; then
     read -r; read -r
 fi
 
