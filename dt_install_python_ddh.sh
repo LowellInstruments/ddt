@@ -129,12 +129,25 @@ _restore_old_venv() {
 }
 
 
+_detect_need() {
+    if [ "$1" == "force" ]; then return; fi
+
+    if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
+        # on laptop testing, we keep going
+        if [ $FLAG_IS_RPI -eq 1 ]; then
+            _st "DDH - newest app already on RPi :)"
+            exit 0
+        fi
+    fi
+}
+
+
 _create_venv() {
     if [ -d "$F_VE" ]; then
-        _st "VENV - stashing old to $F_VO";
+        _st "VENV - stashing old as $F_VO";
         mv "$F_VE" "$F_VO"
         if [ $rv -ne 0 ]; then
-            _e "cannot stash old $F_VE";
+            _e "cannot stash old VENV";
         fi
     fi
 
@@ -160,14 +173,6 @@ _create_venv() {
 
 
 _install() {
-    if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
-        # on laptop testing, we keep going
-        if [ $FLAG_IS_RPI -eq 1 ]; then
-            _st "DDH - newest app already on RPi :)"
-            exit 0
-        fi
-    fi
-
     _s "VENV - installing LIU library"
     "$VPIP" uninstall -y liu
     "$VPIP" install --upgrade git+$GH_REPO_LIU
@@ -286,6 +291,7 @@ _check_flag_ddh_update
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
   echo 20; _get_local_commit_ddh
+  echo 25; _detect_need "$1"
   echo 30; _create_venv
   echo 60; _install
   echo 98; _resolv_conf
