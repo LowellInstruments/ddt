@@ -31,9 +31,8 @@ else
 fi
 
 
-if [ "$1" == "force" ]; then
-    FLAG_FORCE=1;
-fi
+# ignores everything and force software download
+FLAG_FORCE=0; if [ "$1" == "force" ]; then FLAG_FORCE=1; fi
 
 
 # common variables for laptop and RPi
@@ -51,7 +50,7 @@ FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
 _s() {
-    # progress bar dialog cannot change font size :( let's uppercase
+    # progress bar dialog cannot change font size :( maybe uppercase
     # src: https://funprojects.blog/2021/01/25/zenity-command-line-dialogs/
     # echo "#""${1^^}";
     # normal case
@@ -248,7 +247,7 @@ _install() {
 
     # on laptop we stop here, don't really install
     if [ $FLAG_IS_RPI -eq 0 ]; then
-        _st "DDH - detected non-rpi, leaving"
+        _st "DDH - detected non-rpi, not installing, leaving"
         return;
     fi
 

@@ -53,20 +53,19 @@ cd /home/pi/li/ddt;
 
 ## Description of the scripts
 
-Each script has a purpose. They are described next. This list also indicates suggested installation order.
+The next list explains the purpose of each script as well as indicates suggested installation order.
 
-- The ``./dt_install_emolt_flag.sh`` script marks this box as eMolt one. In doubt, do NOT run.
+- The ``./dt_install_emolt_flag.sh`` script marks this box as eMolt one. Do NOT run in case of doubt.
 
-- The ``./dt_install_linux.sh`` script installs dependencies at the linux level. 
-Nothing specific to DDH here yet. 
+- The ``./dt_install_linux.sh`` script installs linux dependencies, nothing specific to DDH here yet. 
 For example, it copies the ``rc.local`` file from the ``utils`` folder to the
-Linux installation and also takes care of the ``juice4halt`` feature.
+Linux installation and takes care of the ``juice4halt`` feature.
 
-- The ``./dt_install_linux_bluez.sh`` installs bluez v5.6.6 which works better with bleak v0.20.1.
+- The ``./dt_install_linux_bluez.sh`` installs bluez v5.66, which works better with bleak v0.20.x.
 
-- The ``./dt_install_python_ddh.sh`` script updates the software in the DDH folder ``/home/pi/li/ddh``.
+- The ``./dt_install_python_ddh.sh`` script updates the DDH software in folder ``/home/pi/li/ddh``.
 
-- The ``./dt_install_python_ddh_settings.py`` python script grabs settings for this DDH box from DDN. In beta.
+- The ``./dt_install_python_ddh_settings.py`` script grabs settings for this DDH box from DDN. In beta.
 
 - The ``./dt_install_service_sw_net.sh`` scripts installs and enables a ``systemctl`` service which switches
 from cell to wi-fi interfaces to save cellular data.
@@ -79,7 +78,7 @@ from cell to wi-fi interfaces to save cellular data.
 $ sudo ./_dt_files/ppp_install_standalone.sh
 ```
 
-- The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts. Optional step.
+- The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts. Optional.
 
 
 
