@@ -144,12 +144,6 @@ _detect_need() {
         return
     fi
 
-    # debug
-    if [ "$COM_MAT_LOC" == "$COM_MAT_GH" ]; then
-        _st "DETECTED NEWEST MAT version"
-    fi
-
-
     if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ] && [ "$COM_MAT_LOC" == "$COM_MAT_GH" ]; then
         # on laptop testing, we keep going
         if [ $FLAG_IS_RPI -eq 1 ]; then
@@ -157,6 +151,8 @@ _detect_need() {
             exit 0
         fi
     fi
+
+    _st "DDH - we need to perform an update"
 }
 
 
