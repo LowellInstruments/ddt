@@ -224,6 +224,12 @@ _install() {
         _restore_old_venv
     fi
 
+    _s "VENV - storing last MAT library git commit string"
+    if [ $FLAG_IS_RPI ]; then
+        _st "storing last MAT lib git commit string";
+        sudo echo "$COM_MAT_LOC" > /etc/com_mat_loc.txt
+    fi
+
     _s "VENV - cloning DDH"
     rm -rf $F_CLONE_DDH
     git clone $GH_REPO_DDH $F_CLONE_DDH
