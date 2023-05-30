@@ -121,6 +121,11 @@ _get_local_commit_ddh() {
 }
 
 
+_get_local_commit_mat() {
+    COM_MAT_LOC=$(cat /etc/com_mat_loc.txt 2> /dev/null)
+}
+
+
 _restore_old_venv() {
     # this only gets called on error
     _st "VENV - restoring $F_VO"
@@ -139,7 +144,13 @@ _detect_need() {
         return
     fi
 
-    if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ]; then
+    # debug
+    if [ "$COM_MAT_LOC" == "$COM_MAT_GH" ]; then
+        _st "DETECTED NEWEST MAT version"
+    fi
+
+
+    if [ "$COM_DDH_LOC" == "$COM_DDH_GH" ] && [ "$COM_MAT_LOC" == "$COM_MAT_GH" ]; then
         # on laptop testing, we keep going
         if [ $FLAG_IS_RPI -eq 1 ]; then
             _st "DDH - bye! newest app already installed"
@@ -298,6 +309,7 @@ _check_flag_ddh_update
   echo 10; _get_gh_commit_mat
   echo 15; _get_gh_commit_ddh
   echo 20; _get_local_commit_ddh
+  echo 22; _get_local_commit_mat
   echo 25; _detect_need "$1"
   echo 30; _create_venv
   echo 60; _install
