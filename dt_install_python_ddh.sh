@@ -224,9 +224,11 @@ _install() {
         _restore_old_venv
     fi
 
-    _s "VENV - storing last MAT library git commit string"
+    _st "VENV - storing last MAT library git commit string"
     if [ $FLAG_IS_RPI ]; then
-        _st "storing last MAT lib git commit string";
+        COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master); rv=$?;
+        if [ "$rv" -ne 0 ]; then _e "cannot get MAT local version"; fi
+        if [ ${#COM_DDH_LOC} -ne 40 ]; then _e "bad MAT local version"; fi
         sudo echo "$COM_MAT_LOC" > /etc/com_mat_loc.txt
     fi
 
