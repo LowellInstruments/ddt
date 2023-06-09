@@ -224,7 +224,7 @@ _install() {
     if [ $FLAG_IS_RPI ]; then
         COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master); rv=$?;
         if [ "$rv" -ne 0 ]; then _e "cannot get MAT local version"; fi
-        if [ ${#COM_DDH_LOC} -ne 40 ]; then _e "bad MAT local version"; fi
+        if [ ${#COM_MAT_LOC} -ne 40 ]; then _e "bad MAT local version"; fi
         sudo echo "$COM_MAT_LOC" | sudo tee /etc/com_mat_loc.txt > /dev/null
     fi
 
