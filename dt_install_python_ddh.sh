@@ -105,7 +105,7 @@ _get_gh_commit_ddh() {
 _get_gh_commit_mat() {
     COM_MAT_GH=$(git ls-remote $GH_REPO_MAT master | awk '{ print $1 }'); rv=$?;
     if [ "$rv" -ne 0 ]; then _e "cannot get MAT github version"; fi
-    if [ ${#COM_MAT_GH} -ne 40 ]; then _e "bad MAT github version"; fi
+    if [ ${#COM_MAT_GH} -ne 40 ]; then _st "bad MAT github version"; fi
     # _s "got MAT github commit \n""$COM_MAT_GH"
 }
 
