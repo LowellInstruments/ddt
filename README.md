@@ -10,6 +10,8 @@ Base image: ```2022-09-22-raspios-bullseye-armhf.img``` from Lowell Instruments'
 
 Do NOT update via GUI or apt.
 
+Check the cell shield firmware version.
+
 On RPi3, we need to use the legacy display driver to prevent hang on boot.
 
 ```console
