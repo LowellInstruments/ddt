@@ -115,4 +115,8 @@ Some additional useful things to do for better DDH behavior:
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
 - Replace DWS credentials if they come from a cloned DDH.
-- Ensure juice4halt is running by checkin existence of file ```...```.
+- Ensure juice4halt is running by checking existence of file:
+
+  ``` console
+  $ ls /home/pi/li/juice4halt/bin/j4h_halt_flag
+  ```
