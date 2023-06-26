@@ -6,11 +6,29 @@ Tools to install and update DDH.
 
 ## Introduction
 
-Base image: ```2022-09-22-raspios-bullseye-armhf.img``` from Lowell Instruments' GDrive.
+Base image: ```2022-09-22-raspios-bullseye-armhf.img``` from Lowell Instruments' GDrive
 
 Do NOT update via GUI or apt.
 
-Check the cell shield firmware version.
+Check the cell shield firmware version. Old ones are from 2017 or 2019.
+
+```console
+$ minicom -D /dev/ttyUSB2 -b 115200
+AT+CVERSION
+```
+
+If you need to update cell shield firmware version for EC25 modules (adjust for EG25) just do:
+
+```console
+$ cd /home/pi/Downloads;	\
+git clone https://github.com/lowellinstruments/ddt_quectel.git;	\
+cd ddt_quectel;	\
+unzip QFirehose_Linux_Android_V1.4.13.zip;	\
+unzip EC25AFAR05A07M4G_30.003.30.003.zip;	\
+cd QFirehose_Linux_Android_V1.4.13;	\
+make;	\
+sudo ./QFirehose -f ..
+```
 
 On RPi3, we need to use the legacy display driver to prevent hang on boot.
 
@@ -95,3 +113,4 @@ Some additional useful things to do for better DDH behavior:
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
 - Replace DWS credentials if they come from a cloned DDH.
+- Ensure juice4halt is running by checkin existence of file ```...```.
