@@ -20,19 +20,20 @@ AT+CVERSION
 If you need to update cell shield firmware version for EC25 modules (adjust for EG25) just do:
 
 ```console
-$ cd /home/pi/Downloads;	\
-git clone https://github.com/lowellinstruments/ddt_quectel.git;	\
-cd ddt_quectel;	\
-unzip QFirehose_Linux_Android_V1.4.13.zip;	\
-unzip EC25AFAR05A07M4G_30.003.30.003.zip;	\
-cd QFirehose_Linux_Android_V1.4.13;	\
-make;	\
+$ cd /home/pi/Downloads;
+git clone https://github.com/lowellinstruments/ddt_quectel.git;
+cd ddt_quectel;
+unzip QFirehose_Linux_Android_V1.4.13.zip;
+unzip EC25AFAR05A07M4G_30.003.30.003.zip;
+cd QFirehose_Linux_Android_V1.4.13;
+make;
 sudo ./QFirehose -f ..
 ```
 
 On RPi3, we need to use the legacy display driver to prevent hang on boot.
 
 ```console
+$ cat /proc/cpuinfo
 $ sudo nano /boot/config.txt
 $ # dtoverlay=vc4-fkms-v3d # disable by commenting it
 ```
