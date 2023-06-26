@@ -4,9 +4,9 @@
 # author          : Greg <gosmondson@gmail.com>
 # date            :20160504
 # version         :1.0
-# usage		 :copy this file to /home/pi/juice4halt/bin/
+# usage		 :copy this file to /home/pi/li/juice4halt/bin/
 #   and make it executable: sudo chmod 755 shutdown_script.py
-#   then add it to rc.local: /home/pi/juice4halt/bin/shutdown_script.py &
+#   then add it to rc.local: /home/pi/li/juice4halt/bin/shutdown_script.py &
 # notes           :www.juice4halt.com
 # copyright	 :GNU GPL v3.0
 # ==============================================================================
@@ -37,7 +37,7 @@ while pinval == 1:
 print("power lost")
 GPIO.setup(25, GPIO.OUT)
 GPIO.output(25, GPIO.LOW)
-os.system("rm -f /home/pi/juice4halt/bin/j4h_halt_flag")
-os.system("touch /home/pi/juice4halt/bin/j4h_halt_flag")
+os.system("rm -f /home/pi/li/juice4halt/bin/j4h_halt_flag")
+os.system("touch /home/pi/li/juice4halt/bin/j4h_halt_flag")
 time.sleep(2)
 os.system("sudo halt")
