@@ -10,26 +10,6 @@ Base image: ```2022-09-22-raspios-bullseye-armhf.img``` from Lowell Instruments'
 
 Do NOT update via GUI or apt.
 
-Check the cell shield firmware version. Old ones are from 2017 or 2019.
-
-```console
-$ minicom -D /dev/ttyUSB2 -b 115200
-AT+CVERSION
-```
-
-If you need to update cell shield firmware version for EC25 modules (adjust for EG25) just do:
-
-```console
-$ cd /home/pi/Downloads;
-git clone https://github.com/lowellinstruments/ddt_quectel.git;
-cd ddt_quectel;
-unzip QFirehose_Linux_Android_V1.4.13.zip;
-unzip EC25AFAR05A07M4G_30.003.30.003.zip;
-cd QFirehose_Linux_Android_V1.4.13;
-make;
-sudo ./QFirehose -f ..
-```
-
 On RPi3, we need to use the legacy display driver to prevent hang on boot.
 
 ```console
@@ -102,6 +82,27 @@ $ sudo ./_dt_files/ppp_install_standalone.sh
 - The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts. Optional.
 
 
+## Cell shield firmware update
+
+Old ones are from 2017 or 2019.
+
+```console
+$ minicom -D /dev/ttyUSB2 -b 115200
+AT+CVERSION
+```
+
+If you need to update cell shield firmware version for EC25 modules (adjust for EG25) just do:
+
+```console
+$ cd /home/pi/Downloads;
+git clone https://github.com/lowellinstruments/ddt_quectel.git;
+cd ddt_quectel;
+unzip QFirehose_Linux_Android_V1.4.13.zip;
+unzip EC25AFAR05A07M4G_30.003.30.003.zip;
+cd QFirehose_Linux_Android_V1.4.13;
+make;
+sudo ./QFirehose -f ..
+```
 
 ## Post configuration
 
