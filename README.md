@@ -17,6 +17,8 @@ $ sudo nano /boot/config.txt
 $ # dtoverlay=vc4-fkms-v3d # comment this line so it uses the old legacy video driver
 ```
 
+## Remote access: SSH and GUI
+
 Drag your finger from the middle of the screen up to the wi-fi icon at the top-right part of the DDH.
 
 Lift your finger up and a pop-up telling the assigned IP address. Run any SSH client software and go to such IP.
@@ -58,7 +60,7 @@ git clone https://github.com/lowellinstruments/ddt.git;
 cd /home/pi/li/ddt;
 ```
 
-## Description of the scripts
+## Description of the DDT scripts
 
 List all the scripts within the ```ddt``` folder by entering:
 
