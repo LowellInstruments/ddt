@@ -2,8 +2,6 @@
 
 Tools to install and update DDH.
 
-
-
 ## Introduction
 
 First, follow the steps in README.md document.
@@ -66,7 +64,7 @@ List all the scripts within the ```ddt``` folder by entering:
 
 ```console
 cd /home/pi/li/ddt;
-ls
+ls;
 ```
 
 The following list overviews each script as well as indicates a suggested installation order.
