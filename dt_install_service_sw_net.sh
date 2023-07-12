@@ -20,8 +20,10 @@ sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
 
 # LI switch_net_service only on pure DDH
 if test -f $EMOLT_FILE_FLAG; then
-    printf '\n\n>>> not installing LI switch_net_service on emolt boxes\n'
-    exit 0
+    read -rp "Is this emolt_DDH box going to use a CELL connection / shield? (y/n) " choice
+    case "$choice" in
+        n|N ) printf 'not installing service_sw_net'; exit 0;;
+    esac
 fi
 
 
