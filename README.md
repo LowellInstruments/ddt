@@ -17,6 +17,12 @@ $ sudo nano /boot/config.txt
 $ # dtoverlay=vc4-fkms-v3d # comment this line so it uses the old legacy video driver
 ```
 
+Drag your finger from the middle of the screen up to the wi-fi icon at the top-right part of the DDH.
+
+Lift your finger up and a pop-up telling the assigned IP address. Run any SSH client software and go to such IP.
+
+Enter credentials "user" and "password" as set in BASE_LINUX.md document. You are now in a DDH terminal.
+
 ---
 Optional. Install DWService.
 
@@ -41,12 +47,6 @@ Optional. Install Wireguard VPN. Credentials are in our private repository.
 $ sudo apt install wireguard
 ```
 ---
-
-Drag your finger from the middle of the screen up to the wi-fi icon at the top-right part of the DDH.
-
-Lift your finger up and a pop-up telling the assigned IP address. Run any SSH client software and go to such IP.
-
-Enter credentials "user" and "password" as set in BASE_LINUX.md document. You are now in a DDH terminal.
 
 Get the DDH Tools repository, a.k.a. ``ddt``. Feel free to copy and paste the following.
 
