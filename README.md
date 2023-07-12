@@ -86,7 +86,7 @@ from cell to wi-fi interfaces to save cellular data.
 
 - The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
 
-- The cell capabilities are installed by doing:
+- Optional. Only if you have cell modem capabilities. They are installed by doing:
 
 ```console
 $ sudo ./_dt_files/ppp_install_standalone.sh
