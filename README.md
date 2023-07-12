@@ -10,17 +10,11 @@ First, follow the steps in README.md document.
 
 Remember to NEVER update any Linux part via GUI or apt. We will take care of this.
 
-On RPi3, force legacy display driver use to prevent hang on boot. Check if you have a RPi3 by doing:
-
-```console
-$ cat /proc/cpuinfo
-```
-
-Only if you have a RPi3, do the following step.
+If you have a RPi3, which you can check by ```$ cat /proc/cpuinfo```, do the following steps.
 
 ```console
 $ sudo nano /boot/config.txt
-$ # dtoverlay=vc4-fkms-v3d # disable by commenting it
+$ # dtoverlay=vc4-fkms-v3d # comment this line so it uses the old legacy video driver
 ```
 
 ---
