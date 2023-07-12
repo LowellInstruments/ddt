@@ -81,16 +81,16 @@ Linux installation and takes care of the ``juice4halt`` feature.
 
 - Optional. The ``./dt_install_python_ddh_settings.py`` script grabs settings for this DDH box from DDN. In beta. Skip.
 
-- The ``./dt_install_service_sw_net.sh`` scripts installs and enables a ``systemctl`` service which switches
-from cell to wi-fi interfaces to save cellular data.
-
-- The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
-
 - Optional. Only if you have cell modem capabilities. They are installed by doing:
 
 ```console
 $ sudo ./_dt_files/ppp_install_standalone.sh
 ```
+
+- Optional. Only if you have cell modem capabilities. The ``./dt_install_service_sw_net.sh`` scripts sets a ``systemctl`` service which switches
+from cell to wi-fi interfaces to save cellular data.
+
+- The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
 
 - The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
 
