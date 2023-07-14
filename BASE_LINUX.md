@@ -20,7 +20,8 @@ On RPI imager, select ```Choose storage``` to your target storage, either SD or 
 
 On RPI imager, select ```Settings```, that is, the small wheel on the bottom rightmost part.
 
-- Set "user" as pi and password as "li_ddh_82!!". No quotes.
+- Tick the box "Enable SSH" and "password authentication".
+- Set user as "pi" (no quotes) and password that Lowell Instruments will provide.
 - Set your "wi-fi information" so when your Pi first boots ever, it will join your wi-fi automatically.
 - Set "locale" and "keyboard" settings.
 
