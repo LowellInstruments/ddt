@@ -21,6 +21,8 @@ Drag your finger from the middle of the screen up to the wi-fi icon at the top-r
 
 Lift your finger up and a pop-up telling the assigned IP address. Run any SSH client software and go to such IP.
 
+Probably, your DDH IP address will be something like "192.x.x.x" or "10.x.x.x". Ignore any addresses starting with "169.".
+
 Enter credentials "user" and "password" as set in BASE_LINUX.md document. You are now in a DDH terminal.
 
 ---
