@@ -26,7 +26,7 @@ Probably, your DDH IP address will be something like "192.x.x.x" or "10.x.x.x". 
 Enter credentials "user" and "password" as set in BASE_LINUX.md document. You are now in a DDH terminal.
 
 ---
-Optional. Install DWService.
+Optional. Install DWService. Just copy-paste the following instructions.
 
 ```console
 cd /home/pi/Downloads;
@@ -35,7 +35,7 @@ chmod +x /home/pi/Downloads/dwagent.sh;
 sudo /home/pi/Downloads/dwagent.sh;
 ```
 ---
-Optional. Install Nomachine for RPi.
+Optional. If you don't want to work with DWService, you can install Nomachine for RPi.
 
 ```console
 $ cd /home/pi/Downloads
