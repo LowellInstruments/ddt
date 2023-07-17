@@ -35,20 +35,6 @@ chmod +x /home/pi/Downloads/dwagent.sh;
 sudo /home/pi/Downloads/dwagent.sh;
 ```
 ---
-Optional. If you don't want to work with DWService, you can install Nomachine for RPi.
-
-```console
-$ cd /home/pi/Downloads
-$ wget https://download.nomachine.com/download/8.4/Raspberry/nomachine_8.4.2_1_armhf.deb
-$ sudo dpkg -i nomachine_8.4.2_1_armhf.deb
-```
----
-Optional. Install Wireguard VPN. Credentials are in our private repository.
-
-```console
-$ sudo apt install wireguard
-```
----
 
 Get the DDH Tools repository, a.k.a. ``ddt``. Feel free to copy and paste the following.
 
