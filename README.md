@@ -69,7 +69,7 @@ Linux installation and takes care of the ``juice4halt`` feature.
 
 - Optional. The ``./dt_install_python_ddh_settings.py`` script grabs settings for this DDH box from DDN. In beta. Skip.
 
-- Optional. Only if you have cell modem capabilities. They are installed by doing:
+- Optional. Only if you have cell modem capabilities. The shield option is number "6: 3G/4G hat", the port is "ttyUSB3" and common APN names vary by SIM type. The cell features are installed by doing:
 
 ```console
 $ sudo ./_dt_files/ppp_install_standalone.sh
