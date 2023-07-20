@@ -26,27 +26,13 @@ Probably, your DDH IP address will be something like "192.x.x.x" or "10.x.x.x". 
 Enter credentials "user" and "password" as set in BASE_LINUX.md document. You are now in a DDH terminal.
 
 ---
-Optional. Install DWService.
+Optional. Install DWService. Just copy-paste the following instructions.
 
 ```console
 cd /home/pi/Downloads;
 wget https://www.dwservice.net/download/dwagent.sh;
 chmod +x /home/pi/Downloads/dwagent.sh;
 sudo /home/pi/Downloads/dwagent.sh;
-```
----
-Optional. Install Nomachine for RPi.
-
-```console
-$ cd /home/pi/Downloads
-$ wget https://download.nomachine.com/download/8.4/Raspberry/nomachine_8.4.2_1_armhf.deb
-$ sudo dpkg -i nomachine_8.4.2_1_armhf.deb
-```
----
-Optional. Install Wireguard VPN. Credentials are in our private repository.
-
-```console
-$ sudo apt install wireguard
 ```
 ---
 
@@ -83,7 +69,7 @@ Linux installation and takes care of the ``juice4halt`` feature.
 
 - Optional. The ``./dt_install_python_ddh_settings.py`` script grabs settings for this DDH box from DDN. In beta. Skip.
 
-- Optional. Only if you have cell modem capabilities. They are installed by doing:
+- Optional. Only if you have cell modem capabilities. The shield option is number "6: 3G/4G hat", the port is "ttyUSB3" and common APN names vary by SIM type. The cell features are installed by doing:
 
 ```console
 $ sudo ./_dt_files/ppp_install_standalone.sh
