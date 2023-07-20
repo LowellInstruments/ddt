@@ -6,7 +6,7 @@
 # In order to enable this script just change the execution bits.
 
 
-# must match the value in dt_install_emolt_flag.sh
+# must match the value in dt_install_custom_box.sh
 EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 

@@ -27,7 +27,7 @@ sudo apt remove -y modemmanager
 printf '\n\n>>> running linux apt-get\n'
 sudo apt-get --yes update
 sudo apt remove -y python3-numpy
-sudo apt-get --yes --force-yes install xscreensaver matchbox-keyboard ifmetric joe git \
+sudo apt-get --yes --force-yes install minicom xscreensaver matchbox-keyboard ifmetric joe git \
 libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
 libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
 libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \

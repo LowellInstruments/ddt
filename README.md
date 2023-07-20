@@ -71,7 +71,7 @@ ls;
 
 The following list overviews each script as well as indicates a suggested installation order.
 
-- The ``./dt_install_emolt_flag.sh`` script marks this box as eMolt one. Do NOT run in case of doubt.
+- The ``./dt_install_custom_box.sh`` script customizes boxes such as eMolt. Do NOT run in case of doubt.
 
 - The ``./dt_install_linux.sh`` script installs linux dependencies, nothing specific to DDH here yet. 
 For example, it automatically copies the ``rc.local`` file from the ``utils`` folder to the
