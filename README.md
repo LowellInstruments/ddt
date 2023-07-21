@@ -11,8 +11,8 @@ Remember to NEVER update any Linux part via GUI or apt. We will take care of thi
 If you have a RPi3, which you can check by ```$ cat /proc/cpuinfo```, do the following steps.
 
 ```console
-$ sudo nano /boot/config.txt
-$ # dtoverlay=vc4-fkms-v3d # comment this line so it uses the old legacy video driver
+sudo nano /boot/config.txt
+    # dtoverlay=vc4-fkms-v3d # ---> comment this line so it uses the old legacy video driver
 ```
 
 ## Remote access: SSH and GUI
@@ -88,14 +88,29 @@ from cell to wi-fi interfaces to save cellular data.
 Optional. Just skip this. Lowell Instruments will do it for you upon request. Old firmware may be from 2017 or 2019.
 
 ```console
-$ minicom -D /dev/ttyUSB2 -b 115200
+minicom -D /dev/ttyUSB2 -b 115200
 AT+CVERSION
 ```
 
-If you need to update cell shield firmware version for EC25 modules (adjust for EG25) just do:
+---
+Optional. If you need to update cell shield firmware version for ```EG25 modules``` (not EC25) just do:
 
 ```console
-$ cd /home/pi/Downloads;
+cd /home/pi/Downloads;
+git clone https://github.com/lowellinstruments/ddt_quectel.git;
+cd ddt_quectel;
+unzip QFirehose_Linux_Android_V1.4.13.zip;
+unzip EG25GGBR07A08M2G_30.007.30.007.zip;
+cd QFirehose_Linux_Android_V1.4.13;
+make;
+sudo ./QFirehose -f ..
+```
+
+---
+Optional. Instead, if you need for ```EC25 modules``` do:
+
+```console
+cd /home/pi/Downloads;
 git clone https://github.com/lowellinstruments/ddt_quectel.git;
 cd ddt_quectel;
 unzip QFirehose_Linux_Android_V1.4.13.zip;
@@ -104,6 +119,8 @@ cd QFirehose_Linux_Android_V1.4.13;
 make;
 sudo ./QFirehose -f ..
 ```
+---
+
 
 ## Post configuration
 
