@@ -425,7 +425,7 @@ class MoanaBle:
                 rbl_gen_file(mb)
 
             # Lowell files always generated, needed for plotting at least
-            lg.a("NOT emolt box detecting, converting file to LI format")
+            lg.a("converting file to LI format")
             self.generate_lowell_csv_files()
 
             # indicate 100% download
