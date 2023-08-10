@@ -15,7 +15,7 @@ printf '\n\n\n---- dt_install_linux_bluez ----\n'
 
 
 printf '\n\n>>> Installing btuart patch\n'
-cat /proc/cpuinfo | grep Raspberry
+grep Raspberry /proc/cpuinfo
 rv=$?
 if [ $rv -eq 0 ]; then
     sudo cp _dt_files/btuart /usr/bin/
