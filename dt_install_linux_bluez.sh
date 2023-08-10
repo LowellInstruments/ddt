@@ -14,6 +14,16 @@ if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
 printf '\n\n\n---- dt_install_linux_bluez ----\n'
 
 
+printf '\n\n>>> Installing btuart patch\n'
+cat /proc/cpuinfo | grep Raspberry
+rv=$?
+if [ $rv -eq 0 ]; then
+    sudo cp _dt_files/btuart /usr/bin/
+    sudo chown root /usr/bin/btuart
+    sudo chgrp root /usr/bin/btuart
+fi
+
+
 printf '\n\n>>> uncompressing bluez from _dt_files folder\n'
 cd _dt_files
 wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
