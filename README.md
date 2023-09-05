@@ -4,7 +4,7 @@ Tools to install and update DDH.
 
 ## Introduction
 
-First, follow the steps in README.md document.
+First, follow the steps in BASE_LINUX.md document.
 
 Remember to NEVER update any Linux part via GUI or apt. We will take care of this.
 
