@@ -65,18 +65,18 @@ Linux installation and takes care of the ``juice4halt`` feature.
 
 - The ``./dt_install_linux_bluez.sh`` installs bluez v5.66, which works better with bleak v0.20.x.
 
-- The ``./dt_install_python_ddh.sh`` script updates the DDH software in folder ``/home/pi/li/ddh``.
+- The ``./dt_install_python_ddh.sh`` is a GUI that updates the DDH software in folder ``/home/pi/li/ddh``.
 
 - Optional. The ``./dt_install_python_ddh_settings.py`` script grabs settings for this DDH box from DDN. In beta. Skip.
 
-- Optional. Only if you have cell modem capabilities. The shield option is number "6: 3G/4G hat", the port is "ttyUSB3" and common APN names vary by SIM type. The cell features are installed by doing:
+- Optional. Run the next command only if you have cell modem capabilities. The shield option is number "6: 3G/4G hat", the port is "ttyUSB3" and common APN names vary by SIM type. The cell features are installed by doing:
 
 ```console
 $ sudo ./_dt_files/ppp_install_standalone.sh
 ```
 
-- Optional. Only if you have cell modem capabilities. The ``./dt_install_service_sw_net.sh`` scripts sets a ``systemctl`` service which switches
-from cell to wi-fi interfaces to save cellular data.
+- Optional. Again, run the next command only if you have cell modem capabilities. The ``./dt_install_service_sw_net.sh`` scripts sets a ``systemctl`` service which switches
+from cell to wi-fi interfaces to save cell data.
 
 - The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
 
@@ -107,7 +107,7 @@ sudo ./QFirehose -f ..
 ```
 
 ---
-Optional. Instead, if you need for ```EC25 modules``` do:
+Optional. Instead, for ```EC25 modules``` do:
 
 ```console
 cd /home/pi/Downloads;
@@ -132,7 +132,7 @@ Some additional useful things to do for better DDH behavior:
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
 - Replace DWS credentials if they come from a cloned DDH.
-- Ensure juice4halt is running by checking existence of file:
+- Ensure ``juice4halt`` is running by checking existence of file:
 
 ``` console
   $ ls /home/pi/li/juice4halt/bin/j4h_halt_flag
@@ -140,4 +140,4 @@ Some additional useful things to do for better DDH behavior:
   
 Finally, run the DDH software once by clicking the icon on the desktop.
 
-- Edit file ```settings/ddh.json``` with boat information by opening the "Setup" tab on DDH and add your loggers' macs.
+- Edit file ``settings/ddh.json`` by opening the "Setup" tab on DDH and add your loggers' macs.

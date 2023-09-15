@@ -43,14 +43,14 @@ def _z(s):
 
 def main() -> int:
 
-    # the best wifi case ever
+    # best wi-fi case ever
     wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 {}'.format(IP))
     wlan_used = _sh('ip route get {} | grep wlan0'.format(IP))
     if wlan_via and wlan_used:
         _p('wifi')
         return _z('wifi')
 
-    # seems no wifi, but maybe wifi just needs some adjustment
+    # seems no wi-fi, but maybe it only needs some adjustment
     if wlan_via and not wlan_used:
         _sh('/usr/sbin/ifmetric ppp0 400')
         _sh('/usr/sbin/ifmetric wlan0 0')
@@ -60,7 +60,7 @@ def main() -> int:
             _p('* wifi *')
             return _z('wifi')
 
-    # no wifi, try the best cell case ever
+    # no wi-fi, let's try cell
     cell_via = _sh('timeout 2 ping -c 1 -I ppp0 {}'.format(IP))
     cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
 
@@ -71,12 +71,12 @@ def main() -> int:
         _p('cell_via = {}'.format(cell_via))
         _p('cell_used = {}'.format(cell_used))
 
-    # seems no cell, but maybe cell just needs some adjustment
+    # seems no cell, but maybe it only needs some adjustment
     if cell_via and not cell_used:
         _sh('/usr/sbin/ifmetric wlan0 400')
         _sh('/usr/sbin/ifmetric ppp0 0')
 
-    # maybe we can switch to cell w/ no problems
+    # let's try cell again after adjustment
     cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
     if cell_via and cell_used:
         _p('cell')
