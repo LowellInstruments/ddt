@@ -82,6 +82,7 @@ from cell to wi-fi interfaces to save cell data.
 
 - The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
 
+- The ``./dt_install_utils.sh`` script populates the DDH system with useful small utils such as ``cm``.
 
 ## Cell shield firmware update
 
@@ -135,9 +136,14 @@ Some additional useful things to do for better DDH behavior:
 - Ensure ``juice4halt`` is running by checking existence of file:
 
 ``` console
-  $ ls /home/pi/li/juice4halt/bin/j4h_halt_flag
+ls /home/pi/li/juice4halt/bin/j4h_halt_flag
 ```
   
 Finally, run the DDH software once by clicking the icon on the desktop.
 
 - Edit file ``settings/ddh.json`` by opening the "Setup" tab on DDH and add your loggers' macs.
+- In beta, you can also simplify some of these tasks by running:
+
+```console
+cm
+```
