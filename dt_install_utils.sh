@@ -16,7 +16,8 @@ sudo cp $F_DT/_dt_files/cm_ddh.conf /etc/
 grep 'alias cm' /home/pi/.bashrc
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo 'alias cm="/usr/local/bin/cm /etc/cm_ddh.conf"' >> /home/pi/.bashrc
+    echo -e 'alias cm="/usr/local/bin/cm /etc/cm_ddh.conf"\n' >> /home/pi/.bashrc
+
 fi
 sudo chmod +x $F_IN/cm
 
