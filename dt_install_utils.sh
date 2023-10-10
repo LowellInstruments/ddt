@@ -5,12 +5,6 @@ F_LI=/home/pi/li
 F_DT="$F_LI"/ddt
 
 
-# abort upon any error
-clear && echo && set -e
-trap 'echo "$BASH_COMMAND" TRAPPED! rv $?' EXIT
-if [ "$PWD" != "$F_DT" ]; then echo 'wrong starting folder'; exit 1; fi
-
-
 printf '\n\n\n---- dt_install_utils ----\n'
 
 
