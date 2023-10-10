@@ -10,6 +10,7 @@ printf '\n\n\n---- dt_install_utils ----\n'
 
 
 printf '\n\n>>> installing climenu\n'
+sudo killall cm
 sudo cp $F_DT/_dt_files/cm $F_IN
 sudo cp $F_DT/_dt_files/cm_ddh.conf /etc/
 grep 'alias cm' /home/pi/.bashrc
