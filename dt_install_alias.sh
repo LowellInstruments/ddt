@@ -10,6 +10,10 @@ F_RC=/home/pi/.bashrc
 printf '\n\n\n---- dt_install_alias ----\n'
 
 
+printf '\n\n>>> building climenu as cm\n'
+gcc $F_DT/_dt_files/cm -o $F_DT/_dt_files/climenu.c
+
+
 printf '\n\n>>> installing aliases DDC and DDI\n'
 sudo killall cm
 sudo cp $F_DT/_dt_files/cm $F_IN
