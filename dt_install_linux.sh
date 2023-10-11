@@ -34,7 +34,7 @@ libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \
 libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build
 
 
-# install stuff only on pure Lowell Instruments DDH such as wiringpi and juice4halt
+# install stuff only on pure LI DDH such as wiringpi and juice4halt
 if ! test -f $EMOLT_FILE_FLAG; then
     # already done by ppp_install_standalone.sh
     # printf '\n\n>>> installing wiringpi\n'

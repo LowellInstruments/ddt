@@ -19,6 +19,7 @@ IP = '8.8.8.8'
 def _p(s):
     print('[ NET ] LI: {}'.format(s))
     # o/wise output not shown in journalctl
+    #   $ journalctl -u unit_switch_net.service
     sys.stdout.flush()
 
 
