@@ -4,6 +4,7 @@
 F_LI=/home/pi/li
 F_DT="$F_LI"/ddt
 F_IN=/usr/local/bin
+F_RC=/home/pi/.bashrc
 
 
 printf '\n\n\n---- dt_install_alias ----\n'
@@ -14,17 +15,17 @@ sudo killall cm
 sudo cp $F_DT/_dt_files/cm $F_IN
 sudo cp $F_DT/_dt_files/cmc.conf /etc/
 sudo cp $F_DT/_dt_files/cmi.conf /etc/
-grep 'alias ddc' /home/pi/.bashrc
+grep 'alias ddc' $F_RC
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo -e 'alias ddc="/usr/local/bin/cm /etc/cmc.conf"\n' >> /home/pi/.bashrc
+    echo -e 'alias ddc="/usr/local/bin/cm /etc/cmc.conf"\n' >> $F_RC
 fi
-grep 'alias ddi' /home/pi/.bashrc
+grep 'alias ddi' $F_RC
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo -e 'alias ddi="/usr/local/bin/cm /etc/cmi.conf"\n' >> /home/pi/.bashrc
+    echo -e 'alias ddi="/usr/local/bin/cm /etc/cmi.conf"\n' >> $F_RC
 fi
 sudo chmod +x $F_IN/cm
 
-
+source $F_RC
 printf '\n\n>>> dt_install_alias OK\n'
