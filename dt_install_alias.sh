@@ -22,14 +22,13 @@ sudo cp $F_DT/_dt_files/cmi.conf /etc/
 grep 'alias ddc' $F_RC
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo -e 'alias ddc="/usr/local/bin/cm /etc/cmc.conf"\n' >> $F_RC
+    echo 'alias ddc="/usr/local/bin/cm /etc/cmc.conf"' >> $F_RC
 fi
 grep 'alias ddi' $F_RC
 rv=$?
 if [ $rv -ne 0 ]; then
-    echo -e 'alias ddi="/usr/local/bin/cm /etc/cmi.conf"\n' >> $F_RC
+    echo 'alias ddi="/usr/local/bin/cm /etc/cmi.conf"' >> $F_RC
 fi
 sudo chmod +x $F_IN/cm
 
-source $F_RC
 printf '\n\n>>> dt_install_alias OK\n'
