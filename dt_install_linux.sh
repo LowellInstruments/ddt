@@ -60,8 +60,4 @@ sudo systemctl enable rc-local
 sudo systemctl status rc-local
 
 
-printf '\n\n>>> installing .bash_aliases\n'
-sudo cp "$F_DT"/_dt_files/.bash_aliases /home/pi
-
-
 printf '\n\n>>> dt_install_linux = OK\n'
