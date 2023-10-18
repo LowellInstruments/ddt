@@ -129,6 +129,7 @@ Some additional useful things to do for better DDH behavior:
 
 - Edit file ```settings/_li_all_macs_to_sn.yml``` with the project's MACs.
 - Edit file ```run_dds.sh``` with the project's credentials. Lowell Instruments will do this for you.
+- Edit file ``settings/ddh.json`` by opening the "Setup" tab on DDH and add your loggers' macs.
 - Disable ``xscreensaver``. Go to Rpi menu, click "Preferences" and "Screen Saver". Disable it.
 - Remove the Bluetooth and software updater icons from the panel.
 - Remove any unwanted wi-fi credentials left.
@@ -141,9 +142,4 @@ ls /home/pi/li/juice4halt/bin/j4h_halt_flag
   
 Finally, run the DDH software once by clicking the icon on the desktop.
 
-- Edit file ``settings/ddh.json`` by opening the "Setup" tab on DDH and add your loggers' macs.
-- In beta, you can also simplify some of these tasks by running:
-
-```console
-cm
-```
+- In beta, you can also simplify some of these tasks by running ``ddc`` or ``ddu``.
