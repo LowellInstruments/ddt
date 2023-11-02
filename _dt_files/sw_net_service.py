@@ -47,9 +47,11 @@ def main() -> int:
     # best wi-fi case ever
     wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 {}'.format(IP))
     wlan_used = _sh('ip route get {} | grep wlan0'.format(IP))
-    if wlan_via and wlan_used:
-        _p('wifi')
-        return _z('wifi')
+    for i in range(3):
+        if wlan_via and wlan_used:
+            _p('wifi')
+            return _z('wifi')
+        time.sleep(1)
 
     # seems no wi-fi, but maybe it only needs some adjustment
     if wlan_via and not wlan_used:
