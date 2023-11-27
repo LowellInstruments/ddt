@@ -11,10 +11,10 @@ from bleak import BleakClient, BleakError
 from datetime import datetime
 from enum import Enum
 from dds.emolt import (
-    file_moana_raw_csv_to_emolt_csv,
+    file_moana_raw_csv_to_emolt_zt_csv,
     ddh_is_emolt_box,
-    file_emolt_csv_to_hl,
-    file_out_hl_process_xc_85,
+    file_emolt_zt_csv_to_emolt_hl,
+    file_emolt_hl_csv_to_dict_xc85,
 )
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
@@ -413,13 +413,11 @@ class MoanaBle:
             # ----------------------------------
             if ddh_is_emolt_box() or not linux_is_rpi():
                 lg.a("emolt box detected, converting Moana CSV file to emolt format")
-                file_emolt_zt_csv = file_moana_raw_csv_to_emolt_csv(
+                fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
                     self.offload_file_path, self.lat, self.lon
                 )
-                hl_csv_file = file_emolt_csv_to_hl(
-                    file_emolt_zt_csv, logger_type="moana"
-                )
-                x85 = file_out_hl_process_xc_85(hl_csv_file)
+                fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
+                x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
                 ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
                 mb = rbl_hex_str_to_hex_bytes(ms)
                 rbl_gen_file(mb)
