@@ -432,8 +432,6 @@ class MoanaBle:
             time.sleep(5)
             print("Offload succeeded")
 
-            # try to plot
-            _u("{}/{}".format(STATE_DDS_REQUEST_PLOT, mac))
             return True
 
         # went south
