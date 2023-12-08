@@ -19,12 +19,11 @@ from dds.emolt import (
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
 from utils.ddh_shared import (
-    create_folder_logger_by_mac, STATE_DDS_REQUEST_PLOT,
+    create_folder_logger_by_mac,
     send_ddh_udp_gui as _u
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
-
 
 
 VSP_RX_CHAR_UUID = "569a2001-b87f-490c-92cb-11ba5ea5167c"
@@ -422,7 +421,7 @@ class MoanaBle:
                 mb = rbl_hex_str_to_hex_bytes(ms)
                 rbl_gen_file(mb)
 
-            # Lowell files always generated, needed for plotting at least
+            # Lowell files always generated, needed for graphing
             lg.a("converting file to LI format")
             self.generate_lowell_csv_files()
 
@@ -432,6 +431,8 @@ class MoanaBle:
             time.sleep(5)
             print("Offload succeeded")
 
+            # try to graph
+            # you can request a graph here
             return True
 
         # went south
