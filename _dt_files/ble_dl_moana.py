@@ -18,6 +18,7 @@ from dds.emolt import (
 )
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
+from settings.ctx import rbl_en
 from utils.ddh_shared import (
     create_folder_logger_by_mac,
     send_ddh_udp_gui as _u
@@ -417,9 +418,10 @@ class MoanaBle:
                 )
                 fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
                 x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
-                ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
-                mb = rbl_hex_str_to_hex_bytes(ms)
-                rbl_gen_file(mb)
+                if rbl_en:
+                    ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
+                    mb = rbl_hex_str_to_hex_bytes(ms)
+                    rbl_gen_file(mb)
 
             # Lowell files always generated, needed for graphing
             lg.a("converting file to LI format")
