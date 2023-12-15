@@ -418,10 +418,12 @@ class MoanaBle:
                 )
                 fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
                 x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
-                if rbl_en:
+                try:
                     ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
                     mb = rbl_hex_str_to_hex_bytes(ms)
                     rbl_gen_file(mb)
+                except (Exception, ) as ex:
+                    lg.a(f'error: exception ble_dl_moana_RBL {ex}')
 
             # Lowell files always generated, needed for graphing
             lg.a("converting file to LI format")
