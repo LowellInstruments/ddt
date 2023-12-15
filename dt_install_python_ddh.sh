@@ -187,15 +187,6 @@ _create_venv() {
 
 
 _install() {
-    _s "VENV - installing LIU library"
-    "$VPIP" uninstall -y liu
-    "$VPIP" install --upgrade git+$GH_REPO_LIU
-    rv=$?
-    if [ "$rv" -ne 0 ]; then
-        _st "error: cannot install LIU library";
-        _restore_old_venv
-    fi
-
     _s "VENV - cloning MAT library"
     rm -rf $F_CLONE_MAT 2> /dev/null
     git clone $GH_REPO_MAT $F_CLONE_MAT
@@ -252,11 +243,7 @@ _install() {
         _st "DDH - saving existing settings"
         cp -r "$F_DA"/dl_files "$F_CLONE_DDH"
         cp -r "$F_DA"/logs "$F_CLONE_DDH"
-        cp "$F_DA"/run_dds.sh "$F_CLONE_DDH"
-        cp "$F_DA"/settings/ddh.json "$F_CLONE_DDH"/settings
-        cp "$F_DA"/settings/ctx.py "$F_CLONE_DDH"/settings
-        cp "$F_DA"/settings/_macs_to_sn.yml "$F_CLONE_DDH"/settings
-        cp "$F_DA"/settings/_li_all_macs_to_sn.yml "$F_CLONE_DDH"/settings
+        cp "$F_DA"/settings/config.toml "$F_CLONE_DDH"/settings
         cp "$F_DT"/_dt_files/ble_dl_moana.py "$F_CLONE_DDH"/dds
     fi
 

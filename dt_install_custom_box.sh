@@ -4,7 +4,6 @@
 # --------------------------------------------------
 # creates flags that other installers rely upon
 # also affects global file upload behavior
-# finer tweaking flags in file ddh/settings/ctx.py
 # --------------------------------------------------
 
 
