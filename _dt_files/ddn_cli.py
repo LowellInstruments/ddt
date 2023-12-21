@@ -2,12 +2,9 @@ from getmac import get_mac_address
 import requests
 
 
-EP_GIVE_ME_CONF = 'give_me_conf'
-# DDN_IP = 'ddn.lowellinstruments.com'
-DDN_IP = 'localhost'
-# DDN_PORT = 7711
-DDN_PORT = 8000
-DDN_EP = 'conf_provider'
+EP = 'conf_provider'
+DDN_PORT_API = 9000
+DDN_IP = 'ddn.lowellinstruments.com'
 
 
 def main():
@@ -15,7 +12,7 @@ def main():
     if not mac:
         print('error, no interface wlan0')
         return
-    url = f'http://{DDN_IP}:{DDN_PORT}/{DDN_EP}/{mac}'
+    url = f'http://{DDN_IP}:{DDN_PORT_API}/{EP}/{mac}'
     try:
         rsp = requests.get(url, timeout=5)
         rsp.raise_for_status()
