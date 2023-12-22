@@ -10,7 +10,7 @@ DDN_IP = 'ddn.lowellinstruments.com'
 def main():
     mac = get_mac_address(interface="wlan0")
     if not mac:
-        print('error, no interface wlan0')
+        print('error: client not running, no interface wlan0')
         return
     url = f'http://{DDN_IP}:{DDN_PORT_API}/{EP}/{mac}'
     try:
@@ -19,7 +19,7 @@ def main():
     except (Exception, ) as ex:
         print(f'error: {ex}')
     else:
-        print('we should have received a config.toml file')
+        print(f'ddn_cli: received {rsp.text}')
 
 
 if __name__ == "__main__":
