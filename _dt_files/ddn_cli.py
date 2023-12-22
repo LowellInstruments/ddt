@@ -1,3 +1,5 @@
+import os
+
 from getmac import get_mac_address
 import requests
 
@@ -5,6 +7,14 @@ import requests
 EP = 'conf_provider'
 DDN_PORT_API = 9000
 DDN_IP = 'ddn.lowellinstruments.com'
+
+
+def _get_filename_from_content_disposition_header(cd):
+    # src: codementor, downloading-files-from-urls-in-python-77q3bs0un
+    if not cd:
+        return None
+    # cd: attachment; filename*=utf-8''config_f4%3A7b....toml
+    return cd.split('\'\'')[1]
 
 
 def main():
@@ -19,7 +29,15 @@ def main():
     except (Exception, ) as ex:
         print(f'error: {ex}')
     else:
-        print(f'ddn_cli: received {rsp.text}')
+        if rsp and rsp.status_code == 200:
+            h = rsp.headers.get('content-disposition')
+            fn = _get_filename_from_content_disposition_header(h)
+            print(os.getcwd())
+            with open(fn, 'wb') as f:
+                f.write(rsp.content)
+            print(f'ddn_cli: received file {fn}')
+        else:
+            print(f'ddn_cli: error, nope received file')
 
 
 if __name__ == "__main__":
