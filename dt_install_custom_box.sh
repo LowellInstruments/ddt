@@ -17,19 +17,18 @@ rm $EMOLT_FILE_FLAG 2> /dev/null
 rm $GROUPED_S3_FILE_FLAG 2> /dev/null
 
 
-echo; echo;
-read -rp "Set this DDH as emolt? (y/n) " choice
-# affects dt_install_linux.sh /rc.local juice4halt, net switching service...
-case "$choice" in
-    y|Y ) touch $EMOLT_FILE_FLAG; printf 'set emolt OK';;
-esac
-echo
+function install_custom {
+    source dt_install_utils.sh
+    _pb "CUSTOMIZING BOX"
 
-
-echo; echo;
-read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
-# how DDH groups files before S3 upload
-case "$choice" in
-    y|Y ) touch $GROUPED_S3_FILE_FLAG; printf 'set grouped S3 OK';;
-esac
-echo
+    read -rp "Set this DDH as emolt? (y/n) " choice
+    # affects dt_install_linux.sh /rc.local juice4halt, net switching service...
+    case "$choice" in
+        y|Y ) touch $EMOLT_FILE_FLAG; printf 'set emolt OK';;
+    esac
+    read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
+    # how DDH groups files before S3 upload
+    case "$choice" in
+        y|Y ) touch $GROUPED_S3_FILE_FLAG; printf 'set grouped S3 OK';;
+    esac
+}
