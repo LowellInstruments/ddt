@@ -1,1 +1,0 @@
-include confinc.mk # ignored
