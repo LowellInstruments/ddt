@@ -45,7 +45,6 @@ F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
-GH_REPO_LIU=https://github.com/lowellinstruments/liu.git
 FLAG_DDH_UPDATED=/tmp/ddh_got_update_file.flag
 
 
@@ -292,25 +291,29 @@ _done()
 
 
 
-_check_flag_ddh_update
-(
-  sleep 1; # so we can see first text
-  echo 1; _kill_ddh
-  echo 5; _internet
-  echo 10; _get_gh_commit_mat
-  echo 15; _get_gh_commit_ddh
-  echo 20; _get_local_commit_ddh
-  echo 22; _get_local_commit_mat
-  echo 25; _detect_need "$1"
-  echo 30; _create_venv
-  echo 60; _install
-  echo 98; _resolv_conf
-  echo 99; _done
-  echo 100; _done
-) | zenity --width=400 --title "DDH Installer" \
-  --progress --auto-kill --auto-close \
-  --icon-name="dialog-info" --window-icon="coffee.png" \
-  --text="DDH Installer"
+function install_bluez {
+    source dt_install_python_ddh.sh
+    _pb "INSTALL PYTHON DDH"
 
+    _check_flag_ddh_update
+    (
+      sleep 1; # so we can see first text
+      echo 1; _kill_ddh
+      echo 5; _internet
+      echo 10; _get_gh_commit_mat
+      echo 15; _get_gh_commit_ddh
+      echo 20; _get_local_commit_ddh
+      echo 22; _get_local_commit_mat
+      echo 25; _detect_need "$1"
+      echo 30; _create_venv
+      echo 60; _install
+      echo 98; _resolv_conf
+      echo 99; _done
+      echo 100; _done
+    ) | zenity --width=400 --title "DDH Installer" \
+      --progress --auto-kill --auto-close \
+      --icon-name="dialog-info" --window-icon="coffee.png" \
+      --text="DDH Installer"
+}
 
 # implicit exit 0 :)
