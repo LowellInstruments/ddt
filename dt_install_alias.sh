@@ -11,15 +11,21 @@ function install_alias {
     source dt_utils.sh
     _pb "INSTALL ALIAS"
 
+
+    _pb "climenu build"
     gcc $F_DT/_dt_files/climenu.c -o $F_DT/_dt_files/cm
     _e $? "building climenu"
 
+
+    _pb "climenu install"
     sudo killall cm 2> /dev/null
     sudo cp $F_DT/_dt_files/cm $F_IN && \
     sudo cp $F_DT/_dt_files/cmc.conf /etc/ && \
     sudo cp $F_DT/_dt_files/cmi.conf /etc/
     _e $? "copy alias"
 
+
+    _pb "climenu alias"
     grep 'alias ddc' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then

@@ -11,6 +11,7 @@ function install_linux {
     source dt_utils.sh
     _pb "INSTALL LINUX DEPENDENCIES"
 
+    _pb "apt-get"
     sudo apt-mark hold bluez
     sudo apt remove -y modemmanager
     sudo apt-get --yes update
@@ -25,6 +26,7 @@ function install_linux {
 
     # install stuff only on pure LI DDH such as wiringpi and juice4halt
     if ! test -f $EMOLT_FILE_FLAG; then
+        _pb "juice4halt"
         # already done by ppp_install_standalone.sh
         # printf '\n\n>>> installing wiringpi\n'
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
@@ -35,12 +37,12 @@ function install_linux {
     fi
 
 
-    printf 'apt clean\n'
+    _pb 'apt-get clean'
     sudo apt autoremove -y
     sudo apt-get clean
 
 
-    printf 'installing rc.local\n'
+    _pb 'rc.local'
     sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
     sudo chmod +x /etc/rc.local
     sudo systemctl enable rc-local

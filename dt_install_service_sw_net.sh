@@ -10,10 +10,12 @@ function install_service_sw_net {
     source dt_utils.sh
     _pb "INSTALL SERVICE_SW_NET"
 
+    _pb "ifmetric"
     sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
     _e $? "ifmetric"
 
     # LI switch_net_service only on pure DDH
+    _pb "switch_net_service"
     if ! test -f $EMOLT_FILE_FLAG; then return 0; fi
     read -rp "Is this emolt_DDH using CELL shield? (y/n) " choice
     case "$choice" in

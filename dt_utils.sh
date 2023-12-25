@@ -4,6 +4,7 @@
 # 4 blue, 5 magenta, 6 cyan, 7 white
 function _p_color { tput setaf "$1"; printf "%s\n" "$2"; tput sgr0; }
 function _pr { _p_color 1 "$1"; }
+function _pg { _p_color 2 "$1"; }
 function _py { _p_color 3 "$1"; }
 function _pb { _p_color 6 "$1"; }
 function _e {
