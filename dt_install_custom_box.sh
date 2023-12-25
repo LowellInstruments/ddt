@@ -18,7 +18,7 @@ rm $GROUPED_S3_FILE_FLAG 2> /dev/null
 
 
 function install_custom {
-    source dt_install_utils.sh
+    source dt_utils.sh
     _pb "CUSTOMIZING BOX"
 
     read -rp "Set this DDH as emolt? (y/n) " choice

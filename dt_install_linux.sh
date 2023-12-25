@@ -8,7 +8,7 @@ EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 
 function install_linux {
-    source dt_install_utils.sh
+    source dt_utils.sh
     _pb "INSTALL LINUX DEPENDENCIES"
 
     sudo apt-mark hold bluez

@@ -6,7 +6,7 @@ F_DT="$F_LI"/ddt
 
 
 function install_bluez {
-    source dt_install_utils.sh
+    source dt_utils.sh
     _pb "INSTALL LINUX BLUEZ"
 
     grep Raspberry /proc/cpuinfo

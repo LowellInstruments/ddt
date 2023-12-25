@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 
+# todo ---> move this to DDH scripts and call it via DDC
 clear
 echo; echo; echo;
 echo '> running client for DDN API'
