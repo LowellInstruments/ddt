@@ -9,6 +9,7 @@ source dt_install_custom_box.sh
 source dt_install_linux.sh
 source dt_install_linux_bluez.sh
 source dt_install_ddh.sh
+# see this line section below, installs ppp
 source dt_install_service_sw_net.sh
 source dt_install_alias.sh
 source dt_install_icons.sh
