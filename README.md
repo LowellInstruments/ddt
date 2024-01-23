@@ -72,7 +72,7 @@ The ``./dt_install_icons.sh`` script populates the DDH desktop with useful short
 
 The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
 
-The ``dt_install_dws.sh" script remembers you to install DWS.
+The ``dt_install_dws.sh`` script remembers you to install DWS.
 
 **Note:**
 Optional. Only if you have cell modem capabilities.
