@@ -10,11 +10,12 @@ EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 function install_linux {
     source dt_utils.sh
     _pb "INSTALL LINUX DEPENDENCIES"
+    cd $F_LI || (_pe "error: bad working directory"; exit 1)
 
     _pb "apt-get"
+    sudo apt-get --yes update
     sudo apt-mark hold bluez
     sudo apt remove -y modemmanager
-    sudo apt-get --yes update
     sudo apt remove -y python3-numpy
     sudo apt-get --yes --force-yes install minicom xscreensaver matchbox-keyboard ifmetric joe git \
     libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
@@ -25,7 +26,7 @@ function install_linux {
 
 
     # install stuff only on pure LI DDH such as wiringpi and juice4halt
-    if ! test -f $EMOLT_FILE_FLAG; then
+    if [ ! -f $EMOLT_FILE_FLAG ]; then
         _pb "juice4halt"
         # already done by ppp_install_standalone.sh
         # printf '\n\n>>> installing wiringpi\n'
@@ -41,7 +42,14 @@ function install_linux {
     sudo apt autoremove -y
     sudo apt-get clean
 
+    # install a nice wallpaper
+    # todo ---> test this
+    export XAUTHORITY=/home/pi/.Xauthority
+    export DISPLAY=:0
+    pcmanfm --set-wallpaper "$F_DT"/_dt_files/wp_ddh.jpg
 
+
+    # rc.local runs display brightness, NTP, juice4halt
     _pb 'rc.local'
     sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
     sudo chmod +x /etc/rc.local

@@ -331,7 +331,7 @@ do
 	esac
 done
 
-echo "END OK JOAQUIM"
+colored_echo "ppp_install_custom.sh end OK" ${GREEN};
 #read -p "Press ENTER key to reboot" ENTER
 #colored_echo "Rebooting..." ${GREEN}
 #reboot

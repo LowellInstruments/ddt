@@ -10,6 +10,7 @@ F_RC=/home/pi/.bashrc
 function install_alias {
     source dt_utils.sh
     _pb "INSTALL ALIAS"
+    cd $F_LI || (_pe "error: bad working directory"; exit 1)
 
 
     _pb "climenu build"

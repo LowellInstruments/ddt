@@ -12,15 +12,17 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-DDH_REQS_TXT=$F_DA/requirements_rpi_39.txt
+DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39.txt
 
 
 function install_ddh {
     source dt_utils.sh
     _pb "INSTALL DDH"
+     cd $F_LI || (_pe "error: bad working directory"; exit 1)
 
 
-    _pb "[ 05% ] DDH folder detection"
+
+    _pb "[  5% ] DDH folder detection"
     ! test -d "$F_DA"
     _e $? "DDH folder already exists"
 
@@ -36,9 +38,10 @@ function install_ddh {
 
 
     # virtualenv
-    _pb "[ 20% ] virtualenv"
+    _pb "[ 20% ] virtualenv removing"
     rm -rf "$F_VE" 2> /dev/null
     rm -rf "$HOME"/.cache/pip 2> /dev/null
+    _pb "[ 22% ] virtualenv creating"
     python3 -m venv "$F_VE" --system-site-packages && \
     source "$F_VE"/bin/activate && \
     "$VPIP" install --upgrade pip && \
@@ -54,9 +57,13 @@ function install_ddh {
     _e $? "cannot install MAT library"
 
 
+    # ----------------------------------
+    # todo: REMOVE BRANCH TOML here
+    # ----------------------------------
     _pb "[ 40% ] DDH source code"
-    git clone $GH_REPO_DDH $F_CLONE_DDH && \
-    "$VPIP" install -r "$F_CLONE_DDH"/$DDH_REQS_TXT && \
+    rm -rf $F_CLONE_DDH 2> /dev/null
+    git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
+    "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$F_LI"
     _e $? "cannot install DDH"
 
@@ -69,5 +76,5 @@ function install_ddh {
     _e $? "cannot install new resolv.conf"
 
 
-    _pb "[ 100% ] done"
+    _pb "[ 100% ] install_ddh done"
 }
