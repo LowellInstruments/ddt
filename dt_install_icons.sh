@@ -12,6 +12,6 @@ function install_icons {
 
 
     cp "$F_DT"/_dt_files/run_ddh_from_desktop.sh /home/pi/Desktop
-    cp "$F_DT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop
+    cp "$F_DT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop/conf_tool_ddh.sh
     _e $? "install_icons"
 }

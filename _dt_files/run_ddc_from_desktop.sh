@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-ddc
+# run this
+/usr/local/bin/cm /etc/cmc.conf
 
