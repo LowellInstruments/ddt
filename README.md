@@ -46,7 +46,7 @@ You only need to run ``./dt_install_all.sh``. Description of the individual scri
 
 ## Description of the DDT scripts
 
-[!WARNING]  
+**Note:**
 Don't run this if you already ran ``./dt_install_all.sh``.
 
 List all the scripts within the ```ddt``` folder by entering:
