@@ -27,16 +27,8 @@ like "192.x.x.x" or "10.x.x.x". Ignore any addresses starting with "169.".
 Run any SSH client software and go to such IP. Enter credentials "user" and "password" as 
 set in BASE_LINUX.md document.
 
----
-Optional. Install DWService. Just copy-paste the following instructions.
 
-```console
-cd /home/pi/Downloads;
-wget https://www.dwservice.net/download/dwagent.sh;
-chmod +x /home/pi/Downloads/dwagent.sh;
-sudo /home/pi/Downloads/dwagent.sh;
-```
----
+## Getting the installation tools
 
 Get the DDH Tools repository, a.k.a. ``ddt``. Feel free to copy and paste the following.
 
@@ -48,41 +40,45 @@ git clone https://github.com/lowellinstruments/ddt.git;
 cd /home/pi/li/ddt;
 ```
 
+## Turning a raspberry into a DDH
+
+You only need to run ``./dt_install_all.sh``. Description of the individual scripts is provided below for convenience.
+
 ## Description of the DDT scripts
+
+**Note:**
+Don't run this if you already ran ``./dt_install_all.sh``.
 
 List all the scripts within the ```ddt``` folder by entering:
 
 ```console
-cd /home/pi/li/ddt;
-ls;
+ls /home/pi/li/ddt
 ```
 
-The list of DDT scripts, in suggested order, comes next:
+The ``./dt_check.sh`` script verifies ddt is run from the proper working directory.
 
-- The ``./dt_install_custom_box.sh`` script customizes boxes with features such as eMolt or grouped AWS S3.
+The ``./dt_install_custom_box.sh`` script customizes boxes with features such as eMolt or grouped AWS S3.
 
-- The ``./dt_install_linux.sh`` script installs linux dependencies. Also takes care of custom ``rc.local``
+The ``./dt_install_linux.sh`` script installs linux dependencies. Also takes care of custom ``rc.local``
 and features such as ``juice4halt``.
 
-- The ``./dt_install_linux_bluez.sh`` installs bluez v5.66, which works better with bleak v0.20.x.
+The ``./dt_install_linux_bluez.sh`` script installs bluez v5.66, which works better with bleak v0.20.x.
 
-- The ``./dt_install_python_ddh.sh`` is a GUI installer that updates the DDH software in folder ``/home/pi/li/ddh``.
+The ``./dt_install_ddh.sh`` script installs a brand new DDH software in folder ``/home/pi/li/ddh``.
 
-- The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
+The ``./dt_install_alias.sh`` script installs ``ddc`` and ``ddi`` utilities.
 
-- The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
+The ``./dt_install_icons.sh`` script populates the DDH desktop with useful shortcuts.
 
-- The ``./dt_install_alias.sh`` script installs ``ddc`` and ``ddi`` utilities.
+The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors the DDH.
 
-- Optional. Only if you have cell modem capabilities. 
-The shield option is number "6: 3G/4G hat", the port is "ttyUSB3" and common APN names vary by SIM type.
+The ``dt_install_dws.sh`` script remembers you to install DWS.
 
-```console
-sudo ./_dt_files/ppp_install_standalone.sh
-```
-
-- Optional. Only if you have cell modem capabilities. The ``./dt_install_service_sw_net.sh`` scripts 
-sets a ``systemctl`` service which switches from cell to wi-fi to save data charges.
+**Note:**
+Optional. Only if you have cell modem capabilities.
+    - The ``_dt_files/ppp_install_custom.sh`` script installs sixfab cell shield software.
+    - The ``./dt_install_service_sw_net.sh``script installs a systemcl service to auto-switch wi-fi / cell.
+    - The ``dt_install_fw_cell_shield.sh`` script remembers to update cell shield firmware, if so.
 
 
 ## Cell shield firmware update
