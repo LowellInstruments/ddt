@@ -18,7 +18,6 @@ from dds.emolt import (
 )
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
-from settings.ctx import rbl_en
 from utils.ddh_shared import (
     create_folder_logger_by_mac,
     send_ddh_udp_gui as _u
