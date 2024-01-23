@@ -20,7 +20,7 @@ function install_linux {
     sudo apt-get --yes --force-yes install minicom xscreensaver matchbox-keyboard ifmetric joe git \
     libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
     libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
-    libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev \
+    libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev libopenblas-dev \
     libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build
     _e $? "apt-get"
 
