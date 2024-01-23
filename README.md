@@ -74,7 +74,7 @@ The ``./dt_install_crontab.sh`` script installs a crontab that runs and monitors
 
 The ``dt_install_dws.sh" script remembers you to install DWS.
 
-[!NOTE]  
+**Note:**
 Optional. Only if you have cell modem capabilities.
     - The ``_dt_files/ppp_install_custom.sh`` script installs sixfab cell shield software.
     - The ``./dt_install_service_sw_net.sh``script installs a systemcl service to auto-switch wi-fi / cell.
