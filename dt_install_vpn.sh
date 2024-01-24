@@ -42,20 +42,19 @@ function install_vpn {
     printf "\n"
     if [ $is_rpi -eq 0 ]; then
         _f=/etc/wireguard/wg0.conf
-        sudo echo "# file auto-created by Lowell Instruments tool" | sudo tee $_f > /dev/null
-        printf "----------------------------------------------" >> $_f
-        printf "# info about myself as a peer\n"
-        printf "[Interface]\n"
-        printf "Address = %s/32\n" "$2"
-        printf "PrivateKey = %s \n" "$(cat "$VF"/$NAME.key)"
-        printf "\n"
-        printf "\t# info about the Hub\n"
-        printf "\t[Peer]\n"
-        printf "\tPublicKey = %s\n" "$1"
-        printf "\tEndpoint = 3.143.21.254:51820\n"
-        printf "\t# set hosts allowed to reach this peer via HUB\n"
-        printf "\tAllowedIPs = 10.5.0.0/24\n"
-        printf "\tPersistentKeepalive = 25\n"
+        sudo echo -e "# file auto-created by Lowell Instruments tool" | sudo tee $_f > /dev/null
+        sudo echo -e  "----------------------------------------------" | sudo tee $_f > /dev/null
+        sudo echo -e  "# info about myself as a peer" | sudo tee $_f > /dev/null
+        sudo echo -e  "[Interface]" | sudo tee $_f > /dev/null
+        sudo printf   "Address = %s/32\n" "$2" | sudo tee $_f > /dev/null
+        sudo printf   "PrivateKey = %s \n\n" "$(cat "$VF"/$NAME.key)" | sudo tee $_f > /dev/null
+        sudo echo -e  "\t# info about the Hub" | sudo tee $_f > /dev/null
+        sudo echo -e  "\t[Peer]" | sudo tee $_f > /dev/null
+        sudo printf   "\tPublicKey = %s\n" "$1" | sudo tee $_f > /dev/null
+        sudo echo -e  "\tEndpoint = 3.143.21.254:51820" | sudo tee $_f > /dev/null
+        sudo echo -e  "\t# set hosts allowed to reach this peer via HUB" | sudo tee $_f > /dev/null
+        sudo echo -e  "\tAllowedIPs = 10.5.0.0/24" | sudo tee $_f > /dev/null
+        sudo echo -e  "\tPersistentKeepalive = 25" | sudo tee $_f > /dev/null
     fi
     printf "\n\n\n"
     _pb "# ----------------------------------------------\n"
