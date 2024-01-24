@@ -27,13 +27,6 @@ function install_vpn {
     wg pubkey < "$VF"/$NAME.key > "$VF"/$NAME.pub
 
 
-    _pb "taking care of umask warning..."
-    if [ $is_rpi -eq 0 ]; then
-      sudo chmod 600 "$VF"/$NAME.key
-      sudo chmod 600 "$VF"/$NAME.pub
-    fi
-
-
     _pb "creating this peer's /etc/wireguard/wg0.conf"
     if [ $is_rpi -eq 0 ]; then
         _f=/etc/wireguard/wg0.conf
@@ -52,6 +45,8 @@ function install_vpn {
         sudo echo -e  "\tPersistentKeepalive = 25\n";) | sudo tee $_f > /dev/null
     fi
     printf "\n"
+
+
     _pb "# --------------------------------------------------"
     _pb "# copy-paste this to Hub's /etc/wireguard/wg0.conf"
     _pb "# --------------------------------------------------"
@@ -62,11 +57,15 @@ function install_vpn {
     printf "\tAllowedIPs = %s/32\n" "$2"
     printf "\n"
 
-    # permissions
+
+
+    _pb "taking care of umask warning..."
     if [ $is_rpi -eq 0 ]; then
-      sudo chmod 600 /etc/wireguard/wg0.conf
-      sudo chown root /etc/wireguard/wg0.conf
-      sudo chgrp root /etc/wireguard/wg0.conf
+        sudo chmod 600 "$VF"/$NAME.key
+        sudo chmod 600 "$VF"/$NAME.pub
+        sudo chmod 600 /etc/wireguard/wg0.conf
+        sudo chown root /etc/wireguard/wg0.conf
+        sudo chgrp root /etc/wireguard/wg0.conf
     fi
 }
 
