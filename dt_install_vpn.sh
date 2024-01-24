@@ -1,29 +1,43 @@
 #!/usr/bin/env bash
 
 
-VF=$HOME/.vpn/
+VF=$HOME/.vpn
+
+
+grep Raspberry /proc/cpuinfo
+is_rpi=$?
 
 
 function install_vpn {
     source dt_utils.sh
-    _pb "INSTALL DDH VPN, run this as:"
-    _pb "install_vpn <pubkey_of_hub> <ip_of_this_peer>"
+    _pb "INSTALL DDH VPN"
+    printf "install_vpn <pubkey_of_hub> <ip_of_this_peer>\n"
 
-#    sudo apt install wireguard
-#    mkdir "$VF" 2> /dev/null
-#    cd "$VF" && umask 077
-#    _e $? "vpn folder"
-#
-#
-#    # ep: endpoint
-#    _pb "generating keys"
-#    wg genkey > "$VF"/.ep.key
-#    wg pubkey < "$VF"/.ep.key > "$VF"/.ep.pub
-#
 
-    printf "# ----------------------------------------------\n"
-    printf "# paste to this peer's /etc/wireguard/wg0.conf\n"
-    printf "# ----------------------------------------------\n"
+    if [ $is_rpi -eq 0 ]; then
+        _pb "installing wireguard if needed"
+        sudo apt install wireguard
+    fi
+
+
+    _pb "generating keys for this peer"
+    mkdir "$VF" 2> /dev/null
+    wg genkey > "$VF"/.this_peer.key
+    wg pubkey < "$VF"/.this_peer.key > "$VF"/.this_peer.pub
+
+
+    printf "\n"
+    _pb "taking care of umask warning..."
+    if [ $is_rpi -eq 0 ]; then
+      sudo chmod 600 "$VF"/.this_peer.key
+      sudo chmod 600 "$VF"/.this_peer.pub
+    fi
+
+
+    printf "\n"
+    _pb "# ----------------------------------------------\n"
+    _pb "# paste to this peer's /etc/wireguard/wg0.conf\n"
+    _pb "# ----------------------------------------------\n"
     printf "\n"
     printf "# info about myself as a peer\n"
     printf "[Interface]\n"
@@ -37,21 +51,19 @@ function install_vpn {
     printf "\t# set hosts allowed to reach this peer via HUB\n"
     printf "\tAllowedIPs = 10.5.0.0/24\n"
     printf "\tPersistentKeepalive = 25\n"
+    printf "\n\n\n"
+    _pb "# ----------------------------------------------\n"
+    _pb "# paste to the Hub's /etc/wireguard/wg0.conf\n"
+    _pb "# ----------------------------------------------\n"
     printf "\n"
-    printf "\n"
-    printf "# ----------------------------------------------\n"
-    printf "# paste to the Hub's /etc/wireguard/wg0.conf\n"
-    printf "# ----------------------------------------------\n"
-    printf "\n"
+    printf "# info about the remote peer\n"
     printf "\t[Peer]\n"
     printf "\tPublicKey = %s\n" "$(cat "$VF"/.ep.pub)"
     printf "\tAllowedIPs = %s/32\n" "$2"
 
 
     # permissions
-    grep Raspberry /proc/cpuinfo
-    rv=$?
-    if [ $rv -eq 0 ]; then
+    if [ $is_rpi -eq 0 ]; then
       sudo chmod 600 /etc/wireguard/wg0.conf
       sudo chown root /etc/wireguard/wg0.conf
       sudo chgrp root /etc/wireguard/wg0.conf
