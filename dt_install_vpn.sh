@@ -36,21 +36,26 @@ function install_vpn {
 
     printf "\n"
     _pb "# ----------------------------------------------\n"
-    _pb "# paste to this peer's /etc/wireguard/wg0.conf\n"
+    _pb "# creating this peer's /etc/wireguard/wg0.conf\n"
     _pb "# ----------------------------------------------\n"
     printf "\n"
-    printf "# info about myself as a peer\n"
-    printf "[Interface]\n"
-    printf "Address = %s/32\n" "$2"
-    printf "PrivateKey = %s \n" "$(cat "$VF"/.ep.key)"
-    printf "\n"
-    printf "\t# info about the Hub\n"
-    printf "\t[Peer]\n"
-    printf "\tPublicKey = %s\n" "$1"
-    printf "\tEndpoint = 3.143.21.254:51820\n"
-    printf "\t# set hosts allowed to reach this peer via HUB\n"
-    printf "\tAllowedIPs = 10.5.0.0/24\n"
-    printf "\tPersistentKeepalive = 25\n"
+    if [ $is_rpi -eq 0 ]; then
+        _f=/etc/wireguard/wg0.conf
+        printf "# file auto-created by Lowell Instruments tool" >> $_f
+        printf "----------------------------------------------" >> $_f
+        printf "# info about myself as a peer\n"
+        printf "[Interface]\n"
+        printf "Address = %s/32\n" "$2"
+        printf "PrivateKey = %s \n" "$(cat "$VF"/.ep.key)"
+        printf "\n"
+        printf "\t# info about the Hub\n"
+        printf "\t[Peer]\n"
+        printf "\tPublicKey = %s\n" "$1"
+        printf "\tEndpoint = 3.143.21.254:51820\n"
+        printf "\t# set hosts allowed to reach this peer via HUB\n"
+        printf "\tAllowedIPs = 10.5.0.0/24\n"
+        printf "\tPersistentKeepalive = 25\n"
+    fi
     printf "\n\n\n"
     _pb "# ----------------------------------------------\n"
     _pb "# paste to the Hub's /etc/wireguard/wg0.conf\n"
@@ -59,7 +64,7 @@ function install_vpn {
     printf "# info about the remote peer\n"
     printf "\t[Peer]\n"
     printf "\tPublicKey = %s\n" "$(cat "$VF"/.ep.pub)"
-    printf "\tAllowedIPs = %s/32\n" "$2"
+    printf "\tAllowedIPs = %s/32\n" "$2" >> pepi.txt
 
 
     # permissions
