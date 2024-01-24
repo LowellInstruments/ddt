@@ -40,3 +40,6 @@ function install_alias {
     sudo chmod +x $F_IN/cm
     _e $? "install alias"
 }
+
+
+if [ "$1" == "force" ]; then install_alias; fi
