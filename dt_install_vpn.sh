@@ -21,13 +21,12 @@ function install_vpn {
     fi
 
 
-    _pb "generating keys for this peer"
+    _pb "\ngenerating keys for this peer"
     mkdir "$VF" 2> /dev/null
     wg genkey > "$VF"/$NAME.key
     wg pubkey < "$VF"/$NAME.key > "$VF"/$NAME.pub
 
 
-    printf "\n"
     _pb "taking care of umask warning..."
     if [ $is_rpi -eq 0 ]; then
       sudo chmod 600 "$VF"/$NAME.key
@@ -35,10 +34,10 @@ function install_vpn {
     fi
 
 
-    _pb "# creating this peer's /etc/wireguard/wg0.conf"
+    _pb "creating this peer's /etc/wireguard/wg0.conf"
     if [ $is_rpi -eq 0 ]; then
         _f=/etc/wireguard/wg0.conf
-        (sudo echo -e "# file auto-created by Lowell Instruments tool"; \
+        (sudo echo -e "\n# file auto-created by Lowell Instruments tool"; \
         sudo echo -e  "----------------------------------------------"; \
         sudo echo -e  "# info about myself as a peer"; \
         sudo echo -e  "[Interface]"; \
@@ -50,12 +49,12 @@ function install_vpn {
         sudo echo -e  "\tEndpoint = 3.143.21.254:51820"; \
         sudo echo -e  "\t# set hosts allowed to reach this peer via HUB"; \
         sudo echo -e  "\tAllowedIPs = 10.5.0.0/24"; \
-        sudo echo -e  "\tPersistentKeepalive = 25";) | sudo tee $_f > /dev/null
+        sudo echo -e  "\tPersistentKeepalive = 25\n";) | sudo tee $_f > /dev/null
     fi
-    printf "\n\n\n"
-    _pb "# ----------------------------------------------"
-    _pb "# copy-paste to the Hub's /etc/wireguard/wg0.conf"
-    _pb "# ----------------------------------------------"
+    printf "\n"
+    _pb "# --------------------------------------------------"
+    _pb "# copy-paste this to Hub's /etc/wireguard/wg0.conf"
+    _pb "# --------------------------------------------------"
     printf "\n"
     printf "# info about the remote peer\n"
     printf "\t[Peer]\n"
