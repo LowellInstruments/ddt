@@ -42,7 +42,7 @@ function install_vpn {
     printf "\n"
     if [ $is_rpi -eq 0 ]; then
         _f=/etc/wireguard/wg0.conf
-        printf "# file auto-created by Lowell Instruments tool" >> $_f
+        sudo echo "# file auto-created by Lowell Instruments tool" | sudo tee $_f > /dev/null
         printf "----------------------------------------------" >> $_f
         printf "# info about myself as a peer\n"
         printf "[Interface]\n"
