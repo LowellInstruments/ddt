@@ -2,6 +2,7 @@
 
 
 VF=$HOME/.vpn
+NAME=.this_peer
 
 
 grep Raspberry /proc/cpuinfo
@@ -22,15 +23,15 @@ function install_vpn {
 
     _pb "generating keys for this peer"
     mkdir "$VF" 2> /dev/null
-    wg genkey > "$VF"/.this_peer.key
-    wg pubkey < "$VF"/.this_peer.key > "$VF"/.this_peer.pub
+    wg genkey > "$VF"/$NAME.key
+    wg pubkey < "$VF"/$NAME.key > "$VF"/$NAME.pub
 
 
     printf "\n"
     _pb "taking care of umask warning..."
     if [ $is_rpi -eq 0 ]; then
-      sudo chmod 600 "$VF"/.this_peer.key
-      sudo chmod 600 "$VF"/.this_peer.pub
+      sudo chmod 600 "$VF"/$NAME.key
+      sudo chmod 600 "$VF"/$NAME.pub
     fi
 
 
@@ -46,7 +47,7 @@ function install_vpn {
         printf "# info about myself as a peer\n"
         printf "[Interface]\n"
         printf "Address = %s/32\n" "$2"
-        printf "PrivateKey = %s \n" "$(cat "$VF"/.ep.key)"
+        printf "PrivateKey = %s \n" "$(cat "$VF"/$NAME.key)"
         printf "\n"
         printf "\t# info about the Hub\n"
         printf "\t[Peer]\n"
@@ -63,7 +64,7 @@ function install_vpn {
     printf "\n"
     printf "# info about the remote peer\n"
     printf "\t[Peer]\n"
-    printf "\tPublicKey = %s\n" "$(cat "$VF"/.ep.pub)"
+    printf "\tPublicKey = %s\n" "$(cat "$VF"/$NAME.pub)"
     printf "\tAllowedIPs = %s/32\n" "$2" >> pepi.txt
 
 
