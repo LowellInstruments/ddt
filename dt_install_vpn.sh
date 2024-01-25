@@ -67,14 +67,21 @@ function install_vpn {
 
 
 
-    _pb "taking care of umask warning..."
+    _S='solving umask warning'
+    _pb "$_S"
     if [ $is_rpi -eq 0 ]; then
-        sudo chmod 600 "$VF"/$NAME.key
-        sudo chmod 600 "$VF"/$NAME.pub
-        sudo chmod 600 /etc/wireguard/wg0.conf
-        sudo chown root /etc/wireguard/wg0.conf
+        sudo chmod 600 "$VF"/$NAME.key && \
+        sudo chmod 600 "$VF"/$NAME.pub && \
+        sudo chmod 600 /etc/wireguard/wg0.conf && \
+        sudo chown root /etc/wireguard/wg0.conf && \
         sudo chgrp root /etc/wireguard/wg0.conf
+        _e $? "$_S"
     fi
+
+
+    _pb "restarting wireguard service"
+    sudo systemctl enable wg-quick@wg0.service
+
 }
 
 
