@@ -14,4 +14,6 @@ function install_dws {
     echo "wget https://www.dwservice.net/download/dwagent.sh;"
     echo "chmod +x /home/pi/Downloads/dwagent.sh;"
     echo "sudo /home/pi/Downloads/dwagent.sh;"
+    _py  "use 7-digit code created in your DWS account to add this host"
+
 }

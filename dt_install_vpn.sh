@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
 
 
+
 VF=$HOME/.vpn
 NAME=.this_peer
-
-
+MAC_ADDR=$(cat /sys/class/net/eth0/address)
 grep Raspberry /proc/cpuinfo
 is_rpi=$?
 
 
+# this script:
+#   1) gets own DDH eth0 MAC address (ma)
+#   2) uses (ma) to curl-query DDN API to get:
+#       - a VPN IP address (va) for this DDH
+#       - the HUB VPN public key
+#   3) use info from 2) to generate own wireguard configuration
+
+
 function install_vpn {
     source dt_utils.sh
-    _pb "INSTALL DDH VPN"
+    _pb "INSTALL DDH VPN KEYS"
     printf "install_vpn <pubkey_of_hub> <ip_of_this_peer>\n"
 
 
