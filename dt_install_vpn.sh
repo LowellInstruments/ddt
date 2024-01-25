@@ -42,10 +42,11 @@ function install_vpn {
     printf "\n"
 
 
-    _pb "# --------------------------------------------------"
-    _pb "# copy-paste this to Hub's /etc/wireguard/wg0.conf"
-    _pb "# it's the info the hub needs about this remote peer"
-    _pb "# --------------------------------------------------"
+    _py "# -----------------------------------------------------------"
+    _py "# copy-paste this to Hub's /etc/wireguard/wg0.conf so it     "
+    _py "# knows about this remote peer, then restart hub's wireguard "
+    _py "#     $ sudo systemctl restart wg-quick@wg0.service          "
+    _py "# -----------------------------------------------------------"
     printf "\t[Peer]\n"
     printf "\tPublicKey = %s\n" "$(cat "$VF"/$NAME.pub)"
     printf "\tAllowedIPs = %s/32\n" "$2"
