@@ -24,4 +24,3 @@ function install_config {
 }
 
 
-read_api_pw_to_file
