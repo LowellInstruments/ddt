@@ -98,6 +98,7 @@ python3 _dt_files/_ddn_cli_api_vpn.py "$1"
 # step 3) use results to call this bash function
 if [ ! -f "$VF"/$NAME.vpn_pub_hub ]; then _e 1 "fail vpn_pub_hub"; exit 1; fi
 if [ ! -f "$VF"/$NAME.vpn_ip ]; then _e 1 "fail vpn_ip_for_me"; exit 1; fi
-vpn_hub_pub=$(cat "$VF"/$NAME.vpn_pub_hub)
-vpn_ip_for_me=$(cat "$VF"/$NAME.vpn_ip)
-install_vpn "$vpn_hub_pub" "$vpn_ip_for_me"
+vhp=$(cat "$VF"/$NAME.vpn_pub_hub)
+vim=$(cat "$VF"/$NAME.vpn_ip)
+if [ "$vhp" == "vpn_pub_empty" ]; then _e 1 "fail empty vpn_pub_hub"; exit 1; fi
+install_vpn "$vhp" "$vim"
