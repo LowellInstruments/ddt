@@ -44,8 +44,8 @@ def _main_cli_api_vpn(api_pw):
         s = rsp.content.decode()
         j = json.loads(s)
         if not j:
-            p(f'error: answer is empty')
-            p(f'mac {mac} not authorized or server has no config file for it')
+            p(f'error: answer is empty, maybe bad pw, or this')
+            p(f'mac {mac} is not authorized or server has no config file for it')
             return
         p(f"VPN ip received = {j['ip_vpn']}")
         p(f"VPN hub pubkey  = {j['vpn_pub_hub']}")

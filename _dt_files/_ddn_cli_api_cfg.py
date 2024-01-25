@@ -36,6 +36,7 @@ def _main_cli_api_cfg(api_pw):
         rsp.raise_for_status()
     except (Exception, ) as ex:
         p(f'error: client exception -> {ex}')
+        p(f'check mac is authorized and has remote config file associated')
         return
 
     # analyze API answer
@@ -45,6 +46,7 @@ def _main_cli_api_cfg(api_pw):
         if rsp.content == b'null':
             # p.e: bad mac or wrong password
             p('error: got API answer, but no file')
+            p(f'check mac is authorized and has remote config file associated')
             return
         path_dl_config_file = f'/tmp/{fn}'
         with open(path_dl_config_file, 'wb') as f:
