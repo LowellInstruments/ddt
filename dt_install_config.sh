@@ -16,7 +16,7 @@ echo "running dt_install_config.sh"
 
 
 # this requires DDH to be inside VPN
-ping -c 1 10.5.0.1
+timeout 2 ping -c 1 10.5.0.1
 rv=$?
 if [ $rv -ne 0 ]; then
     echo "error: this script requires DDH to be part of VPN"
