@@ -9,10 +9,6 @@ VPN_ADDR=ip a s wg0 | grep -E -o \
 # this script does the following:
 #   1) obtain own DDH VPN interface IP address (va)
 #   2) use (va) to query DDN API to get a DDH config.toml file
-#       url = f'http://{API_IP}:{API_PORT}/{API_EP}/{va}'
-# python _dt_files/ddn_cli.py "$1"
-# note:
-# configure DDN API so it only answers via its VPN interface
 
 
 function install_config {

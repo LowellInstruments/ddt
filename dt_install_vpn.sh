@@ -1,45 +1,32 @@
 #!/usr/bin/env bash
 
-
-
+source dt_utils.sh
 VF=$HOME/.vpn
 NAME=.this_peer
-MAC_ADDR=$(cat /sys/class/net/eth0/address)
 grep Raspberry /proc/cpuinfo
 is_rpi=$?
 
 
-# this script:
-#   1) gets own DDH eth0 MAC address (ma)
-#   2) uses (ma) to curl-query DDN API to get:
-#       - a VPN IP address (va) for this DDH
-#       - the HUB VPN public key
-#   3) use info from 2) to generate own wireguard configuration
-
-
 function install_vpn {
-    source dt_utils.sh
-    _pb "INSTALL DDH VPN KEYS"
-    printf "install_vpn <pubkey_of_hub> <ip_of_this_peer>\n"
-
-
     if [ $is_rpi -eq 0 ]; then
         _pb "installing wireguard if needed"
         sudo apt install wireguard
     fi
 
 
-    _pb "\ngenerating keys for this peer"
+    _pb "generating keys for this local peer"
     mkdir "$VF" 2> /dev/null
     wg genkey > "$VF"/$NAME.key
     wg pubkey < "$VF"/$NAME.key > "$VF"/$NAME.pub
+    _py "we will solve any umask warning later"
+
 
 
     _pb "creating this peer's /etc/wireguard/wg0.conf"
     if [ $is_rpi -eq 0 ]; then
         _f=/etc/wireguard/wg0.conf
         (sudo echo -e "\n# file auto-created by Lowell Instruments tool"; \
-        sudo echo -e  "----------------------------------------------"; \
+        sudo echo -e  "#----------------------------------------------"; \
         sudo echo -e  "# info about myself as a peer"; \
         sudo echo -e  "[Interface]"; \
         sudo printf   "Address = %s/32\n" "$2"; \
@@ -57,9 +44,8 @@ function install_vpn {
 
     _pb "# --------------------------------------------------"
     _pb "# copy-paste this to Hub's /etc/wireguard/wg0.conf"
+    _pb "# it's the info the hub needs about this remote peer"
     _pb "# --------------------------------------------------"
-    printf "\n"
-    printf "# info about the remote peer\n"
     printf "\t[Peer]\n"
     printf "\tPublicKey = %s\n" "$(cat "$VF"/$NAME.pub)"
     printf "\tAllowedIPs = %s/32\n" "$2"
@@ -67,9 +53,9 @@ function install_vpn {
 
 
 
-    _S='solving umask warning'
-    _pb "$_S"
     if [ $is_rpi -eq 0 ]; then
+        _S='solving umask warning'
+        _pb "$_S"
         sudo chmod 600 "$VF"/$NAME.key && \
         sudo chmod 600 "$VF"/$NAME.pub && \
         sudo chmod 600 /etc/wireguard/wg0.conf && \
@@ -79,10 +65,37 @@ function install_vpn {
     fi
 
 
-    _pb "restarting wireguard service"
-    sudo systemctl enable wg-quick@wg0.service
-
+    if [ $is_rpi -eq 0 ]; then
+        _pb "restarting wireguard service"
+        sudo systemctl enable wg-quick@wg0.service
+        sudo systemctl restart wg-quick@wg0.service
+        sudo systemctl status wg-quick@wg0.service
+    fi
 }
 
 
-install_vpn "<pubkey_of_hub>" 10.5.0.69
+
+# this script has a slightly different structure
+clear && echo && echo
+_pb "---------------------------"
+_pb "running dt_install_vpn.sh"
+_pb "---------------------------"
+
+
+# step 1) remove any previous result files
+rm "$VF"/$NAME.vpn_pub_hub 2> /dev/null
+rm "$VF"/$NAME.vpn_ip 2> /dev/null
+
+
+# step 2) call python script to get VPN IP address and hub VPN public key
+# we use a password passed from from command line like this
+# $ ./dt_install_vpn.sh <password_from_cmd_line>
+python3 _dt_files/_ddn_cli_api_vpn.py "$1"
+
+
+# step 3) use results to call this bash function
+if [ ! -f "$VF"/$NAME.vpn_pub_hub ]; then _e 1 "fail vpn_pub_hub"; exit 1; fi
+if [ ! -f "$VF"/$NAME.vpn_ip ]; then _e 1 "fail vpn_ip_for_me"; exit 1; fi
+vpn_hub_pub=$(cat "$VF"/$NAME.vpn_pub_hub)
+vpn_ip_for_me=$(cat "$VF"/$NAME.vpn_ip)
+install_vpn "$vpn_hub_pub" "$vpn_ip_for_me"
