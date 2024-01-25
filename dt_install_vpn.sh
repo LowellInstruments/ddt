@@ -10,6 +10,7 @@ is_rpi=$?
 function install_vpn {
     if [ $is_rpi -eq 0 ]; then
         _pb "installing wireguard if needed"
+        pip install getmac
         sudo apt install wireguard
     fi
 

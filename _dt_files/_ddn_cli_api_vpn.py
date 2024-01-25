@@ -11,7 +11,7 @@ from pathlib import Path
 
 # VPN address of remote server
 DDN_API_VPN_PORT = 9000
-DDN_API_IP = '10.5.0.1'
+DDN_API_IP = 'ddn.lowellinstruments.com'
 
 
 # debug
