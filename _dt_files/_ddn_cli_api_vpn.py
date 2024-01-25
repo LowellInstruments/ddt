@@ -45,6 +45,7 @@ def _main_cli_api_vpn(api_pw):
         j = json.loads(s)
         if not j:
             p(f'error: answer is empty')
+            p(f'ensure this DDH mac {mac} is authorized')
             return
         p(f"VPN ip received for this DDH = {j['ip_vpn']}")
         p(f"VPN hub pubkey  for this DDH  = {j['vpn_pub_hub']}")
