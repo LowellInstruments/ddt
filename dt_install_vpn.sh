@@ -73,10 +73,8 @@ function install_vpn {
 
 
 # this script has a slightly different structure
-clear && echo && echo
-_pb "---------------------------"
+clear && echo
 _pb "running dt_install_vpn.sh"
-_pb "---------------------------"
 
 
 # step 1) remove any previous result files
