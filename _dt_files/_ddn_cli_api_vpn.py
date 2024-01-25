@@ -47,8 +47,8 @@ def _main_cli_api_vpn(api_pw):
             p(f'error: answer is empty')
             p(f'mac {mac} not authorized or server has no config file for it')
             return
-        p(f"VPN ip received for this DDH = {j['ip_vpn']}")
-        p(f"VPN hub pubkey  for this DDH  = {j['vpn_pub_hub']}")
+        p(f"rxed VPN ip received = {j['ip_vpn']}")
+        p(f"rxed VPN hub pubkey  = {j['vpn_pub_hub']}")
         fn = str(Path.home()) + '/.vpn/.this_peer.vpn_ip'
         with open(fn, 'w') as f:
             f.write(j['ip_vpn'])

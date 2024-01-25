@@ -8,12 +8,6 @@ is_rpi=$?
 
 
 function install_vpn {
-    if [ $is_rpi -eq 0 ]; then
-        _pb "installing wireguard if needed"
-        pip install getmac
-        sudo apt install wireguard
-    fi
-
 
     _pb "generating keys for this local peer"
     mkdir "$VF" 2> /dev/null
@@ -71,7 +65,8 @@ function install_vpn {
         _pb "restarting wireguard service"
         sudo systemctl enable wg-quick@wg0.service
         sudo systemctl restart wg-quick@wg0.service
-        sudo systemctl status wg-quick@wg0.service
+        _pb "ensure wireguard service active"
+        sudo systemctl is-active wg-quick@wg0.service
     fi
 }
 
