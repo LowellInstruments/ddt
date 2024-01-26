@@ -4,9 +4,32 @@
 import json
 import sys
 import requests
-from _ddn_cli_api import (p,
-                          get_interface_mac_address)
 from pathlib import Path
+import re
+from getmac import get_mac_address
+
+
+def p(s):
+    print(f'[ DDN ] cli | {s}')
+
+
+def get_interface_mac_address(i):
+    mac = get_mac_address(interface=i)
+    if not mac:
+        return
+    mac = mac.replace(':', '_')
+    mac = mac.replace('-', '_')
+    return mac
+
+
+def get_filename_from_content_disposition_header(cd):
+    # src: codementor, downloading-files-from-urls-in-python-77q3bs0un
+    if not cd:
+        return None
+    s = re.findall('filename=(.+)', cd)
+    if len(s) == 0:
+        return None
+    return s[0].replace('"', '')
 
 
 # VPN address of remote server
@@ -76,5 +99,5 @@ def main():
 
 
 if __name__ == '__main__':
-    # $ ./_ddn_cli_api_vpn.py <remote_api_pw> (vpn_api_pw_default)
+    # $ ./ddn_cli_api_vpn.py <remote_api_pw> (vpn_api_pw_default)
     main()

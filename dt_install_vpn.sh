@@ -85,7 +85,7 @@ rm "$VF"/$NAME.vpn_ip 2> /dev/null
 # step 2) call python script to get VPN IP address and hub VPN public key
 # password must be previously stored in file $HOME/.api_pw
 api_pw=$(cat "$HOME"/.api_pw)
-python3 _dt_files/_ddn_cli_api_vpn.py "$api_pw"
+python3 _dt_files/ddn_cli_api_vpn.py "$api_pw"
 
 
 # step 3) use python results to call bash function "install_vpn" in this file
