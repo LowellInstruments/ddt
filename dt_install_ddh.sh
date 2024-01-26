@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
 
-source dt_utils.sh
-
-
 F_LI=/home/pi/li
 F_DA="$F_LI"/ddh
 F_VE="$F_LI"/venv
