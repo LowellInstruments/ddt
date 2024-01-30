@@ -17,6 +17,9 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # *  *  *  *  * user-name command to be executed
 
 
+# this takes care of run_ddh.sh and run_dds.sh
 #* * * * * pi /home/pi/li/ddt/_dt_files/crontab_ddh.sh
+
+# this takes care of the DDH API
 #* * * * * pi /home/pi/li/ddt/_dt_files/crontab_api.sh
 
