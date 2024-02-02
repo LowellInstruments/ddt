@@ -28,10 +28,11 @@ def _sh(s: str) -> bool:
     return rv.returncode == 0
 
 
-g_debug = False
+g_debug = 0
 
 
 def _z(s):
+    # returns number of seconds to sleep for debug purposes
     if g_debug:
         return 10
     if s in 'wifi':
@@ -44,7 +45,7 @@ def _z(s):
 
 def main() -> int:
 
-    # best wi-fi case ever
+    # best wi-fi case: via wi-fi and already being used
     wlan_via = _sh('timeout 2 ping -c 1 -I wlan0 {}'.format(IP))
     wlan_used = _sh('ip route get {} | grep wlan0'.format(IP))
     for i in range(3):
@@ -63,12 +64,18 @@ def main() -> int:
             _p('* wifi *')
             return _z('wifi')
 
-    # no wi-fi, let's try cell
-    cell_via = _sh('timeout 2 ping -c 1 -I ppp0 {}'.format(IP))
+    # no wi-fi, let's try cell, since it is shared, we do some repetitions
+    cell_via = 0
+    for i in range(5):
+        cell_via = _sh('timeout 1 ping -c 1 -I ppp0 {}'.format(IP))
+        if cell_via:
+            break
+        time.sleep(.1)
     cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
 
-    # debug
+    # display debug info
     if g_debug:
+        _p('\n')
         _p('wlan_via = {}'.format(wlan_via))
         _p('wlan_used = {}'.format(wlan_used))
         _p('cell_via = {}'.format(cell_via))
@@ -78,6 +85,7 @@ def main() -> int:
     if cell_via and not cell_used:
         _sh('/usr/sbin/ifmetric wlan0 400')
         _sh('/usr/sbin/ifmetric ppp0 0')
+        time.sleep(2)
 
     # let's try cell again after adjustment
     cell_used = _sh('ip route get {} | grep ppp0'.format(IP))
@@ -85,7 +93,7 @@ def main() -> int:
         _p('cell')
         return _z('cell')
 
-    # no internet connection of any kind
+    # it seems we have NO internet connection of any kind
     _p('none')
     return _z('none')
 
