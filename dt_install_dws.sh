@@ -9,14 +9,12 @@ function install_dws {
     title dt_install_dws
 
 
-    _pb "INSTALL DWS, copy paste the following: "
-     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
+    _pb "DOWNLOADING but not INSTALLING DWS:"
 
 
-    echo "cd /home/pi/Downloads;"
-    echo "wget https://www.dwservice.net/download/dwagent.sh;"
-    echo "chmod +x /home/pi/Downloads/dwagent.sh;"
-    echo "sudo /home/pi/Downloads/dwagent.sh;"
-    _py  "use 7-digit code created in your DWS account to add this host"
-
+    cd "$FOL_PI"/Downloads && \
+    wget https://www.dwservice.net/download/dwagent.sh && \
+    chmod +x "$FOL_PI"/Downloads/dwagent.sh && \
+    _py "use 7-digit code created in your DWS account to add this host" && \
+    _py "we left the DWS installer in $FOL_PI/Downloads"
 }

@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 
-export FOL_LI=/home/pi/li
+export FOL_PI=/home/pi
+export FOL_LI=$FOL_PI/li
 export FOL_DDH=$FOL_LI/ddh
 export FOL_VEN=$FOL_LI/venv
 export VPIP=$FOL_VEN/bin/pip
