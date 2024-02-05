@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_ddh
-
 
 
 
@@ -13,6 +11,9 @@ DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39_2023.txt
 
 
 function install_ddh {
+    title dt_install_ddh
+
+
     _pb "INSTALL DDH"
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

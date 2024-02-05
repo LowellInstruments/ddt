@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_fw_cell_shield
-
-
 
 
 function install_fw_cell_shield {
+    title dt_install_fw_cell_shield
+
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
     _pr "------------------------------"

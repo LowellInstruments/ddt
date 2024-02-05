@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_crontab
-
-
 
 
 function install_crontab {
+    title dt_install_crontab
+
     _pb "INSTALL CRONTAB"
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

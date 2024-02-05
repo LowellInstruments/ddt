@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_linux
-
 
 
 
@@ -9,6 +7,8 @@ J4H="$FOL_LI"/juice4halt
 
 
 function install_linux {
+    title dt_install_linux
+
     _pb "INSTALL LINUX DEPENDENCIES"
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_linux_bluez
-
 
 
 
 function install_bluez {
+    title dt_install_linux_bluez
+
     _pb "INSTALL LINUX BLUEZ"
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

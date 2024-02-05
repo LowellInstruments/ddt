@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_custom_box
 
 
 # --------------------------------------------------
@@ -9,6 +8,8 @@ title dt_install_custom_box
 # --------------------------------------------------
 
 function install_custom {
+    title dt_install_custom_box
+
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
     _pb "CUSTOMIZING BOX"

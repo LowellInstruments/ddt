@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_check
 
 
 
 function install_check {
+    title dt_check
+
     if [ "$(pwd)" != "$FOL_DDT" ]; then
         _pr "error dt_check: working_dir should be $FOL"
         exit 1

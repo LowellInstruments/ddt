@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_service_sw_net
-
-
-
 
 
 function install_service_sw_net {
+    title dt_install_service_sw_net
+
     _pb "INSTALL SERVICE_SW_NET"
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

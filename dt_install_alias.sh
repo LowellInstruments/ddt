@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_alias
 
 
 
@@ -9,6 +8,8 @@ F_RC=/home/pi/.bashrc
 
 
 function install_alias {
+    title dt_install_alias
+
     _pb "INSTALL ALIAS"
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 

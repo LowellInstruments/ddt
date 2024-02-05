@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title dt_install_dws
 
 
 
 
 function install_dws {
+
+    title dt_install_dws
+
 
     _pb "INSTALL DWS, copy paste"
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
