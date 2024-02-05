@@ -19,16 +19,18 @@ source dt_install_service_sw_net.sh
 source dt_install_fw_cell_shield
 
 
-install_check
-install_custom
-install_linux
-install_bluez
-install_ddh
-install_alias
-install_icons
-install_crontab
-install_dws
+install_check && \
+install_custom && \
+install_linux && \
+install_bluez && \
+install_ddh && \
+install_alias && \
+install_icons && \
+install_crontab && \
+install_dws && \
 # * ppp has no "source" instruction
-sudo _dt_files/ppp_install_custom.sh
+sudo _dt_files/ppp_install_custom.sh && \
 install_service_sw_net
-install_fw_cell_shield
+
+# maybe yes maybe not
+# install_fw_cell_shield
