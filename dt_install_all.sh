@@ -16,7 +16,7 @@ source dt_install_icons.sh
 source dt_install_crontab.sh
 source dt_install_dws.sh
 source dt_install_service_sw_net.sh
-source dt_install_fw_cell_shield
+source dt_install_fw_cell_shield.sh
 
 
 install_check && \
