@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 
-export FOL_DDT=/home/pi/li/ddt
+export FOL_LI=/home/pi/li
+export FOL_DDT=$FOL_LI/ddt
 
 
 
