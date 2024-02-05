@@ -79,5 +79,14 @@ Some additional useful things to do for better DDH behavior:
 ``` console
 ls /home/pi/li/juice4halt/bin/j4h_halt_flag
 ```
+
+- Use the icons in the desktop to test your DDH installation.
+- Remember to edit the crontab with:
+
+``` console
+sudo nano /etc/crontab
+```
+  
+
   
 Finally, run the DDH software once by clicking the icon on the desktop.
