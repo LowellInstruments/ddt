@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 source dt_utils.sh
+title dt_install_custom_box
 
 
 # --------------------------------------------------
