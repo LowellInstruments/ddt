@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
-F_LI=/home/pi/li
+
 
 function install_fw_cell_shield {
-    source dt_utils.sh
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
     _pr "------------------------------"
     _pr "remember check firmware shield"

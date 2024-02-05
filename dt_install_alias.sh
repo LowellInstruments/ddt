@@ -1,28 +1,26 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
 
-F_LI=/home/pi/li
-F_DT="$F_LI"/ddt
 F_IN=/usr/local/bin
 F_RC=/home/pi/.bashrc
 
 
 function install_alias {
-    source dt_utils.sh
     _pb "INSTALL ALIAS"
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
     _pb "climenu build"
-    gcc $F_DT/_dt_files/climenu.c -o $F_DT/_dt_files/cm
+    gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
     _e $? "building climenu"
 
 
     _pb "climenu install"
     sudo killall cm 2> /dev/null
-    sudo cp $F_DT/_dt_files/cm $F_IN && \
-    sudo cp $F_DT/_dt_files/cmc.conf /etc/ && \
-    sudo cp $F_DT/_dt_files/cmi.conf /etc/
+    sudo cp "$FOL_DDT"/_dt_files/cm $F_IN && \
+    sudo cp "$FOL_DDT"/_dt_files/cmc.conf /etc/ && \
+    sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc/
     _e $? "copy alias"
 
 

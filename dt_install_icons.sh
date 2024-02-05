@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
-
-F_LI=/home/pi/li
-F_DT=/home/pi/li/ddt
 
 
 function install_icons {
-    source dt_utils.sh
+
     _pb "INSTALL ICONS"
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
-    cp "$F_DT"/_dt_files/run_ddh_from_desktop.sh /home/pi/Desktop
-    cp "$F_DT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop/conf_tool_ddh.sh
+    cp "$FOL_DDT"/_dt_files/run_ddh_from_desktop.sh /home/pi/Desktop
+    cp "$FOL_DDT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop/conf_tool_ddh.sh
     _e $? "install_icons"
 }

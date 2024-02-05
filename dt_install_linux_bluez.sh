@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
-F_LI=/home/pi/li
 
 
 function install_bluez {
-    source dt_utils.sh
     _pb "INSTALL LINUX BLUEZ"
-     cd $F_LI || (_pe "error: bad working directory"; exit 1)
+     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
     grep Raspberry /proc/cpuinfo

@@ -1,17 +1,14 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
-
-F_LI=/home/pi/li
-F_DT=/home/pi/li/ddt
 
 
 function install_crontab {
-    source dt_utils.sh
     _pb "INSTALL CRONTAB"
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
-    sudo cp "$F_DT"/_dt_files/crontab /etc/crontab && \
+    sudo cp "$FOL_DDT"/_dt_files/crontab /etc/crontab && \
     sudo chmod 644 /etc/crontab && \
     sudo service cron reload
     _e $? "install crontab"

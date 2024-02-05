@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
 
 # --------------------------------------------------
@@ -6,12 +7,7 @@
 # also affects global file upload behavior
 # --------------------------------------------------
 
-EMOLT_FILE_FLAG=$FOL_LI/.ddt_this_is_emolt_box.flag
-GROUPED_S3_FILE_FLAG=$FOL_LI/.ddt_this_box_has_grouped_s3_uplink.flag
-
-
 function install_custom {
-    source dt_utils.sh
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
     _pb "CUSTOMIZING BOX"

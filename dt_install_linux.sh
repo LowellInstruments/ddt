@@ -1,16 +1,14 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
 
-F_LI=/home/pi/li
-F_DT="$F_LI"/ddt
-J4H="$F_LI"/juice4halt
-EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
+
+J4H="$FOL_LI"/juice4halt
 
 
 function install_linux {
-    source dt_utils.sh
     _pb "INSTALL LINUX DEPENDENCIES"
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
     _pb "apt-get"
     sudo apt-get --yes update
@@ -39,7 +37,7 @@ function install_linux {
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
         sudo rm -rf "$J4H"
         mkdir -p "$J4H"/bin
-        cp "$F_DT"/_dt_files/shutdown_script.py "$J4H"/bin/
+        cp "$FOL_DDT"/_dt_files/shutdown_script.py "$J4H"/bin/
         _e $? "juice4halt"
     fi
 
@@ -52,12 +50,12 @@ function install_linux {
     # todo ---> test this
     export XAUTHORITY=/home/pi/.Xauthority
     export DISPLAY=:0
-    pcmanfm --set-wallpaper "$F_DT"/_dt_files/wp_ddh.jpg
+    pcmanfm --set-wallpaper "$FOL_DDT"/_dt_files/wp_ddh.jpg
 
 
     # rc.local runs display brightness, NTP, juice4halt
     _pb 'rc.local'
-    sudo cp "$F_DT"/_dt_files/rc.local /etc/rc.local
+    sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local
     sudo chmod +x /etc/rc.local
     sudo systemctl enable rc-local
     sudo systemctl status rc-local

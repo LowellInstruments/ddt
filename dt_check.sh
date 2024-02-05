@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
 
 

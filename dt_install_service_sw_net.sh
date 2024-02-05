@@ -1,23 +1,22 @@
 #!/usr/bin/env bash
+source dt_utils.sh
 
 
-F_LI=/home/pi/li
-F_DT="$F_LI"/ddt
-EMOLT_FILE_FLAG=/home/pi/li/.ddt_this_is_emolt_box.flag
 
 
 function install_service_sw_net {
-    source dt_utils.sh
     _pb "INSTALL SERVICE_SW_NET"
-    cd $F_LI || (_pe "error: bad working directory"; exit 1)
+    cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
+
 
     _pb "ifmetric"
     sudo setcap 'cap_net_raw,cap_net_admin+eip' /usr/sbin/ifmetric
     _e $? "ifmetric"
 
+
     # LI switch_net_service only on pure DDH
     _pb "switch_net_service"
-    if [ -f $EMOLT_FILE_FLAG ]; then
+    if [ -f "$EMOLT_FILE_FLAG" ]; then
         read -rp "Is this emolt_DDH using CELL shield? (y/n) " choice
         case "$choice" in
             n|N ) printf 'not installing service_sw_net'; return 0;;
@@ -25,7 +24,7 @@ function install_service_sw_net {
     fi
 
     (sudo systemctl stop unit_switch_net.service || true) && \
-    sudo cp "$F_DT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
+    sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
     sudo chmod 644 /etc/systemd/system/unit_switch_net.service && \
     sudo systemctl daemon-reload && \
     (sudo systemctl disable unit_switch_net.service || true) && \
