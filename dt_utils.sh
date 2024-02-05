@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+
+export FOL_DDT=/home/pi/li/ddt
+
+
+
 # 0 black, 1 red, 2 green, 3 yellow
 # 4 blue, 5 magenta, 6 cyan, 7 white
 function _p_color { tput setaf "$1"; printf "%s\n" "$2"; tput sgr0; }

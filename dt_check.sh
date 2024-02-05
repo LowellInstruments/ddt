@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 
 
-source dt_utils.sh
 
-FOL=/home/pi/li/ddt
 
 function install_check {
-    if [ "$(pwd)" != $FOL ]; then
+    if [ "$(pwd)" != "$FOL_DDT" ]; then
         _pr "error dt_check: working_dir should be $FOL"
         exit 1
     fi
