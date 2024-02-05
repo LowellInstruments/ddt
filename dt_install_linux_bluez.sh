@@ -14,14 +14,14 @@ function install_bluez {
     rv=$?
     if [ $rv -eq 0 ]; then
         _pb "btuart"
-        sudo cp _dt_files/btuart /usr/bin/ && \
+        sudo cp "$FOL_DDT"/_dt_files/btuart /usr/bin/ && \
         sudo chown root /usr/bin/btuart && \
         sudo chgrp root /usr/bin/btuart
         _e $? "btuart patch for rpi"
     fi
 
     _pb "bluez"
-    cd _dt_files && \
+    cd "$FOL_DDT"/_dt_files && \
     wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
     _e $? "download bluez"
     unxz bluez-5.66.tar.xz && \

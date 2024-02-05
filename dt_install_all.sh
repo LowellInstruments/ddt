@@ -18,9 +18,9 @@ source dt_install_service_sw_net.sh
 source dt_install_fw_cell_shield.sh
 
 
-install_check
-install_custom
-install_linux
+install_check && \
+install_custom && \
+install_linux && \
 install_bluez
 install_ddh
 install_alias
