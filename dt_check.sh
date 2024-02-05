@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 source dt_utils.sh
-title _dt_check
+title dt_check
 
 
 
