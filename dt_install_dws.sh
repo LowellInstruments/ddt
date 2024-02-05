@@ -9,7 +9,7 @@ function install_dws {
     title dt_install_dws
 
 
-    _pb "INSTALL DWS, copy paste"
+    _pb "INSTALL DWS, copy paste the following: "
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 

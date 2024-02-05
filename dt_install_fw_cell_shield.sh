@@ -7,8 +7,8 @@ function install_fw_cell_shield {
 
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
-    _pr "------------------------------"
-    _pr "remember check firmware shield"
-    _pr "see ddt/README.md for details"
-    _pr "------------------------------"
+    _py "------------------------------"
+    _py "remember check firmware shield"
+    _py "see ddt/README.md for details"
+    _py "------------------------------"
 }
