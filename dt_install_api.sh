@@ -2,10 +2,6 @@
 source dt_utils.sh
 
 
-API_REQS_TXT=$F_DA/requirements_api.txt
-
-
-
 function install_api {
     title dt_install_api
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
@@ -13,6 +9,9 @@ function install_api {
 
     _pb "virtualenv API removing, folder $FOL_VAN"
     rm -rf "$FOL_VAN" 2> /dev/null
+
+
+    _pb "virtualenv API creating"
     python3 -m venv "$FOL_VAN" && \
     source "$FOL_VAN"/bin/activate && \
     "$VPIP" install --upgrade pip && \
@@ -21,6 +20,6 @@ function install_api {
 
 
     _pb "installing API requirements"
-    "$VPIP" install -r "$API_REQS_TXT"
+    "$VPIP" install -r "$FOL_DDH"/requirements_api.txt
     _e $? "cannot pip install api_reqs_txt"
 }
