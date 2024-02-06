@@ -11,7 +11,7 @@ function install_api {
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
-    _pb "virtualenv API removing"
+    _pb "virtualenv API removing, folder $FOL_VAN"
     rm -rf "$FOL_VAN" 2> /dev/null
     python3 -m venv "$FOL_VAN" && \
     source "$FOL_VAN"/bin/activate && \
