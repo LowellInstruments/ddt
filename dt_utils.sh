@@ -5,6 +5,7 @@ export FOL_PI=/home/pi
 export FOL_LI=$FOL_PI/li
 export FOL_DDH=$FOL_LI/ddh
 export FOL_VEN=$FOL_LI/venv
+export FOL_VAN=$FOL_LI/venv_api
 export VPIP=$FOL_VEN/bin/pip
 export FOL_DDT=$FOL_LI/ddt
 export EMOLT_FILE_FLAG=$FOL_LI/.ddt_this_is_emolt_box.flag
