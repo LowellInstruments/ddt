@@ -14,12 +14,12 @@ function install_api {
     _pb "virtualenv API creating"
     python3 -m venv "$FOL_VAN" && \
     source "$FOL_VAN"/bin/activate && \
-    "$VPIP" install --upgrade pip && \
-    "$VPIP" install wheel
+    "$VPAP" install --upgrade pip && \
+    "$VPAP" install wheel
     _e $? "cannot create virtualenv"
 
 
     _pb "installing API requirements"
-    "$VPIP" install -r "$FOL_DDH"/requirements_api.txt
+    "$VPAP" install -r "$FOL_DDH"/requirements_api.txt
     _e $? "cannot pip install api_reqs_txt"
 }

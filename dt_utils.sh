@@ -7,6 +7,7 @@ export FOL_DDH=$FOL_LI/ddh
 export FOL_VEN=$FOL_LI/venv
 export FOL_VAN=$FOL_LI/venv_api
 export VPIP=$FOL_VEN/bin/pip
+export VPAP=$FOL_VAN/bin/pip
 export FOL_DDT=$FOL_LI/ddt
 export EMOLT_FILE_FLAG=$FOL_LI/.ddt_this_is_emolt_box.flag
 export GROUPED_S3_FILE_FLAG=$FOL_LI/.ddt_this_box_has_grouped_s3_uplink.flag
