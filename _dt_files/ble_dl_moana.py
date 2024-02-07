@@ -19,8 +19,7 @@ from dds.emolt import (
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
 from utils.ddh_shared import (
-    create_folder_logger_by_mac,
-    send_ddh_udp_gui as _u
+    create_folder_logger_by_mac
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
@@ -30,10 +29,6 @@ VSP_RX_CHAR_UUID = "569a2001-b87f-490c-92cb-11ba5ea5167c"
 VSP_TX_CHAR_UUID = "569a2000-b87f-490c-92cb-11ba5ea5167c"
 
 _sk = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-
-def check_moana_plugin_is_missing(int_ignored):
-    return False
 
 
 class OffloadState(Enum):
@@ -417,12 +412,9 @@ class MoanaBle:
                 )
                 fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
                 x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
-                try:
-                    ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
-                    mb = rbl_hex_str_to_hex_bytes(ms)
-                    rbl_gen_file(mb)
-                except (Exception, ) as ex:
-                    lg.a(f'error: exception ble_dl_moana_RBL {ex}')
+                ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
+                mb = rbl_hex_str_to_hex_bytes(ms)
+                rbl_gen_file(mb)
 
             # Lowell files always generated, needed for graphing
             lg.a("converting file to LI format")
@@ -461,3 +453,41 @@ async def ble_interact_moana(dl_folder, mac, h, g):
         lg.a("error: traceback -> {}".format(traceback.print_exc()))
         await lc.disconnect()
         return 1
+
+
+if __name__ == '__main__':
+    dl_file_path = "/home/kaz/Downloads/MOANA_0736_14_231222175737.bin"
+    csv_file_path = dl_file_path.replace(".bin", ".csv")
+
+    with open(dl_file_path, "rb") as bin_file:
+        print(f"Decoding to file: {csv_file_path}")
+        with open(csv_file_path, "wb") as csv_file:
+            # header
+            data = bin_file.read(1)
+            while data and data != b"\x03":
+                csv_file.write(data)
+                data = bin_file.read(1)
+
+            # origin time
+            timestamp = struct.unpack("<i", bin_file.read(4))[0]
+
+            data = bin_file.read(6)
+            while data:
+                if len(data) != 6:
+                    print("Unexpected number of bytes")
+                    break
+                values = struct.unpack("<3H", data)
+
+                timestamp += values[0]
+                csv_file.write(
+                    f'{datetime.utcfromtimestamp(timestamp).strftime("%d/%m/%Y,%H:%M:%S")},'.encode()
+                )
+
+                depth = (values[1] / 10) - 10
+                csv_file.write(f"{depth:.1f},".encode())
+
+                temp = (values[2] / 1000) - 10
+                csv_file.write(f"{temp:.3f}\n".encode())
+
+                data = bin_file.read(6)
+    print("Decoding finished")
