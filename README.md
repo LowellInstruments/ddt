@@ -1,6 +1,6 @@
 # DDH Tools | ddt
 
-Tools to install and update DDH. No need to ```apt-get update```. We take care of this.
+Tools to install DDH. Don't manually run ```apt-get update```. We take care of all.
 
 
 ## In case of Raspberry Pi 3
@@ -9,7 +9,7 @@ On a RPi3, which you can check by ```$ cat /proc/cpuinfo```, do the following:
 
 ```console
 sudo nano /boot/config.txt
-    # dtoverlay=vc4-fkms-v3d # ---> comment this line so it uses the old legacy video driver
+    # dtoverlay=vc4-fkms-v3d # ---> comment line to force old video driver
 ```
 
 ## Remote access
@@ -21,7 +21,9 @@ ifconfig -a
 ```
 
 Annotate the IP address indicated in the wlan0 interface. 
-Run any SSH client software and go to such IP. 
+
+Run any SSH client software and go to such IP.
+
 Enter credentials "user" and "password" as set in BASE_LINUX.md document.
 
 ---
@@ -38,7 +40,7 @@ sudo /home/pi/Downloads/dwagent.sh;
 
 ## Getting the installation tools
 
-Get the DDH Tools repository, a.k.a. ``ddt``. Feel free to copy and paste the following.
+Copy-n-paste the following to obtain the DDH Tools repository ``ddt``.
 
 ```console
 cd /home/pi;
@@ -50,7 +52,9 @@ cd /home/pi/li/ddt;
 
 ## Turning a raspberry into a DDH
 
-You only need to run ``./dt_install_all.sh``. 
+You just need to run ``./dt_install_all.sh``. 
+
+Any further installation tweak can be done running ``ddi``.
 
 
 ## Cell shield firmware update
@@ -62,7 +66,7 @@ minicom -D /dev/ttyUSB2 -b 115200
 AT+CVERSION
 ```
 
-If you see a year < 2022 in your answer, please contact Lowell Instruments and we will do this for you.
+If you see a year < 2022 in your answer, contact Lowell Instruments and we will do this for you.
 
 
 ## Post configuration
@@ -87,6 +91,4 @@ ls /home/pi/li/juice4halt/bin/j4h_halt_flag
 sudo nano /etc/crontab
 ```
   
-
-  
-Finally, run the DDH software once by clicking the icon on the desktop.
+Run the DDH software by clicking the icon on the desktop, or wait for the crontab to do it for you.
