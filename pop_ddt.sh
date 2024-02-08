@@ -13,5 +13,5 @@ _e $? "$_S"
 
 
 
-_pb "[ POP ] ddt | ran OK!"
+_pb "[ POP ] ddt | done OK!"
 

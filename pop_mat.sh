@@ -50,5 +50,5 @@ _e $? "cannot copy MAT commit file to /etc/"
 
 
 
-_pb "[ POP ] mat | ran OK!"
+_pb "[ POP ] mat | done OK!"
 

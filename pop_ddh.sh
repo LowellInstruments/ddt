@@ -55,4 +55,4 @@ cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds && \
 _e $? "$_S"
 
 
-_pg "[ POP ] ddh | ran OK!"
+_pg "[ POP ] ddh | done OK!"
