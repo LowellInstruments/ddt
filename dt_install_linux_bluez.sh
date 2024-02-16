@@ -32,6 +32,7 @@ if [ $rv -ne 0 ]; then
     echo 'error wget bluez'
     exit 1
 fi
+rm bluez-5.66.tar.xz || true
 unxz bluez-5.66.tar.xz
 tar xvf bluez-5.66.tar
 
