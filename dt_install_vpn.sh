@@ -29,7 +29,7 @@ function install_vpn {
         sudo echo -e  "\t# info about the Hub"; \
         sudo echo -e  "\t[Peer]"; \
         sudo printf   "\tPublicKey = %s\n" "$1"; \
-        sudo echo -e  "\tEndpoint = 3.143.21.254:51820"; \
+        sudo echo -e  "\tEndpoint = <ip_hub_vpn>:51820"; \
         sudo echo -e  "\t# set hosts allowed to reach this peer via HUB"; \
         sudo echo -e  "\tAllowedIPs = 10.5.0.0/24"; \
         sudo echo -e  "\tPersistentKeepalive = 25\n";) | sudo tee $_f > /dev/null
