@@ -14,7 +14,7 @@ _e $? "$_S"
 
 _S="[ POP ] ddt | new aliases"
 _pb "$_S"
-cd "$FOL_DDT" && ./dt_install_alias.sh
+cd "$FOL_DDT" && ./dt_install_alias.sh force
 _e $? "$_S"
 
 
