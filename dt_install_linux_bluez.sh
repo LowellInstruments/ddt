@@ -26,13 +26,12 @@ fi
 
 printf '\n\n>>> uncompressing bluez from _dt_files folder\n'
 cd _dt_files
-wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
+wget -O bluez-5.66.tar.xz http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
 rv=$?
 if [ $rv -ne 0 ]; then
     echo 'error wget bluez'
     exit 1
 fi
-rm bluez-5.66.tar.xz || true
 unxz bluez-5.66.tar.xz
 tar xvf bluez-5.66.tar
 
