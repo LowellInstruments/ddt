@@ -3,14 +3,10 @@ source dt_utils.sh
 
 
 
-
 function install_dws {
-
     title dt_install_dws
 
-
     _pb "DOWNLOADING but not INSTALLING DWS:"
-
 
     cd "$FOL_PI"/Downloads && \
     wget https://www.dwservice.net/download/dwagent.sh && \

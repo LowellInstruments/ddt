@@ -14,7 +14,7 @@ function install_alias {
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
-    _pb "climenu build"
+    _pb "climenu binary build"
     gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
     _e $? "building climenu"
 
@@ -22,8 +22,9 @@ function install_alias {
     _pb "climenu install"
     sudo killall cm 2> /dev/null
     sudo cp "$FOL_DDT"/_dt_files/cm $F_IN && \
-    sudo cp "$FOL_DDT"/_dt_files/cmc.conf /etc/ && \
-    sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc/
+    sudo cp "$FOL_DDT"/_dt_files/cmc.conf /etc && \
+    sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
+    sudo cp "$FOL_DDT"/_dt_files/cmu.conf /etc
     _e $? "copy alias"
 
 
@@ -31,12 +32,17 @@ function install_alias {
     grep 'alias ddc' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
-        echo 'alias ddc="/usr/local/bin/cm /etc/cmc.conf"' >> $F_RC
+        echo "alias ddc=\"$F_IN/cm /etc/cmc.conf\"" >> $F_RC
     fi
     grep 'alias ddi' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
-        echo 'alias ddi="/usr/local/bin/cm /etc/cmi.conf"' >> $F_RC
+        echo "alias ddi=\"$F_IN/cm /etc/cmi.conf\"" >> $F_RC
+    fi
+    grep 'alias ddu' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        echo "alias ddu=\"$F_IN/cm /etc/cmu.conf\"" >> $F_RC
     fi
     sudo chmod +x $F_IN/cm
     _e $? "install alias"
