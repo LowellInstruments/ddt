@@ -22,7 +22,7 @@ function install_bluez {
 
     _pb "bluez"
     cd "$FOL_DDT"/_dt_files && \
-    wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
+    wget -O bluez-5.66.tar.xz http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
     _e $? "download bluez"
     unxz bluez-5.66.tar.xz && \
     tar xvf bluez-5.66.tar
