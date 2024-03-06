@@ -18,6 +18,7 @@ from dds.emolt import (
 )
 from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
 from mat.utils import linux_is_rpi
+from settings import ctx
 from settings.ctx import rbl_en
 from utils.ddh_shared import (
     create_folder_logger_by_mac,
@@ -411,7 +412,7 @@ class MoanaBle:
             # ----------------------------------
             # generates custom output CSV files
             # ----------------------------------
-            if ddh_is_emolt_box() or not linux_is_rpi():
+            if ctx.rbl_en:
                 lg.a("emolt box detected, converting Moana CSV file to emolt format")
                 fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
                     self.offload_file_path, self.lat, self.lon
