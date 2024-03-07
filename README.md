@@ -46,7 +46,7 @@ Copy-n-paste the following to obtain the DDH Tools repository ``ddt``.
 cd /home/pi;
 mkdir li;
 cd li;
-git clone https://github.com/lowellinstruments/ddt.git;
+git clone --branch toml https://github.com/lowellinstruments/ddt.git;
 cd /home/pi/li/ddt;
 ```
 
