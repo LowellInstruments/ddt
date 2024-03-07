@@ -12,7 +12,7 @@ Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP 
 SSH to such IP or open the disk somewhere else via USB on a computer. Edit the file ```/boot/config.txt```:
 
 ```console
-    dtoverlay=vc4-fkms-v3d # ensure this line says fkms, not kms, in case of error, comment it
+dtoverlay=vc4-fkms-v3d # ensure this line says fkms, not kms, in case of error, comment it
 ```
 
 
