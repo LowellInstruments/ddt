@@ -45,3 +45,4 @@ function install_bluez {
     _e $? "install bluez"
 }
 
+if [ "$1" == "force" ]; then dt_install_linux_bluez; fi

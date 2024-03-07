@@ -43,8 +43,7 @@ function install_linux {
     sudo apt-get clean
 
 
-    # install a nice wallpaper
-    # todo ---> test this
+    # install a Lowell Instruments DDH wallpaper
     export XAUTHORITY=/home/pi/.Xauthority
     export DISPLAY=:0
     pcmanfm --set-wallpaper "$FOL_DDT"/_dt_files/wp_ddh.jpg
