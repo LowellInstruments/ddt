@@ -54,9 +54,6 @@ function install_ddh {
     _e $? "cannot install MAT library"
 
 
-    # ----------------------------------
-    # todo: REMOVE BRANCH TOML here
-    # ----------------------------------
     _pb " [39% ] DDH requirements"
     DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39_2023.txt
     python3 --version | grep "3.11"
@@ -67,6 +64,9 @@ function install_ddh {
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
 
 
+    # ----------------------------------
+    # todo: REMOVE BRANCH TOML here
+    # ----------------------------------
     _pb "[ 40% ] DDH source code"
     # todo: test this wheel thing
     rm -rf $F_CLONE_DDH 2> /dev/null
