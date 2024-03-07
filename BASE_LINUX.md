@@ -6,9 +6,15 @@ Instructions to install a base Linux system on a Raspberry Pi that will host a D
 
 ## Introduction
 
-Download base image ```2022-09-22-raspios-bullseye-armhf.img``` from the following link.
+Download base image files from the following links.
+
+This is for old DDH. We will update it soon.
 
 [raspios 2022](https://drive.google.com/file/d/1ydjJiUCTUBVqvDyzErxvnI1JxK9sD-x8/view?usp=sharing)
+
+This is for new DDH.
+
+[raspios 2023](still under testing)
 
 Download image flasher utility ```Raspberry PI imager``` and run it.
 
