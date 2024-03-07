@@ -7,7 +7,6 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39_2023.txt
 
 
 function install_ddh {
@@ -57,6 +56,15 @@ function install_ddh {
     # ----------------------------------
     # todo: REMOVE BRANCH TOML here
     # ----------------------------------
+    _pb " [39% ] DDH requirements"
+    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39_2023.txt
+    python3 --version | grep "3.11"
+    rv=$?
+    if [ $rv -eq 0 ]; then
+        DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_311_2023.txt
+    fi
+
+
     _pb "[ 40% ] DDH source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
