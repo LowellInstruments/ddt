@@ -17,7 +17,7 @@ function install_linux {
     sudo apt-mark hold bluez
     sudo apt remove -y modemmanager
     sudo apt remove -y python3-numpy
-    sudo apt-get --yes --force-yes install minicom xscreensaver matchbox-keyboard ifmetric joe git \
+    sudo apt-get --yes --assume-yes install minicom xscreensaver matchbox-keyboard ifmetric joe git \
     libatlas3-base libglib2.0-dev python3-pyqt5 libhdf5-dev python3-dev \
     libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
     libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev libopenblas-dev \
@@ -26,17 +26,10 @@ function install_linux {
     _e $? "apt-get"
 
 
-    # only required for some DDT conf scripts
-    _pb "pip"
-    pip install getmac
-    _e $? "pip"
-
-
     # install stuff only on pure LI DDH such as wiringpi and juice4halt
-    if [ ! -f $EMOLT_FILE_FLAG ]; then
+    if [ ! -f "$EMOLT_FILE_FLAG" ]; then
         _pb "juice4halt"
-        # already done by ppp_install_standalone.sh
-        # printf '\n\n>>> installing wiringpi\n'
+        # wiringpi is already going to be installed by ppp_install_standalone.sh
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
         sudo rm -rf "$J4H"
         mkdir -p "$J4H"/bin
@@ -48,6 +41,7 @@ function install_linux {
     _pb 'apt-get clean'
     sudo apt autoremove -y
     sudo apt-get clean
+
 
     # install a nice wallpaper
     # todo ---> test this
@@ -64,3 +58,6 @@ function install_linux {
     sudo systemctl status rc-local
     _e $? "rc.local"
 }
+
+if [ "$1" == "force" ]; then install_linux; fi
+

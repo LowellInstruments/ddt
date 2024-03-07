@@ -10,6 +10,7 @@ function install_bluez {
      cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
 
+    # this seems to minimize the number of BLE hardware errors
     grep Raspberry /proc/cpuinfo
     rv=$?
     if [ $rv -eq 0 ]; then
@@ -18,6 +19,15 @@ function install_bluez {
         sudo chown root /usr/bin/btuart && \
         sudo chgrp root /usr/bin/btuart
         _e $? "btuart patch for rpi"
+    fi
+
+
+    # 5.66 version seems to work nicely with bleak BLE library
+    _pb "checking current bluez version"
+    bluetoothctl -v | grep "5.66"
+    rv=$?
+    if [ $rv -eq 0 ]; then
+        exit 0
     fi
 
     _pb "bluez"
