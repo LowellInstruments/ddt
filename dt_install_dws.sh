@@ -14,3 +14,8 @@ function install_dws {
     _py "use 7-digit code created in your DWS account to add this host" && \
     _py "we left the DWS installer in $FOL_PI/Downloads"
 }
+
+
+if [ "$1" == "force" ]; then install_dws; fi
+
+

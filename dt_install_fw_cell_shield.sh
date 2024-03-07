@@ -12,3 +12,6 @@ function install_fw_cell_shield {
     _py "see ddt/README.md for details"
     _py "------------------------------"
 }
+
+if [ "$1" == "force" ]; then install_fw_cell_shield; fi
+

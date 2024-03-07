@@ -5,6 +5,7 @@ source dt_utils.sh
 function install_service_sw_net {
     title dt_install_service_sw_net
 
+
     _pb "INSTALL SERVICE_SW_NET"
     cd "$FOL_LI" || (_pe "error: bad working directory"; exit 1)
 
@@ -23,6 +24,7 @@ function install_service_sw_net {
         esac
     fi
 
+    # install the service
     (sudo systemctl stop unit_switch_net.service || true) && \
     sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
     sudo chmod 644 /etc/systemd/system/unit_switch_net.service && \
@@ -33,3 +35,5 @@ function install_service_sw_net {
     _e $? "switch net service"
     systemctl status unit_switch_net.service
 }
+
+if [ "$1" == "force" ]; then install_service_sw_net; fi

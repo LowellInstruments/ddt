@@ -14,3 +14,5 @@ function install_crontab {
     sudo service cron reload
     _e $? "install crontab"
 }
+
+if [ "$1" == "force" ]; then install_crontab; fi

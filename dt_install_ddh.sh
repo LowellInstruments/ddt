@@ -7,6 +7,7 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
+WHEEL_DBUS=$FOL_DDT/_dt_files/wheels/dbus_fast-2.21.1-cp311-cp311-manylinux_2_36_aarch64.whl
 
 
 function install_ddh {
@@ -63,22 +64,26 @@ function install_ddh {
     if [ $rv -eq 0 ]; then
         DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_311_2023.txt
     fi
+    _pb "selected requirements file $DDH_TMP_REQS_TXT"
 
 
     _pb "[ 40% ] DDH source code"
+    # todo: test this wheel thing
     rm -rf $F_CLONE_DDH 2> /dev/null
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
+    "$VPIP" install "$WHEEL_DBUS" && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
     _e $? "cannot install DDH"
 
 
-    _pb "[ 90% ] resolv.conf"
+    _pb "[ 90% ] setting and protecting file resolv.conf"
     sudo chattr -i /etc/resolv.conf && \
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf" && \
     sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf" && \
     sudo chattr +i /etc/resolv.conf
     _e $? "cannot install new resolv.conf"
+
 
 
     _pb "[ 100% ] install_ddh done"

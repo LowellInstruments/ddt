@@ -23,3 +23,6 @@ function install_api {
     "$VPAP" install -r "$FOL_DDH"/requirements_api.txt
     _e $? "cannot pip install api_reqs_txt"
 }
+
+if [ "$1" == "force" ]; then install_api; fi
+

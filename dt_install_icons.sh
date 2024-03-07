@@ -14,3 +14,7 @@ function install_icons {
     cp "$FOL_DDT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop/conf_tool_ddh.sh
     _e $? "install_icons"
 }
+
+
+if [ "$1" == "force" ]; then install_icons; fi
+

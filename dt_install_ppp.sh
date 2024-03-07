@@ -15,5 +15,7 @@ function install_ppp {
     fi
 
     sudo "$FOL_DDT"/_dt_files/ppp_install_custom.sh
-
 }
+
+if [ "$1" == "force" ]; then install_ppp; fi
+
