@@ -7,7 +7,7 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-WHEEL_DBUS=$FOL_DDT/_dt_files/wheels/dbus_fast-2.21.1-cp311-cp311-manylinux_2_36_aarch64.whl
+WHEEL_DBUS=$FOL_DDT/_dt_files/my_wheels/dbus_fast-2.21.1-cp311-cp311-manylinux_2_36_aarch64.whl
 
 
 function install_ddh {
