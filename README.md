@@ -3,19 +3,29 @@
 Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 
-## In case of Raspberry Pi 3
-
-On a RPi3, do ```$ cat /proc/cpuinfo```. If rpi3, go to terminal and type:
-
-```console
-# /boot/config.txt is a link to --> /boot/firmware/config.txt
-sudo nano /boot/config.txt
-    # dtoverlay=vc4-fkms-v3d # ---> comment line to force old video driver
-```
+## Special case of Raspberry Pi 3
 
 Rpi3 might get stuck at boot and all you see is a black screen with a blinking cursor.
 
 Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen. SSH to it.
+
+You can know if you are on a RPi3 by doing ```$ cat /proc/cpuinfo```. 
+
+You can know the arch of your OS by doing ```$ uname -m```. armv7l means 32 bits, aarch64 means 64 bits.
+
+If you are on a Rpi3 and your OS is 32-bits, go to terminal and type:
+
+```console
+sudo nano /boot/config.txt
+    # dtoverlay=vc4-fkms-v3d # comment line to force old video driver
+```
+
+If you are on a Rpi3 and your OS is 64-bits, go to terminal and type:
+
+```console
+sudo nano /boot/config.txt
+    dtoverlay=vc4-fkms-v3d # probably you need to add a "f" to the current line content (kms -> fkms)
+```
 
 ## Remote access
 
