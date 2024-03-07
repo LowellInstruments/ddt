@@ -75,3 +75,6 @@ function install_ddh {
 
     _pb "[ 100% ] install_ddh done"
 }
+
+if [ "$1" == "force" ]; then install_ddh; fi
+

@@ -27,6 +27,7 @@ function install_bluez {
     bluetoothctl -v | grep "5.66"
     rv=$?
     if [ $rv -eq 0 ]; then
+        _pg "bluez already version 5.66"
         exit 0
     fi
 
