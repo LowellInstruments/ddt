@@ -1,11 +1,11 @@
 # DDH Tools | ddt
 
-Tools to install DDH. Don't manually run ```apt-get update```. We take care of all.
+Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 
 ## In case of Raspberry Pi 3
 
-On a RPi3, which you can check by ```$ cat /proc/cpuinfo```, do the following:
+On a RPi3, do ```$ cat /proc/cpuinfo```. If rpi3, go to terminal and type:
 
 ```console
 sudo nano /boot/config.txt
@@ -14,17 +14,17 @@ sudo nano /boot/config.txt
 
 ## Remote access
 
-Join your DDH to your wi-fi network. Next, go to terminal and type:
+Join your DDH to your wi-fi. Next, go to terminal and type:
 
 ```console
 ifconfig -a    
 ```
 
-Annotate the IP address indicated in the wlan0 interface. 
+Annotate the IP address for the wlan0 interface. 
 
-Run any SSH client software and go to such IP.
+Run any SSH client software to such IP.
 
-Enter credentials "user" and "password" as set in BASE_LINUX.md document.
+Enter credentials "user" and "password" as per document BASE_LINUX.md.
 
 ---
 Optional. Install DWService. Just copy-paste the following instructions.
@@ -40,7 +40,7 @@ sudo /home/pi/Downloads/dwagent.sh;
 
 ## Getting the installation tools
 
-Copy-n-paste the following to obtain the DDH Tools repository ``ddt``.
+Copy-n-paste the following to get the DDH Tools ``ddt``.
 
 ```console
 cd /home/pi;
@@ -66,25 +66,22 @@ minicom -D /dev/ttyUSB2 -b 115200
 AT+CVERSION
 ```
 
-If you see a year < 2022 in your answer, contact Lowell Instruments and we will do this for you.
+For a year < 2022 in the answer, contact Lowell Instruments and we will upgrade it.
 
 
 ## Post configuration
 
 Some additional useful things to do for better DDH behavior:
 
-- Edit file ```settings/config.toml``` with the project's credentials.
-- Disable ``xscreensaver``. Go to Rpi menu, click "Preferences" and "Screen Saver". Disable it.
-- Remove the Bluetooth and software updater icons from the panel.
-- Remove any unwanted wi-fi credentials left.
-- Replace DWS credentials if they come from a cloned DDH.
+- Edit file ```settings/config.toml``` with project's settings and credentials.
+- Go to Rpi menu, click "Preferences" and "Screen Saver". Disable it.
+- Remove the Bluetooth and software updater icons from the upper panel. Right-click on them.
 - Ensure ``juice4halt`` is running by checking existence of file:
 
 ``` console
 ls /home/pi/li/juice4halt/bin/j4h_halt_flag
 ```
 
-- Use the icons in the desktop to test your DDH installation.
 - Remember to edit the crontab with:
 
 ``` console
