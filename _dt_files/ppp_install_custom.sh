@@ -212,7 +212,8 @@ do
 
 			colored_echo "Installing or upgrading atcom if it is required..."
 
-			pip3 install -U atcom
+      # joaquim had to add flag --break-system-packages
+			pip3 install -U atcom --break-system-packages
 			if [[ $? -ne 0 ]]; then colored_echo "Process failed" ${RED}; exit 1; fi
 
 			source ~/.profile

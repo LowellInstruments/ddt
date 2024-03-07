@@ -46,12 +46,14 @@ function install_ddh {
     _e $? "cannot create virtualenv"
 
 
+
     _pb "[ 25% ] MAT library"
     rm -rf $F_CLONE_MAT 2> /dev/null
     git clone $GH_REPO_MAT $F_CLONE_MAT
     cp $F_CLONE_MAT/tools/_setup_wo_reqs.py $F_CLONE_MAT/setup.py
     "$VPIP" install $F_CLONE_MAT
     _e $? "cannot install MAT library"
+
 
 
     _pb " [39% ] DDH requirements"
@@ -68,7 +70,6 @@ function install_ddh {
     # todo: REMOVE BRANCH TOML here
     # ----------------------------------
     _pb "[ 40% ] DDH source code"
-    # todo: test this wheel thing
     rm -rf $F_CLONE_DDH 2> /dev/null
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install "$WHEEL_DBUS" && \
@@ -77,13 +78,13 @@ function install_ddh {
     _e $? "cannot install DDH"
 
 
+
     _pb "[ 90% ] setting and protecting file resolv.conf"
     sudo chattr -i /etc/resolv.conf && \
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf" && \
     sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf" && \
     sudo chattr +i /etc/resolv.conf
     _e $? "cannot install new resolv.conf"
-
 
 
     _pb "[ 100% ] install_ddh done"
