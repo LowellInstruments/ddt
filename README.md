@@ -8,9 +8,14 @@ Tools to install DDH. Don't manually run ```apt```. We take care of all.
 On a RPi3, do ```$ cat /proc/cpuinfo```. If rpi3, go to terminal and type:
 
 ```console
+# /boot/config.txt is a link to --> /boot/firmware/config.txt
 sudo nano /boot/config.txt
     # dtoverlay=vc4-fkms-v3d # ---> comment line to force old video driver
 ```
+
+Rpi3 might get stuck at boot and all you see is a black screen with a blinking cursor.
+
+Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen. SSH to it.
 
 ## Remote access
 
