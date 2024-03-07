@@ -5,27 +5,16 @@ Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 ## Special case of Raspberry Pi 3
 
-Rpi3 might get stuck at boot and all you see is a black screen with a blinking cursor.
+Old DDH with Rpi3 might get stuck at boot on a black screen with a blinking cursor.
 
-Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen. SSH to it.
+Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen.
 
-You can know if you are on a RPi3 by doing ```$ cat /proc/cpuinfo```. 
-
-You can know the arch of your OS by doing ```$ uname -m```. armv7l means 32 bits, aarch64 means 64 bits.
-
-If you are on a Rpi3 and your OS is 32-bits, go to terminal and type:
+SSH to such IP or open the disk somewhere else via USB on a computer. Edit the file ```/boot/config.txt```:
 
 ```console
-sudo nano /boot/config.txt
-    # dtoverlay=vc4-fkms-v3d # comment line to force old video driver
+    dtoverlay=vc4-fkms-v3d # ensure this line says fkms, not kms, in case of error, comment it
 ```
 
-If you are on a Rpi3 and your OS is 64-bits, go to terminal and type:
-
-```console
-sudo nano /boot/config.txt
-    dtoverlay=vc4-fkms-v3d # probably you need to add a "f" to the current line content (kms -> fkms)
-```
 
 ## Remote access
 
