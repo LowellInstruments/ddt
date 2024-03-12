@@ -3,19 +3,18 @@
 Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 
-## In case of Raspberry Pi 3
+## Special case of Raspberry Pi 3
 
-On a RPi3, do ```$ cat /proc/cpuinfo```. If rpi3, go to terminal and type:
+Old DDH with Rpi3 might get stuck at boot on a black screen with a blinking cursor.
+
+Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen.
+
+SSH to such IP or open the disk somewhere else via USB on a computer. Edit the file ```/boot/config.txt```:
 
 ```console
-# /boot/config.txt is a link to --> /boot/firmware/config.txt
-sudo nano /boot/config.txt
-    # dtoverlay=vc4-fkms-v3d # ---> comment line to force old video driver
+dtoverlay=vc4-fkms-v3d # ensure this line says fkms, not kms, in case of error, comment it
 ```
 
-Rpi3 might get stuck at boot and all you see is a black screen with a blinking cursor.
-
-Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen. SSH to it.
 
 ## Remote access
 
