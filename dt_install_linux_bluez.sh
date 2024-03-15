@@ -28,22 +28,21 @@ function install_bluez {
     rv=$?
     if [ $rv -eq 0 ]; then
         _pg "bluez already version 5.66"
-        return
+    else
+        _pb "bluez"
+        cd "$FOL_DDT"/_dt_files && \
+        wget -O bluez-5.66.tar.xz http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
+        _e $? "download bluez"
+        unxz bluez-5.66.tar.xz && \
+        tar xvf bluez-5.66.tar
+        _e $? "uncompress bluez"
+        cd bluez-5.66 && \
+        ./configure && \
+        make && \
+        sudo make install && \
+        rm -rf bluez-5.66*
+        _e $? "install bluez"
     fi
-
-    _pb "bluez"
-    cd "$FOL_DDT"/_dt_files && \
-    wget -O bluez-5.66.tar.xz http://www.kernel.org/pub/linux/bluetooth/bluez-5.66.tar.xz
-    _e $? "download bluez"
-    unxz bluez-5.66.tar.xz && \
-    tar xvf bluez-5.66.tar
-    _e $? "uncompress bluez"
-    cd bluez-5.66 && \
-    ./configure && \
-    make && \
-    sudo make install && \
-    rm -rf bluez-5.66*
-    _e $? "install bluez"
 }
 
 if [ "$1" == "force" ]; then install_bluez; fi
