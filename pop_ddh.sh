@@ -18,9 +18,7 @@ cp "$FOL_DDH"/settings/*.toml $FTS && \
 cp "$FOL_DDH"/scripts/script_logger_do_deploy_cfg.json $FTS
 _e $? "$_S"
 # might be there or not
-# todo > test this
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS
-_e $? "$_S"
 
 
 
@@ -44,9 +42,10 @@ _e $? "$_S"
 _S="[ POP ] ddh | un-stashing configuration files"
 _pb "$_S"
 cp $FTS/*.toml "$FOL_DDH"/settings && \
-cp $FTS/script_logger_do_deploy_cfg.json "$FOL_DDH"/scripts && \
-cp $FTS/db_his.json "$FOL_DDH"/ddh/db
+cp $FTS/script_logger_do_deploy_cfg.json "$FOL_DDH"/scripts
 _e $? "$_S"
+# might be there or not
+cp $FTS/db_his.json "$FOL_DDH"/ddh/db
 
 
 
