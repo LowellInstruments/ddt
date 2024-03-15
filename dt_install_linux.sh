@@ -51,9 +51,12 @@ function install_linux {
 
     # rc.local runs display brightness, NTP, juice4halt
     _pb 'rc.local'
-    sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local
-    sudo chmod +x /etc/rc.local
+    sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local && \
+    sudo chmod +x /etc/rc.local && \
     sudo systemctl enable rc-local
+
+
+    _pb 'is active rc.local'
     sudo systemctl is-active rc-local
     _e $? "rc.local"
 }
