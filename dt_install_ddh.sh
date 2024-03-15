@@ -61,7 +61,7 @@ function install_ddh {
     python3 --version | grep "3.11"
     rv=$?
     if [ $rv -eq 0 ]; then
-        DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_311_2023.txt
+        DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_311_2023_32b.txt
     fi
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
 
@@ -71,7 +71,7 @@ function install_ddh {
     # ----------------------------------
     _pb "[ 40% ] DDH source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
-    # todo ---> see if this is needed
+    # in 32-bit, dbus is already a wheel
     # "$VPIP" install "$WHEEL_DBUS" && \
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \

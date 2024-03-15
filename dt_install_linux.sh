@@ -54,7 +54,7 @@ function install_linux {
     sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local
     sudo chmod +x /etc/rc.local
     sudo systemctl enable rc-local
-    sudo systemctl status rc-local
+    sudo systemctl is-active rc-local
     _e $? "rc.local"
 }
 
