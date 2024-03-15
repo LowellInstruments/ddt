@@ -9,9 +9,11 @@ export FOL_VAN=$FOL_LI/venv_api
 export VPIP=$FOL_VEN/bin/pip
 export VPAP=$FOL_VAN/bin/pip
 export FOL_DDT=$FOL_LI/ddt
+
+# these 3 are the only ones at DDI time
 export EMOLT_FILE_FLAG=$FOL_LI/.ddt_this_is_emolt_box.flag
 export GROUPED_S3_FILE_FLAG=$FOL_LI/.ddt_this_box_has_grouped_s3_uplink.flag
-
+export GPS_EXTERNAL_FILE_FLAG=$FOL_LI/.ddt_gps_external.flag
 
 
 # 0 black, 1 red, 2 green, 3 yellow

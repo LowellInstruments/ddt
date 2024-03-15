@@ -20,6 +20,7 @@ function install_custom {
     _pb "removing custom flags"
     rm "$EMOLT_FILE_FLAG" 2> /dev/null
     rm "$GROUPED_S3_FILE_FLAG" 2> /dev/null
+    rm "$GPS_EXTERNAL_FILE_FLAG" 2> /dev/null
 
 
     read -rp "Set this DDH as emolt? (y/n) " choice
@@ -33,5 +34,12 @@ function install_custom {
     # how DDH groups files before S3 upload
     case "$choice" in
         y|Y ) touch "$GROUPED_S3_FILE_FLAG"; printf 'set grouped S3 OK\n';;
+    esac
+
+
+
+    read -rp "Set this DDH with external GPS puck? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$GPS_EXTERNAL_FILE_FLAG"; printf 'set GPS puck OK\n';;
     esac
 }
