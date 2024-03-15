@@ -47,7 +47,7 @@ _e $? "$_S"
 
 
 
-_S="[ POP ] ddh | installing Moana plugin from ddt folder"
+_S="[ POP ] ddh | updating DDT and installing Moana plugin from it"
 _pb "$_S"
 cd "$FOL_DDT" && \
 git reset --hard && \
