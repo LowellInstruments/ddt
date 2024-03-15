@@ -58,7 +58,7 @@ cd /home/pi/li/ddt;
 
 You just need to run ``./dt_install_all.sh``. 
 
-Any further installation tweak can be done running ``ddi``.
+Any further installation tweak can be done at a later time running ``ddi``.
 
 
 ## Cell shield firmware update
