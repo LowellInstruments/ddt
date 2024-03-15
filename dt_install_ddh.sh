@@ -72,7 +72,7 @@ function install_ddh {
     _pb "[ 40% ] DDH source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
-    "$VPIP" install "$WHEEL_DBUS" && \
+    # "$VPIP" install "$WHEEL_DBUS" && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
     _e $? "cannot install DDH"
