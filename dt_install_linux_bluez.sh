@@ -28,7 +28,7 @@ function install_bluez {
     rv=$?
     if [ $rv -eq 0 ]; then
         _pg "bluez already version 5.66"
-        exit 0
+        return
     fi
 
     _pb "bluez"
