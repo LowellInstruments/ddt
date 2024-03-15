@@ -15,7 +15,10 @@ rm -rf $FTS
 mkdir $FTS && \
 # TOML files: config.toml, all_macs.toml, rerun_flag.toml
 cp "$FOL_DDH"/settings/*.toml $FTS && \
-cp "$FOL_DDH"/scripts/script_logger_do_deploy_cfg.json $FTS && \
+cp "$FOL_DDH"/scripts/script_logger_do_deploy_cfg.json $FTS
+_e $? "$_S"
+# might be there or not
+# todo > test this
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS
 _e $? "$_S"
 
