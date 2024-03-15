@@ -7,7 +7,6 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-WHEEL_DBUS=$FOL_DDT/_dt_files/my_wheels/dbus_fast-2.21.1-cp311-cp311-manylinux_2_36_aarch64.whl
 
 
 function install_ddh {
@@ -71,8 +70,11 @@ function install_ddh {
     # ----------------------------------
     _pb "[ 40% ] DDH source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
-    # in 32-bit, dbus is already a wheel
-    # "$VPIP" install "$WHEEL_DBUS" && \
+
+
+
+    _pb "[ 41% ] DDH requirements"
+    # difficult ones: awscli, botocore, docutils, s3transfer
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
