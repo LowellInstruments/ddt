@@ -212,8 +212,16 @@ do
 
 			colored_echo "Installing or upgrading atcom if it is required..."
 
-      # joaquim had to add flag --break-system-packages
-			pip3 install -U atcom --break-system-packages
+      # joaquim had to add flag --break-system-packages for python 3.11
+      python3 --version | grep 3.9.2
+      rv=$?
+      if [ $rv -eq 0 ]; then
+          # everything was right on 3.9.2
+          pip3 install -U atcom
+      else
+          pip3 install -U atcom --break-system-packages
+      fi
+
 			if [[ $? -ne 0 ]]; then colored_echo "Process failed" ${RED}; exit 1; fi
 
 			source ~/.profile
