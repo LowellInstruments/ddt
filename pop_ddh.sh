@@ -33,7 +33,8 @@ _e $? "$_S"
 
 _S="[ POP ] ddh | pip installing extra requirements"
 _pb "$_S"
-pip install -r "$FOL_DDH"/requirements_rpi_39_2023_extra.txt
+source "$FOL_VEN"/bin/activate && \
+pip3 install -r "$FOL_DDH"/requirements_extra.txt
 _e $? "$_S"
 
 
