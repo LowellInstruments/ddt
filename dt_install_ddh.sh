@@ -56,25 +56,17 @@ function install_ddh {
 
 
     _pb " [39% ] DDH requirements"
-    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_rpi_39_2023.txt
-    python3 --version | grep "3.11"
-    rv=$?
-    if [ $rv -eq 0 ]; then
-        DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_311_2023_32b.txt
-    fi
+    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_p3_2023_32b.txt
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
 
 
-    # ----------------------------------
-    # todo: REMOVE BRANCH TOML here
-    # ----------------------------------
-    _pb "[ 40% ] DDH source code"
+    _pb "[ 40% ] DDH clone source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
 
 
 
     _pb "[ 41% ] DDH requirements"
-    # difficult ones: awscli, botocore, docutils, s3transfer
+    # todo: REMOVE BRANCH TOML here
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
