@@ -63,9 +63,12 @@ function install_vpn {
 
     if [ $is_rpi -eq 0 ]; then
         _pb "restarting wireguard service"
-        sudo systemctl enable wg-quick@wg0.service
+        sudo systemctl enable wg-quick@wg0.service && \
         sudo systemctl restart wg-quick@wg0.service
-        _pb "ensure wireguard service active"
+        _e $? "starting rc.local service"
+
+
+        _pb "is wireguard active"
         sudo systemctl is-active wg-quick@wg0.service
     fi
 }

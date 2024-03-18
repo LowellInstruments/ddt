@@ -8,4 +8,7 @@ sleep 1
 
 /home/pi/li/ddh/run_ddh.sh&
 
-
+# so it does not leave instantaneously
+read -r
+read -r
+read -r

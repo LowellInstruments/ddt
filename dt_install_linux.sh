@@ -54,11 +54,11 @@ function install_linux {
     sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local && \
     sudo chmod +x /etc/rc.local && \
     sudo systemctl enable rc-local
+    _e $? "starting rc.local"
 
 
-    _pb 'is active rc.local'
+    _pb "is rc.local active"
     sudo systemctl is-active rc-local
-    _e $? "rc.local"
 }
 
 if [ "$1" == "force" ]; then install_linux; fi

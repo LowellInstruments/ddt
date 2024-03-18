@@ -32,8 +32,11 @@ function install_service_sw_net {
     (sudo systemctl disable unit_switch_net.service || true) && \
     sudo systemctl enable unit_switch_net.service && \
     sudo systemctl start unit_switch_net.service
-    _e $? "switch net service"
-    systemctl status unit_switch_net.service
+    _e $? "starting switch net service"
+
+
+    _pb "is switch_net_service active"
+    systemctl is-active unit_switch_net.service
 }
 
 if [ "$1" == "force" ]; then install_service_sw_net; fi
