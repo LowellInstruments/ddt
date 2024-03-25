@@ -7,9 +7,7 @@ Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 Old DDH with Rpi3 might get stuck at boot on a black screen with a blinking cursor.
 
-Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen.
-
-SSH to the box, or either connecting the disk via USB to your computer, do the following:
+On a laptop, open the SSD disk with a USB reader and do the following:
 
 ```console
 sudo nano /boot/config.txt
@@ -17,6 +15,7 @@ sudo nano /boot/config.txt
     # dtoverlay=vc4-fkms-v3d # ---> comment this line to use old legacy video driver
 ```
 
+Be sure to save the file. 
 
 ## Remote access
 
