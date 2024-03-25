@@ -11,4 +11,5 @@ FO=/home/pi/li/ddt/_dt_files/usage_mem.log
 
 # when run via crontab, only once
 # */5 * * * * pi /home/pi/li/ddt/_dt_files/mem_log.sh
-top -bn 1 -o +%MEM | grep "load average" -A 9 | tee -a $FO
+top -bn 1 -o +%MEM | grep "load average" -A 20 | tee -a $FO
+echo | tee -a $FO
