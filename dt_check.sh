@@ -11,13 +11,17 @@ function install_check {
         exit 1
     fi
 
+    # get raspberry hardware version
+    grep "Pi 3" /proc/cpuinfo
+    is_rpi3=$?
 
-    grep 2023 /boot/issue.txt
-    rv=$?
-    if [ $rv -ne 0 ]; then
-        # example: Raspberry Pi reference 2023-05-03
-        _py "-----------------------------"
-        _py "warning: this DDH is not 2023"
-        _py "-----------------------------"
+    # get OS release version
+    grep "2023-05" /boot/issue.txt
+    is_202305=$?
+
+    # check bad combinations
+    if [ "$is_rpi3" -eq 0 ] && [ "$is_202305" -ne 0 ]; then
+        _pr "DDH can only run on raspberryos 202305 release for rpi3"
+        exit 1
     fi
 }
