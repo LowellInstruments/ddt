@@ -12,7 +12,6 @@ from datetime import datetime
 from enum import Enum
 from dds.emolt import (
     file_moana_raw_csv_to_emolt_zt_csv,
-    ddh_is_emolt_box,
     file_emolt_zt_csv_to_emolt_hl,
     file_emolt_hl_csv_to_dict_xc85,
 )
@@ -23,6 +22,8 @@ from utils.ddh_shared import (
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
+from utils.ddh_config import dds_get_cfg_flag_rbl_en
+
 
 
 VSP_RX_CHAR_UUID = "569a2001-b87f-490c-92cb-11ba5ea5167c"
@@ -405,7 +406,7 @@ class MoanaBle:
             # ----------------------------------
             # generates custom output CSV files
             # ----------------------------------
-            if ddh_is_emolt_box() or not linux_is_rpi():
+            if dds_get_cfg_flag_rbl_en() or not linux_is_rpi():
                 lg.a("emolt box detected, converting Moana CSV file to emolt format")
                 fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
                     self.offload_file_path, self.lat, self.lon
