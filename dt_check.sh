@@ -16,7 +16,7 @@ function install_check {
     is_rpi3=$?
 
     # get OS release version
-    grep "2023-05" /boot/issue.txt
+    grep "2023-05-03" /boot/issue.txt
     is_202305=$?
 
     # check bad combinations

@@ -9,10 +9,12 @@ Old DDH with Rpi3 might get stuck at boot on a black screen with a blinking curs
 
 Pressing ```ctrl + alt + F1``` should give you time to see the remote access IP on screen.
 
-SSH to such IP or open the disk somewhere else via USB on a computer. Edit the file ```/boot/config.txt```:
+SSH to the box, or either connecting the disk via USB to your computer, do the following:
 
 ```console
-dtoverlay=vc4-fkms-v3d # ensure this line says fkms, not kms, in case of error, comment it
+sudo nano /boot/config.txt
+    # dtoverlay=vc4-kms-v3d # ---> comment this line to use old legacy video driver
+    # dtoverlay=vc4-fkms-v3d # ---> comment this line to use old legacy video driver
 ```
 
 
