@@ -11,17 +11,19 @@ function install_check {
         exit 1
     fi
 
-    # get raspberry hardware version
+    # grep raspberry architecture, hardware version and OS version
+    arch | grep "armv7l"
+    is_arm7=$?
     grep "Pi 3" /proc/cpuinfo
     is_rpi3=$?
-
-    # get OS release version
     grep "2023-05-03" /boot/issue.txt
     is_202305=$?
 
     # check bad combinations
-    if [ "$is_rpi3" -eq 0 ] && [ "$is_202305" -ne 0 ]; then
-        _pr "DDH can only run on raspberryos 202305 release for rpi3"
-        exit 1
+    if [ "$is_rpi3" -eq 0 ]; then
+        if [ "$is_202305" -ne 0 ] || [ $is_arm7 -ne 0 ]; then
+            _pr "DDH can only run on raspberryos 202305 armv7l release for rpi3"
+            exit 1
+        fi
     fi
 }

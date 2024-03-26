@@ -3,23 +3,33 @@
 Tools to install DDH. Don't manually run ```apt```. We take care of all.
 
 
-## Special case of Raspberry Pi 3
+## Different Raspberry versions
 
-Old DDH with Rpi3 might get stuck at boot on a black screen with a blinking cursor.
+DDH based on Rpi3 runs on 32-bits kernel, raspberryOS release 2023-12-05. 
 
-On a laptop, open the SSD disk with a USB reader and do the following:
+DDH based on Rpi4 runs on 64-bits kernel, raspberryOS release 2024-03-15. 
+
+Rpi3 uses /boot/config.txt. Rpi4 uses /boot/firmware/config.txt.
+
+During the first boot, it might hang at boot on a black screen because of our 7-inch display.
+
+On a laptop, or via SSH, open the SSD disk with a USB reader and do the following:
 
 ```console
-sudo nano /boot/config.txt
+sudo nano /<proper_path>/config.txt
     # dtoverlay=vc4-kms-v3d # ---> comment this line to use old legacy video driver
-    # dtoverlay=vc4-fkms-v3d # ---> comment this line to use old legacy video driver
 ```
 
-Be sure to save the file. 
+On Rpi4, the touch screen fails because of Wayland. To use X11 use option A6 in:
+
+```console
+sudo raspi-config
+```
+
 
 ## Remote access
 
-Join your DDH to your wi-fi. Next, go to terminal and type:
+Join your DDH to your wi-fi. Next, use a keyboard and go to terminal and type:
 
 ```console
 ifconfig -a    
@@ -48,11 +58,7 @@ sudo /home/pi/Downloads/dwagent.sh;
 Copy-n-paste the following to get the DDH Tools ``ddt``.
 
 ```console
-cd /home/pi;
-mkdir li;
-cd li;
-git clone --branch toml https://github.com/lowellinstruments/ddt.git;
-cd /home/pi/li/ddt;
+
 ```
 
 ## Turning a raspberry into a DDH
