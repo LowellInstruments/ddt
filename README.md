@@ -1,17 +1,19 @@
 # DDH Tools | ddt
 
-Tools to install DDH. Don't manually run ```apt```. We take care of all.
+Tools to convert a Rpi into a DDH. Don't manually run ```apt```. We take care of all.
 
 
 ## Different Raspberry versions
 
-DDH based on Rpi3 runs on 32-bits kernel, raspberryOS release 2023-12-05. 
+Rpi3 can run on 32-bits kernel, [release 2023-05-03](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf.img.xz).
 
-DDH based on Rpi4 runs on 64-bits kernel, raspberryOS release 2024-03-15. 
+Rpi4 can run on 32-bits kernel, [release 2023-05-03](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf.img.xz).
 
-Rpi3 uses /boot/config.txt. Rpi4 uses /boot/firmware/config.txt.
+Rpi4 can also run on 64-bits kernel, [release 2024-03-15](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2024-03-15/2024-03-15-raspios-bookworm-armhf.img.xz) but this has not been tested in dept.
 
-During the first boot, it might hang at boot on a black screen because of our 7-inch display.
+32-bits kernel uses ```/boot/config.txt```. 64-bits kernel uses ```/boot/firmware/config.txt```.
+
+ONLY IN CASE it hangs during boot on a black screen, it might be because of 7-inch display driver. 
 
 On a laptop, or via SSH, open the SSD disk with a USB reader and do the following:
 
@@ -20,7 +22,7 @@ sudo nano /<proper_path>/config.txt
     # dtoverlay=vc4-kms-v3d # ---> comment this line to use old legacy video driver
 ```
 
-On Rpi4, the touch screen fails because of Wayland. To use X11 use option A6 in:
+On Rpi4 on 64-bits, the touch screen fails because of Wayland. Set X11 with option ```A6``` in:
 
 ```console
 sudo raspi-config
@@ -29,36 +31,23 @@ sudo raspi-config
 
 ## Remote access
 
-Join your DDH to your wi-fi. Next, use a keyboard and go to terminal and type:
+If you followed the steps in document BASE_LINUX.md your Rpi is in your wi-fi and can SSH to it.
 
-```console
-ifconfig -a    
-```
-
-Annotate the IP address for the wlan0 interface. 
-
-Run any SSH client software to such IP.
-
-Enter credentials "user" and "password" as per document BASE_LINUX.md.
-
----
-Optional. Install DWService. Just copy-paste the following instructions.
-
-```console
-cd /home/pi/Downloads;
-wget https://www.dwservice.net/download/dwagent.sh;
-chmod +x /home/pi/Downloads/dwagent.sh;
-sudo /home/pi/Downloads/dwagent.sh;
-```
----
+We will install another remote control tool, DWService, later.
 
 
-## Getting the installation tools
+## Getting the DDH installation tools
+
+This is the first step of converting a Rpi into a DDH.
 
 Copy-n-paste the following to get the DDH Tools ``ddt``.
 
 ```console
-
+cd /home/pi;
+mkdir li;
+cd li;
+git clone --branch toml https://github.com/lowellinstruments/ddt.git;
+cd /home/pi/li/ddt;
 ```
 
 ## Turning a raspberry into a DDH
