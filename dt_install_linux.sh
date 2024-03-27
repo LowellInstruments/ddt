@@ -27,7 +27,7 @@ function install_linux {
 
 
     # install stuff only on pure LI DDH such as wiringpi and juice4halt
-    if [ ! -f "$EMOLT_FILE_FLAG" ]; then
+    if [ ! -f "$DDH_USES_SHIELD_JUICE4HALT" ]; then
         _pb "juice4halt"
         # wiringpi is already going to be installed by ppp_install_standalone.sh
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb

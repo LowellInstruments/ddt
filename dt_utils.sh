@@ -10,10 +10,12 @@ export VPIP=$FOL_VEN/bin/pip
 export VPAP=$FOL_VAN/bin/pip
 export FOL_DDT=$FOL_LI/ddt
 
+
 # these 3 are the only ones at DDI time
-export EMOLT_FILE_FLAG=$FOL_LI/.ddt_this_is_emolt_box.flag
 export GROUPED_S3_FILE_FLAG=$FOL_LI/.ddt_this_box_has_grouped_s3_uplink.flag
 export GPS_EXTERNAL_FILE_FLAG=$FOL_LI/.ddt_gps_external.flag
+export DDH_USES_SHIELD_CELL=$FOL_LI/.ddt_cell_shield.flag
+export DDH_USES_SHIELD_JUICE4HALT=$FOL_LI/.ddt_j4h_shield.flag
 
 
 # 0 black, 1 red, 2 green, 3 yellow

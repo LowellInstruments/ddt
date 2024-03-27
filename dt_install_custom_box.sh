@@ -18,28 +18,34 @@ function install_custom {
 
 
     _pb "removing custom flags"
-    rm "$EMOLT_FILE_FLAG" 2> /dev/null
     rm "$GROUPED_S3_FILE_FLAG" 2> /dev/null
     rm "$GPS_EXTERNAL_FILE_FLAG" 2> /dev/null
-
-
-    read -rp "Set this DDH as emolt? (y/n) " choice
-    # affects dt_install_linux.sh /rc.local juice4halt, net switching service...
-    case "$choice" in
-        y|Y ) touch "$EMOLT_FILE_FLAG"; printf 'set emolt OK\n';;
-    esac
+    rm "$DDH_USES_SHIELD_CELL" 2> /dev/null
+    rm "$DDH_USES_SHIELD_JUICE4HALT" 2> /dev/null
 
 
     read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
     # how DDH groups files before S3 upload
     case "$choice" in
-        y|Y ) touch "$GROUPED_S3_FILE_FLAG"; printf 'set grouped S3 OK\n';;
+        y|Y ) touch "$GROUPED_S3_FILE_FLAG"; printf 'set grouped S3 flag OK\n';;
     esac
-
 
 
     read -rp "Set this DDH with external GPS puck? (y/n) " choice
     case "$choice" in
-        y|Y ) touch "$GPS_EXTERNAL_FILE_FLAG"; printf 'set GPS puck OK\n';;
+        y|Y ) touch "$GPS_EXTERNAL_FILE_FLAG"; printf 'set GPS puck flag OK\n';;
     esac
+
+
+    read -rp "Does this DDH use cell shield? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$DDH_USES_SHIELD_CELL"; printf 'set cell shield flag OK\n';;
+    esac
+
+
+    read -rp "Does this DDH use juice_for_halt shield? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
+    esac
+
 }

@@ -17,11 +17,9 @@ function install_service_sw_net {
 
     # LI switch_net_service only on pure DDH
     _pb "switch_net_service"
-    if [ -f "$EMOLT_FILE_FLAG" ]; then
-        read -rp "Will this emolt use net_switch_service? (y/n) " choice
-        case "$choice" in
-            n|N ) printf 'not installing service_sw_net'; return 0;;
-        esac
+    if [ ! -f "$DDH_USES_SHIELD_CELL" ]; then
+        printf 'not installing service_sw_net'
+        return 0
     fi
 
     # install the service
