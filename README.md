@@ -59,7 +59,7 @@ ls;
 
 The list of DDT scripts, in suggested order, comes next:
 
-- The ``./dt_install_custom_box.sh`` script customizes boxes with features such as eMolt or grouped AWS S3.
+- The ``./dt_install_custom_box.sh`` script customizes boxes with features such as eMolt (juice4halt) or grouped AWS S3.
 
 - The ``./dt_install_linux.sh`` script installs linux dependencies. Also takes care of custom ``rc.local``
 and features such as ``juice4halt``.
