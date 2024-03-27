@@ -412,12 +412,13 @@ class MoanaBle:
             # ----------------------------------
             # generates custom output CSV files
             # ----------------------------------
+            fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
+                self.offload_file_path, self.lat, self.lon
+            )
+            fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
+
+            # only if rockblocks
             if ctx.rbl_en:
-                lg.a("emolt box detected, converting Moana CSV file to emolt format")
-                fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
-                    self.offload_file_path, self.lat, self.lon
-                )
-                fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
                 x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
                 try:
                     ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
