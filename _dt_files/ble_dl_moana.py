@@ -406,13 +406,11 @@ class MoanaBle:
             # ----------------------------------
             # generates custom output CSV files
             # ----------------------------------
-            fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
-                self.offload_file_path, self.lat, self.lon
-            )
-            fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
-
-            # only if rockblocks
             if dds_get_cfg_flag_rbl_en() or not linux_is_rpi():
+                fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
+                    self.offload_file_path, self.lat, self.lon
+                )
+                fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
                 x85 = file_emolt_hl_csv_to_dict_xc85(fe_hl)
                 ms = rbl_build_emolt_msg_as_str(self.lat, self.lon, x85)
                 mb = rbl_hex_str_to_hex_bytes(ms)
