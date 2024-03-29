@@ -31,7 +31,6 @@ function install_alias {
     grep 'alias ddc' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
-        # todo: test this
         echo "alias ddc=\"/home/pi/li/ddh/run_ddc.sh\"" >> $F_RC
     fi
     grep 'alias ddi' $F_RC
