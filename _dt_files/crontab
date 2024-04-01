@@ -27,4 +27,5 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #*/5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_lxp.sh
 
 # todo ---> maybe call script_provision_auto?
+# todo ---> maybe call the script for DDH gpio buttons
 
