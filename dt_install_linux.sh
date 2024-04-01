@@ -22,7 +22,7 @@ function install_linux {
     libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
     libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev libopenblas-dev \
     libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build wireguard \
-    cmake
+    cmake xinput-calibrator
     _e $? "apt-get"
 
 
