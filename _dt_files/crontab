@@ -23,3 +23,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # this takes care of the DDH API
 #* * * * * pi /home/pi/li/ddt/_dt_files/crontab_api.sh
 
+# this takes care of the lxpanel bug
+#*/5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_lxp.sh
+
