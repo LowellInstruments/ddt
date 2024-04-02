@@ -66,7 +66,9 @@ function install_ddh {
 
 
     _pb "[ 41% ] DDH requirements"
+    # -----------------------------
     # todo: REMOVE BRANCH TOML here
+    # -----------------------------
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"

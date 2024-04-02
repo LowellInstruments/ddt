@@ -5,7 +5,7 @@ clear
 echo
 
 
-source dt_check.sh
+source dt_install_check.sh
 source dt_install_custom_box.sh
 source dt_install_linux.sh
 source dt_install_linux_bluez.sh

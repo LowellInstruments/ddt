@@ -27,3 +27,6 @@ function install_check {
         fi
     fi
 }
+
+if [ "$1" == "force" ]; then install_check; fi
+
