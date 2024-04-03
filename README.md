@@ -33,7 +33,7 @@ git clone --branch toml https://github.com/lowellinstruments/ddt.git;
 cd /home/pi/li/ddt;
 ```
 
-``Step 2) You should be in ``/home/pi/li/ddt`` at this point. Now, run the installer.
+``Step 2)`` You should be in ``/home/pi/li/ddt`` at this point. Run the installer with:
 
 ```console
 ./dt_install_all.sh
@@ -62,7 +62,6 @@ Please contact Lowell Instruments so we can help you get it updated with our ``d
 Some additional useful things to do for better DDH behavior:
 
 - ``Click menu / Preferences / Screen Saver``. Next to "mode", you can disable it. Use a mouse in case the drop-down does not open properly.
-- Remove the Bluetooth and software updater icons from the upper panel. Right-click on them.
+- Remove the Bluetooth and software updater icons from the upper panel. To do this, right-click on them.
 - ``Click menu / Preferences / mouse and keyboard settings / 500`` to slo down the requirements to double-click. 
-- Ensure ``juice4halt`` is running by checking existence of file:
 - You can now run the ``ddc`` tool to configure your DDH behavior.
