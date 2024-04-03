@@ -3,6 +3,13 @@
 Tools to convert a Rpi into a DDH. Don't manually run ```apt```. We take care of all.
 
 
+## Remote access
+
+If you followed the steps in document BASE_LINUX.md your Rpi is in your wi-fi and can SSH to it.
+
+We will install another remote control tool, DWService, later.
+
+
 ## Different Raspberry versions
 
 To know the architecture of your raspberrypi OS, just run ``arch`` in the terminal. ``armv7l`` indicates 32-bits and ``aarch64`` indicates 64-bits.
@@ -29,13 +36,6 @@ On Rpi4 on 64-bits, the touch screen fails because of Wayland. Set X11 with opti
 ```console
 sudo raspi-config
 ```
-
-
-## Remote access
-
-If you followed the steps in document BASE_LINUX.md your Rpi is in your wi-fi and can SSH to it.
-
-We will install another remote control tool, DWService, later.
 
 
 ## Getting the DDH installation tools
