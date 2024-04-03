@@ -42,7 +42,7 @@ sudo raspi-config
 
 This is the first step of converting a Rpi into a DDH.
 
-Copy-n-paste the following to get the DDH Tools ``ddt``.
+Copy-n-paste the following to get the DDH Tools ``ddt``. This can be considered the DDH installer.
 
 ```console
 cd /home/pi;
