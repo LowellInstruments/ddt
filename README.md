@@ -77,7 +77,8 @@ AT+CVERSION
 
 Alternative 
 ```console
-echo -ne "AT+CVERSION\r" > /dev/ttyUSB2
+echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 \
+cat -v /dev/ttyUSB2
 ```
 
 For a year < 2022 in the answer, contact Lowell Instruments. 
