@@ -2,10 +2,9 @@
 source dt_utils.sh
 
 
-# --------------------------------------------------
-# creates flags that other installers rely upon
-# also affects global file upload behavior
-# --------------------------------------------------
+# ---------------------------------------------------
+# CREATES flags that tools such as DDC read and write
+# ----------------------------------------------------
 
 function install_custom {
     title dt_install_custom_box
@@ -22,6 +21,8 @@ function install_custom {
     rm "$GPS_EXTERNAL_FILE_FLAG" 2> /dev/null
     rm "$DDH_USES_SHIELD_CELL" 2> /dev/null
     rm "$DDH_USES_SHIELD_JUICE4HALT" 2> /dev/null
+    rm "$DDH_USES_SHIELD_SAILOR" 2> /dev/null
+
 
 
     read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
@@ -46,6 +47,12 @@ function install_custom {
     read -rp "Does this DDH use juice_for_halt shield? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
+    esac
+
+
+    read -rp "Does this DDH use sailor hat shield? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
     esac
 
 }
