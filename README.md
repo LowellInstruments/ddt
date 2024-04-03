@@ -57,7 +57,7 @@ cd /home/pi/li/ddt;
 The installer will end up and leave you in the proper directory, which is ```/home/pi/li/ddt```. Run:
 
 ```console
-$ ./dt_install_all.sh
+./dt_install_all.sh
 ```` 
 
 Any further installation tweak can be done at a later time running ``ddi``.
