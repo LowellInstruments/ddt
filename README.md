@@ -68,21 +68,18 @@ reboot
 
 ## Cell shield firmware update
 
-Now, check you have the proper cell shield firmware. Old cell shield firmware may be from 2017 or 2019.
+Now, check you have the proper cell shield firmware. If the cell shield firmware is from 2017 or 2019, it is outdated. Please contact Lowell Instruments so we can help you get it updated with our ```ddt_quectel``` tools.
 
 ```console
 echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
 cat -v /dev/ttyUSB2
 ```
 
-For a year < 2022 in the answer, contact Lowell Instruments so it can be updated with their ```ddt_quectel``` tools.
-
 
 ## Post configuration
 
 Some additional useful things to do for better DDH behavior:
 
-- Edit file ```settings/config.toml``` with project's settings and credentials.
 - Go to Rpi menu, click "Preferences" and "Screen Saver". Disable it.
 - Remove the Bluetooth and software updater icons from the upper panel. Right-click on them.
 - Ensure ``juice4halt`` is running by checking existence of file:
