@@ -54,6 +54,8 @@ cd /home/pi/li/ddt;
 
 ## Turning a raspberry into a DDH
 
+The installer will end up and leave you in the proper directory, which is ```/home/pi/li/ddt```.
+
 You just need to run ``./dt_install_all.sh``. 
 
 Any further installation tweak can be done at a later time running ``ddi``.
