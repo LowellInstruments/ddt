@@ -68,22 +68,14 @@ reboot
 
 ## Cell shield firmware update
 
-Old cell shield firmware may be from 2017 or 2019.
+Now, check you have the proper cell shield firmware. Old cell shield firmware may be from 2017 or 2019.
 
-```console
-minicom -D /dev/ttyUSB2 -b 115200
-AT+CVERSION
-```
-
-Alternative 
 ```console
 echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
 cat -v /dev/ttyUSB2
 ```
 
-For a year < 2022 in the answer, contact Lowell Instruments. 
-
-We will upgrade it using our ```ddt_quectel``` tools.
+For a year < 2022 in the answer, contact Lowell Instruments so it can be updated with their ```ddt_quectel``` tools.
 
 
 ## Post configuration
