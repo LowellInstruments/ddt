@@ -5,6 +5,8 @@ Tools to convert a Rpi into a DDH. Don't manually run ```apt```. We take care of
 
 ## Different Raspberry versions
 
+To know the architecture of your raspberrypi OS, just run ``arch`` in the terminal. ``armv7l`` indicates 32-bits and ``aarch64`` indicates 64-bits.
+
 Rpi3 can run on 32-bits kernel, [release 2023-05-03](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf.img.xz).
 
 Rpi4 can run on 32-bits kernel, [release 2023-05-03](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf.img.xz).
