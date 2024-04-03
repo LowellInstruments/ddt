@@ -60,8 +60,11 @@ The installer will end up and leave you in the proper directory, which is ```/ho
 ./dt_install_all.sh
 ```` 
 
-The previous command will take about 15 minutes. Any further installation tweak can be done at a later time running ``ddi``.
+The previous command will take about 15 minutes. Now reboot the DDH with:
 
+```console
+reboot
+```` 
 
 ## Cell shield firmware update
 
