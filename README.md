@@ -72,6 +72,11 @@ minicom -D /dev/ttyUSB2 -b 115200
 AT+CVERSION
 ```
 
+Alternative 
+```console
+echo -ne "AT+CVERSION\r" > /dev/ttyUSB2
+```
+
 For a year < 2022 in the answer, contact Lowell Instruments. 
 
 We will upgrade it using our ```ddt_quectel``` tools.
