@@ -17,12 +17,13 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 # *  *  *  *  * user-name command to be executed
 
 
-# this crontab takes care of
+# ------------------------------------------
+# this crontab takes care of:
 #     - run_ddh.sh and run_dds.sh
 #     - DDH API
 #     - lxpanel bug
+# ------------------------------------------
 #* * * * * pi /home/pi/li/ddt/_dt_files/crontab_ddh.sh
-#* * * * * pi /home/pi/li/ddt/_dt_files/crontab_api.sh
-#*/5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_lxp.sh
+* * * * * pi /home/pi/li/ddt/_dt_files/crontab_api.sh
+*/5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_lxp.sh
 # todo ---> maybe call script_provision_auto?
-# todo ---> maybe call the script for DDH gpio buttons

@@ -25,8 +25,8 @@ function install_custom {
 
 
 
-    read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
     # how DDH groups files before S3 upload
+    read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$GROUPED_S3_FILE_FLAG"; printf 'set grouped S3 flag OK\n';;
     esac
@@ -50,9 +50,12 @@ function install_custom {
     esac
 
 
-    read -rp "Does this DDH use sailor hat shield? (y/n) " choice
-    case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
-    esac
+    # omit if we already know we are using J4H
+    if [ "$choice" != 'y' ] && [ "$choice" != 'Y' ]; then
+        read -rp "Does this DDH use sailor hat shield? (y/n) " choice
+        case "$choice" in
+            y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
+        esac
+    fi
 
 }
