@@ -63,5 +63,6 @@ Some additional useful things to do for better DDH behavior:
 
 - ``Click menu / Preferences / Screen Saver``. Next to "mode", you can disable it. Use a mouse in case the drop-down does not open properly.
 - Remove the Bluetooth and software updater icons from the upper panel. To do this, right-click on them.
-- ``Click menu / Preferences / mouse and keyboard settings / 500`` to slo down the requirements to double-click. 
-- You can now run the ``ddc`` tool to configure your DDH behavior.
+- ``Click menu / Preferences / mouse and keyboard settings / 500`` to slo down the requirements to double-click.
+- ``Click menu / Preferences > Raspberry Pi Configuration > Localisation > Timezone`` to set your timezone.
+- Run the ``ddc`` tool to make sure all the configuration is OK.
