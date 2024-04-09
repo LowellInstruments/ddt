@@ -11,6 +11,7 @@ source dt_install_linux.sh
 source dt_install_linux_bluez.sh
 source dt_install_ddh.sh
 source dt_install_api.sh
+source dt_install_ddb.sh
 source dt_install_alias.sh
 source dt_install_icons.sh
 source dt_install_crontab.sh
@@ -26,6 +27,7 @@ install_linux && \
 install_bluez && \
 install_ddh && \
 install_api && \
+install_ddb && \
 install_alias && \
 install_icons && \
 install_crontab && \
