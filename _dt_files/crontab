@@ -26,5 +26,4 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #* * * * * pi /home/pi/li/ddt/_dt_files/crontab_ddh.sh
 * * * * * pi /home/pi/li/ddt/_dt_files/crontab_api.sh
 */5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_lxp.sh
-*/5 * * * * pi /home/pi/li/ddt/_dt_files/crontab_gpq.sh
 # todo ---> maybe call script_provision_auto?
