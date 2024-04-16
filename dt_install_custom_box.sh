@@ -92,9 +92,15 @@ function install_custom {
         _pb 'modifying sailor_hat settings'
         vv=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
         c_sailor_p=/usr/local/lib/shrpid/lib/python"$vv"/site-packages/shrpi/const.py
-        cp _dt_files/sailor_const.py "$c_sailor_p"
+        sudo cp "$FOL_DDT"/_dt_files/sailor_const.py "$c_sailor_p"
         _e $? "sailor_hat modifying settings"
 
+
+        _pb "checking sailor_hat service active"
+        systemctl enable shrpid
+        systemctl start shrpid
+        systemctl is-active shrpid.service | grep -w active
+        _e $? "sailor_hat service NOT active"
     fi
 
 }
