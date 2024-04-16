@@ -3,9 +3,6 @@ source dt_utils.sh
 
 
 
-J4H="$FOL_LI"/juice4halt
-
-
 function install_linux {
     title dt_install_linux
 
@@ -24,18 +21,6 @@ function install_linux {
     libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build wireguard \
     cmake xinput-calibrator
     _e $? "apt-get"
-
-
-    # install stuff only on pure LI DDH such as wiringpi and juice4halt
-    if [ ! -f "$DDH_USES_SHIELD_JUICE4HALT" ]; then
-        _pb "juice4halt"
-        # wiringpi is already going to be installed by ppp_install_standalone.sh
-        # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
-        sudo rm -rf "$J4H"
-        mkdir -p "$J4H"/bin
-        cp "$FOL_DDT"/_dt_files/shutdown_script.py "$J4H"/bin/
-        _e $? "juice4halt"
-    fi
 
 
     _pb 'apt-get clean'
