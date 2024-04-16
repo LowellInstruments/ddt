@@ -16,9 +16,13 @@ function install_check {
     is_202209=$?
     grep "2023-05-03" /boot/issue.txt
     is_202305=$?
+    grep "2024-03-15" /boot/issue.txt
+    is_202403=$?
 
     # check bad combinations
-    if [ "$is_202209" -ne 0 ] && [ "$is_202305" -ne 0 ]; then
+    if [ "$is_202209" -ne 0 ] && \
+       [ "$is_202305" -ne 0 ] && \
+       [ "$is_202403" -ne 0 ]; then
         _pr "DDH detected unknown raspberryOS edition"
         exit 1
     fi
