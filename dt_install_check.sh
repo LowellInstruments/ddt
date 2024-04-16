@@ -26,6 +26,9 @@ function install_check {
         _pr "DDH detected unknown raspberryOS edition"
         exit 1
     fi
+
+    # show architecture
+    arch
 }
 
 if [ "$1" == "force" ]; then install_check; fi
