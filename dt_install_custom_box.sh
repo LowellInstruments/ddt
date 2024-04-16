@@ -97,9 +97,9 @@ function install_custom {
 
 
         _pb "checking sailor_hat service active"
-        systemctl enable shrpid
-        systemctl start shrpid
-        systemctl is-active shrpid.service | grep -w active
+        sudo systemctl enable shrpid
+        sudo systemctl start shrpid
+        sudo systemctl is-active shrpid.service | grep -w active
         _e $? "sailor_hat service NOT active"
     fi
 
