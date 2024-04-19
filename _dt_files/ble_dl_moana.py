@@ -163,10 +163,13 @@ class MoanaBle:
 
     async def disconnect(self):
         if self.cli and self.cli.is_connected:
-            self.mac = ""
-            print("Disconnecting")
-            await self.packet_write(".")
-            await self.cli.disconnect()
+            try:
+                self.mac = ""
+                print("Disconnecting")
+                await self.packet_write(".")
+                await self.cli.disconnect()
+            except (Exception, ) as ex:
+                print(f'patch: moana bug {ex}')
 
     async def authenticate(self):
         print("Authenticating")
