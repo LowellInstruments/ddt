@@ -33,11 +33,19 @@ function install_alias {
     if [ $rv -ne 0 ]; then
         echo "alias ddc=\"/home/pi/li/ddh/run_ddc.sh\"" >> $F_RC
     fi
+
+    grep 'alias ddp' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        echo "alias ddp=\"/home/pi/li/ddh/run_ddp.sh\"" >> $F_RC
+    fi
+
     grep 'alias ddi' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
         echo "alias ddi=\"$F_IN/cm /etc/cmi.conf\"" >> $F_RC
     fi
+
     grep 'alias ddu' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
