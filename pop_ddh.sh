@@ -59,4 +59,13 @@ cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds && \
 _e $? "$_S"
 
 
+
+_S="[ POP ] ddh | renaming pyca scripts"
+_pb "$_S"
+# we don't care the architecture here, only when we call them from main_ddp
+mv "$FOL_DDH/scripts/main_brt_armv7l.pyca" "$FOL_DDH/scripts/main_brt_armv7l.pyc"
+mv "$FOL_DDH/scripts/main_nadv_armv7l.pyca" "$FOL_DDH/scripts/main_nadv_armv7l.pyc"
+
+
+
 _pg "[ POP ] ddh | done OK!"
