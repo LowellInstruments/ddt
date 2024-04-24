@@ -11,7 +11,6 @@ function install_bluez {
 
 
     # this seems to minimize the number of BLE hardware errors
-    # todo ---> test Pi 4 also need this?
     grep "aspberry Pi 3" /proc/cpuinfo
     rv=$?
     if [ $rv -eq 0 ]; then
