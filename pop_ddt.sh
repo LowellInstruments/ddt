@@ -18,6 +18,12 @@ cd "$FOL_DDT" && ./dt_install_alias.sh force
 _e $? "$_S"
 
 
+_S="[ POP ] ddt | sourcing bashrc"
+_pb "$_S"
+source /home/pi/.bashrc
+_e $? "$_S"
+
+
 
 _pb "[ POP ] ddt | done OK!"
 
