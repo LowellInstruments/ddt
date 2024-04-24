@@ -56,7 +56,7 @@ function install_ddh {
 
 
     _pb " [39% ] DDH requirements"
-    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements_p3_2023_32b.txt
+    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements.txt
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
 
 
