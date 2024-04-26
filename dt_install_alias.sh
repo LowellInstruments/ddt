@@ -53,6 +53,21 @@ function install_alias {
     fi
     sudo chmod +x $F_IN/cm
     _e $? "install alias"
+
+
+    # not used very often: alias edit configuration
+    grep 'alias aec' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        echo "alias aec=\"nano $FOL_DDH/settings/config.toml\"" >> $F_RC
+    fi
+
+    # not used very often: alias edit crontab
+    grep 'alias aet' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        echo "alias aet=\"sudo nano /etc/crontab\"" >> $F_RC
+    fi
 }
 
 

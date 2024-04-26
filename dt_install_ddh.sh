@@ -73,6 +73,11 @@ function install_ddh {
     _e $? "cannot install DDH"
 
 
+    _pb "[ 41% ] DDH config.toml template file"
+    cp "$FOL_DDH"/settings/config_template.toml "$FOL_DDH"/settings/config.toml
+    _e $? "cannot copy config.toml template file"
+
+
 
     _pb "[ 90% ] setting and protecting file resolv.conf"
     sudo chattr -i /etc/resolv.conf && \
