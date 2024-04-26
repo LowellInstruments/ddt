@@ -12,6 +12,7 @@ function install_icons {
 
     cp "$FOL_DDT"/_dt_files/crontab_ddh.sh /home/pi/Desktop/DDH.sh
     cp "$FOL_DDT"/_dt_files/run_ddc_from_desktop.sh /home/pi/Desktop/DDC.sh
+    cp "$FOL_DDT"/_dt_files/run_ddp_from_desktop.sh /home/pi/Desktop/DDP.sh
     _e $? "install_icons"
 }
 
