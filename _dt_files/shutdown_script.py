@@ -17,6 +17,7 @@ import os
 
 
 print("Starting up j4h interface")
+os.system("rm -f /home/pi/li/juice4halt/bin/j4h_halt_flag")
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(25, GPIO.OUT)
 GPIO.output(25, GPIO.LOW)
@@ -37,7 +38,6 @@ while pinval == 1:
 print("power lost")
 GPIO.setup(25, GPIO.OUT)
 GPIO.output(25, GPIO.LOW)
-os.system("rm -f /home/pi/li/juice4halt/bin/j4h_halt_flag")
 os.system("touch /home/pi/li/juice4halt/bin/j4h_halt_flag")
 time.sleep(2)
 os.system("sudo halt")
