@@ -54,22 +54,25 @@ function install_alias {
     sudo chmod +x $F_IN/cm
     _e $? "install alias"
 
+    # ---------------------
+    # not used very often
+    # ---------------------
 
-    # not used very often: alias configuration edit
+    # alias configuration edit
     grep 'alias ace' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
         echo "alias aec=\"nano $FOL_DDH/settings/config.toml\"" >> $F_RC
     fi
 
-    # not used very often: alias configuration see
+    # alias configuration see
     grep 'alias acs' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
         echo "alias acs=\"cat $FOL_DDH/settings/config.toml\"" >> $F_RC
     fi
 
-    # not used very often: alias cronTab edit
+    # alias cronTab edit
     grep 'alias ate' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
