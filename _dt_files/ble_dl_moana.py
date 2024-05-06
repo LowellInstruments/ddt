@@ -22,7 +22,8 @@ from utils.ddh_shared import (
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
-from utils.ddh_config import dds_get_cfg_flag_rbl_en
+from utils.ddh_config import (dds_get_cfg_flag_rbl_en,
+                              dds_get_cfg_flag_download_test_mode)
 
 
 
@@ -212,6 +213,9 @@ class MoanaBle:
             print("csv approx. file size", self.offload_file_size)
             print(f"Offloading to file: {self.offload_file_name}")
             try:
+                # todo ---> test this
+                if dds_get_cfg_flag_download_test_mode():
+                    self.offload_file_name = 'testmode_' + self.offload_file_name
                 self.offload_file_path = str(
                     pathlib.Path(self.offload_file_folder) / self.offload_file_name
                 )
