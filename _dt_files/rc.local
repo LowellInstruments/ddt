@@ -26,6 +26,11 @@ if [ -f $DDH_USES_SHIELD_JUICE4HALT ]; then
 fi
 
 
+# --------------------------------------------------------
+# sailorhat instead, it boots as a service automatically
+# --------------------------------------------------------
+
+
 echo 'RC_LOCAL -> asserting RPi NTP true'
 sudo timedatectl set-ntp true
 

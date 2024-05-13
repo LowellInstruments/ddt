@@ -19,7 +19,7 @@ function install_linux {
     libgdal-dev libproj-dev proj-data proj-bin python3-gdbm python3-venv \
     libcurl4-gnutls-dev gnutls-dev python3-pycurl libdbus-1-dev libopenblas-dev \
     libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build wireguard \
-    cmake xinput-calibrator
+    cmake xinput-calibrator x11-utils
     _e $? "apt-get"
 
 
@@ -34,7 +34,7 @@ function install_linux {
     pcmanfm --set-wallpaper "$FOL_DDT"/_dt_files/wp_ddh.jpg
 
 
-    # rc.local runs display brightness, NTP, juice4halt
+    # rc.local runs display brightness, NTP, juice4halt, sailorhat
     _pb 'rc.local'
     sudo cp "$FOL_DDT"/_dt_files/rc.local /etc/rc.local && \
     sudo chmod +x /etc/rc.local && \

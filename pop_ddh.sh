@@ -64,11 +64,9 @@ _S="[ POP ] ddh | renaming pyca scripts"
 _pb "$_S"
 if [ $(arch) = "armv7l" ]; then
     cp "$FOL_DDH/scripts/main_brt_armv7l.pyca" "$FOL_DDH/scripts/main_brt.pyc"
-    cp "$FOL_DDH/scripts/main_nadv_armv7l.pyca" "$FOL_DDH/scripts/main_nadv.pyc"
 fi
 if [ $(arch) = "aarch64" ]; then
     cp "$FOL_DDH/scripts/main_brt_aarch64.pyca" "$FOL_DDH/scripts/main_brt.pyc"
-    cp "$FOL_DDH/scripts/main_nadv_aarch64.pyca" "$FOL_DDH/scripts/main_nadv.pyc"
 fi
 
 
