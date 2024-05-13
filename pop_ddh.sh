@@ -9,6 +9,14 @@ clear
 FTS=/tmp/ddh_stash
 
 
+_S="[ POP ] ddh | updating DDT"
+_pb "$_S"
+cd "$FOL_DDT" && \
+git reset --hard && \
+git pull
+_e $? "$_S"
+
+
 _S="[ POP ] ddh | stashing configuration files"
 _pb "$_S"
 rm -rf $FTS
@@ -52,10 +60,7 @@ cp $FTS/db_his.json "$FOL_DDH"/ddh/db
 
 _S="[ POP ] ddh | updating DDT and installing Moana plugin from it"
 _pb "$_S"
-cd "$FOL_DDT" && \
-git reset --hard && \
-git pull && \
-cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds && \
+cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds
 _e $? "$_S"
 
 

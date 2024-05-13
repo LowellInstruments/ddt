@@ -218,6 +218,9 @@ class MoanaBle:
             print("csv approx. file size", self.offload_file_size)
             print(f"Offloading to file: {self.offload_file_name}")
             try:
+                # todo ---> test this
+                if dds_get_cfg_flag_download_test_mode():
+                    self.offload_file_name = 'testmode_' + self.offload_file_name
                 self.offload_file_path = str(
                     pathlib.Path(self.offload_file_folder) / self.offload_file_name
                 )
