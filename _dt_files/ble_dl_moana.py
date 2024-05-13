@@ -23,14 +23,12 @@ from dds.emolt import (
     file_emolt_zt_csv_to_emolt_hl,
     file_emolt_hl_csv_to_dict_xc85,
 )
-from dds.rbl import rbl_build_emolt_msg_as_str, rbl_gen_file, rbl_hex_str_to_hex_bytes
-from mat.utils import linux_is_rpi
 from utils.ddh_shared import (
     create_folder_logger_by_mac
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
-from utils.ddh_config import dds_get_cfg_flag_rbl_en
+from utils.ddh_config import dds_get_cfg_box_project
 
 
 
