@@ -75,4 +75,9 @@ if [ $(arch) = "aarch64" ]; then
 fi
 
 
+_S="[ POP ] ddh | killing API ddh, should restart automatically"
+_pb "$_S"
+killall main_api
+
+
 _pg "[ POP ] ddh | done OK!"
