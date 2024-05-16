@@ -80,4 +80,13 @@ _pb "$_S"
 killall main_api
 
 
+_S="[ POP ] ddh | killing all DDH"
+_pb "$_S"
+killall main_dds_controller
+killall main_ddh_controller
+killall main_dds
+killall main_ddh
+
+
+
 _pg "[ POP ] ddh | done OK!"
