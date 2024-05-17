@@ -65,16 +65,6 @@ _e $? "$_S"
 
 
 
-_S="[ POP ] ddh | renaming pyca scripts"
-_pb "$_S"
-if [ $(arch) = "armv7l" ]; then
-    cp "$FOL_DDH/scripts/main_brt_armv7l.pyca" "$FOL_DDH/scripts/main_brt.pyc"
-fi
-if [ $(arch) = "aarch64" ]; then
-    cp "$FOL_DDH/scripts/main_brt_aarch64.pyca" "$FOL_DDH/scripts/main_brt.pyc"
-fi
-
-
 _S="[ POP ] ddh | killing API ddh, should restart automatically"
 _pb "$_S"
 killall main_api
