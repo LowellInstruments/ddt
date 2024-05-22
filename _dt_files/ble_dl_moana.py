@@ -28,9 +28,7 @@ from utils.ddh_shared import (
 )
 from utils.logs import lg_dds as lg
 from mat.ble.ble_mat_utils import ble_mat_progress_dl
-from utils.ddh_config import dds_get_cfg_box_project
-
-
+from utils.ddh_config import dds_get_cfg_box_project, dds_get_cfg_flag_download_test_mode
 
 VSP_RX_CHAR_UUID = "569a2001-b87f-490c-92cb-11ba5ea5167c"
 VSP_TX_CHAR_UUID = "569a2000-b87f-490c-92cb-11ba5ea5167c"
