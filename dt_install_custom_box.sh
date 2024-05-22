@@ -112,5 +112,7 @@ function install_custom {
         sudo systemctl is-active shrpid.service | grep -w active
         _e $? "sailor_hat service NOT active"
     fi
-
 }
+
+if [ "$1" == "force" ]; then install_custom; fi
+
