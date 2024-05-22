@@ -220,7 +220,7 @@ class MoanaBle:
             try:
                 # todo ---> test this
                 if dds_get_cfg_flag_download_test_mode():
-                    self.offload_file_name = 'testmode_' + self.offload_file_name
+                    self.offload_file_name = 'testfile_' + self.offload_file_name
                 self.offload_file_path = str(
                     pathlib.Path(self.offload_file_folder) / self.offload_file_name
                 )
