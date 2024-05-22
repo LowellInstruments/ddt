@@ -82,10 +82,11 @@ function install_custom {
     SAH="$FOL_LI"/sailorhat
     if [ -f "$DDH_USES_SHIELD_SAILOR" ]; then
         _pb "shield sailor_hat, please enter answers as follows"
-        _pb "    - enable on-board RTC"
-        _pb "    - disable CAN interface"
-        _pb "    - disable RS485 interface"
-        _pb "    - disable MAX-M8Q GNSS interface"
+        _pb "    - enable the first one, on-board RTC"
+        _pb "    - disable or skip the rest:"
+        _pb "            - CAN interface"
+        _pb "            - RS485 interface"
+        _pb "            - MAX-M8Q GNSS interface"
         _pb
         read -r
         sudo rm -rf "$J4H"
