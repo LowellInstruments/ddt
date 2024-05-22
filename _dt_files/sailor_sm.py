@@ -31,12 +31,14 @@ async def run_state_machine(
         elif state == "OK":
             if dcin_voltage < blackout_voltage_limit:
                 logger.warning("Detected blackout")
-                blackout_time = time.time()
-                state = "BLACKOUT"
-
                 # added by Lowell Instruments
-                os.system('/home/pi/li/sailorhat/popup_sah.sh &')
-
+                time.sleep(1)
+                if dcin_voltage < blackout_voltage_limit:
+                    os.system('/home/pi/li/sailorhat/popup_sah.sh &')
+                    blackout_time = time.time()
+                    state = "BLACKOUT"
+                else:
+                    state = "OK"
         elif state == "BLACKOUT":
             if dcin_voltage > blackout_voltage_limit:
                 logger.info("Power resumed")
