@@ -87,6 +87,15 @@ function install_ddh {
     _e $? "cannot install new resolv.conf"
 
 
+
+
+    _pb "[ 95% ] installing closed-source moana plugin"
+    cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds
+    _e $? "cannot install closed-source moana plugin"
+
+
+
+
     _pb "[ 100% ] install_ddh done"
 }
 
