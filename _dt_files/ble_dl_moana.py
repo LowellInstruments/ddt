@@ -20,8 +20,6 @@ from datetime import datetime
 from enum import Enum
 from dds.emolt import (
     file_moana_raw_csv_to_emolt_zt_csv,
-    file_emolt_zt_csv_to_emolt_hl,
-    file_emolt_hl_csv_to_dict_xc85,
 )
 from utils.ddh_shared import (
     create_folder_logger_by_mac
@@ -420,8 +418,6 @@ class MoanaBle:
                 fe_zt = file_moana_raw_csv_to_emolt_zt_csv(
                     self.offload_file_path, self.lat, self.lon
                 )
-                fe_hl = file_emolt_zt_csv_to_emolt_hl(fe_zt, logger_type="moana")
-
 
             # Lowell files always generated, needed for graphing
             lg.a("converting file to LI format")
