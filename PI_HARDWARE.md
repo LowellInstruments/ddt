@@ -17,7 +17,9 @@ sudo nano /<proper_path>/config.txt
     # dtoverlay=vc4-kms-v3d # ---> comment this line to use old legacy video driver
 ```
 
-Additionally, in case of Rpi4 64-bits, the touch screen fails because of Wayland. Set X11 with option ```A6``` in:
+Additionally, in case of Rpi4 64-bits, the touch screen fails because of Wayland. 
+
+Set X11 with option ```6 / A6``` in:
 
 ```console
 sudo raspi-config

@@ -18,6 +18,8 @@ source dt_install_dws.sh
 source dt_install_ppp.sh
 source dt_install_service_sw_net.sh
 source dt_install_fw_cell_shield.sh
+source dt_install_display_calib.sh
+
 
 if [ "$1" == "skip_ppp" ]; then
     install_check && \
@@ -48,3 +50,14 @@ else
     install_service_sw_net && \
     install_fw_cell_shield
 fi
+
+
+if [ "$(arch)" == "aarch64" ]; then
+    install_display_calib
+fi
+
+
+# so we don't try to run DDH / DDS right after install
+# because it will fail because cell stuff needs a reboot
+touch "$LI_DDH_NEEDS_REBOOT_POST_INSTALL"
+

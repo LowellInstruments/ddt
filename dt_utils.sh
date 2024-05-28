@@ -17,6 +17,8 @@ export GPS_EXTERNAL_FILE_FLAG=$FOL_LI/.ddt_gps_external.flag
 export DDH_USES_SHIELD_CELL=$FOL_LI/.ddt_cell_shield.flag
 export DDH_USES_SHIELD_JUICE4HALT=$FOL_LI/.ddt_j4h_shield.flag
 export DDH_USES_SHIELD_SAILOR=$FOL_LI/.ddt_sailor_shield.flag
+export LI_DDH_NEEDS_REBOOT_POST_INSTALL=/tmp/.ddh_needs_reboot_post_install.flag
+
 
 
 # 0 black, 1 red, 2 green, 3 yellow
