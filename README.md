@@ -21,6 +21,12 @@ chmod +x /home/pi/Downloads/dwagent.sh;
 sudo /home/pi/Downloads/dwagent.sh;
 ```
 
+If DWS complains about Wayland, switch to X11 with option ```6 / A6``` in:
+
+```console
+sudo raspi-config
+```
+
 ## Turning a raspberry into a DDH
 
 ``Step 1)`` download the DDH installer from the DDH Tools, or ``ddt`` repository. For this, you can copy-n-paste the following instructions.
@@ -66,3 +72,9 @@ Some additional useful things to do for better DDH behavior:
 - ``Click menu / Preferences / mouse and keyboard settings / 500`` to slo down the requirements to double-click.
 - ``Click menu / Preferences > Raspberry Pi Configuration > Localisation > Timezone`` to set your timezone.
 - Run the ``ddc`` tool to make sure all the configuration is OK.
+
+In case a DDH seems to get stuck on boot with a black screen, open file ``/boot/config.txt`` and comment:
+
+```console
+#dtoverlay=vc4-kms-v3d
+```

@@ -81,9 +81,10 @@ function install_custom {
     # install sailor_hat shield
     SAH="$FOL_LI"/sailorhat
     if [ -f "$DDH_USES_SHIELD_SAILOR" ]; then
-        _pb "shield sailor_hat, please enter answers as follows"
-        _pb "    - enable the first one, on-board RTC"
-        _pb "    - disable or skip the rest:"
+        _pb "we are about to install the shield sailor_hat"
+        _pb "press \"enter\" once and answer the questions as follows:"
+        _pb "    - ENABLE the first one, on-board RTC"
+        _pb "    - SKIP the rest:"
         _pb "            - CAN interface"
         _pb "            - RS485 interface"
         _pb "            - MAX-M8Q GNSS interface"

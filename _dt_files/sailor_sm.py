@@ -32,7 +32,7 @@ async def run_state_machine(
             if dcin_voltage < blackout_voltage_limit:
                 logger.warning("Detected blackout")
                 # added by Lowell Instruments
-                time.sleep(3)
+                time.sleep(2)
                 dcin_voltage = shrpi_device.dcin_voltage()
                 if dcin_voltage < blackout_voltage_limit:
                     os.system('/home/pi/li/sailorhat/popup_sah.sh &')
