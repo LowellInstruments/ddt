@@ -80,7 +80,8 @@ killall main_ddh
 
 _S="[ POP ] ddh | reinstalling alias"
 _pb "$_S"
-"$FOL_DDT"/dt_install_alias.sh force
+source "$FOL_DDT"/dt_install_alias.sh
+dt_install_alias
 
 
 
