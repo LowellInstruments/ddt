@@ -60,7 +60,11 @@ echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
 cat -v /dev/ttyUSB2
 ```
 
-Please contact Lowell Instruments so we can help you get it updated with our ``ddt_quectel`` tools.
+No answer? You might have the cell port in ``/dev/ttyUSB4``. Re-run the command above replacing '2' with '4'.
+
+Please contact Lowell Instruments if you have an old version. 
+
+We can help you get it updated with our ``ddt_quectel`` tools.
 
 
 ## Post configuration
