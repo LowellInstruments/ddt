@@ -14,9 +14,9 @@ function backup_yellow {
     _pb "detecting old yellow boat DDH version"
     [ -f /home/pi/li/ddh/settings/ddh.json ]
     rv=$?
-    if [ $rv -ne 0 ]; then
-        _py "no previous older version DDH to backup";
-        exit 1;
+    if [ $rv -eq 0 ]; then
+        _pb "creating old yellow boat DDH folder backup to ddh_yellow"
+        mv "$FOL_DDH" "$FOL_LI"/ddh_yellow
     fi
 
 
@@ -27,11 +27,7 @@ function backup_yellow {
     killall main_dds
 
 
-    _pb "creating old yellow boat DDH folder backup to ddh_yellow"
-    mv "$FOL_DDH" "$FOL_LI"/ddh_yellow
-
-
-    _pb "backup done, proceed to run ./dt_install_all.sh"
+    _pb "backup_yellow done, proceed to run ./dt_install_all.sh"
 }
 
 
