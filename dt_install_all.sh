@@ -52,9 +52,16 @@ else
 fi
 
 
-if [ "$(arch)" == "aarch64" ]; then
-    install_display_calib
-fi
+#if [ detect bookworm not bullseye ]; then
+#    install_display_calib
+#fi
+
+
+echo "------------------------------------------------"
+echo "dt_install_all.sh done"
+echo "now complete your ddh/settings/config.toml file"
+echo "or request one to your DDH service provider"
+echo "------------------------------------------------"
 
 
 # so we don't try to run DDH / DDS right after install
