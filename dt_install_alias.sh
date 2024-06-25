@@ -56,7 +56,7 @@ function install_alias {
     grep 'alias ace' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
-        echo "alias aec=\"nano $FOL_DDH/settings/config.toml\"" >> $F_RC
+        echo "alias ace=\"nano $FOL_DDH/settings/config.toml\"" >> $F_RC
     fi
 
     # alias configuration see
