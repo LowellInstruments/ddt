@@ -2,7 +2,7 @@
 
 
 # don't run if BRT tool is running
-ps -aux | grep brt | grep -v grep
+ps -aux | grep main_brt | grep -v grep
 rv=$?
 if [ $rv -eq 0 ]; then
     printf "detected BRT running, DDH leaving\n"
