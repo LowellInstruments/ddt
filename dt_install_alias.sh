@@ -28,6 +28,7 @@ function install_alias {
 
 
     _pb "climenu alias"
+    sed -i '/alias ddc/d' $F_RC
     grep 'alias ddc' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
