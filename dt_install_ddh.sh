@@ -87,6 +87,9 @@ function install_ddh {
     _e $? "cannot install new resolv.conf"
 
 
+    _pb "[ 95% ] ensuring no old flags in config file"
+    sed -i '/rbl_en/d' "$FOL_DDH"/settings/config.toml
+
 
 
     #_pb "[ 95% ] installing closed-source moana plugin"
