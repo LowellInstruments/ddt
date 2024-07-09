@@ -54,18 +54,14 @@ function install_ddh {
     _e $? "cannot install MAT library"
 
 
-
-    _pb " [39% ] DDH requirements"
-    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements.txt
-    _pb "selected requirements file $DDH_TMP_REQS_TXT"
-
-
-    _pb "[ 40% ] DDH clone source code"
+    _pb "[ 39% ] DDH clone source code"
     rm -rf $F_CLONE_DDH 2> /dev/null
 
 
 
-    _pb "[ 41% ] DDH requirements"
+    _pb "[ 40% ] DDH requirements"
+    DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements.txt
+    _pb "selected requirements file $DDH_TMP_REQS_TXT"
     # todo: REMOVE BRANCH TOML here
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
     "$VPIP" install -r $DDH_TMP_REQS_TXT && \
@@ -73,13 +69,13 @@ function install_ddh {
     _e $? "cannot install DDH"
 
 
-    _pb "[ 41% ] DDH config.toml template file"
+    _pb "[ 90% ] DDH config.toml template file"
     cp "$FOL_DDH"/settings/config_template.toml "$FOL_DDH"/settings/config.toml
     _e $? "cannot copy config.toml template file"
 
 
 
-    _pb "[ 90% ] setting and protecting file resolv.conf"
+    _pb "[ 91% ] setting and protecting file resolv.conf"
     sudo chattr -i /etc/resolv.conf && \
     sudo sh -c "echo 'nameserver 8.8.8.8' > /etc/resolv.conf" && \
     sudo sh -c "echo 'nameserver 8.8.4.4' >> /etc/resolv.conf" && \
@@ -92,9 +88,9 @@ function install_ddh {
 
 
 
-    #_pb "[ 95% ] installing closed-source moana plugin"
-    #cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds
-    #_e $? "cannot install closed-source moana plugin"
+    _pb "[ 97% ] installing closed-source moana plugin"
+    cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds
+    _e $? "cannot install closed-source moana plugin"
 
 
 
