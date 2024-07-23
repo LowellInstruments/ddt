@@ -9,7 +9,8 @@ clear
 FTS=/tmp/ddh_stash
 
 
-_S="[ POP ] ddh | updating DDT"
+echo
+_S="[ POP ] updating DDT"
 _pb "$_S"
 cd "$FOL_DDT" && \
 git reset --hard && \
@@ -17,7 +18,9 @@ git pull
 _e $? "$_S"
 
 
-_S="[ POP ] ddh | stashing configuration files"
+
+echo
+_S="[ POP ] stashing DDH configuration files"
 _pb "$_S"
 rm -rf $FTS
 mkdir $FTS && \
@@ -30,7 +33,8 @@ cp "$FOL_DDH"/ddh/db/db_his.json $FTS
 
 
 
-_S="[ POP ] ddh | getting last github DDH code"
+echo
+_S="[ POP ] updating DDH"
 _pb "$_S"
 cd "$FOL_DDH" && \
 git reset --hard && \
@@ -39,7 +43,8 @@ _e $? "$_S"
 
 
 
-_S="[ POP ] ddh | pip installing extra requirements"
+echo
+_S="[ POP ] updating DDH requirements"
 _pb "$_S"
 source "$FOL_VEN"/bin/activate && \
 pip3 install -r "$FOL_DDH"/requirements_extra.txt
@@ -48,7 +53,8 @@ _e $? "$_S"
 
 
 
-_S="[ POP ] ddh | un-stashing configuration files"
+echo
+_S="[ POP ] un-stashing DDH configuration files"
 _pb "$_S"
 cp $FTS/*.toml "$FOL_DDH"/settings && \
 cp $FTS/script_logger_dox_deploy_cfg.json "$FOL_DDH"/scripts
@@ -58,19 +64,22 @@ cp $FTS/db_his.json "$FOL_DDH"/ddh/db
 
 
 
-_S="[ POP ] ddh | updating DDT and installing Moana plugin from it"
+echo
+_S="[ POP ] installing Moana plugin from DDT"
 _pb "$_S"
 cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/dds
 _e $? "$_S"
 
 
-
-_S="[ POP ] ddh | killing API ddh, should restart automatically"
+echo
+_S="[ POP ] kill API, it will auto-restart"
 _pb "$_S"
 killall main_api
 
 
-_S="[ POP ] ddh | killing all DDH"
+
+echo
+_S="[ POP ] kill DDH, it will auto-restart"
 _pb "$_S"
 killall main_dds_controller
 killall main_ddh_controller
@@ -78,4 +87,7 @@ killall main_dds
 killall main_ddh
 
 
-_pg "[ POP ] ddh | done OK!"
+
+echo
+_pg "[ POP ] all OK!"
+echo

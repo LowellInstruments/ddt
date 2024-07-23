@@ -19,7 +19,6 @@ async def run_state_machine(
     blackout_time = 0.0
 
     while True:
-        # TODO: Provide facilities for reporting the states and voltages
         # en5v_state = dev.en5v_state()
         # dev_state = dev.state()
         dcin_voltage = shrpi_device.dcin_voltage()
