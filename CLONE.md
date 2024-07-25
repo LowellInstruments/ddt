@@ -1,0 +1,59 @@
+# Cloning Instructions
+
+## Hardware
+
+Grab the first "Raspberry Pi USB to M.2 SATA SSD Converter Board".
+
+Install the SSD disk labeled "DDH golden" on it. This is the source disk of the cloning procedure.
+
+Connect the board to USB.
+
+Grab a second "Raspberry Pi USB to M.2 SATA SSD Converter Board".
+
+Install a destination SSD disk on it. This should be empty, or ok to be erased. This is the destination disk of the cloning procedure.
+
+Connect the board to a different USB port.
+
+    Note:
+    Both source and destination SSD disks have to be same size.
+
+
+## Software 
+
+Download [balena etcher](https://etcher.balena.io/) program to your computer and run it.
+
+Choose "clone drive" in the first column.
+
+As source or origin, be sure to choose the board containing the "DDH golden" SSD disk.
+
+As destination, be sure to choose the board containing the empty SSD disk.
+
+Press "clone". It will take about 10 minutes.
+
+
+## Booting the newly cloned disk on a DDH
+
+Put the newly cloned destination SSD disk on a DDH. Power on the DDH. Wait a couple of minutes for it to boot.
+
+It could be that the screen remains black on the first boot attempt. This is normal.
+
+Power off the DDH and wait a couple more minutes while it is off.
+
+Power on again the DDH. Now it will boot.
+
+
+## Updating the new DDH
+
+Since this is cloned disk, it can contain slightly outdated DDH application or settings.
+
+Click the icon ``DDC`` on the desktop. The DDH Configuration (DDC) tool will appear.
+
+Choose the option ``DDH update``. This will update the DDH application and API.
+
+Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
+
+
+## Adding the DDH to the Dashboard
+
+Press the "add new DDH" on the Dashboard main page.
+
