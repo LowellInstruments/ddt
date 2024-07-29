@@ -55,7 +55,7 @@ Once it is done, choose the option ``DDH provision``. This will update the DDH c
 
 ## Customize the DDH
 
-Some things cannot be automated. For example, we need to check if the firmware on the cell shield is OK.
+The firmware on the cell shield cannot be automated since the boards come from the provider with unknown version.
 
 Please check the document README.md, section ``Cell shield firmware update`` for this.
 
