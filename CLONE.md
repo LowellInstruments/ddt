@@ -53,6 +53,15 @@ Choose the option ``DDH update``. This will update the DDH application and API.
 Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
 
 
+## Customize the DDH
+
+Some things cannot be automated. For example, we need to check if the firmware on the cell shield is OK.
+
+Please check the document README.md, section ``Cell shield firmware update`` for this.
+
+The repository ``ddt_quectel`` is already present in folder ``/home/pi/li/ddt_quectel`` of your DDH.
+
+
 ## Adding the DDH to the Dashboard
 
 Press the "add new DDH" on the Dashboard main page.
