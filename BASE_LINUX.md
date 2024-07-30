@@ -14,7 +14,7 @@ This is for old DDH. We will update it soon.
 
 This is for new DDH.
 
-[raspios 2023](https://downloads.raspberrypi.com/raspios_armhf/images/raspios_armhf-2023-05-03/2023-05-03-raspios-bullseye-armhf.img.xz)
+[raspios 2023](https://drive.google.com/file/d/1rxlDitExsuZ21KmOXXVDiTmJJNj7MwTH/view?usp=drive_link)
 
 Download image flasher utility ```Raspberry PI imager``` and run it.
 
