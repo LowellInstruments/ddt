@@ -17,6 +17,10 @@ Connect the board to a different USB port.
     Note:
     Both source and destination SSD disks have to be same size.
 
+Connecting a USB wired keyboard may be useful for the rest of this tutorial.
+
+You can also SSH to the DDH if you are at Lowell Instruments HQ and now the IP of the DDH.
+
 
 ## Software 
 
@@ -41,6 +45,18 @@ Power off the DDH and wait a couple more minutes while it is off.
 
 Power on again the DDH. Now it will boot.
 
+
+## Install DWService
+
+Create a new agent in your DWService account for this DDH. Next, open a terminal and paste:
+
+```console
+cd /home/pi/Downloads;
+chmod +x /home/pi/Downloads/dwagent.sh;
+sudo /home/pi/Downloads/dwagent.sh;
+```
+
+Use the agent code from the website to finish the installation.
 
 ## Updating the new DDH
 

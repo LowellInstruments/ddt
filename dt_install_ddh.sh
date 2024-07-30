@@ -93,8 +93,6 @@ function install_ddh {
     _e $? "cannot install closed-source moana plugin"
 
 
-
-
     _pb "[ 100% ] install_ddh done"
 }
 
