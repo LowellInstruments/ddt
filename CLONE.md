@@ -52,8 +52,8 @@ Create a new agent in your DWService account for this DDH. Next, open a terminal
 
 ```console
 cd /home/pi/Downloads;
-chmod +x /home/pi/Downloads/dwagent.sh;
-sudo /home/pi/Downloads/dwagent.sh;
+chmod +x dwagent.sh;
+sudo ./dwagent.sh install
 ```
 
 Use the agent code from the website to finish the installation.

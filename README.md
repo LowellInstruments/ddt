@@ -17,8 +17,8 @@ You can install an additional remote control tool called DWService, by opening a
 ```
 cd /home/pi/Downloads;
 wget https://www.dwservice.net/download/dwagent.sh;
-chmod +x /home/pi/Downloads/dwagent.sh;
-sudo /home/pi/Downloads/dwagent.sh;
+chmod +x dwagent.sh;
+sudo ./dwagent.sh install
 ```
 
 If DWS complains about Wayland, switch to X11 with option ```6 / A6``` in:
