@@ -66,6 +66,8 @@ Click the icon ``DDC`` on the desktop. The DDH Configuration (DDC) tool will app
 
 Choose the option ``DDH update``. This will update the DDH application and API.
 
+If there is one, also choosen ``MAT update``. This will update the MAT library.
+
 Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
 
 
