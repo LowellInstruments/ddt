@@ -72,8 +72,9 @@ Choose the option ``DDH update``. This will update the DDH application and API.
 
 If there is one, also choosen ``MAT update``. This will update the MAT library.
 
-Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
+Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings. (JOAQUIM TODO)
 
+Run dt_install_power.sh and select power option (Joaquim TODO)
 
 ## Customize the DDH
 
