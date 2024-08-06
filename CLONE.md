@@ -56,7 +56,11 @@ chmod +x dwagent.sh;
 sudo ./dwagent.sh install
 ```
 
-Use the agent code from the website to finish the installation.
+Select "Install" and accept the default options.
+Login to Dwservice with the accounbt you want to use for the DDH and add a new agent.
+Name the new agent with the DDH's serial number.
+Use the agent code from the website to finish the installation omn the DDH.
+Confirm that the connection works.
 
 ## Updating the new DDH
 
