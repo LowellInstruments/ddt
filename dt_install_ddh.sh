@@ -32,11 +32,17 @@ function install_ddh {
     ping -q -c 1 -W 2 www.google.com
     _e $? "no internet"
 
+    # caches
+    _pb "[ 20% ] removing python caches"
+    rm -rf "$HOME"/.cache/pip 2> /dev/null
+    sudo rm -rf /root/.cache/pip
+    # rm -rf /home/pi/.local/lib/python3.9/site-packages
+
+
 
     # virtualenv
-    _pb "[ 20% ] virtualenv removing"
+    _pb "[ 21% ] virtualenv removing"
     rm -rf "$FOL_VEN" 2> /dev/null
-    rm -rf "$HOME"/.cache/pip 2> /dev/null
     _pb "[ 22% ] virtualenv creating"
     python3 -m venv "$FOL_VEN" --system-site-packages && \
     source "$FOL_VEN"/bin/activate && \
@@ -64,7 +70,7 @@ function install_ddh {
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
     # todo: REMOVE BRANCH TOML here
     git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH && \
-    "$VPIP" install -r $DDH_TMP_REQS_TXT && \
+    "$VPIP" install --no-cache-dir -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
     _e $? "cannot install DDH"
 
