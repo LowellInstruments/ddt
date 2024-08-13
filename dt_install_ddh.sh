@@ -64,8 +64,16 @@ function install_ddh {
     rm -rf $F_CLONE_DDH 2> /dev/null
 
 
+    _pb "[ 40 % ] DDH wheels"
+    pip install --no-cache-dir "$FOL_DDT_WHL"/numpy-1.26.4-cp311-cp311-linux_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/pandas-2.2.2-cp311-cp311-linux_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/h5py-3.10.0-cp311-cp311-linux_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/botocore-1.29.165-py3-none-any.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/dbus_fast-2.22.1-cp311-cp311-manylinux_2_36_armv7l.whl
 
-    _pb "[ 40% ] DDH requirements"
+
+
+    _pb "[ 45% ] DDH requirements"
     DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements.txt
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
     # todo: REMOVE BRANCH TOML here

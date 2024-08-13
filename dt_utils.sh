@@ -9,6 +9,7 @@ export FOL_VAN=$FOL_LI/venv_api
 export VPIP=$FOL_VEN/bin/pip
 export VPAP=$FOL_VAN/bin/pip
 export FOL_DDT=$FOL_LI/ddt
+export FOL_DDT_WHL=$FOL_DDT/_dt_files/my_wheels
 
 
 # these are the only ones at DDI time
