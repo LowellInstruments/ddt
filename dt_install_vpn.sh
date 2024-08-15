@@ -37,7 +37,7 @@ function install_vpn {
     _pb "please paste the following to Lightsail HUB wireguard configuration file"
     _HUB="
     [Peer]
-    PublicKey= $PUB
+    PublicKey = $PUB
     AllowedIPs = $1/32
     "
     echo "$_HUB"

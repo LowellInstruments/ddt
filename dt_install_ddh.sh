@@ -7,6 +7,7 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
+PVV="$($FOL_VEN/bin/python -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
 
 
 function install_ddh {
@@ -65,11 +66,19 @@ function install_ddh {
 
 
     _pb "[ 40 % ] DDH wheels"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/numpy-1.26.4-cp311-cp311-linux_armv7l.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/pandas-2.2.2-cp311-cp311-linux_armv7l.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/h5py-3.10.0-cp311-cp311-linux_armv7l.whl
+    case $PVV in
+        39|311)
+            _pb "OK! using wheels for version $PVV"
+            ;;
+        *)
+            _pr "we don't have wheels for this python version"
+            exit 1
+    esac
+    pip install --no-cache-dir "$FOL_DDT_WHL"/numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/pandas-2.2.2-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/h5py-3.10.0-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
     pip install --no-cache-dir "$FOL_DDT_WHL"/botocore-1.29.165-py3-none-any.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/dbus_fast-2.22.1-cp311-cp311-manylinux_2_36_armv7l.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_36_armv7l.whl
 
 
 
