@@ -100,7 +100,7 @@ function install_ddh {
     _pb "[ 41% ] DDH doing wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
 
-    _WHL=dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_36_armv7l.whl
+    _WHL=dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_31_armv7l.whl
     _pb "[ 41% ] DDH doing wheel $_WHL"
     wget $REPO_PIP/dbus-fast/"$_WHL" -P "$FOL_DDT_WHL"
     _e $? "cannot wget wheel $_WHL"
