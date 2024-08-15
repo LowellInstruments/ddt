@@ -70,18 +70,18 @@ function install_ddh {
     # ---------------------------
     # wheels to speed up install
     # ---------------------------
-
+    AR=$(arch)
     case $PVV in
         39|311)
-            _pb "[ 40% ] DDH using wheels for version $PVV"
+            _pb "[ 40% ] DDH using wheels for python version $PVV, arch $AR"
             ;;
         *)
             _pr "[ 40% ] DDH no wheels available for this python version"
             exit 1
     esac
 
-    pip install "$FOL_DDT_WHL"/*cp"$PVV"*"$AR"*.whl
-    pip install "$FOL_DDT_WHL"/*any.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/*cp"$PVV"*"$AR"*.whl
+    pip install --no-cache-dir "$FOL_DDT_WHL"/*any.whl
 
 #    _WHL=numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
 #    _pb "[ 41% ] DDH doing wheel $_WHL"
