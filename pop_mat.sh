@@ -27,7 +27,7 @@ _e $? "$_S"
 _S="[ POP ] mat | cloning newest code from github to /tmp"
 _pb "$_S"
 rm -rf $F_CLONE_MAT
-git clone https://github.com/lowellinstruments/mat.git $F_CLONE_MAT
+git clone https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1
 _e $? "$_S"
 
 

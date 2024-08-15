@@ -34,7 +34,7 @@ echo
 _S="[ POP ] download new MAT library"
 _pb "$_S"
 rm -rf $F_CLONE_MAT
-git clone https://github.com/lowellinstruments/mat.git $F_CLONE_MAT
+git clone https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1
 _e $? "$_S"
 
 
