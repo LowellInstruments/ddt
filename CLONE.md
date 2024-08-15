@@ -80,7 +80,7 @@ Do the following in the command line:
 
 ```console
 cd /home/pi/li/ddt;
-./dt_install_power.sh
+./dt_install_power.sh force
 ```
 
 ## Customize the DDH
