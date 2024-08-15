@@ -15,7 +15,7 @@ function install_vpn {
 
 
     echo
-    _pb "paste this to NODE wireguard configuration file"
+    _pb "generating this NODE's wireguard configuration file..."
     _NODE="
     [Interface]
     # info about this node
@@ -29,11 +29,12 @@ function install_vpn {
         AllowedIPs = 10.5.0.0/24
         PersistentKeepalive = 25
     "
-    echo "$_NODE"
+    echo "$_NODE" | sudo tee -a /etc/wireguard/wg0.conf > /dev/null
 
 
 
-    _pb "paste this to Lightsail HUB wireguard configuration file"
+    echo
+    _pb "please paste the following to Lightsail HUB wireguard configuration file"
     _HUB="
     [Peer]
     PublicKey= $PUB
