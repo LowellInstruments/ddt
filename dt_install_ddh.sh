@@ -7,8 +7,6 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-PVV="$("$FOL_VEN"/bin/python -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
-REPO_PIP=https://www.piwheels.org/simple
 
 
 function install_ddh {
@@ -66,50 +64,12 @@ function install_ddh {
     rm -rf $F_CLONE_DDH 2> /dev/null
 
 
-    case $PVV in
-        39|311)
-            _pb "[ 40% ] DDH using wheels for version $PVV"
-            ;;
-        *)
-            _pr "[ 40% ] DDH no wheels for this python version"
-            exit 1
-    esac
 
-    _WHL=numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
-    _pb "[ 41% ] DDH doing wheel $_WHL"
-    wget $REPO_PIP/numpy/"$_WHL" -P "$FOL_DDT_WHL"
-    _e $? "cannot wget wheel $_WHL"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
-    _e $? "cannot pip install wheel $_WHL"
-    rm "$FOL_DDT_WHL"/"$_WHL"
+    # ---------------------------
+    # wheels to speed up install
+    # ---------------------------
+    "$FOL_DDT"/dt_install_ddh_wheels.sh
 
-    _WHL=pandas-2.2.2-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
-    _pb "[ 41% ] DDH doing wheel $_WHL"
-    wget $REPO_PIP/pandas/"$_WHL" -P "$FOL_DDT_WHL"
-    _e $? "cannot wget wheel $_WHL"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
-    _e $? "cannot pip install wheel $_WHL"
-    rm "$FOL_DDT_WHL"/"$_WHL"
-
-    _WHL=h5py-3.10.0-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
-    _pb "[ 41% ] DDH doing wheel $_WHL"
-    wget $REPO_PIP/h5py/"$_WHL" -P "$FOL_DDT_WHL"
-    _e $? "cannot wget wheel $_WHL"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
-    _e $? "cannot pip install wheel $_WHL"
-    rm "$FOL_DDT_WHL"/"$_WHL"
-
-    _WHL=botocore-1.29.165-py3-none-any.whl
-    _pb "[ 41% ] DDH doing wheel $_WHL"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
-
-    _WHL=dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_31_armv7l.whl
-    _pb "[ 41% ] DDH doing wheel $_WHL"
-    wget $REPO_PIP/dbus-fast/"$_WHL" -P "$FOL_DDT_WHL"
-    _e $? "cannot wget wheel $_WHL"
-    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
-    _e $? "cannot pip install wheel $_WHL"
-    rm "$FOL_DDT_WHL"/"$_WHL"
 
 
     _pb "[ 45% ] DDH requirements"
