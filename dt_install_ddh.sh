@@ -68,7 +68,9 @@ function install_ddh {
     # ---------------------------
     # wheels to speed up install
     # ---------------------------
-    "$FOL_DDT"/dt_install_ddh_wheels.sh
+    source "$FOL_DDT"/dt_install_ddh_wheels.sh
+    _e $? "cannot install DDH wheels"
+
 
 
 
