@@ -2,40 +2,44 @@
 source dt_utils.sh
 
 
-
 function install_vpn {
     clear && echo && echo
     _pb "INSTALL VPN"
-    echo
 
+
+    echo
     _pb "creating wireguard keys"
     wg genkey > /tmp/pri && wg pubkey < /tmp/pri > /tmp/pub
     PRI=$(cat /tmp/pri)
     PUB=$(cat /tmp/pub)
 
 
+    echo
     _pb "paste this to NODE wireguard configuration file"
-    echo
-    echo "[Interface]"
-    echo "# info about this node"
-    echo "Address = $1/32"
-    echo "PrivateKey = $PRI"
-    echo "    # info about the HUB"
-    echo "    [Peer]"
-    echo "    PublicKey = Z013dqulL/htKFs2Z4YTKG9BA9J4kGZ7IqHZovcMp1w="
-    echo "    Endpoint = 3.143.21.254:51820"
-    echo "    # hosts allowed to reach this peer via HUB"
-    echo "    AllowedIPs = 10.5.0.0/24"
-    echo "    PersistentKeepalive = 25"
-    echo
+    _NODE="
+    [Interface]
+    # info about this node
+    Address = $1/32
+    PrivateKey = $PRI
+        # info about the HUB
+        [Peer]
+        PublicKey = Z013dqulL/htKFs2Z4YTKG9BA9J4kGZ7IqHZovcMp1w=
+        Endpoint = 3.143.21.254:51820
+        # hosts allowed to reach this peer via HUB
+        AllowedIPs = 10.5.0.0/24
+        PersistentKeepalive = 25
+    "
+    echo "$_NODE"
 
 
-    _pb "paste this to HUB wireguard configuration file"
-    echo
-    echo "[Peer]"
-    echo "PublicKey=$PUB"
-    echo "AllowedIPs = $1/32"
-    echo
+
+    _pb "paste this to Lightsail HUB wireguard configuration file"
+    _HUB="
+    [Peer]
+    PublicKey= $PUB
+    AllowedIPs = $1/32
+    "
+    echo "$_HUB"
 
 
     _pb "restart wireguard"
@@ -43,5 +47,7 @@ function install_vpn {
 }
 
 
-#install_vpn $1
-install_vpn 1.2.3.4
+# example call this script
+# ./dt_install_vpn.sh 1.2.3.4
+install_vpn "$1"
+
