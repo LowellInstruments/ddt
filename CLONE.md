@@ -74,7 +74,14 @@ If there is one, also choosen ``MAT update``. This will update the MAT library.
 
 Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings. (JOAQUIM TODO)
 
-Run dt_install_power.sh and select power option (Joaquim TODO)
+## Choosing the power shield option for the DDH
+
+Do the following in the command line:
+
+```console
+cd /home/pi/li/ddt;
+./dt_install_power.sh
+```
 
 ## Customize the DDH
 
