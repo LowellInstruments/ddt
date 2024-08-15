@@ -7,6 +7,8 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
+PVV="$("$FOL_VEN"/bin/python -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
+REPO_PIP=https://www.piwheels.org/simple
 
 
 function install_ddh {
@@ -68,8 +70,28 @@ function install_ddh {
     # ---------------------------
     # wheels to speed up install
     # ---------------------------
-    source "$FOL_DDT"/dt_install_ddh_wheels.sh
-    _e $? "cannot install DDH wheels"
+
+    case $PVV in
+        39|311)
+            _pb "[ 40% ] DDH using wheels for version $PVV"
+            ;;
+        *)
+            _pr "[ 40% ] DDH no wheels available for this python version"
+            exit 1
+    esac
+
+    pip install "$FOL_DDT_WHL"/*cp"$PVV"*"$AR"*.whl
+    pip install "$FOL_DDT_WHL"/*any.whl
+
+#    _WHL=numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+#    _pb "[ 41% ] DDH doing wheel $_WHL"
+#    wget $REPO_PIP/numpy/"$_WHL" -P "$FOL_DDT_WHL"
+#    _e $? "cannot wget wheel $_WHL"
+#    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
+#    _e $? "cannot pip install wheel $_WHL"
+#    rm "$FOL_DDT_WHL"/"$_WHL"
+
+
 
 
 
