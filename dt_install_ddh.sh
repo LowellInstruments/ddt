@@ -81,6 +81,7 @@ function install_ddh {
     _e $? "cannot wget wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
     _e $? "cannot pip install wheel $_WHL"
+    rm "$FOL_DDT_WHL"/"$_WHL"
 
     _WHL=pandas-2.2.2-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
     _pb "[ 41% ] DDH doing wheel $_WHL"
@@ -88,6 +89,7 @@ function install_ddh {
     _e $? "cannot wget wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
     _e $? "cannot pip install wheel $_WHL"
+    rm "$FOL_DDT_WHL"/"$_WHL"
 
     _WHL=h5py-3.10.0-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
     _pb "[ 41% ] DDH doing wheel $_WHL"
@@ -95,6 +97,7 @@ function install_ddh {
     _e $? "cannot wget wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
     _e $? "cannot pip install wheel $_WHL"
+    rm "$FOL_DDT_WHL"/"$_WHL"
 
     _WHL=botocore-1.29.165-py3-none-any.whl
     _pb "[ 41% ] DDH doing wheel $_WHL"
@@ -106,7 +109,7 @@ function install_ddh {
     _e $? "cannot wget wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
     _e $? "cannot pip install wheel $_WHL"
-
+    rm "$FOL_DDT_WHL"/"$_WHL"
 
 
     _pb "[ 45% ] DDH requirements"
