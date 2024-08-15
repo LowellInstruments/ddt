@@ -8,6 +8,7 @@ GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
 PVV="$($FOL_VEN/bin/python -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
+REPO_PIP=https://www.piwheels.org/simple
 
 
 function install_ddh {
@@ -74,11 +75,27 @@ function install_ddh {
             _pr "we don't have wheels for this python version"
             exit 1
     esac
-    pip install --no-cache-dir "$FOL_DDT_WHL"/numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/pandas-2.2.2-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/h5py-3.10.0-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    _WHL=numpy-1.26.4-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    wget $REPO_PIP/numpy/"$_WHL" -P "$FOL_DDT_WHL"
+    _e $? "cannot wget wheel $_WHL"
+    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
+    _e $? "cannot pip install wheel $_WHL"
+    _WHL=pandas-2.2.2-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    wget $REPO_PIP/pandas/"$_WHL" -P "$FOL_DDT_WHL"
+    _e $? "cannot wget wheel $_WHL"
+    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
+    _e $? "cannot pip install wheel $_WHL"
+    _WHL=h5py-3.10.0-cp"$PVV"-cp"$PVV"-linux_armv7l.whl
+    wget $REPO_PIP/h5py/"$_WHL" -P "$FOL_DDT_WHL"
+    _e $? "cannot wget wheel $_WHL"
+    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
+    _e $? "cannot pip install wheel $_WHL"
     pip install --no-cache-dir "$FOL_DDT_WHL"/botocore-1.29.165-py3-none-any.whl
-    pip install --no-cache-dir "$FOL_DDT_WHL"/dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_36_armv7l.whl
+    _WHL=dbus_fast-2.22.1-cp"$PVV"-cp"$PVV"-manylinux_2_36_armv7l.whl
+    wget $REPO_PIP/dbus_fast/"$_WHL" -P "$FOL_DDT_WHL"
+    _e $? "cannot wget wheel $_WHL"
+    pip install --no-cache-dir "$FOL_DDT_WHL"/"$_WHL"
+    _e $? "cannot pip install wheel $_WHL"
 
 
 
