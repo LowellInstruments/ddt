@@ -76,7 +76,7 @@ Once it is done, choose the option ``DDH provision``. This will update the DDH c
 
 ## Choosing the power shield option for the DDH
 
-Do the following in the command line:
+Paste the following text in the command line. When asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
 
 ```console
 cd /home/pi/li/ddt;
