@@ -7,8 +7,7 @@ GH_REPO_MAT=https://github.com/lowellinstruments/mat.git
 GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
-#PVV="$("$FOL_VEN"/bin/python -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
-PVV=39
+PVV="$(python3 -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
 REPO_PIP=https://www.piwheels.org/simple
 
 
@@ -68,19 +67,18 @@ function install_ddh {
 
 
 
-    # wheels to speed up install
-    AR=$(arch)
-    case $PVV in
-        39|311)
-            _pb "[ 40% ] DDH using wheels for python v$PVV, architecture $AR"
-            ;;
-        *)
-            _pr "[ 40% ] DDH no wheels available for this python version"
-            exit 1
-    esac
-    pip install --no-cache-dir "$FOL_DDT_WHL"/*cp"$PVV"*"$AR"*.whl
+    # detect python architecture depending on RaspberryOS version
+    PY_ARCH="$(/usr/bin/python3 -c 'import platform; print(platform.architecture())')"
+    echo "$PY_ARCH" | grep 64bit
+    rv=$?
+    if [ "$rv" -eq 0 ]; then
+        _pb "[ 40% ] DDH using wheels for python v$PVV, aarch64"
+        pip install --no-cache-dir "$FOL_DDT_WHL"/*cp"$PVV"*aarch64*.whl
+    else
+        _pb "[ 40% ] DDH using wheels for python v$PVV, armv7l"
+        pip install --no-cache-dir "$FOL_DDT_WHL"/*cp"$PVV"*armv7l*.whl
+    fi
     pip install --no-cache-dir "$FOL_DDT_WHL"/*any.whl
-
 
 
 

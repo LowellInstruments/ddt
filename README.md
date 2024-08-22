@@ -35,7 +35,7 @@ sudo raspi-config
 cd /home/pi;
 mkdir li;
 cd li;
-git clone --branch toml https://github.com/lowellinstruments/ddt.git;
+git clone --branch toml https://github.com/lowellinstruments/ddt.git --depth 1;
 cd /home/pi/li/ddt;
 ```
 
