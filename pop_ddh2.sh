@@ -23,6 +23,22 @@ _e $? "$_S"
 
 
 echo
+_S="[ POP ] DDT regenerate aliases"
+_pb "$_S"
+cd "$FOL_DDT" && ./dt_install_alias.sh force
+_e $? "$_S"
+
+
+
+echo
+_S="[ POP ] DDT sourcing bashrc"
+_pb "$_S"
+source /home/pi/.bashrc
+_e $? "$_S"
+
+
+
+echo
 _S="[ POP ] uninstall previous MAT library"
 _pb "$_S"
 "$FOL_VEN"/bin/pip3 uninstall -y mat
