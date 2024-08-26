@@ -66,7 +66,11 @@ Confirm that the connection works.
 
 Since this is cloned disk, it can contain slightly outdated DDH application or settings.
 
-Click the icon ``DDC`` on the desktop. The DDH Configuration (DDC) tool will appear.
+Click the terminal icon on the desktop. Now type:
+
+```console
+ddu
+```
 
 Choose the option ``DDH update``. This will update the DDH application and API.
 
