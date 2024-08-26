@@ -94,7 +94,7 @@ if [[ $? -ne 0 ]]; then colored_echo "Download failed" ${RED}; exit 1; fi
 
 colored_echo "What is your carrier APN?"
 # joaquim auto
-carrierapn=super
+carrierapn=wireless.twilio.com
 
 colored_echo "Your Input is : $carrierapn" ${GREEN}
 
@@ -340,7 +340,7 @@ do
 	esac
 done
 
-colored_echo "ppp_install_custom.sh end OK" ${GREEN};
+colored_echo "ppp_install_twilio.sh end OK" ${GREEN};
 #read -p "Press ENTER key to reboot" ENTER
 #colored_echo "Rebooting..." ${GREEN}
 #reboot

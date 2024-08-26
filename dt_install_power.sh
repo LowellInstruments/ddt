@@ -34,7 +34,7 @@ function install_power {
     sudo rm -rf "$J4H"
     if [ -f "$DDH_USES_SHIELD_JUICE4HALT" ]; then
         _pb "juice4halt"
-        # wiringpi is already going to be installed by ppp_install_standalone.sh
+        # wiringpi is already going to be installed by ppp_install_*.sh
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
         mkdir -p "$J4H"/bin
         cp "$FOL_DDT"/_dt_files/shutdown_script.py "$J4H"/bin/

@@ -19,7 +19,8 @@ function install_custom {
     _pb "removing custom flags"
     rm "$GROUPED_S3_FILE_FLAG" 2> /dev/null
     rm "$GPS_EXTERNAL_FILE_FLAG" 2> /dev/null
-    rm "$DDH_USES_SHIELD_CELL" 2> /dev/null
+    rm "$DDH_USES_SHIELD_CELL_SIXFAB" 2> /dev/null
+    rm "$DDH_USES_SHIELD_CELL_TWILIO" 2> /dev/null
     rm "$DDH_USES_SHIELD_JUICE4HALT" 2> /dev/null
     rm "$DDH_USES_SHIELD_SAILOR" 2> /dev/null
 
@@ -38,9 +39,15 @@ function install_custom {
     esac
 
 
-    read -rp "Does this DDH use cell shield? (y/n) " choice
+    read -rp "Does this DDH use a cell shield with SIXFAB SIM? (y/n) " choice
     case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_CELL"; printf 'set cell shield flag OK\n';;
+        y|Y ) touch "$DDH_USES_SHIELD_CELL_SIXFAB"; printf 'set cell shield with sixfab flag OK\n';;
+    esac
+
+
+    read -rp "Does this DDH use a cell shield with TWILIO SIM? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$DDH_USES_SHIELD_CELL_TWILIO"; printf 'set cell shield with twilio flag OK\n';;
     esac
 
 
@@ -65,7 +72,7 @@ function install_custom {
     sudo rm -rf "$J4H"
     if [ -f "$DDH_USES_SHIELD_JUICE4HALT" ]; then
         _pb "juice4halt"
-        # wiringpi is already going to be installed by ppp_install_standalone.sh
+        # wiringpi is already going to be installed by ppp_install_*.sh
         # sudo dpkg -i ./_dt_files/wiringpi-latest.deb
         mkdir -p "$J4H"/bin
         cp "$FOL_DDT"/_dt_files/shutdown_script.py "$J4H"/bin/
