@@ -27,30 +27,35 @@ function install_custom {
 
 
     # how DDH groups files before S3 upload
+    echo
     read -rp "Set this DDH with grouped S3 uplink? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$GROUPED_S3_FILE_FLAG"; printf 'set grouped S3 flag OK\n';;
     esac
 
 
+    echo
     read -rp "Set this DDH with external GPS puck? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$GPS_EXTERNAL_FILE_FLAG"; printf 'set GPS puck flag OK\n';;
     esac
 
 
+    echo
     read -rp "Does this DDH use a cell shield with SIXFAB SIM? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$DDH_USES_SHIELD_CELL_SIXFAB"; printf 'set cell shield with sixfab flag OK\n';;
     esac
 
 
+    echo
     read -rp "Does this DDH use a cell shield with TWILIO SIM? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$DDH_USES_SHIELD_CELL_TWILIO"; printf 'set cell shield with twilio flag OK\n';;
     esac
 
 
+    echo
     read -rp "Does this DDH use juice_for_halt shield? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
@@ -59,6 +64,7 @@ function install_custom {
 
     # omit if we already know we are using J4H
     if [ "$choice" != 'y' ] && [ "$choice" != 'Y' ]; then
+        echo
         read -rp "Does this DDH use sailor hat shield? (y/n) " choice
         case "$choice" in
             y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
