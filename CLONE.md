@@ -100,7 +100,7 @@ The repository ``ddt_quectel`` is already present in folder ``/home/pi/li/ddt_qu
 
 ## Adding the DDH to the Dashboard
 
-Add DDH to the VPN (Joaquim TODO)
+Add DDH to the VPN (Joaquim TODO).
 
 Press the "add new DDH" on the Dashboard main page.
 
