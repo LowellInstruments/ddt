@@ -17,10 +17,6 @@ function install_service_sw_net {
 
     # LI switch_net_service only on pure DDH
     _pb "switch_net_service"
-    if [ ! -f "$DDH_USES_SHIELD_CELL" ]; then
-        printf 'not installing service_sw_net'
-        return 0
-    fi
 
     # install the service
     (sudo systemctl stop unit_switch_net.service || true) && \
