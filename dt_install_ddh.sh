@@ -8,7 +8,6 @@ GH_REPO_DDH=https://github.com/lowellinstruments/ddh.git
 F_CLONE_MAT=/tmp/mat
 F_CLONE_DDH=/tmp/ddh
 PVV="$(python3 -c 'import sys; v0=sys.version_info[0]; v1=sys.version_info[1]; print(f"{v0}{v1}")')"
-REPO_PIP=https://www.piwheels.org/simple
 
 
 function install_ddh {

@@ -30,7 +30,9 @@ function install_service_sw_net {
 
 
     _pb "is switch_net_service active"
-    systemctl is-active unit_switch_net.service
+    systemctl is-active unit_switch_net.service | grep -w active
+    _e $? "switch_net_service NOT active"
+
 }
 
 if [ "$1" == "force" ]; then install_service_sw_net; fi
