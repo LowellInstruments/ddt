@@ -42,6 +42,14 @@ function install_linux {
     _e $? "starting rc.local"
 
 
+
+    # reduce the number of journal logs
+    _pb 'journald.conf'
+    sudo cp "$FOL_DDT"/_dt_files/journald.conf /etc/systemd/
+    sudo systemctl restart systemd-journald
+
+
+
     _pb "is rc.local active"
     sudo systemctl is-active rc-local
 }
