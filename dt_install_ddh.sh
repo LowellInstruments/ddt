@@ -31,7 +31,7 @@ function install_ddh {
 
 
     _pb "[ 15% ] internet detection"
-    ping -q -c 1 -W 2 www.google.com
+    timeout 1 ping -q -c 1 -W 2 www.google.com
     _e $? "no internet"
 
     # caches
