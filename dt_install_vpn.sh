@@ -50,7 +50,8 @@ function install_vpn {
     echo "$_HUB"
 
 
-    _pb "restart wireguard"
+    _pb "restart wireguard on both HUB and client"
+    _pb "sudo systemctl restart wg-quick@wg0.service && sudo systemctl enable wg-quick@wg0.service"
     sudo systemctl restart wg-quick@wg0.service && sudo systemctl enable wg-quick@wg0.service
 }
 
