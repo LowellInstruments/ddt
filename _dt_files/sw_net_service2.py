@@ -17,7 +17,7 @@ IP = '8.8.8.8'
 
 
 def _p(s):
-    print('[ NET ] LI: {}'.format(s))
+    print(f'SW_NET - {s}')
     # o/wise output not shown in journalctl
     #   $ journalctl -u unit_switch_net.service
     sys.stdout.flush()
@@ -58,7 +58,6 @@ def main() -> int:
     if wlan_via and not wlan_used:
         _sh('/usr/sbin/ifmetric ppp0 400')
         _sh('/usr/sbin/ifmetric wlan0 0')
-        time.sleep(2)
         _p('* wifi *')
         return _z('wifi')
 
@@ -69,7 +68,6 @@ def main() -> int:
     if cell_via and not cell_used:
         _sh('/usr/sbin/ifmetric wlan0 400')
         _sh('/usr/sbin/ifmetric ppp0 0')
-        time.sleep(2)
         _p('* cell *')
         return _z('cell')
 
