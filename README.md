@@ -60,7 +60,9 @@ echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
 cat -v /dev/ttyUSB2
 ```
 
-No answer? You might have the cell port in ``/dev/ttyUSB4``. Re-run the command above replacing '2' with '4'.
+No answer? You might have the cell port in ``/dev/ttyUSB4``. 
+
+Re-run the command above replacing '2' with '4'.
 
 Please contact Lowell Instruments if you have an old version. 
 

@@ -7,6 +7,12 @@ function install_vpn {
     _pb "INSTALL VPN"
 
 
+    if [ "$#" -ne 1 ]; then
+        _pr "Illegal number of parameters, need IP"
+        exit 1
+    fi
+
+
     echo
     _pb "creating wireguard keys"
     wg genkey > /tmp/pri && wg pubkey < /tmp/pri > /tmp/pub
@@ -29,6 +35,7 @@ function install_vpn {
         AllowedIPs = 10.5.0.0/24
         PersistentKeepalive = 25
     "
+    sudo rm /etc/wireguard/wg0.conf
     echo "$_NODE" | sudo tee -a /etc/wireguard/wg0.conf > /dev/null
 
 

@@ -66,15 +66,20 @@ function install_power {
         | sudo bash
         _e $? "sailor_hat install"
 
+
         _pb 'modifying sailor_hat settings'
         vv=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
         c_sailor_p=/usr/local/lib/shrpid/lib/python"$vv"/site-packages/shrpi/
         sudo cp "$FOL_DDT"/_dt_files/sailor_const.py "$c_sailor_p"/const.py
         sudo cp "$FOL_DDT"/_dt_files/sailor_sm.py "$c_sailor_p"/state_machine.py
+        _e $? "sailor_hat modifying settings"
 
+
+        _pb 'creating sailor_hat pop-up'
         mkdir "$SAH"
         sudo cp "$FOL_DDT"/_dt_files/popup_sah.sh "$SAH"
         _e $? "sailor_hat modifying settings"
+
 
 
         _pb "checking sailor_hat service active"
