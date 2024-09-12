@@ -74,15 +74,15 @@ ddu
 
 Choose the option ``DDH update``. This will update the DDH application and API.
 
-If there is one, also choosen ``MAT update``. This will update the MAT library.
+If there is one, also choose ``MAT update``. This will update the MAT library.
 
-Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings. (JOAQUIM TODO)
+(JOAQUIM TODO) Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
 
 ## Choosing the power shield option for the DDH
 
 Paste the commands below in the command line. 
 
-When asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
+In case you select ``sailor-hat``, when asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
 
 ```console
 cd /home/pi/li/ddt;
@@ -100,7 +100,12 @@ The repository ``ddt_quectel`` is already present in folder ``/home/pi/li/ddt_qu
 
 ## Adding the DDH to the Dashboard
 
-Add DDH to the VPN (Joaquim TODO).
+(JOAQUIM TODO) Add DDH to the VPN.
 
 Press the "add new DDH" on the Dashboard main page.
+
+
+## Check config.toml
+
+See this DDH has credentials and monitored MACs.
 
