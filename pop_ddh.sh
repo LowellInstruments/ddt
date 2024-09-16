@@ -23,14 +23,6 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] regenerate DDT aliases"
-_pb "$_S"
-cd "$FOL_DDT" && ./dt_install_alias.sh force
-_e $? "$_S"
-
-
-
-echo
 _S="[ DDU ] restarting systemctl for any new service in DDT"
 _pb "$_S"
 sudo systemctl daemon-reload
@@ -168,6 +160,14 @@ sudo killall cm 2> /dev/null
 sudo cp "$FOL_DDT"/_dt_files/cm /usr/local/bin && \
 sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
 sudo cp "$FOL_DDT"/_dt_files/cmu.conf /etc
+_e $? "$_S"
+
+
+
+echo
+_S="[ DDU ] regenerate DDT aliases"
+_pb "$_S"
+cd "$FOL_DDT" && ./dt_install_alias.sh force
 _e $? "$_S"
 
 
