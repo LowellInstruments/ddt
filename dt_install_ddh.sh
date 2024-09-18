@@ -30,7 +30,7 @@ function install_ddh {
 
 
     _pb "[ 15% ] internet detection"
-    timeout 1 ping -q 8.8.8.8
+    timeout 1 ping -q 8.8.8.8 -c 1
     _e $? "no internet"
 
     # caches
