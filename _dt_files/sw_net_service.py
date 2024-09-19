@@ -48,8 +48,6 @@ def main() -> int:
 
     wlan_via = _sh(f'timeout 2 ping -c 1 -I wlan0 {IP}')
     wlan_used = _sh(f'ip route get {IP} | grep wlan0')
-    cell_via = _sh(f'timeout 2 ping -c 1 -I ppp0 {IP}')
-    cell_used = _sh(f'ip route get {IP} | grep ppp0')
 
     if wlan_via and wlan_used:
         _p('wifi')
@@ -60,6 +58,9 @@ def main() -> int:
         _sh('/usr/sbin/ifmetric wlan0 0')
         _p('* wifi *')
         return _z('wifi')
+
+    cell_via = _sh(f'timeout 2 ping -c 1 -I ppp0 {IP}')
+    cell_used = _sh(f'ip route get {IP} | grep ppp0')
 
     if cell_via and cell_used:
         _p('cell')
