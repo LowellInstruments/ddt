@@ -34,12 +34,12 @@ g_debug = 0
 def _z(s):
     # helps developing
     if g_debug:
-        return 10
+        return 5
 
     if s == 'wifi':
-        return 30
+        return 10
     if s == 'cell':
-        return 30
+        return 20
     # none
     return 10
 
