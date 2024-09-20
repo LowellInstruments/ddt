@@ -26,6 +26,8 @@ echo
 _S="[ DDU ] restarting systemctl for any new service in DDT"
 _pb "$_S"
 sudo systemctl daemon-reload
+sudo systemctl enable unit_switch_net.service
+sudo systemctl restart unit_switch_net.service
 _e $? "$_S"
 
 
