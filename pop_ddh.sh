@@ -23,16 +23,6 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] restarting systemctl for any new service in DDT"
-_pb "$_S"
-sudo systemctl daemon-reload
-sudo systemctl enable unit_switch_net.service
-sudo systemctl restart unit_switch_net.service
-_e $? "$_S"
-
-
-
-echo
 _S="[ DDU ] uninstall previous MAT library"
 _pb "$_S"
 "$FOL_VEN"/bin/pip3 uninstall -y mat
@@ -180,6 +170,15 @@ _pb "$_S"
 source /home/pi/.bashrc
 _e $? "$_S"
 
+
+
+echo
+_S="[ DDU ] restarting systemctl for any new service in DDT"
+_pb "$_S"
+sudo systemctl daemon-reload
+sudo systemctl restart unit_switch_net.service
+sudo systemctl enable unit_switch_net.service
+_e $? "$_S"
 
 
 
