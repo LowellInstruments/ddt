@@ -29,8 +29,8 @@ function install_ddh {
     main_dds main_dds_controller 2> /dev/null
 
 
-    _pb "[ 15% ] internet detection"
-    timeout 1 ping -4 -I ppp0 www.google.com -c 1
+    _pb "[ 15% ] internet detection to run this installer"
+    timeout 1 ping -4 www.google.com -c 1
     _e $? "no internet"
 
 
