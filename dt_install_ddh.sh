@@ -30,8 +30,10 @@ function install_ddh {
 
 
     _pb "[ 15% ] internet detection"
-    timeout 1 ping -q 8.8.8.8 -c 1
+    timeout 1 ping -4 -I ppp0 www.google.com -c 1
     _e $? "no internet"
+
+
 
     # caches
     _pb "[ 20% ] removing python caches"

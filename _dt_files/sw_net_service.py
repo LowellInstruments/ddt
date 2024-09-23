@@ -47,7 +47,7 @@ def _z(s):
 def main() -> int:
 
     c_im = '/usr/sbin/ifmetric'
-    wlan_via = _sh(f'timeout 1 ping -c 1 -I wlan0 {IP}')
+    wlan_via = _sh(f'timeout 1 ping -c 1 -I wlan0 www.google.com -4')
     wlan_used = _sh(f'ip route get {IP} | grep wlan0')
 
     if wlan_via and wlan_used:
@@ -60,7 +60,7 @@ def main() -> int:
         _p('* wifi *')
         return _z('wifi')
 
-    cell_via = _sh(f'timeout 1 ping -c 1 -I ppp0 {IP}')
+    cell_via = _sh(f'timeout 1 ping -c 1 -I ppp0 www.google.com -4')
     cell_used = _sh(f'ip route get {IP} | grep ppp0')
 
     if cell_via and cell_used:
