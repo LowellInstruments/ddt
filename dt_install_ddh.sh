@@ -86,8 +86,8 @@ function install_ddh {
     _pb "[ 45% ] DDH requirements"
     DDH_TMP_REQS_TXT=$F_CLONE_DDH/requirements.txt
     _pb "selected requirements file $DDH_TMP_REQS_TXT"
-    # todo: REMOVE BRANCH TOML here
-    git clone --branch toml $GH_REPO_DDH $F_CLONE_DDH --depth 1 && \
+    # todo: REMOVE BRANCH GPS2 here
+    git clone --branch gps2 $GH_REPO_DDH $F_CLONE_DDH --depth 1 && \
     "$VPIP" install --no-cache-dir -r $DDH_TMP_REQS_TXT && \
     mv "$F_CLONE_DDH" "$FOL_LI"
     _e $? "cannot install DDH"
