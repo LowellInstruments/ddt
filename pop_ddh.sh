@@ -121,13 +121,6 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] kill API, it will auto-start"
-_pb "$_S"
-killall main_api
-
-
-
-echo
 _S="[ DDU ] kill DDH, it will auto-start"
 _pb "$_S"
 killall main_dds_controller
@@ -179,6 +172,13 @@ sudo systemctl daemon-reload
 sudo systemctl restart unit_switch_net.service
 sudo systemctl enable unit_switch_net.service
 _e $? "$_S"
+
+
+echo
+_S="[ DDU ] kill API, it will auto-start"
+_pb "$_S"
+killall main_api
+killall main_api_controller
 
 
 
