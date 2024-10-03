@@ -79,7 +79,8 @@ function install_ddh {
         _pb "[ 40% ] DDH using wheels for python v$PVV, armv7l"
         pip install --no-cache-dir "$FOL_DDT_WHL"/*cp"$PVV"*armv7l*.whl
     fi
-    pip install --no-cache-dir "$FOL_DDT_WHL"/*any.whl
+    # slightly different version than the API one
+    pip install --no-cache-dir "$FOL_DDT_WHL"/botocore-1.29.165-py3-none-any.whl
 
 
 
