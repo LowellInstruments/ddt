@@ -62,7 +62,7 @@ If there is one, also choose ``MAT update``. This will update the MAT library.
 
 
 
-## DDH Option - remote control with DWService
+## DDH Option - DWService Remote Control
 
 Please see document README.md for this.
 
