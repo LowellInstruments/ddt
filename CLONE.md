@@ -46,22 +46,6 @@ Power off the DDH and wait a couple more minutes while it is off.
 Power on again the DDH. Now it will boot.
 
 
-## Install DWService
-
-Create a new agent in your DWService account for this DDH. Next, open a terminal and paste:
-
-```console
-cd /home/pi/Downloads;
-chmod +x dwagent.sh;
-sudo ./dwagent.sh install
-```
-
-Select "Install" and accept the default options.
-Login to Dwservice with the accounbt you want to use for the DDH and add a new agent.
-Name the new agent with the DDH's serial number.
-Use the agent code from the website to finish the installation omn the DDH.
-Confirm that the connection works.
-
 ## Updating the new DDH
 
 Since this is cloned disk, it can contain slightly outdated DDH application or settings.
@@ -100,7 +84,7 @@ The repository ``ddt_quectel`` is already present in folder ``/home/pi/li/ddt_qu
 
 ## Adding the DDH to the Dashboard
 
-(JOAQUIM TODO) Add DDH to the VPN.
+Ask Lowell Instruments staff to add your DDH to the VPN.
 
 Press the "add new DDH" on the Dashboard main page.
 
