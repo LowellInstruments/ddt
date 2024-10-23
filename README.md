@@ -3,11 +3,6 @@
 Tools to set up a Rpi as a DDH. Don't manually run ```apt```. We take care of all.
 
 
-## Different Raspberry Pi hardware versions
-
-Read about them in document PI_HARDWARE.md.
-
-
 ## Remote access
 
 If you followed the steps in document ``BASE_LINUX.md``, your Rpi is in your wi-fi and can SSH to it.
