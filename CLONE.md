@@ -71,7 +71,7 @@ Please see document README.md for this.
 
 ## DDH Option - Power Shield
 
-In case you selected ``sailorhat``, please type the following when ``ddu`` is finished. 
+In case you need to change the power shield configuration of your DDH, please type the following: 
 
 ```console
 cd /home/pi/li/ddt;
