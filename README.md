@@ -44,7 +44,7 @@ cd /home/pi/li/ddt;
 ./dt_install_all.sh
 ````
 
-> &#1F4DD; _note:_ In case you select a ``sailorhat`` power shield, When asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
+> &#x1F4DD; _note:_ In case you select a ``sailorhat`` power shield, When asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
 
 The previous command will take about 15 minutes. Now reboot the DDH with:
 
