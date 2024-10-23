@@ -35,7 +35,7 @@ As destination, be sure to choose the board containing the empty SSD disk.
 Press "clone". It will take about 10 minutes.
 
 
-## Booting the newly cloned disk on a DDH
+## Boot the new cloned disk on a DDH
 
 Put the newly cloned destination SSD disk on a DDH. Power on the DDH. Wait a couple of minutes for it to boot.
 
@@ -60,36 +60,54 @@ Choose the option ``DDH update``. This will update the DDH application and API.
 
 If there is one, also choose ``MAT update``. This will update the MAT library.
 
-(JOAQUIM TODO) Once it is done, choose the option ``DDH provision``. This will update the DDH configuration settings.
 
-## Choosing the power shield option for the DDH
 
-Paste the commands below in the command line. 
 
-In case you select ``sailor-hat``, when asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
+## DDH Option - Power Shield
+
+In case you selected ``sailorhat``, please type the following when ``ddu`` is finished. 
 
 ```console
 cd /home/pi/li/ddt;
 ./dt_install_power.sh force
 ```
 
-## Customize the DDH
+When asked, ``enable`` the first option (RTC) and ``skip`` the remaining 3 (CAN, RS485, MAX-M8Q GNSS).
+
+
+
+## DDH Option - Cell Shield
 
 The firmware on the cell shield cannot be automated since the boards come from the provider with unknown version.
 
-Please check the document README.md, section ``Cell shield firmware update`` for this.
+If the cell shield firmware is from 2017 or 2019, it is outdated. You can check it with:
 
-The repository ``ddt_quectel`` is already present in folder ``/home/pi/li/ddt_quectel`` of your DDH.
+```console
+echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
+cat -v /dev/ttyUSB2
+```
+
+No answer? You might have the cell port in ``/dev/ttyUSB4``. 
+
+Re-run the command above replacing '2' with '4'.
+
+Please contact Lowell Instruments if you have an old version. 
+
+We can help you get it updated with our ``ddt_quectel`` tools.
 
 
-## Adding the DDH to the Dashboard
+
+
+## DDH Option - DDD Dashboard
 
 Ask Lowell Instruments staff to add your DDH to the VPN.
 
 Press the "add new DDH" on the Dashboard main page.
 
 
-## Check config.toml
+
+
+## DDH Option - file settings/config.toml
 
 See this DDH has credentials and monitored MACs.
 
