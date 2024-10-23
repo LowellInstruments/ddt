@@ -3,6 +3,8 @@
 Tools to set up a Rpi as a DDH. Don't manually run ```apt```. We take care of all.
 
 
+
+
 ## Remote access
 
 If you followed the steps in document ``BASE_LINUX.md``, your Rpi is in your wi-fi and can SSH to it.
@@ -21,6 +23,8 @@ If DWS complains about Wayland, switch to X11 with option ```6 / A6``` in:
 ```console
 sudo raspi-config
 ```
+
+
 
 ## Turning a raspberry into a DDH
 
@@ -46,22 +50,7 @@ The previous command will take about 15 minutes. Now reboot the DDH with:
 reboot
 ```` 
 
-## Cell shield firmware update
 
-If the cell shield firmware is from 2017 or 2019, it is outdated. You can check it with:
-
-```console
-echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && \
-cat -v /dev/ttyUSB2
-```
-
-No answer? You might have the cell port in ``/dev/ttyUSB4``. 
-
-Re-run the command above replacing '2' with '4'.
-
-Please contact Lowell Instruments if you have an old version. 
-
-We can help you get it updated with our ``ddt_quectel`` tools.
 
 
 ## Post configuration
