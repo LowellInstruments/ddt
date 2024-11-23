@@ -9,17 +9,17 @@ echo "usage: <name> branch_ddt branch_ddh"
 
 # constants
 if [ -z "$1" ]; then BRANCH_DDT=toml; else BRANCH_DDT=$1; fi
-if [ -z "$2" ]; then BRANCH_DDH=toml; else BRANCH_DDH=$1; fi
+if [ -z "$2" ]; then BRANCH_DDH=toml; else BRANCH_DDH=$2; fi
 
 
 
 echo
-_S="[ DDU ] install DDT"
+_S="[ DDU ] install DDT branch $BRANCH_DDT"
 _pb "$_S"
 cd "$FOL_DDT" && \
-    (git checkout -fb $BRANCH_DDT || git checkout $BRANCH_DDT) && \
-    git fetch origin $BRANCH_DDT:refs/remotes/origin/$BRANCH_DDT --depth 1 && \
-    git reset --hard origin/$BRANCH_DDT
+    (git checkout -fb "$BRANCH_DDT" || git checkout "$BRANCH_DDT") && \
+    git fetch origin "$BRANCH_DDT":refs/remotes/origin/"$BRANCH_DDT" --depth 1 && \
+    git reset --hard origin/"$BRANCH_DDT"
 _e $? "$_S"
 
 
@@ -34,12 +34,12 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] install DDH"
+_S="[ DDU ] install DDH branch $BRANCH_DDH"
 _pb "$_S"
 cd "$FOL_DDH" && \
-    (git checkout -fb $BRANCH_DDH || git checkout $BRANCH_DDH) && \
-    git fetch origin $BRANCH_DDH:refs/remotes/origin/$BRANCH_DDH --depth 1 && \
-    git reset --hard origin/$BRANCH_DDH
+    (git checkout -fb "$BRANCH_DDH" || git checkout "$BRANCH_DDH") && \
+    git fetch origin "$BRANCH_DDH":refs/remotes/origin/"$BRANCH_DDH" --depth 1 && \
+    git reset --hard origin/"$BRANCH_DDH"
 _e $? "$_S"
 
 
