@@ -25,10 +25,19 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] install MAT"
+_S="[ DDU ] get MAT"
 _pb "$_S"
-pip install --upgrade --no-deps --force-reinstall \
-    mat@git+https://github.com/LowellInstruments/mat.git
+if [ ! -d "$FOL_MAT" ]; then
+    git clone https://github.com/LowellInstruments/mat.git
+fi
+_e $? "$_S"
+
+
+
+_S="[ DDU ] install MAT"
+cd "$FOL_MAT" && \
+    git pull &&
+    pip install --upgrade --no-deps --force-reinstall .
 _e $? "$_S"
 
 
@@ -37,6 +46,7 @@ echo
 _S="[ DDU ] install DDH branch $BRANCH_DDH"
 _pb "$_S"
 cd "$FOL_DDH" && \
+    git remote update origin --prune && \
     (git checkout -fb "$BRANCH_DDH" || git checkout "$BRANCH_DDH") && \
     git fetch origin "$BRANCH_DDH":refs/remotes/origin/"$BRANCH_DDH" --depth 1 && \
     git reset --hard origin/"$BRANCH_DDH"
