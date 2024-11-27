@@ -6,6 +6,9 @@ clear
 echo "usage: <name> branch_ddt branch_ddh"
 
 
+FOL_DDT_MAT=$FOL_LI/mat
+
+
 
 # constants
 if [ -z "$1" ]; then BRANCH_DDT=toml; else BRANCH_DDT=$1; fi
@@ -27,8 +30,8 @@ _e $? "$_S"
 echo
 _S="[ DDU ] get MAT"
 _pb "$_S"
-if [ ! -d "$FOL_MAT" ]; then
-    git clone https://github.com/LowellInstruments/mat.git "$FOL_MAT"
+if [ ! -d "$FOL_DDT_MAT" ]; then
+    git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
 fi
 _e $? "$_S"
 
@@ -36,7 +39,7 @@ _e $? "$_S"
 
 _S="[ DDU ] install MAT"
 cd "$FOL_MAT" && \
-    git pull &&
+    git pull --depth 1 &&
     pip install --upgrade --no-deps --force-reinstall "$FOL_MAT"
 _e $? "$_S"
 
