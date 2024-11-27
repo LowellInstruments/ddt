@@ -28,7 +28,7 @@ echo
 _S="[ DDU ] get MAT"
 _pb "$_S"
 if [ ! -d "$FOL_MAT" ]; then
-    git clone https://github.com/LowellInstruments/mat.git
+    git clone https://github.com/LowellInstruments/mat.git "$FOL_MAT"
 fi
 _e $? "$_S"
 
