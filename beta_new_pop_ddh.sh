@@ -41,7 +41,7 @@ _S="[ DDU ] install MAT"
 cd "$FOL_DDT_MAT" && \
     git config pull.rebase false && \
     git pull --depth 1 &&
-    pip install --upgrade --no-deps --force-reinstall "$FOL_DDT_MAT"
+    pip install --no-deps "$FOL_DDT_MAT"
 _e $? "$_S"
 
 
