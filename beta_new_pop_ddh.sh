@@ -37,7 +37,7 @@ _e $? "$_S"
 _S="[ DDU ] install MAT"
 cd "$FOL_MAT" && \
     git pull &&
-    pip install --upgrade --no-deps --force-reinstall .
+    pip install --upgrade --no-deps --force-reinstall "$FOL_MAT"
 _e $? "$_S"
 
 
