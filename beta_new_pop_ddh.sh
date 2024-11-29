@@ -25,6 +25,14 @@ _e $? "$_S"
 
 
 echo
+_S="[ DDU ] activate DDH virtual environment"
+_pb "$_S"
+source "$FOL_VEN"/bin/activate
+_e $? "$_S"
+
+
+
+echo
 _S="[ DDU ] install MAT"
 _pb "$_S"
 pip install --upgrade --no-deps --force-reinstall \
@@ -47,7 +55,6 @@ _e $? "$_S"
 echo
 _S="[ DDU ] install DDH extra requirements"
 _pb "$_S"
-source "$FOL_VEN"/bin/activate && \
 pip3 install -r "$FOL_DDH"/requirements_extra.txt
 _e $? "$_S"
 
