@@ -3,13 +3,16 @@
 
 source /home/pi/li/ddh/scripts/utils.sh
 clear
-echo "usage: <name> branch_ddt branch_ddh"
+
+
+FOL_DDT_MAT=$FOL_LI/mat
+BRANCH_DDT=toml
 
 
 
 # constants
-if [ -z "$1" ]; then BRANCH_DDT=toml; else BRANCH_DDT=$1; fi
-if [ -z "$2" ]; then BRANCH_DDH=toml; else BRANCH_DDH=$2; fi
+if [ "$#" -ne 1 ]; then echo "usage: $0 <branch_ddh_name>"; exit 1; fi
+if [ -z "$1" ]; then BRANCH_DDH=toml; else BRANCH_DDH=$1; fi
 
 
 
@@ -33,10 +36,20 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] install MAT"
+_S="[ DDU ] get MAT"
 _pb "$_S"
-pip install --upgrade --no-deps --force-reinstall \
-    mat@git+https://github.com/LowellInstruments/mat.git
+if [ ! -d "$FOL_DDT_MAT" ]; then
+    git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
+fi
+_e $? "$_S"
+
+
+
+_S="[ DDU ] install MAT"
+cd "$FOL_DDT_MAT" && \
+    git config pull.rebase false && \
+    git pull --depth 1 &&
+    pip install --no-deps "$FOL_DDT_MAT"
 _e $? "$_S"
 
 
@@ -45,6 +58,7 @@ echo
 _S="[ DDU ] install DDH branch $BRANCH_DDH"
 _pb "$_S"
 cd "$FOL_DDH" && \
+    git remote update origin --prune && \
     (git checkout -fb "$BRANCH_DDH" || git checkout "$BRANCH_DDH") && \
     git fetch origin "$BRANCH_DDH":refs/remotes/origin/"$BRANCH_DDH" --depth 1 && \
     git reset --hard origin/"$BRANCH_DDH"
