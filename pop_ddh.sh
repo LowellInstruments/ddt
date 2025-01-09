@@ -79,6 +79,7 @@ cp "$FOL_DDH"/scripts/script_logger_dox_deploy_cfg.json $FTS
 _e $? "$_S"
 # might be there or not
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS
+cp "$FOL_DDH"/.decided_scf_*.toml $FTS
 
 
 
@@ -109,6 +110,7 @@ cp $FTS/script_logger_dox_deploy_cfg.json "$FOL_DDH"/scripts
 _e $? "$_S"
 # might be there or not
 cp $FTS/db_his.json "$FOL_DDH"/ddh/db
+cp $FTS/.decided_scf_*.toml "$FOL_DDH"
 
 
 
