@@ -48,37 +48,35 @@ function install_power {
 
 
     # install sailor_hat shield
-    SAH="$FOL_LI"/sailorhat
     if [ -f "$DDH_USES_SHIELD_SAILOR" ]; then
-        _pb "we are about to install the shield sailor_hat"
-        _pb "press \"enter\" once and answer the questions as follows:"
-        _pb "    - ENABLE the first one, on-board RTC"
-        _pb "    - SKIP the rest:"
-        _pb "            - CAN interface"
-        _pb "            - RS485 interface"
-        _pb "            - MAX-M8Q GNSS interface"
-        _pb
-        read -r
         sudo rm -rf "$J4H"
-        pip uninstall shrpi --break-system-packages
-        curl -L \
-        https://raw.githubusercontent.com/hatlabs/SH-RPi-daemon/main/install-online.sh \
-        | sudo bash
-        _e $? "sailor_hat install"
 
 
-        _pb 'modifying sailor_hat settings'
-        vv=$(python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
-        c_sailor_p=/usr/local/lib/shrpid/lib/python"$vv"/site-packages/shrpi/
-        sudo cp "$FOL_DDT"/_dt_files/sailor_const.py "$c_sailor_p"/const.py
-        sudo cp "$FOL_DDT"/_dt_files/sailor_sm.py "$c_sailor_p"/state_machine.py
-        _e $? "sailor_hat modifying settings"
+        _pb "unzipping sailorhat folder"
+        FOL_TMP_SAH=/tmp/my_sailorhat
+        rm -rf $FOL_TMP_SAH 2> /dev/null
+        unzip "$FOL_DDT"/_dt_files/sh_rpi_daemon_226.zip -d $FOL_TMP_SAH
+        _e $? "unzipping sailor_hat"
+
+
+        _pb "modifying sailorhat couple of files"
+        cp "$FOL_DDT"/_dt_files/sailor_const.py /tmp/my_sailorhat/src/shrpi/const.py
+        cp "$FOL_DDT"/_dt_files/sailor_sm.py /tmp/my_sailorhat/src/shrpi/state_machine.py
+        _e $? "modifying sailor_hat"
+
+
+        _pb "installing modified sailorhat"
+        cd $FOL_TMP_SAH && \
+        sudo ./install.sh --enable RTC
+        _e $? "installing sailor_hat"
 
 
         _pb 'creating sailor_hat pop-up'
-        mkdir "$SAH"
-        sudo cp "$FOL_DDT"/_dt_files/popup_sah.sh "$SAH"
-        _e $? "sailor_hat modifying settings"
+        FOL_SAH="$FOL_LI"/sailorhat
+        rm -rf "$FOL_SAH" 2> /dev/null
+        mkdir "$FOL_SAH"
+        sudo cp "$FOL_DDT"/_dt_files/popup_sah.sh "$FOL_SAH"
+        _e $? "sailor_hat pop-up"
 
 
 
