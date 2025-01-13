@@ -52,11 +52,11 @@ function install_power {
         sudo rm -rf "$J4H"
 
 
-        _pb "cloning latest sailorhat repo"
+        _pb "unzipping sailorhat folder"
         FOL_TMP_SAH=/tmp/my_sailorhat
         rm -rf $FOL_TMP_SAH 2> /dev/null
-        git clone https://github.com/hatlabs/SH-RPi-daemon $FOL_TMP_SAH
-        _e $? "cloning sailor_hat"
+        unzip "$FOL_DDT"/_dt_files/sh_rpi_daemon_226.zip -d $FOL_TMP_SAH
+        _e $? "unzipping sailor_hat"
 
 
         _pb "modifying sailorhat couple of files"
