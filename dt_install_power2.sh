@@ -48,18 +48,35 @@ function install_power {
 
 
     # install sailor_hat shield
-    SAH="$FOL_LI"/sailorhat
     if [ -f "$DDH_USES_SHIELD_SAILOR" ]; then
         sudo rm -rf "$J4H"
 
-        _pb "running local sailorhat install"
-        sudo "$FOL_DDT"/_dt_files/SH-RPi-daemon/install.sh --enable RTC
+
+        _pb "cloning latest sailorhat repo"
+        FOL_TMP_SAH=/tmp/my_sailorhat
+        rm -rf $FOL_TMP_SAH 2> /dev/null
+        git clone https://github.com/hatlabs/SH-RPi-daemon $FOL_TMP_SAH
+        _e $? "cloning sailor_hat"
+
+
+        _pb "modifying sailorhat couple of files"
+        cp "$FOL_DDT"/_dt_files/sailor_const.py /tmp/my_sailorhat/src/shrpi/const.py
+        cp "$FOL_DDT"/_dt_files/sailor_sm.py /tmp/my_sailorhat/src/shrpi/state_machine.py
+        _e $? "modifying sailor_hat"
+
+
+        _pb "installing modified sailorhat"
+        cd $FOL_TMP_SAH && \
+        sudo ./install.sh --enable RTC
+        _e $? "installing sailor_hat"
 
 
         _pb 'creating sailor_hat pop-up'
-        mkdir "$SAH"
-        sudo cp "$FOL_DDT"/_dt_files/popup_sah.sh "$SAH"
-        _e $? "sailor_hat modifying settings"
+        FOL_SAH="$FOL_LI"/sailorhat
+        rm -rf "$FOL_SAH" 2> /dev/null
+        mkdir "$FOL_SAH"
+        sudo cp "$FOL_DDT"/_dt_files/popup_sah.sh "$FOL_SAH"
+        _e $? "sailor_hat pop-up"
 
 
 
