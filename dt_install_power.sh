@@ -55,7 +55,7 @@ function install_power {
         _pb "unzipping sailorhat folder"
         FOL_TMP_SAH=/tmp/my_sailorhat
         rm -rf $FOL_TMP_SAH 2> /dev/null
-        unzip "$FOL_DDT"/_dt_files/sh_rpi_daemon_226.zip -d $FOL_TMP_SAH
+        unzip "$FOL_DDT"/_dt_files/sh_rpi_daemon_224.zip -d $FOL_TMP_SAH
         _e $? "unzipping sailor_hat"
 
 
