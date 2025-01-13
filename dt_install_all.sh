@@ -7,6 +7,7 @@ echo
 
 source dt_install_check.sh
 source dt_install_custom_box.sh
+source dt_install_power.sh
 source dt_install_linux.sh
 source dt_install_linux_bluez.sh
 source dt_install_ddh.sh
@@ -24,6 +25,7 @@ source dt_install_display_calib.sh
 if [ "$1" == "skip_ppp" ]; then
     install_check && \
     install_custom && \
+    install_power && \
     install_linux && \
     install_bluez && \
     install_ddh && \
@@ -38,6 +40,7 @@ if [ "$1" == "skip_ppp" ]; then
 else
     install_check && \
     install_custom && \
+    install_power && \
     install_linux && \
     install_bluez && \
     install_ddh && \
