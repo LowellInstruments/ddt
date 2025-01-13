@@ -60,13 +60,13 @@ function install_power {
 
 
         _pb "modifying sailorhat couple of files"
-        cp "$FOL_DDT"/_dt_files/sailor_const.py $FOL_TMP_SAH/SH-RPi-daemon/src/shrpi/const.py
-        cp "$FOL_DDT"/_dt_files/sailor_sm.py $FOL_TMP_SAH/SH-RPi-daemon/src/shrpi/state_machine.py
+        cp "$FOL_DDT"/_dt_files/sailor_const.py $FOL_TMP_SAH/SH-RPi-daemon-2.2.4/src/shrpi/const.py
+        cp "$FOL_DDT"/_dt_files/sailor_sm.py $FOL_TMP_SAH/SH-RPi-daemon-2.2.4/src/shrpi/state_machine.py
         _e $? "modifying sailor_hat"
 
 
         _pb "installing modified sailorhat"
-        cd $FOL_TMP_SAH/SH-RPi-daemon && \
+        cd $FOL_TMP_SAH/SH-RPi-daemon-2.2.4 && \
         sudo ./install.sh --enable RTC
         _e $? "installing sailor_hat"
 
