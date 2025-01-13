@@ -41,12 +41,6 @@ function install_custom {
     esac
 
 
-    echo
-    read -rp "Does this DDH use a cell shield with SIXFAB SIM? (y/n) " choice
-    case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_CELL_SIXFAB"; printf 'set cell shield with sixfab flag OK\n';;
-    esac
-
 
     echo
     read -rp "Does this DDH use a cell shield with TWILIO SIM? (y/n) " choice
@@ -56,20 +50,10 @@ function install_custom {
 
 
     echo
-    read -rp "Does this DDH use juice_for_halt shield? (y/n) " choice
+    read -rp "Does this DDH use a cell shield with SIXFAB SIM? (y/n) " choice
     case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
+        y|Y ) touch "$DDH_USES_SHIELD_CELL_SIXFAB"; printf 'set cell shield with sixfab flag OK\n';;
     esac
-
-
-    # omit if we already know we are using J4H
-    if [ "$choice" != 'y' ] && [ "$choice" != 'Y' ]; then
-        echo
-        read -rp "Does this DDH use sailor hat shield? (y/n) " choice
-        case "$choice" in
-            y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
-        esac
-    fi
 }
 
 if [ "$1" == "force" ]; then install_custom; fi
