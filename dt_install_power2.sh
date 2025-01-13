@@ -53,7 +53,7 @@ function install_power {
         sudo rm -rf "$J4H"
 
         _pb "running local sailorhat install"
-        sudo "$FOL_DDT"/_dt_files/install.sh --enable RTC
+        sudo "$FOL_DDT"/_dt_files/SH-RPi-daemon/install.sh --enable RTC
 
 
         _pb 'creating sailor_hat pop-up'
