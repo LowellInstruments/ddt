@@ -41,17 +41,16 @@ function install_custom {
     esac
 
 
-    echo
-    read -rp "Set DDH cell with TWILIO SIM? (y/n) " choice
-    case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_CELL_TWILIO"; printf 'set cell shield with twilio flag OK\n';;
-    esac
-
 
     echo
     read -rp "Set DDH cell with SIXFAB SIM? (y/n) " choice
     case "$choice" in
         y|Y ) touch "$DDH_USES_SHIELD_CELL_SIXFAB"; printf 'set cell shield with sixfab flag OK\n';;
+    esac
+    echo
+    read -rp "Alternatively, set DDH cell with TWILIO SIM? (y/n) " choice
+    case "$choice" in
+        y|Y ) touch "$DDH_USES_SHIELD_CELL_TWILIO"; printf 'set cell shield with twilio flag OK\n';;
     esac
 }
 

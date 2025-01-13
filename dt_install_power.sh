@@ -13,20 +13,19 @@ function install_power {
 
 
 
-    read -rp "Does this DDH use juice_for_halt shield? (y/n) " choice
+    read -rp "Set DDH for POWER shield sailorhat? (y/n) " choice
     case "$choice" in
-        y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
+        y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
     esac
 
 
-    # omit if we already know we are using J4H
+    # omit if we already know we are using sailorhat
     if [ "$choice" != 'y' ] && [ "$choice" != 'Y' ]; then
-        read -rp "Does this DDH use sailor hat shield? (y/n) " choice
+        read -rp "Set DDH for POWER shield juice_for_halt? (y/n) " choice
         case "$choice" in
-            y|Y ) touch "$DDH_USES_SHIELD_SAILOR"; printf 'set sailor shield flag OK\n';;
+            y|Y ) touch "$DDH_USES_SHIELD_JUICE4HALT"; printf 'set j4h shield flag OK\n';;
         esac
     fi
-
 
 
     # install stuff only on pure LI DDH such as wiringpi and juice4halt
