@@ -60,8 +60,8 @@ function install_power {
 
 
         _pb "modifying sailorhat couple of files"
-        cp "$FOL_DDT"/_dt_files/sailor_const.py /tmp/my_sailorhat/src/shrpi/const.py
-        cp "$FOL_DDT"/_dt_files/sailor_sm.py /tmp/my_sailorhat/src/shrpi/state_machine.py
+        cp "$FOL_DDT"/_dt_files/sailor_const.py /tmp/my_sailorhat/SH-RPi-daemon/src/shrpi/const.py
+        cp "$FOL_DDT"/_dt_files/sailor_sm.py /tmp/my_sailorhat/SH-RPi-daemon/src/shrpi/state_machine.py
         _e $? "modifying sailor_hat"
 
 
