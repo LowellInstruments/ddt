@@ -28,8 +28,9 @@ rv=$?
 if [ $rv -ne 0 ]; then
     _S="[ DDU ] install DDT branch $BRANCH_DDT, attempt 2"
     _pb "$_S"
-    rm -rf "$FOL_DDT" && \
-    git clone https://github.com/lowellinstruments/ddt.git --branch $BRANCH_DDT --depth 1
+    cd "$FOL_DDT" && \
+    git reset --hard && \
+    git pull --depth 1
     _e $? "$_S"
 fi
 
