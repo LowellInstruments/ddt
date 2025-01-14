@@ -78,7 +78,7 @@ function install_alias {
     if [ $rv -ne 0 ]; then
         echo "alias ddu2=\"$F_IN/ddu2.sh\"" >> $F_RC
     fi
-    sudo chmod +x $F_IN/ddu2
+    sudo chmod +x $F_IN/ddu2.sh
     _e $? "installing ddu2"
 
 }
