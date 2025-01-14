@@ -24,7 +24,16 @@ cd "$FOL_DDT" && \
     (git checkout -fb "$BRANCH_DDT" || git checkout "$BRANCH_DDT") && \
     git fetch origin "$BRANCH_DDT":refs/remotes/origin/"$BRANCH_DDT" --depth 1 && \
     git reset --hard origin/"$BRANCH_DDT"
-_e $? "$_S"
+rv=$?
+if [ $rv -ne 0 ]; then
+    _S="[ DDU ] install DDT branch $BRANCH_DDT, attempt 2"
+    _pb "$_S"
+    cd "$FOL_DDT" && \
+    (git checkout -fb "$BRANCH_DDT" || git checkout "$BRANCH_DDT") && \
+    git reset --hard && \
+    git pull --depth 1
+    _e $? "$_S"
+fi
 
 
 
