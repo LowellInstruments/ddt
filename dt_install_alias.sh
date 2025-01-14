@@ -71,12 +71,12 @@ function install_alias {
 
 
     _pb "alias ddu2"
-    sudo cp "$FOL_DDT"/_dt_files/ddu2 $F_IN
+    sudo cp "$FOL_DDT"/_dt_files/ddu2.sh $F_IN
     _e $? "install ddu2"
     grep 'alias ddu2' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
-        echo "alias ddu2=\"$F_IN/ddu2\"" >> $F_RC
+        echo "alias ddu2=\"$F_IN/ddu2.sh\"" >> $F_RC
     fi
     sudo chmod +x $F_IN/ddu2
     _e $? "installing ddu2"
