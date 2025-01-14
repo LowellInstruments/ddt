@@ -67,7 +67,20 @@ function install_alias {
         echo "alias ddu=\"$F_IN/cm /etc/cmu.conf\"" >> $F_RC
     fi
     sudo chmod +x $F_IN/cm
-    _e $? "install climenu alias"
+    _e $? "installing climenu"
+
+
+    _pb "alias ddu2"
+    sudo cp "$FOL_DDT"/_dt_files/ddu2 $F_IN
+    _e $? "install ddu2"
+    grep 'alias ddu2' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        echo "alias ddu2=\"$F_IN/ddu2\"" >> $F_RC
+    fi
+    sudo chmod +x $F_IN/ddu2
+    _e $? "installing ddu2"
+
 }
 
 
