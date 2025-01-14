@@ -37,19 +37,25 @@ _e $? "$_S"
 
 
 echo
+if [ -d "$FOL_DDT_MAT" ]; then
+  _S="[DDU] deleting old MAT library cloned repo"
+  _pb "$_S"
+  rm -rf "$FOL_DDT_MAT"
+  _e $? "$_S"
+fi
+
+
+
+echo
 _S="[ DDU ] clone MAT to $FOL_DDT_MAT"
 _pb "$_S"
-if [ ! -d "$FOL_DDT_MAT" ]; then
-    git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
-fi
+git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
 _e $? "$_S"
 
 
 
 _S="[ DDU ] install MAT"
 cd "$FOL_DDT_MAT" && \
-    git config pull.rebase false && \
-    git pull --depth 1 &&
     pip install --no-deps "$FOL_DDT_MAT"
 _e $? "$_S"
 
