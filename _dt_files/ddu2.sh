@@ -38,7 +38,7 @@ _e $? "$_S"
 
 echo
 if [ -d "$FOL_DDT_MAT" ]; then
-  _S="[DDU] deleting old MAT library cloned repo"
+  _S="[ DDU ] deleting old MAT library cloned repo"
   _pb "$_S"
   rm -rf "$FOL_DDT_MAT"
   _e $? "$_S"
@@ -47,7 +47,7 @@ fi
 
 
 echo
-_S="[ DDU ] clone MAT to $FOL_DDT_MAT"
+_S="[ DDU ] clone MAT source code to $FOL_DDT_MAT"
 _pb "$_S"
 git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
 _e $? "$_S"
