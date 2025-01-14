@@ -7,11 +7,12 @@ clear
 
 FOL_DDT_MAT=$FOL_LI/mat
 BRANCH_DDT=toml
+# usage: ddu2 <branch_DDH_notDDT_name>
 
 
 
 # constants
-if [ "$#" -ne 1 ]; then echo "usage: $0 <branch_ddh_name>"; exit 1; fi
+if [ "$#" -gt 1 ]; then echo "error: $0 max parameter number is 1"; exit 1; fi
 if [ -z "$1" ]; then BRANCH_DDH=toml; else BRANCH_DDH=$1; fi
 
 
