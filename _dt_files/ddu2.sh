@@ -37,7 +37,7 @@ _e $? "$_S"
 
 
 echo
-_S="[ DDU ] get MAT"
+_S="[ DDU ] clone MAT to $FOL_DDT_MAT"
 _pb "$_S"
 if [ ! -d "$FOL_DDT_MAT" ]; then
     git clone https://github.com/LowellInstruments/mat.git "$FOL_DDT_MAT" --depth 1
