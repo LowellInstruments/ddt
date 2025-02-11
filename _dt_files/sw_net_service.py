@@ -28,12 +28,9 @@ def _sh(s: str) -> bool:
     return rv.returncode == 0
 
 
-g_debug = 0
-
-
 def _z(s):
-    # helps developing
-    if g_debug:
+    fixed_sleeping_while_developing = 0
+    if fixed_sleeping_while_developing:
         return 5
 
     if s == 'wifi':
@@ -51,7 +48,7 @@ def main() -> int:
     wlan_used = _sh(f'ip route get {IP} | grep wlan0')
 
     if wlan_via and wlan_used:
-        #_p('wifi')
+        _p('wifi')
         return _z('wifi')
 
     if wlan_via and not wlan_used:
@@ -64,7 +61,7 @@ def main() -> int:
     cell_used = _sh(f'ip route get {IP} | grep ppp0')
 
     if cell_via and cell_used:
-        #_p('cell')
+        _p('cell')
         return _z('cell')
 
     if cell_via and not cell_used:
