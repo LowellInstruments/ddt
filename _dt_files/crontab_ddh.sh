@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-# don't run if BRT tool is running
+# don't run when BRT tool is running
 ps -aux | grep main_brt | grep -v grep
 rv=$?
 if [ $rv -eq 0 ]; then
@@ -10,10 +10,23 @@ if [ $rv -eq 0 ]; then
 fi
 
 
+# run DDS if NOT already running
+pgrep -f run_dds.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    /home/pi/li/ddh/run_dds.sh&
+fi
 
-/home/pi/li/ddh/run_dds.sh&
 
-/home/pi/li/ddh/run_ddh.sh&
+
+# run DDH if NOT already running
+pgrep -f run_ddh.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    /home/pi/li/ddh/run_ddh.sh&
+fi
+
+
 
 # so it does not leave instantaneously
 read -r
