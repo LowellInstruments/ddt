@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
-# this sleep allows the API to answer while being killed
-sleep 2
-/home/pi/li/ddh/run_api.sh&
+
+# run API if NOT already running
+pgrep -f run_api.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    /home/pi/li/ddh/run_api.sh&
+fi
