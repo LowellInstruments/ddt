@@ -64,9 +64,10 @@ def main() -> int:
         _p('cell')
         return _z('cell')
 
+    # do NOT move this inside the condition
+    _sh(f'{c_im} wlan0 400')
+    _sh(f'{c_im} ppp0 0')
     if cell_via and not cell_used:
-        _sh(f'{c_im} wlan0 400')
-        _sh(f'{c_im} ppp0 0')
         _p('* cell *')
         return _z('cell')
 
