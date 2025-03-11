@@ -61,6 +61,10 @@ function install_alias {
     if [ $rv -ne 0 ]; then
         echo "alias ddi=\"$F_IN/cm /etc/cmi.conf\"" >> $F_RC
     fi
+
+    # -------------------------------
+    # DDU has an entry with climenu
+    # -------------------------------
     grep 'alias ddu' $F_RC
     rv=$?
     if [ $rv -ne 0 ]; then
@@ -70,6 +74,9 @@ function install_alias {
     _e $? "installing climenu"
 
 
+    # ----------------------------------------
+    # DDU2 has NOT an entry with climenu yet
+    # ----------------------------------------
     _pb "alias ddu2"
     sudo cp "$FOL_DDT"/_dt_files/ddu2.sh $F_IN
     _e $? "install ddu2"
