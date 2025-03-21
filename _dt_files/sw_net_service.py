@@ -36,7 +36,7 @@ def _z(s):
     if s == 'wifi':
         return 10
     if s == 'cell':
-        return 20
+        return 60
     # none
     return 10
 
