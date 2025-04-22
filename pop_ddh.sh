@@ -23,6 +23,15 @@ _e $? "$_S"
 
 
 echo
+_S="[ DDU ] updating file /etc/ppp/options"
+_pb "$_S"
+sudo cp _dt_files/options /etc/ppp/options
+_e $? "$_S"
+
+
+
+
+echo
 _S="[ DDU ] uninstall previous MAT library"
 _pb "$_S"
 "$FOL_VEN"/bin/pip3 uninstall -y mat
