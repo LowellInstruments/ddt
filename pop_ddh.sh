@@ -76,6 +76,12 @@ _e $? "cannot copy MAT commit file to /etc/"
 
 
 
+# removing weird files
+rm "$FOL_DDH"/prova.py
+
+
+
+
 
 echo
 _S="[ DDU ] stash and backup current DDH configuration files"
