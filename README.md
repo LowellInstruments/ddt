@@ -11,7 +11,7 @@ If you followed the steps in document ``BASE_LINUX.md``, your Rpi is in your wi-
 
 You can install an additional remote control tool called DWService, by opening a terminal and doing:
 
-```
+```console
 cd /home/pi/Downloads;
 wget https://www.dwservice.net/download/dwagent.sh;
 chmod +x dwagent.sh;
@@ -24,6 +24,12 @@ If DWS complains about Wayland, switch to X11 with option ```6 / A6``` in:
 sudo raspi-config
 ```
 
+To remove DWService and reinstall on another account
+```console
+cd /home/pi/Downloads;
+sudo ./dwagent.sh uninstall
+```
+Then reinstall the agent (see above).
 
 
 ## Turning a raspberry into a DDH
