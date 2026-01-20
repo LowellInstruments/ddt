@@ -7,7 +7,7 @@ function install_check {
     title dt_check
 
     if [ "$(pwd)" != "$FOL_DDT" ]; then
-        _pr "error dt_check: working_dir should be $FOL"
+        _pr "error dt_check: working_dir should be $FOL_DDT"
         exit 1
     fi
 
