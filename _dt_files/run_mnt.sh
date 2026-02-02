@@ -9,8 +9,8 @@ F_VE=/home/pi/venv_gor
 
 (source $F_VE/bin/activate &&  \
 cd /home/pi && \
-"$F_VE"/bin/python3 main_mnt.py) || \
-echo "error: cannot run main_mnt.py"
+"$F_VE"/bin/python3 main_mnt.cpython-311.pyc) || \
+echo "error: cannot run main_mnt.cpython-311.pyc"
 
 
 # proof it ran

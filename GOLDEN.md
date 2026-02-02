@@ -88,11 +88,11 @@ cd /li/ddt                                                                  && \
 **Install GOR virtual environment** for alarm script, type:
 
 ```sh
-python3 -m venv /home/pi/venv_gor                    && \
-source /home/pi/venv_gor/bin/activate                && \
-/home/pi/venv_gor/bin/pip3 install boto3 pyserial    && \
-deactivate                                           && \
-cp /li/ddt/_dt_files/main_mnt.py /home/pi            && \
+python3 -m venv /home/pi/venv_gor                                 && \
+source /home/pi/venv_gor/bin/activate                             && \
+/home/pi/venv_gor/bin/pip3 install boto3 pyserial                 && \
+deactivate                                                        && \
+cp /li/ddt/_dt_files/main_mnt.cpython-311.pyc /home/pi            && \
 cp /li/ddt/_dt_files/run_mnt.sh /home/pi
 ```
 
