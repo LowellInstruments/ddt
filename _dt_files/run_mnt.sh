@@ -2,6 +2,7 @@
 
 # ------------------------------------------------------
 # MNT: checks /home/pi/li on 3rd partition is mountable
+# the source code of py file is in repo soft_secrets
 # ------------------------------------------------------
 
 F_VE=/home/pi/venv_gor
