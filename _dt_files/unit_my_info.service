@@ -1,0 +1,11 @@
+[Unit]
+Description=Lowell Instruments Basic Box info service
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/python3 /home/pi/li/ddt/_dt_files/service_my_info.py
+
+[Install]
+WantedBy=multi-user.target

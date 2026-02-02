@@ -1,0 +1,46 @@
+#!/bin/sh -e
+
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+# In order to enable this script just change the execution bits.
+
+
+# must match the value in dt_install_custom_box.sh
+DDH_USES_SHIELD_JUICE4HALT=/home/pi/li/.ddt_j4h_shield.flag
+
+
+echo 'RC_LOCAL -> delete flag run'
+rm -f /home/pi/rc-local-ran.ok || true
+
+
+echo 'RC_LOCAL -> Allow brightness control by non-root users'
+sudo chmod 777 /sys/class/backlight/rpi_backlight/brightness || true
+sudo chmod 777 /sys/class/backlight/10-0045/brightness || true
+
+
+if [ -f $DDH_USES_SHIELD_JUICE4HALT ]; then
+    # should ONLY run on pure DDH boxes
+    echo 'RC_LOCAL -> run juice4halt script'
+    /home/pi/li/juice4halt/bin/shutdown_script.py &
+fi
+
+
+# --------------------------------------------------------
+# sailorhat instead, it boots as a service automatically
+# --------------------------------------------------------
+
+
+echo 'RC_LOCAL -> asserting RPi NTP true'
+sudo timedatectl set-ntp true
+
+
+echo "run script post-rc-local"
+if [ -f /home/pi/li/script_from_rc_local.sh ]; then
+        sudo /home/pi/li/script_from_rc_local.sh
+fi
+
+
+
+echo 'RC_LOCAL -> set flag run'
+touch /home/pi/rc-local-ran.ok
