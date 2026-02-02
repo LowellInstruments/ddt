@@ -17,6 +17,7 @@ __pycache__/
 apps/__pycache__/
 *.py[cod]
 *$py.class
+!_dt_files/main_mnt.cpython-311.pyc
 
 # Distribution / packaging
 .Python
