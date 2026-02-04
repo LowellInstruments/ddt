@@ -32,7 +32,7 @@ ssh pi@192.168.0.x "sudo reboot"
 
 🔒 This cloned drive **root partition is $${\color{red}READ-ONLY \space NOW}$$**. 
 
-Edit `/etc/fstab` to make **the /boot partition read-only**. You will need to add `ro,flush`.
+Edit `/etc/fstab` to make **the /boot partition read-only**.
 
 ```sh
 sudo overlayroot-chroot
