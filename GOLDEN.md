@@ -18,15 +18,17 @@ Choose to `Apply` all these settings.
 
 ## Use target DDH
 
-⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH so it **expands the filesystem**. 
+⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH.
+
+📁 This step automatically **expands the filesystem**. 
 
 Then shutdown DDH and **remove disk**.
 
-## Use separate DDH already running
+## Use another DDH already running
 
 **Insert the microSD card** or SSD disk.
 
-Install and run `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
+🇵 Install and run `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
 
 **Remove** microSD card or disk.
 
@@ -51,9 +53,9 @@ sudo systemctl start ssh && sudo systemctl enable ssh
 To start with a fresh package base in this OS, you might need:
 
 ```sh
-sudo rm -rf /var/lib/apt/lists/*            && \
-sudo apt update                             && \
-sudo apt-get -y install overlayroot joe
+sudo rm -rf /var/lib/apt/lists/*                        && \
+sudo apt update                                         && \
+sudo apt-get -y install overlayroot joe gparted
 ```
 
 🇵 **Add the following at the end of file** `/etc/fstab`:
