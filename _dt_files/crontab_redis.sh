@@ -22,6 +22,7 @@ fi
 
 
 echo "starting crontab_redis"
+mkdir /li/redis
 sudo chown -R redis:redis /li/redis
 cd /li/redis
-redis-server redis_ddh.conf
+redis-server --dir /li/redis &
