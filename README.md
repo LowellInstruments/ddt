@@ -35,7 +35,7 @@ ssh pi@192.168.0.x "sudo reboot"
 Edit `/etc/fstab` to make **the /boot partition read-only**.
 
 ```sh
-sudo overlayroot-chroot    && \
+sudo overlayroot-chroot
 joe /etc/fstab
 ```
 
