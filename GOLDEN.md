@@ -59,7 +59,7 @@ sudo apt-get -y install overlayroot joe
 🇵 **Add the following at the end of file** `/etc/fstab`:
 
 ```sh
-PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,sync 0 0
+PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,sync,nofail   0 0
 /li     /home/pi/li     none bind
 ```
 👆 Take a breath and ensure you did not forget the last line starting with `/li` and its **newline**. It's essential.
