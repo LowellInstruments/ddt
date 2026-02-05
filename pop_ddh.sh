@@ -129,19 +129,6 @@ _e $rv "installing DDH new LI GPS libraries"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "LI redis constants library"
-    "$FOL_VEN"/bin/pip3 install --quiet --upgrade --force-reinstall \
-        rd_ctt@git+https://github.com/LowellInstruments/rd_ctt.git\
-        > /dev/null 2>&1
-rv=$?
-spinner.stop
-_e $rv "installing DDH new LI libraries"
-((i_num++))
-
-
-
-
-
 spinner.start " $i_num / $NUM_TASKS Un-stash" "DDH current configuration"
     cp $FTS/*.toml "$FOL_DDH"/settings && \
     cp $FTS/script_logger_dox_deploy_cfg.json "$FOL_DDH"/scripts
