@@ -28,7 +28,7 @@ NUM_TASKS=13
 
 
 i_num=1
-spinner.start " $i_num / $NUM_TASKS Updating" "DDT"
+spinner.start "  $i_num / $NUM_TASKS Updating" "ddh tools DDT"
     (cd "$FOL_DDT" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
@@ -40,7 +40,7 @@ _e $rv "error updating DDT"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Updating" "file /etc/ppp/options"
+spinner.start "  $i_num / $NUM_TASKS Updating" "file /etc/ppp/options"
 sudo cp _dt_files/options /etc/ppp/options
 rv=$?
 spinner.stop
@@ -50,7 +50,7 @@ _e $rv "error updating /etc/ppp/options"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "LI MAT library"
+spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
 #"$FOL_VEN"/bin/pip3 install --upgrade pip -q > /dev/null
 "$FOL_VEN"/bin/pip3 uninstall -y mat > /dev/null
 rm -rf $F_CLONE_MAT
@@ -80,7 +80,7 @@ _e $rv "cannot copy MAT commit file to /etc/"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Stashing" "DDH current configuration"
+spinner.start "  $i_num / $NUM_TASKS Stashing" "DDH current configuration"
 rm -rf $FTS
 mkdir $FTS && \
 # TOML files: config.toml, all_macs.toml, rerun_flag.toml
@@ -98,7 +98,7 @@ cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
 
 
 
-spinner.start " $i_num / $NUM_TASKS Updating" "DDH code open source"
+spinner.start "  $i_num / $NUM_TASKS Updating" "DDH code open source"
     (cd "$FOL_DDH" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
@@ -112,7 +112,7 @@ _e $rv "updating DDH code open source"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "LI BLE library"
+spinner.start "  $i_num / $NUM_TASKS Install " "LI BLE library"
     "$FOL_VEN"/bin/pip3 install --quiet --upgrade --force-reinstall \
         ble@git+https://github.com/LowellInstruments/ble.git\
         > /dev/null 2>&1
@@ -125,7 +125,7 @@ _e $rv "installing DDH new LI BLE libraries"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "LI GPS library"
+spinner.start "  $i_num / $NUM_TASKS Install " "LI GPS library"
     "$FOL_VEN"/bin/pip3 install --quiet --upgrade --force-reinstall \
         gps@git+https://github.com/LowellInstruments/gps.git\
         > /dev/null 2>&1
@@ -137,7 +137,7 @@ _e $rv "installing DDH new LI GPS libraries"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Un-stash" "DDH current configuration"
+spinner.start "  $i_num / $NUM_TASKS Un-stash" "DDH current configuration"
     cp $FTS/*.toml "$FOL_DDH"/settings && \
     cp $FTS/script_logger_dox_deploy_cfg.json "$FOL_DDH"/scripts
 rv=$?
@@ -151,7 +151,7 @@ _e $rv "un-stashing DDH current configuration files"
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "DDH code closed source Moana"
+spinner.start "  $i_num / $NUM_TASKS Install " "DDH unfortunate file closed source"
     cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
 rv=$?
 spinner.stop
@@ -173,7 +173,7 @@ spinner.stop
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
+spinner.start " $i_num / $NUM_TASKS Install " "DDT extra.sh"
     (cd "$FOL_DDT" && ./dt_install_extra.sh force) > /dev/null
 rv=$?
 spinner.stop
@@ -207,3 +207,6 @@ spinner.start " $i_num / $NUM_TASKS Killing " "API, it will auto-start"
     killall -q main_api_controller || true
 spinner.stop
 ((i_num++))
+
+
+echo
