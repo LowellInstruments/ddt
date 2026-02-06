@@ -7,6 +7,7 @@ source /home/pi/li/ddt/bash_sdk/src/spinner.sh
 
 
 
+
 # for development
 grep aspberry /proc/cpuinfo
 rv=$?
@@ -22,7 +23,7 @@ echo
 echo
 FTS=/tmp/ddh_stash
 F_CLONE_MAT=/tmp/mat
-NUM_TASKS=14
+NUM_TASKS=13
 
 
 
@@ -35,6 +36,7 @@ rv=$?
 spinner.stop
 _e $rv "error updating DDT"
 ((i_num++))
+
 
 
 
@@ -94,6 +96,8 @@ cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
 
 
 
+
+
 spinner.start " $i_num / $NUM_TASKS Updating" "DDH code open source"
     (cd "$FOL_DDH" && \
     git reset --hard && \
@@ -106,6 +110,8 @@ _e $rv "updating DDH code open source"
 
 
 
+
+
 spinner.start " $i_num / $NUM_TASKS Install " "LI BLE library"
     "$FOL_VEN"/bin/pip3 install --quiet --upgrade --force-reinstall \
         ble@git+https://github.com/LowellInstruments/ble.git\
@@ -114,6 +120,8 @@ rv=$?
 spinner.stop
 _e $rv "installing DDH new LI BLE libraries"
 ((i_num++))
+
+
 
 
 
@@ -152,10 +160,16 @@ _e $rv "installing closed source moana plugin"
 
 
 
+
+
 spinner.start " $i_num / $NUM_TASKS Killing " "DDH application, it will auto-start"
     killall -q ddh_main || true
+    sleep 1
+    killall -9 -q ddh_main || true
 spinner.stop
 ((i_num++))
+
+
 
 
 
