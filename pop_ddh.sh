@@ -24,7 +24,7 @@ echo
 echo
 FTS=/tmp/ddh_stash
 F_CLONE_MAT=/tmp/mat
-NUM_TASKS=11
+NUM_TASKS=12
 
 
 
@@ -149,6 +149,19 @@ spinner.start "  $i_num / $NUM_TASKS Install " "LI GPS library"
 rv=$?
 spinner.stop
 _e $rv "installing DDH new LI GPS libraries"
+((i_num++))
+
+
+
+
+
+spinner.start "  $i_num / $NUM_TASKS Install " "LI LIX library"
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall \
+        gps@git+https://github.com/LowellInstruments/lix.git\
+        > /dev/null 2>&1
+rv=$?
+spinner.stop
+_e $rv "installing DDH new LI LIX libraries"
 ((i_num++))
 
 
