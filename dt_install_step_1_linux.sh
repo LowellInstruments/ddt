@@ -248,6 +248,11 @@ function install_step_1 {
     fi
 
 
+    # install python tool UV
+    _pb "installing python UV"
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
 
 
 
