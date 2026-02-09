@@ -157,7 +157,7 @@ _e $rv "installing DDH new LI GPS libraries"
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI LIX library"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall \
-        gps@git+https://github.com/LowellInstruments/lix.git\
+        lix@git+https://github.com/LowellInstruments/lix.git\
         > /dev/null 2>&1
 rv=$?
 spinner.stop
