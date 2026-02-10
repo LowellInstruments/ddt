@@ -23,6 +23,10 @@ function install_linux {
     _e $? "apt-get"
 
 
+    _pb "apt get pyqt6wengine"
+    sudo apt-get install -y python3-pyqt6.qtwebengine
+
+
     _pb 'apt-get clean'
     sudo apt autoremove -y
     sudo apt-get clean
