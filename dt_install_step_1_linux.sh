@@ -58,6 +58,11 @@ function install_step_1 {
     export DISPLAY=:0
     pcmanfm --set-wallpaper "$FOL_DDT"/_dt_files/wp_ddh.jpg
 
+
+
+    _pb "apt get pyqt6wengine"
+    sudo apt-get install -y python3-pyqt6.qtwebengine
+
     
     
     
