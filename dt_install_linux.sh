@@ -21,10 +21,7 @@ function install_linux {
     libudev-dev libical-dev libreadline-dev libcap-dev awscli python3-requests ninja-build wireguard \
     cmake xinput-calibrator x11-utils
     _e $? "apt-get"
-
-
-    _pb "apt get pyqt6wengine"
-    sudo apt-get install -y python3-pyqt6.qtwebengine
+    
 
 
     _pb 'apt-get clean'
