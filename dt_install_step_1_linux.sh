@@ -61,7 +61,7 @@ function install_step_1 {
 
 
     _pb "apt get pyqt6wengine"
-    sudo apt-get install -y python3-pyqt6.qtwebengine
+    sudo apt-get --yes --assume-yes install python3-pyqt6.qtwebengine
 
     
     
