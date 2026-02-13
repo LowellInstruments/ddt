@@ -213,6 +213,11 @@ function install_step_1 {
 
 
 
+    _pb "INSTALLING our file ppp/options"
+    sudo cp "$FOL_DDT"/_dt_files/options /etc/ppp/options
+
+
+
 
     _pb "INSTALLING BLUEZ"
     # this seems to minimize the number of BLE hardware errors
@@ -228,7 +233,7 @@ function install_step_1 {
 
 
 
-    # 5.66 from DDHv4 worked fine but a bit old, lets update to 5.82
+    # DDHv5 uses 5.82 instead the 5.66 from DDHv4
     _pb "checking current bluez version"
     bluetoothctl -v | grep "5.82"
     rv=$?
@@ -253,12 +258,10 @@ function install_step_1 {
     fi
 
 
-    # install python tool UV
+
+    # install python tool UV, no need to source it when you call full path
     _pb "installing python UV"
     curl -LsSf https://astral.sh/uv/install.sh | sh
-
-
-
 
 
 

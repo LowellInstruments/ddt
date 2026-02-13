@@ -55,6 +55,7 @@ _e $rv "error updating DDT"
 
 
 # this might not work because /etc/ might be overlay
+# should be already installed in dt_install_step_1_linux.sh
 #spinner.start "  $i_num / $NUM_TASKS Updating" "file /etc/ppp/options"
 #sudo cp _dt_files/options /etc/ppp/options
 #rv=$?
@@ -181,7 +182,7 @@ _e $rv "un-stashing DDH current configuration files"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS Install " "DDH unfortunate file closed source"
+spinner.start "  $i_num / $NUM_TASKS Install " "some unfortunate file closed source not from LI"
     cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
 rv=$?
 spinner.stop
