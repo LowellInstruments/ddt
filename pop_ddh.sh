@@ -33,7 +33,8 @@ BIN_PIP="/home/pi/.local/bin/uv pip -q"
 uv --version  >/dev/null 2>&1
 rv=$?
 if [ $rv -ne 0 ]; then
-    _e $rv "error, DDT has no UV binary"
+    # install it with: $ curl -LsSf https://astral.sh/uv/install.sh | sh
+    _e $rv "DDT has no UV binary"
     exit 1
 fi
 
