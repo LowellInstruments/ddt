@@ -244,7 +244,8 @@ function install_step_1 {
         cd "$FOL_DDT"/_dt_files && \
         wget -O bluez-5.82.tar.gz https://github.com/bluez/bluez/archive/refs/tags/5.82.tar.gz
         _e $? "download bluez"
-        (tar xvf bluez-5.82.tar.gz && cd bluez-5.82) || false
+        tar xvf bluez-5.82.tar.gz 
+        cd bluez-5.82
         _e $? "uncompress bluez"
         _pb "installing bluez dependencies"
         sudo apt-get -y install libelf-dev elfutils libdw-dev libasound2-dev libell-dev libsbc-dev libspeexdsp-dev
