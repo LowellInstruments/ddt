@@ -1,6 +1,6 @@
 # $${\color{blue}DDHv5 \space Golden \space Board}$$
 
-A golden board is not meant to run but serve as copy origin for cloned DDH drives.
+A golden board is $${\color{red}NOT}$$ meant to run but be used as source to clone othere DDH drives.
 
 ## Use your laptop
 
@@ -16,25 +16,32 @@ Set **locale** and **keyboard** settings.
 
 Choose to `Apply` all these settings.
 
+
+
+
 ## Use target DDH
 
-⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH.
+⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH. 📁 This first boot automatically **expands the filesystem**. 
 
-📁 This step automatically **expands the filesystem**. 
+Wait full boot, shutdown DDH and **remove disk**.
 
-Then shutdown DDH and **remove disk**.
+
+
 
 ## Use another DDH already running
 
-**Insert the microSD card** or SSD disk.
+**Connect the microSD card** or SSD disk. The running OS will detect it as a second disk.
 
-🇵 Install and run `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
+🇵 Install and run the tool called `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
 
-**Remove** microSD card or disk.
+**Remove** your microSD card or disk.
 
-## Go back to use target DDH
 
-⚡️ Insert microSD card and **boot it**.
+
+
+## Again, use target DDH
+
+⚡️ Insert microSD card and **boot**.
 
 After booting, you might need to press the icon to **Activate Wi-fi**. 
 
@@ -64,11 +71,19 @@ sudo apt-get -y install overlayroot joe gparted
 PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,sync,nofail   0 0
 /li     /home/pi/li     none bind
 ```
-👆 Take a breath and ensure you did not forget the last line starting with `/li` and its **newline**. It's essential.
+👆 **Ensure** you did not forget the last line starting with `/li` and its **newline**. It's essential.
 
-⚡️ **Reboot RPi**.
+🌐 **Install nomachine**.
 
-**Install DDTv5 Linux required libraries on RW partition /li** with:
+```sh
+cd /home/pi/Downloads                                                                    && \
+wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm64.deb    && \
+sudo dpkg -i nomachine_9.3.7_1_arm64.deb
+```
+
+⚡️ Reboot RPi.
+
+**Install DDTv5 required Linux libraries on RW partition /li** with:
 
 ```sh
 ls /li                                                                      && \
@@ -80,14 +95,13 @@ cd /li/ddt                                                                  && \
 echo -e "\n\neverything went smooth for install_step_1_linux\n\n"
 ```
 
-**Run** the DDTv5 installer for DDH.
+**Install DDTv5 required DDH and API on RW partition /li** with:
 
 ```sh
 cd /li/ddt                                                                  && \
 ./dt_install_step_2_ddh.sh                                                  && \
 ./dt_install_step_3_api.sh                                                  && \
 echo -e "\n\neverything went smooth for install_step_2_and_3\n\n"
-
 ```
 
 **Install GOR virtual environment** for alarm script, type:
@@ -100,23 +114,21 @@ deactivate                                                        && \
 cp /li/ddt/_dt_files/main_mnt.cpython-311.pyc /home/pi            && \
 cp /li/ddt/_dt_files/run_mnt.sh /home/pi                          && \
 echo -e "\n\neverything went smooth for install_gor\n\n"
-
 ```
 
 ⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH` ▶️ `gor/run_mnt.sh`.
 
-🌐 Install **DWService** and set **timezone** with:
+🌐 Set **timezone** with:
 
 ```sh
-sudo dpkg-reconfigure tzdata                 && \
-sudo /li/ddt/_dt_files/dwagent.sh
+sudo dpkg-reconfigure tzdata
 ```
 
-🪟 For DWS to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
+🪟 For DWS (installed later) to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
 
 ⚡️ **Reboot for the X11 change to make effect**. Let it full boot. 
 
-🗑️ Connect via DWS and **remove Bluetooth and software updater upper panel icons** by right-clicking on them.
+🗑️ Connect via Nomachine or presentially and **remove Bluetooth, software updater and ejecter upper panel icons** by right-clicking on them.
 
 **Disable screensaver** by `Click menu / Preferences / Screen Saver`. Next to `mode`, you can disable it. Use a mouse if the drop-down does not open properly.
 
