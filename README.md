@@ -8,7 +8,7 @@ In this procedure, we will use a golden board as a base to create a DDH disk tha
 
 🛜 Write down its **wi-fi IP address**, p.e. 192.168.0.x.
 
-🌐 This disk probably comes from a golden board with a **wrong DWS** and/or **timezone**. Let's **re-install** it. 
+🌐 The origin golden board's disk might come from a golden board with a **wrong DWS** and/or **timezone**. Let's **re-install** it. 
 
 ```sh
 ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh uninstall"
@@ -18,7 +18,7 @@ ssh pi@192.168.0.x "sudo dpkg-reconfigure tzdata"
 
 🌐 Ask **$${\color{red}Joaquim}$$** to install **VPN**.
 
-Prepare to set the **drive as read-only** by creating file `/etc/overlayroot.local.conf` with the following content:
+🔒 Prepare to set the **drive as read-only** by creating file `/etc/overlayroot.local.conf` with the following content:
 
 ```sh
 ssh pi@192.168.0.x "echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayroot.local.conf"
@@ -32,14 +32,14 @@ ssh pi@192.168.0.x "sudo reboot"
 
 🔒 This cloned drive **root partition is $${\color{red}READ-ONLY \space NOW}$$**. 
 
-Edit `/etc/fstab` to make **the /boot partition read-only**.
+Edit `/etc/fstab` to make the **/boot partition read-only**.
 
 ```sh
 sudo overlayroot-chroot
 joe /etc/fstab
 ```
 
-**Change** the following in `/etc/fstab`.
+🔒 **Change** the following (add ro) in `/etc/fstab`.
 
 ```
 PARTUUID=<WHATEVER_UUID>-01		/boot/firmware				vfat    defaults,ro		0       2
