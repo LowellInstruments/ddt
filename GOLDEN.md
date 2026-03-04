@@ -116,6 +116,22 @@ cp /li/ddt/_dt_files/run_mnt.sh /home/pi                          && \
 echo -e "\n\neverything went smooth for install_gor\n\n"
 ```
 
+**Download DWS** but not install it yet.
+
+```sh
+    wget https://www.dwservice.net/download/dwagent.sh -O /home/pi/Downloads/dwagent.sh && \
+    chmod +x /home/pi/Downloads/dwagent.sh
+```
+
+**Download newest cell firmware** but not install it yet.
+
+```sh
+    cd /home/pi/Downloads && \
+    git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
+```
+
+
+
 ⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH` ▶️ `gor/run_mnt.sh`.
 
 🌐 Set **timezone** with:
