@@ -47,7 +47,7 @@ After booting, you might need to press the icon to **Activate Wi-fi**.
 
 Also switch on **Bluetooth icon** in the panel.
 
-If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
+#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
 
 🛜 Write down the **IP address** assigned to this DDH so you can **ssh** to it.
 
