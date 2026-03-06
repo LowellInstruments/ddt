@@ -34,8 +34,10 @@ uv --version  >/dev/null 2>&1
 rv=$?
 if [ $rv -ne 0 ]; then
     # try to install it
-    cp "$FOL_DDT"/_dt_files/uv /home/pi/.local/bin/  && \
-    cp "$FOL_DDT"/_dt_files/uvx /home/pi/.local/bin/
+    FOL_UV_BIN="$FOL_PI"/.local/bin
+    mkdir -p "$FOL_UV_BIN"
+    cp "$FOL_DDT"/_dt_files/uv "$FOL_UV_BIN"  && \
+    cp "$FOL_DDT"/_dt_files/uvx "$FOL_UV_BIN"
     uv --version  >/dev/null 2>&1
     rv=$?
     if [ $rv -ne 0 ]; then
