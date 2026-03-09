@@ -30,7 +30,7 @@ ssh pi@192.168.0.x "echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayro
 ssh pi@192.168.0.x "sudo reboot"
 ```
 
-🔒 This cloned drive **root partition (1 / 2) is $${\color{red}READ-ONLY \space NOW}$$**. 
+🔒 This cloned drive **root partition (1 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**. 
 
 Edit `/etc/fstab` to make the **/boot partition read-only**.
 
@@ -51,7 +51,7 @@ PARTUUID=<WHATEVER_UUID>-01		/boot/firmware				vfat    defaults,ro		0       2
 ssh pi@192.168.0.x "sudo reboot"
 ```
 
-🔒 This cloned drive **boot partition (2 / 2) is $${\color{red}READ-ONLY \space NOW}$$**.
+🔒 This cloned drive **boot partition (2 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**.
 
 📞 Check if you need to **update the cell shield's firmware** by:
 
@@ -78,7 +78,7 @@ sudo mount -o remount,rw /boot/firmware
 sudo overlayroot-chroot
 ```
 
-We can also **disable the overlay(( by setting ``overlayroot=disabled`` in ``/boot/firmware/cmdline.txt``
+We can also **disable the overlay** by setting ``overlayroot=disabled`` in ``/boot/firmware/cmdline.txt``.
 
 You can check if overlay is enabled by finding the `overlay` word in the output of:
 
