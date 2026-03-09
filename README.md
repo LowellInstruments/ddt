@@ -8,7 +8,13 @@ In this procedure, we will use a golden board as a base to create a DDH disk tha
 
 🛜 Write down its **wi-fi IP address**, p.e. 192.168.0.x.
 
-🌐 The origin golden board's disk might come from a golden board with a **wrong DWS** and/or **timezone**. Let's **re-install** it. 
+⬛ First, make sure **screen blanking is disabled in raspi-config**, `Display Options / Screen Blanking`.
+
+```sh
+sudo raspi-config
+```
+
+🌐 The origin golden board's disk might come with a **wrong DWS** and/or **timezone**. Let's **re-install DWS**. 
 
 ```sh
 ssh pi@192.168.0.x "sudo dpkg-reconfigure tzdata"
