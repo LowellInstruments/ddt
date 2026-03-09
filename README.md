@@ -11,9 +11,9 @@ In this procedure, we will use a golden board as a base to create a DDH disk tha
 🌐 The origin golden board's disk might come from a golden board with a **wrong DWS** and/or **timezone**. Let's **re-install** it. 
 
 ```sh
+ssh pi@192.168.0.x "sudo dpkg-reconfigure tzdata"
 ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh uninstall"
 ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh install"
-ssh pi@192.168.0.x "sudo dpkg-reconfigure tzdata"
 ```
 
 🌐 Ask **$${\color{red}Joaquim}$$** to install **VPN**.
