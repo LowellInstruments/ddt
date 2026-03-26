@@ -29,7 +29,7 @@ sudo /home/pi/Downloads/dwagent.sh install
 
 🌐 $${\color{blue}Step \space 3:}$$ ask **$${\color{red}Joaquim}$$** to install **VPN**.
 
-🔒 $${\color{blue}Step \space 4:}$$ set **drive as read-only** by creating file `/etc/overlayroot.local.conf` with this command:
+🔒 $${\color{blue}Step \space 4:}$$ set **root partition as read-only** with:
 
 ```sh
 echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayroot.local.conf
@@ -41,7 +41,7 @@ echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayroot.local.conf
 sudo reboot
 ```
 
-This cloned drive's **root partition (1 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**. 
+This DDH's **root partition (1 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**. 
 
 🔒 $${\color{blue}Step \space 5:}$$ Edit `/etc/fstab` to make the **/boot partition read-only**.
 
