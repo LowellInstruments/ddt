@@ -6,7 +6,7 @@ This procedure uses a golden board as a **source** to create a cloned DDH disk t
 
 ⚡️ **Boot** the newly created card / disk on your target DDH. 
 
-🛜 Write down its **wi-fi IP address**, p.e. 192.168.0.x.
+🛜 Write down its **wi-fi IP address**, p.e. 192.168.0.x. and SSH to it.
 
 ⬛ $${\color{blue}Step \space 1:}$$ make sure **screen blanking is disabled in raspi-config**, `Display Options / Screen Blanking`.
 
@@ -14,12 +14,17 @@ This procedure uses a golden board as a **source** to create a cloned DDH disk t
 sudo raspi-config
 ```
 
-🌐 $${\color{blue}Step \space 2:}$$ the golden board's disk might have a **wrong DWS** and/or **timezone**. Let's **re-install DWS**. 
+🌐 $${\color{blue}Step \space 2:}$$ the golden board's disk might have a **wrong DWS** and/or **timezone**. 
 
 ```sh
-ssh pi@192.168.0.x "sudo dpkg-reconfigure tzdata"
-ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh uninstall"
-ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh install"
+sudo dpkg-reconfigure tzdata
+sudo /home/pi/Downloads/dwagent.sh uninstall
+```
+
+🌐 Now **install DWS**.
+
+```sh
+sudo /home/pi/Downloads/dwagent.sh install
 ```
 
 🌐 $${\color{blue}Step \space 3:}$$ ask **$${\color{red}Joaquim}$$** to install **VPN**.
@@ -27,13 +32,13 @@ ssh pi@192.168.0.x "sudo /home/pi/Downloads/dwagent.sh install"
 🔒 $${\color{blue}Step \space 4:}$$ set **drive as read-only** by creating file `/etc/overlayroot.local.conf` with this command:
 
 ```sh
-ssh pi@192.168.0.x "echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayroot.local.conf"
+echo 'overlayroot=tmpfs:recurse=0' | sudo tee /etc/overlayroot.local.conf
 ```
 
 ⚡️ **Reboot to apply the overlay** with:
 
 ```sh
-ssh pi@192.168.0.x "sudo reboot"
+sudo reboot
 ```
 
 This cloned drive's **root partition (1 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**. 
@@ -54,7 +59,7 @@ PARTUUID=<WHATEVER_UUID>-01		/boot/firmware				vfat    defaults,ro		0       2
 ⚡️ **Reboot to apply the /boot read-only** with:
 
 ```sh
-ssh pi@192.168.0.x "sudo reboot"
+sudo reboot
 ```
 
 🔒 This cloned drive's **boot partition (2 / 2)** is **$${\color{red}READ-ONLY \space NOW}$$**.
@@ -62,7 +67,7 @@ ssh pi@192.168.0.x "sudo reboot"
 📞 🔒 $${\color{blue}Step \space 6:}$$ Check if you need to **update the cell shield's firmware** by:
 
 ```sh
-ssh pi@192.168.0.192 "echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && cat -v /dev/ttyUSB2"
+echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && cat -v /dev/ttyUSB2
 ```
 
 Anything different than **2022** needs update. Refer to `ddt_quectel` repository.
