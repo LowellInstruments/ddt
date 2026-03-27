@@ -3,6 +3,11 @@ clear
 
 
 
+# get rid of possible nomachine update pop-ups
+sudo kill -9 `ps -aux | grep NX | grep update | grep -v grep | awk '{print $2}'`
+
+
+
 echo "is redis already running?"
 systemctl is-active redis
 rv=$?
