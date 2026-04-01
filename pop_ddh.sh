@@ -149,14 +149,14 @@ killall main_ddh
 
 # todo: get rid of this soon
 if [ ! -f /usr/local/bin/cm ]; then
-  echo
-  _S="[ DDU ] compile DDT binary climenu"
-  _pb "$_S"
-  gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
-  _e $? "$_S"
-  sudo killall cm 2> /dev/null
-  sudo cp "$FOL_DDT"/_dt_files/cm /usr/local/bin
-_e $? "$_S"
+    echo
+    _S="[ DDU ] compile DDT binary climenu"
+    _pb "$_S"
+    gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
+    _e $? "$_S"
+    sudo killall cm 2> /dev/null
+    sudo cp "$FOL_DDT"/_dt_files/cm /usr/local/bin
+    _e $? "$_S"
 fi
 
 sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
