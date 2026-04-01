@@ -44,15 +44,16 @@ function install_alias {
     fi
 
 
-    _pb "climenu build and install"
-    gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
-    _e $? "climenu build"
-    sudo killall cm 2> /dev/null
-    sudo cp "$FOL_DDT"/_dt_files/cm $F_IN && \
-    sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
-    sudo cp "$FOL_DDT"/_dt_files/cmu.conf /etc
-    _e $? "climenu install"
-
+    if [ ! -f /usr/local/bin/cm ]; then
+        _pb "climenu build and install"
+        gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
+        _e $? "climenu build"
+        sudo killall cm 2> /dev/null
+        sudo cp "$FOL_DDT"/_dt_files/cm $F_IN && \
+        sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
+        sudo cp "$FOL_DDT"/_dt_files/cmu.conf /etc
+        _e $? "climenu install"
+    fi
 
 
     _pb "alias climenu ddi, ddu"
