@@ -147,11 +147,14 @@ killall main_ddh
 
 
 
-echo
-_S="[ DDU ] compile DDT binary climenu"
-_pb "$_S"
-gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
-_e $? "$_S"
+# todo: get rid of this soon
+if [ ! -f /usr/local/bin/cm ]; then
+  echo
+  _S="[ DDU ] compile DDT binary climenu"
+  _pb "$_S"
+  gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
+  _e $? "$_S"
+fi
 
 
 
