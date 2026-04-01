@@ -154,18 +154,13 @@ if [ ! -f /usr/local/bin/cm ]; then
   _pb "$_S"
   gcc "$FOL_DDT"/_dt_files/climenu.c -o "$FOL_DDT"/_dt_files/cm
   _e $? "$_S"
+  sudo killall cm 2> /dev/null
+  sudo cp "$FOL_DDT"/_dt_files/cm /usr/local/bin
+_e $? "$_S"
 fi
 
-
-
-echo
-_S="[ DDU ] install DDT binary climenu"
-_pb "$_S"
-sudo killall cm 2> /dev/null
-sudo cp "$FOL_DDT"/_dt_files/cm /usr/local/bin && \
 sudo cp "$FOL_DDT"/_dt_files/cmi.conf /etc && \
 sudo cp "$FOL_DDT"/_dt_files/cmu.conf /etc
-_e $? "$_S"
 
 
 
