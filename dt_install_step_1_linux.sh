@@ -74,7 +74,7 @@ function install_step_1 {
 
 
     _pb "INSTALL POWER HATS"
-    select POWEROPTION in "SailorHat" "Juice4Halt" 
+    select POWEROPTION in "SailorHat" "Juice4Halt" "NONE"
     do
       case $POWEROPTION in
         "SailorHat")
