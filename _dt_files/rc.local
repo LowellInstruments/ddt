@@ -37,7 +37,7 @@ sudo timedatectl set-ntp true
 
 echo "run script post-rc-local"
 if [ -f /home/pi/li/script_from_rc_local.sh ]; then
-        sudo /home/pi/li/script_from_rc_local.sh
+    sudo /home/pi/li/script_from_rc_local.sh
 fi
 
 

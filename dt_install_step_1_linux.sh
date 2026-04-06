@@ -80,7 +80,10 @@ function install_step_1 {
         "SailorHat")
           break
           ;;
-      "Juice4Halt")
+        "Juice4Halt")
+          break
+          ;;
+        "NONE")
           break
           ;;
         *)
@@ -151,16 +154,6 @@ function install_step_1 {
     _e $? "rc.local not active"
 
 
-
-
-
-
-
-
-
-
-
-    
 
 
 
