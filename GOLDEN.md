@@ -21,7 +21,9 @@ Choose to `Apply` all these settings.
 
 ## Use target DDH
 
-⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH. 📁 This first boot automatically **expands the filesystem**. 
+⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH. 
+
+📁 This first boot automatically **expands the filesystem**. 
 
 Wait full boot, shutdown DDH and **remove disk**.
 
@@ -30,7 +32,7 @@ Wait full boot, shutdown DDH and **remove disk**.
 
 ## Use another DDH already running
 
-**Connect the microSD card** or SSD disk. The running OS will detect it as a second disk.
+**Connect the microSD card** or SSD disk to a DDH already running. The running OS will detect it as a second disk.
 
 🇵 Install and run the tool called `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
 
@@ -39,15 +41,11 @@ Wait full boot, shutdown DDH and **remove disk**.
 
 
 
-## Again, use target DDH
+## Go back to use target DDH
 
 ⚡️ Insert microSD card and **boot**.
 
 After booting, you might need to press the icon to **Activate Wi-fi**. 
-
-Also switch on **Bluetooth icon** in the panel.
-
-#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
 
 🛜 Write down the **IP address** assigned to this DDH so you can **ssh** to it.
 
@@ -80,6 +78,10 @@ cd /home/pi/Downloads                                                           
 wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm64.deb    && \
 sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 ```
+
+#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
+
+Also ensure to switch on **Bluetooth icon** in the panel if its greyed out.
 
 ⚡️ Reboot RPi.
 
