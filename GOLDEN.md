@@ -79,9 +79,9 @@ wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm6
 sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 ```
 
-Also switch on **Bluetooth icon** in the panel.
-
 #⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
+
+Also ensure to switch on **Bluetooth icon** in the panel if its greyed out.
 
 ⚡️ Reboot RPi.
 
