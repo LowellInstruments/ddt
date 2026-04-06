@@ -21,7 +21,9 @@ Choose to `Apply` all these settings.
 
 ## Use target DDH
 
-⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH. 📁 This first boot automatically **expands the filesystem**. 
+⚡️ **Boot the freshly flashed microSD card** or disk into the target DDH. 
+
+📁 This first boot automatically **expands the filesystem**. 
 
 Wait full boot, shutdown DDH and **remove disk**.
 
@@ -30,7 +32,7 @@ Wait full boot, shutdown DDH and **remove disk**.
 
 ## Use another DDH already running
 
-**Connect the microSD card** or SSD disk. The running OS will detect it as a second disk.
+**Connect the microSD card** or SSD disk to a DDH already running. The running OS will detect it as a second disk.
 
 🇵 Install and run the tool called `gparted`. Choose probably `/dev/sdb`. **Shrink big root partition** and **create new EXT4 one at end of disk** (10 GB).
 
