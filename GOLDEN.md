@@ -47,10 +47,6 @@ Wait full boot, shutdown DDH and **remove disk**.
 
 After booting, you might need to press the icon to **Activate Wi-fi**. 
 
-Also switch on **Bluetooth icon** in the panel.
-
-#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
-
 🛜 Write down the **IP address** assigned to this DDH so you can **ssh** to it.
 
 Ensure **SSH is enabled** by typing:
@@ -82,6 +78,10 @@ cd /home/pi/Downloads                                                           
 wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm64.deb    && \
 sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 ```
+
+Also switch on **Bluetooth icon** in the panel.
+
+#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
 
 ⚡️ Reboot RPi.
 
