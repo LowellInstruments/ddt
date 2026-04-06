@@ -41,7 +41,7 @@ Wait full boot, shutdown DDH and **remove disk**.
 
 
 
-## Again, use target DDH
+## Go back to use target DDH
 
 ⚡️ Insert microSD card and **boot**.
 
