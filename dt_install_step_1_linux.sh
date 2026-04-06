@@ -121,8 +121,9 @@ function install_step_1 {
         sudo systemctl is-active shrpid.service | grep -w active
         _e $? "sailor_hat service NOT active"
 
+
     # juice4halt
-    else
+    if [ "$POWEROPTION" == "Juice4Halt" ]; then
         touch "$DDH_USES_SHIELD_JUICE4HALT"
         FOL_J4H="$FOL_LI"/juice4halt
         sudo rm -rf "$FOL_J4H"
