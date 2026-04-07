@@ -59,6 +59,7 @@ PARTUUID=<WHATEVER_UUID>-01		/boot/firmware				vfat    defaults,ro		0       2
 ⚡️ **Reboot to apply the /boot read-only** with:
 
 ```sh
+exit
 sudo reboot
 ```
 
