@@ -29,21 +29,25 @@ NUM_TASKS=12
 
 
 # detect UV tool presence
-BIN_PIP="/home/pi/.local/bin/uv pip -q"
-$BIN_PIP --version  >/dev/null 2>&1
+BIN_UV="/home/pi/.local/bin/uv"
+$BIN_UV --version  >/dev/null 2>&1
 rv=$?
 if [ $rv -ne 0 ]; then
     # try to install it
-    FOL_UV_BIN="$FOL_PI"/.local/bin
-    mkdir -p "$FOL_UV_BIN"
-    cp "$FOL_DDT"/_dt_files/uv "$FOL_UV_BIN"  && \
-    cp "$FOL_DDT"/_dt_files/uvx "$FOL_UV_BIN"
-    uv --version  >/dev/null 2>&1
-    rv=$?
-    if [ $rv -ne 0 ]; then
-        _e $rv "DDT has no UV binary"
-        exit 1
-    fi
+    FOL_BIN_UV="$FOL_PI"/.local/bin
+    mkdir -p "$FOL_BIN_UV"
+    cp "$FOL_DDT"/_dt_files/uv "$FOL_BIN_UV"  && \
+    cp "$FOL_DDT"/_dt_files/uvx "$FOL_BIN_UV"
+fi
+
+
+# decide flavor of pip
+BIN_PIP="/home/pi/.local/bin/uv pip -q"
+$BIN_UV --version  >/dev/null 2>&1
+rv=$?
+if [ $rv -ne 0 ]; then
+    # we have no UV, just pip then, slower
+    BIN_PIP="$FOL_VEN/bin/pip -q"
 fi
 
 
