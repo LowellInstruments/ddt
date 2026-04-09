@@ -121,15 +121,15 @@ echo -e "\n\neverything went smooth for install_gor\n\n"
 **Download DWS** but not install it yet.
 
 ```sh
-    wget https://www.dwservice.net/download/dwagent.sh -O /home/pi/Downloads/dwagent.sh && \
-    chmod +x /home/pi/Downloads/dwagent.sh
+wget https://www.dwservice.net/download/dwagent.sh -O /home/pi/Downloads/dwagent.sh && \
+chmod +x /home/pi/Downloads/dwagent.sh
 ```
 
 **Download newest cell firmware** but not install it yet.
 
 ```sh
-    cd /home/pi/Downloads && \
-    git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
+cd /home/pi/Downloads && \
+git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
 ```
 
 
@@ -159,9 +159,9 @@ If needed, **change wallpaper** to the one in ``/home/pi/li/ddt/_dt_files/wp_ddh
 🖼️ Change the **splash screen** by:
 
 ```sh
-    sudo cp /home/pi/li/ddt/_dt_files/splash.png /usr/share/plymouth/themes/pix/splash.png     && \
-    sudo plymouth-set-default-theme -R pix                                                     && \
-    echo -e "\n\neverything went smooth changing wallpaper\n\n"
+sudo cp /home/pi/li/ddt/_dt_files/splash.png /usr/share/plymouth/themes/pix/splash.png     && \
+sudo plymouth-set-default-theme -R pix                                                     && \
+echo -e "\n\neverything went smooth changing wallpaper\n\n"
 ```
 
 ⚡️ **Shutdown**. Keep this golden board safe.

@@ -30,7 +30,7 @@ NUM_TASKS=12
 
 # detect UV tool presence
 BIN_PIP="/home/pi/.local/bin/uv pip -q"
-uv --version  >/dev/null 2>&1
+$BIN_PIP --version  >/dev/null 2>&1
 rv=$?
 if [ $rv -ne 0 ]; then
     # try to install it
