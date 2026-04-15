@@ -1,0 +1,81 @@
+id: 019d91f9-64c9-7c80-befa-62abe9fff91b
+name: DDT Atuin
+version: 1
+forkedFrom: null
+content:
+- id: f6596d68-4414-48f3-b502-eb54c9a00b17
+  type: heading
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+    level: 1
+    isToggleable: false
+  content:
+  - type: text
+    text: DDT Atuin
+    styles: {}
+  children: []
+- id: ca213a49-9e3d-413a-af97-72eff8704fc7
+  type: local-directory
+  props: {}
+  children: []
+- id: 196ff939-adc4-4ed4-b1fa-9e62fa28bb20
+  type: script
+  props:
+    interpreter: bash
+    outputVariable: ''
+    name: Script 2
+    code: ./atu_cell.py $(./atu_beacon.py)
+    outputVisible: true
+    dependency: '{}'
+    terminalRows: 12
+  children: []
+- id: e551d13d-8603-4dca-ac24-b026e553d6dd
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: 6adbb837-6ac2-4110-8d5a-9fb6e8baac33
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: f49c7aa5-0f78-4601-b656-1be912288564
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: 61e50c3b-8457-4778-a92d-719617e87702
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: 30bd3f34-0288-43fe-9045-c58b71305e9d
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: a920b102-6e3a-4bc3-85e1-f39f533a2686
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
