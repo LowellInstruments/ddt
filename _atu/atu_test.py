@@ -12,5 +12,5 @@ if __name__ == '__main__':
     ls = ping_all()
     for i in ls:
         c = 'cat /home/pi/li/ddh/.ddh_version'
-        cmd('test', c, timeout)
+        cmd('test', c, timeout, list_of_hosts=ls)
 

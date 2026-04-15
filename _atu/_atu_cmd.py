@@ -20,11 +20,15 @@ def utils_get_ssh(timeout, ip):
 def cmd(
         short: str,
         long: str,
-        timeout: int
+        timeout: int,
+        list_of_hosts: list = []
 ):
     os.system('clear')
     print(f'aut_{short} start', flush=True)
-    ls = sys.argv
+    ls = sys.argv if len(sys.argv) > 1 else list_of_hosts
+
+    sys.exit(0)
+
     if len(ls) > 1:
         ls = ls[1:]
         for i in ls:
