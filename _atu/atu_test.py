@@ -2,15 +2,14 @@
 
 
 
-from _atu_cmd import cmd
+from _atu_cmd import build_ssh_including_command
 from atu_inv_all import ping_all
 
 
 
 if __name__ == '__main__':
+    s = ping_all()
+    c = 'cat /home/pi/li/ddh/.ddh_version'
     timeout = 1
-    ls = ping_all()
-    for i in ls:
-        c = 'cat /home/pi/li/ddh/.ddh_version'
-        cmd('test', c, timeout, list_of_hosts=ls)
+    build_ssh_including_command('test', c, timeout, str_of_hosts=s)
 

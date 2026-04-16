@@ -2,10 +2,10 @@
 
 
 
-from _atu_cmd import cmd
+from _atu_cmd import build_ssh_including_command
 
 
 
 if __name__ == '__main__':
     timeout = 30
-    cmd('ddu', '/home/pi/li/ddt/pop_ddh.sh', timeout)
+    build_ssh_including_command('ddu', '/home/pi/li/ddt/pop_ddh.sh', timeout)

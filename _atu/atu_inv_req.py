@@ -6,7 +6,7 @@ import subprocess as sp
 import threading
 import time
 import queue
-from _atu_cmd import utils_get_ssh
+from _atu_cmd import build_ssh_without_command
 
 
 
@@ -37,13 +37,13 @@ def ping_req():
 
     timeout = TIMEOUT_CMD_BEACON_PING
     for i in ls_ip_vpn:
-        c = utils_get_ssh(timeout, i)
+        c = build_ssh_without_command(timeout, i)
         c += '"redis-cli get ddh:gui:gui_beacon_flag"'
         th = threading.Thread(target=_th_cmd, args=(c, i, timeout))
         th.start()
 
     for i in ls_ip_local:
-        c = utils_get_ssh(timeout, i)
+        c = build_ssh_without_command(timeout, i)
         c += '"redis-cli get ddh:gui:gui_beacon_flag"'
         th = threading.Thread(target=th_cmd, args=(c,i, timeout))
         th.start()
