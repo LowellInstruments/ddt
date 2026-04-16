@@ -20,16 +20,103 @@ content:
   type: local-directory
   props: {}
   children: []
-- id: 196ff939-adc4-4ed4-b1fa-9e62fa28bb20
+- id: 71285314-85c8-4d2e-b6cb-083a279471a4
+  type: local-var
+  props:
+    name: VAR_DDH_SSH_PASSWORD
+    obscured: false
+  children: []
+- id: 1c659cc3-91da-4585-b7bf-60694e9f3e03
+  type: env
+  props:
+    name: DDH_SSH_PASSWORD
+    value: var.VAR_DDH_SSH_PASSWORD
+  children: []
+- id: 8e833ae3-7a8f-4098-a8ba-f2104021a45f
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content:
+  - type: text
+    text: Select which network to detect DDH on
+    styles: {}
+  children: []
+- id: db4f0bc7-858e-4bff-948c-3a996a7c2f81
+  type: dropdown
+  props:
+    name: dd_local_or_vpn
+    options: DDH in my wi-fi:local, DDH in VPN:vpn
+    fixedOptions: DDH in my wi-fi:local, DDH in VPN:vpn
+    variableOptions: ''
+    commandOptions: ''
+    value: local
+    optionsType: fixed
+    interpreter: bash
+    delimiter: ':'
+  children: []
+- id: 2a74970a-1cc3-486c-b130-d63cd75cde52
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content:
+  - type: text
+    text: 'Select which DDH to operate: all found or just the ones that requested it'
+    styles: {}
+  children: []
+- id: 62e8cf3e-fa6c-48b9-8ea1-df9d4ce36ff5
+  type: dropdown
+  props:
+    name: dd_all_or_req
+    options: all:all, req:req
+    fixedOptions: all:all, req:req
+    variableOptions: ''
+    commandOptions: ''
+    value: all
+    optionsType: fixed
+    interpreter: bash
+    delimiter: ':'
+  children: []
+- id: a6fe1a9f-3f32-46a0-8f38-dc3bc5e902b5
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
+  children: []
+- id: e6e95ce3-51bc-4468-9cdd-4d35bf6ee9cb
   type: script
   props:
     interpreter: bash
     outputVariable: ''
-    name: Script 2
-    code: ./atu_cell.py $(./atu_beacon.py)
+    name: Get cell firmware version of all DDH detected
+    code: ./atu_cmd_cell.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
     outputVisible: true
     dependency: '{}'
-    terminalRows: 12
+    terminalRows: 28
+  children: []
+- id: 019d9701-a58c-7563-95ba-0e5186bfbec0
+  type: script
+  props:
+    interpreter: bash
+    outputVariable: ''
+    name: Get software version of all DDH detected
+    code: ./atu_cmd_version.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
+    outputVisible: true
+    dependency: '{}'
+    terminalRows: 28
+  children: []
+- id: 38270d57-6dc7-4551-9888-8cfa7f475e42
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content: []
   children: []
 - id: e551d13d-8603-4dca-ac24-b026e553d6dd
   type: paragraph
