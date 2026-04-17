@@ -45,7 +45,8 @@ def _ssh_prefix(
 def atu_cmd(
         cmd: str,
         str_ls_ip_addr,
-        timeout_cmd: int = 1
+        timeout_cmd: int,
+        debug: int
 ) -> dict:
 
     # declare function to parallelize run SSH command in remote part
@@ -55,16 +56,13 @@ def atu_cmd(
             try:
                 cmd_ssh = _ssh_prefix(timeout=timeout_cmd, ip_addr=ip_addr_th)
                 cmd_ssh = cmd_ssh + f'"{cmd}"'
-                # -------
-                # debug
-                # -------
-                print(cmd_ssh)
+                if debug:
+                    print('\n' + cmd_ssh)
+                # send command via SSH and get SSH return code
                 rv = sp.run(cmd_ssh, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
-                s = rv.stdout.decode()
-                # this is SSH return code
                 if rv.returncode == 0:
                     d_ans_one = dict()
-                    d_ans_one[ip_addr_th] = s
+                    d_ans_one[ip_addr_th] = rv.stdout.decode()
                     q.put(d_ans_one)
                 break
             except (Exception, ):
@@ -82,7 +80,7 @@ def atu_cmd(
 
 
     # recover the command answers
-    till = time.time() + 1
+    till = time.time() + timeout_cmd
     while time.time() < till:
         try:
             d = q.get(timeout=.1)
@@ -90,6 +88,4 @@ def atu_cmd(
         except queue.Empty:
             pass
 
-
-    # dictionary
     return d_ans

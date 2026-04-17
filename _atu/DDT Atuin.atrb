@@ -98,6 +98,19 @@ content:
     interpreter: bash
     delimiter: ':'
   children: []
+- id: 560a5828-c907-40d5-8988-aded9cc771b3
+  type: dropdown
+  props:
+    name: dd_debug
+    options: on:1, off:0
+    fixedOptions: on:1, off:0
+    variableOptions: ''
+    commandOptions: ''
+    value: '0'
+    optionsType: fixed
+    interpreter: zsh
+    delimiter: ':'
+  children: []
 - id: a6fe1a9f-3f32-46a0-8f38-dc3bc5e902b5
   type: paragraph
   props:
@@ -112,7 +125,7 @@ content:
     interpreter: bash
     outputVariable: ''
     name: Get cell firmware version of target DDH
-    code: ./atu_cmd_cell.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
+    code: ./atu_cmd_cell.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}} {{var.dd_debug}}
     outputVisible: true
     dependency: '{}'
     terminalRows: 28
@@ -123,7 +136,7 @@ content:
     interpreter: bash
     outputVariable: ''
     name: Get software version of target DDH
-    code: ./atu_cmd_version.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
+    code: ./atu_cmd_version.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}} {{var.dd_debug}}
     outputVisible: true
     dependency: '{}'
     terminalRows: 28
