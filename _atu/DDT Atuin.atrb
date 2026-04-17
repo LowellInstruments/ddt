@@ -16,6 +16,22 @@ content:
     text: DDT Atuin
     styles: {}
   children: []
+- id: f775960a-c35f-419e-865a-c4d88a576e26
+  type: paragraph
+  props:
+    backgroundColor: default
+    textColor: default
+    textAlignment: left
+  content:
+  - type: text
+    text: 'Set your local working directory, usually '
+    styles:
+      bold: true
+  - type: text
+    text: '{{ workspace.root }}'
+    styles:
+      code: true
+  children: []
 - id: ca213a49-9e3d-413a-af97-72eff8704fc7
   type: local-directory
   props: {}
@@ -30,7 +46,7 @@ content:
   type: env
   props:
     name: DDH_SSH_PASSWORD
-    value: var.VAR_DDH_SSH_PASSWORD
+    value: '{{var.VAR_DDH_SSH_PASSWORD}}'
   children: []
 - id: 8e833ae3-7a8f-4098-a8ba-f2104021a45f
   type: paragraph
@@ -40,8 +56,9 @@ content:
     textAlignment: left
   content:
   - type: text
-    text: Select which network to detect DDH on
-    styles: {}
+    text: Detect DDH on specified network
+    styles:
+      bold: true
   children: []
 - id: db4f0bc7-858e-4bff-948c-3a996a7c2f81
   type: dropdown
@@ -64,15 +81,16 @@ content:
     textAlignment: left
   content:
   - type: text
-    text: 'Select which DDH to operate: all found or just the ones that requested it'
-    styles: {}
+    text: Among  detected DDH, specify which ones we target
+    styles:
+      bold: true
   children: []
 - id: 62e8cf3e-fa6c-48b9-8ea1-df9d4ce36ff5
   type: dropdown
   props:
     name: dd_all_or_req
-    options: all:all, req:req
-    fixedOptions: all:all, req:req
+    options: all of them:all, only requested:req
+    fixedOptions: all of them:all, only requested:req
     variableOptions: ''
     commandOptions: ''
     value: all
@@ -93,7 +111,7 @@ content:
   props:
     interpreter: bash
     outputVariable: ''
-    name: Get cell firmware version of all DDH detected
+    name: Get cell firmware version of target DDH
     code: ./atu_cmd_cell.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
     outputVisible: true
     dependency: '{}'
@@ -104,61 +122,13 @@ content:
   props:
     interpreter: bash
     outputVariable: ''
-    name: Get software version of all DDH detected
+    name: Get software version of target DDH
     code: ./atu_cmd_version.py {{var.dd_local_or_vpn}} {{var.dd_all_or_req}}
     outputVisible: true
     dependency: '{}'
     terminalRows: 28
   children: []
 - id: 38270d57-6dc7-4551-9888-8cfa7f475e42
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: e551d13d-8603-4dca-ac24-b026e553d6dd
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: 6adbb837-6ac2-4110-8d5a-9fb6e8baac33
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: f49c7aa5-0f78-4601-b656-1be912288564
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: 61e50c3b-8457-4778-a92d-719617e87702
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: 30bd3f34-0288-43fe-9045-c58b71305e9d
-  type: paragraph
-  props:
-    backgroundColor: default
-    textColor: default
-    textAlignment: left
-  content: []
-  children: []
-- id: a920b102-6e3a-4bc3-85e1-f39f533a2686
   type: paragraph
   props:
     backgroundColor: default

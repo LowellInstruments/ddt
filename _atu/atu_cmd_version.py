@@ -15,4 +15,6 @@ if __name__ == '__main__':
     assert lv is not None
     assert ar is not None
     _d = atu_cmd_custom(local_or_vpn=lv, all_or_req=ar, cmd=_cmd, timeout=5)
+    print('result atu_cmd_version')
+    print('----------------------')
     pprint(_d)

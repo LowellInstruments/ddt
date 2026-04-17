@@ -25,6 +25,12 @@ def atu_inventory(
     mask = mask_local if local_or_vpn == 'local' else mask_vpn
     ls_ip_addr = [f'{mask}{i}' for i in range(2, 254, 1)]
 
+    # ------
+    # debug
+    # ------
+    # local_or_vpn = 'vpn'
+    # ls_ip_addr = ['10.5.0.12', '10.5.0.12']
+
 
     # inventory command used to detect online
     assert all_or_req in ('all', 'req')
@@ -33,9 +39,10 @@ def atu_inventory(
     cmd = cmd_all if all_or_req == 'all' else cmd_req
 
 
-    # run it
+    # run it, inventory is slower on VPN
     str_ls_ip_addr = ' '.join(ls_ip_addr)
-    d = atu_cmd(cmd, str_ls_ip_addr)
+    timeout_cmd = 1 if local_or_vpn == 'local' else 5
+    d = atu_cmd(cmd, str_ls_ip_addr, timeout_cmd=timeout_cmd)
 
 
     # refine inventory answer for inventory command

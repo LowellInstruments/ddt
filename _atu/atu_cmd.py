@@ -55,8 +55,10 @@ def atu_cmd(
             try:
                 cmd_ssh = _ssh_prefix(timeout=timeout_cmd, ip_addr=ip_addr_th)
                 cmd_ssh = cmd_ssh + f'"{cmd}"'
+                # -------
                 # debug
-                # print(cmd_ssh)
+                # -------
+                print(cmd_ssh)
                 rv = sp.run(cmd_ssh, shell=True, stdout=sp.PIPE, stderr=sp.PIPE)
                 s = rv.stdout.decode()
                 # this is SSH return code
@@ -73,6 +75,7 @@ def atu_cmd(
     d_ans = dict()
     assert type(str_ls_ip_addr) is str
     ls_ip_addr = str_ls_ip_addr.split(' ')
+    ls_ip_addr = [i for i in ls_ip_addr if '.' in i]
     for ip_addr in ls_ip_addr:
         th = threading.Thread(target=_fxn_th, args=(ip_addr,))
         th.start()
