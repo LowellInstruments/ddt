@@ -71,7 +71,7 @@ sudo reboot
 echo -ne 'AT+CVERSION\r' > /dev/ttyUSB2 && cat -v /dev/ttyUSB2
 ```
 
-Anything different than **2022** needs update. Refer to `ddt_quectel` repository.
+Anything different than **$${\color{red}2025}$$**. needs update. Refer to `ddt_quectel` repository.
 
 **Edit** file `/li/ddh/settings/config.toml`. Once properly filled, the DDH GUI will start automatically.
 
