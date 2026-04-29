@@ -77,10 +77,17 @@ case $shield_hat in
     *)    colored_echo "Wrong Selection, exiting" ${RED}; exit 1;
 esac
 
+
+
 colored_echo "Checking requirements..."
+
+
 
 colored_echo "Updating headers..."
 sudo apt-get update
+
+
+
 
 colored_echo "Downloading chat scripts..."
 wget --no-check-certificate  $SOURCE_PATH/chat-connect -O chat-connect
@@ -92,11 +99,20 @@ if [[ $? -ne 0 ]]; then colored_echo "Download failed" ${RED}; exit 1; fi
 wget --no-check-certificate  $SOURCE_PATH/provider -O provider
 if [[ $? -ne 0 ]]; then colored_echo "Download failed" ${RED}; exit 1; fi
 
+
+
+
 colored_echo "What is your carrier APN?"
 # joaquim auto
 carrierapn=super
 
+
+
+
 colored_echo "Your Input is : $carrierapn" ${GREEN}
+
+
+
 
 while [ 1 ]
 do

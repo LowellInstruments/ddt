@@ -31,3 +31,4 @@ mkdir /li/redis
 sudo chown -R redis:redis /li/redis
 cd /li/redis
 redis-server --dir /li/redis &
+# redis-server --save "" --appendonly no
