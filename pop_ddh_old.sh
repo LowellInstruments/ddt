@@ -26,7 +26,8 @@ clear
 echo
 echo
 FTS=/tmp/ddh_stash
-NUM_TASKS=11
+F_CLONE_MAT=/tmp/mat
+NUM_TASKS=12
 
 
 
@@ -43,15 +44,12 @@ if [ $rv -ne 0 ]; then
 fi
 
 
-
 # decide flavor of pip
 BIN_PIP="/home/pi/.local/bin/uv pip -q"
 $BIN_UV --version  >/dev/null 2>&1
 rv=$?
 if [ $rv -ne 0 ]; then
-    # --------------------------------------
     # we have no UV, just pip then, slower
-    # --------------------------------------
     BIN_PIP="$FOL_VEN/bin/pip -q"
 fi
 
@@ -72,32 +70,44 @@ _e $rv "error updating DDT"
 
 
 
-#spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
-#$BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
-#rm -rf $F_CLONE_MAT
-#git clone --quiet https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1 > /dev/null
-#rv=$?
-#if [ $rv -ne 0 ]; then
-#    spinner.stop
-#    _e $rv "error cloning library MAT"
-#fi
-#cp $F_CLONE_MAT/tools/_pyproject_wo_reqs.toml $F_CLONE_MAT/pyproject.toml
-#rm $F_CLONE_MAT/setup.py || true
-#$BIN_PIP install --python "$FOL_VEN"/bin/python3 --no-deps $F_CLONE_MAT > /dev/null
+# this might not work because /etc/ might be overlay
+# should be already installed in dt_install_step_1_linux.sh
+#spinner.start "  $i_num / $NUM_TASKS Updating" "file /etc/ppp/options"
+#sudo cp _dt_files/options /etc/ppp/options
 #rv=$?
 #spinner.stop
-#_e $rv "error installing library MAT"
-#COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master)
-#rv=$?
-#_e $rv "cannot get MAT local commit file"
-#if [ ${#COM_MAT_LOC} -ne 40 ]; then
-#    _e 1 "bad MAT $COM_MAT_LOC local commit file"
-#    exit 1
-#fi
-#sudo echo "$COM_MAT_LOC" | sudo tee /etc/com_mat_loc.txt > /dev/null
-#rv=$?
-#_e $rv "cannot copy MAT commit file to /etc/"
+#_e $rv "error updating /etc/ppp/options"
 #((i_num++))
+
+
+
+
+spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
+$BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
+rm -rf $F_CLONE_MAT
+git clone --quiet https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1 > /dev/null
+rv=$?
+if [ $rv -ne 0 ]; then
+    spinner.stop
+    _e $rv "error cloning library MAT"
+fi
+cp $F_CLONE_MAT/tools/_pyproject_wo_reqs.toml $F_CLONE_MAT/pyproject.toml
+rm $F_CLONE_MAT/setup.py || true
+$BIN_PIP install --python "$FOL_VEN"/bin/python3 --no-deps $F_CLONE_MAT > /dev/null
+rv=$?
+spinner.stop
+_e $rv "error installing library MAT"
+COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master)
+rv=$?
+_e $rv "cannot get MAT local commit file"
+if [ ${#COM_MAT_LOC} -ne 40 ]; then
+    _e 1 "bad MAT $COM_MAT_LOC local commit file"
+    exit 1
+fi
+sudo echo "$COM_MAT_LOC" | sudo tee /etc/com_mat_loc.txt > /dev/null
+rv=$?
+_e $rv "cannot copy MAT commit file to /etc/"
+((i_num++))
 
 
 
@@ -137,7 +147,7 @@ _e $rv "updating DDH code open source"
 
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI BLE library"
-    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall \
         ble@git+https://github.com/LowellInstruments/ble.git\
         > /dev/null 2>&1
 rv=$?
@@ -150,7 +160,7 @@ _e $rv "installing DDH new LI BLE libraries"
 
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI GPS library"
-    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall \
         gps@git+https://github.com/LowellInstruments/gps.git\
         > /dev/null 2>&1
 rv=$?
@@ -163,7 +173,7 @@ _e $rv "installing DDH new LI GPS libraries"
 
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI LIX library"
-    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall \
         lix@git+https://github.com/LowellInstruments/lix.git\
         > /dev/null 2>&1
 rv=$?
