@@ -103,6 +103,7 @@ if [ $rv -ne 0 ]; then
     rv=$?
     _e $rv "cannot copy MAT commit file to /etc/"
 fi
+spinner.stop
 ((i_num++))
 
 
