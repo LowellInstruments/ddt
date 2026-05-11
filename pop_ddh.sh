@@ -206,6 +206,26 @@ _e $rv "installing closed source moana plugin"
 
 
 
+spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
+"$FOL_VEN"/bin/python3 -c "from global_land_mask import is_land" 2> /dev/null
+rv=$?
+if [ $rv -ne 0 ]; then
+    # for the "is_land" functionality
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
+        global_land_mask\
+        > /dev/null 2>&1
+    rv=$?
+fi
+spinner.stop
+_e $rv "installing DDT extra"
+source /home/pi/.bashrc > /dev/null
+rv=$?
+_e $rv "sourcing bashrc"
+((i_num++))
+
+
+
+
 
 spinner.start "  $i_num / $NUM_TASKS Killing " "DDH application, it will auto-start"
     killall -q ddh_main || true
@@ -218,15 +238,7 @@ spinner.stop
 
 
 
-spinner.start " $i_num / $NUM_TASKS Install " "DDT extra.sh"
-    (cd "$FOL_DDT" && ./dt_install_extra.sh force) > /dev/null
-rv=$?
-spinner.stop
-_e $rv "installing DDT extra"
-    source /home/pi/.bashrc > /dev/null
-rv=$?
-_e $rv "sourcing bashrc"
-((i_num++))
+
 
 
 
