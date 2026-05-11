@@ -27,6 +27,7 @@ echo
 echo
 FTS=/tmp/ddh_stash
 NUM_TASKS=12
+F_CLONE_MAT=/tmp/mat
 
 
 
