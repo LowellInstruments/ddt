@@ -211,8 +211,7 @@ spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
 rv=$?
 if [ $rv -ne 0 ]; then
     # for the "is_land" functionality
-    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
-        global_land_mask\
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 global_land_mask\
         > /dev/null 2>&1
     rv=$?
 fi
