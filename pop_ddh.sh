@@ -212,7 +212,7 @@ spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
     "$FOL_VEN"/bin/pip3 list | grep global_land_mask > /dev/null
     rv=$?
     if [ $rv -ne 0 ]; then
-      $BIN_PIP install --python "$FOL_VEN"/bin/python3 global_land_mask > /dev/null 2>&1
+      $BIN_PIP install --python "$FOL_VEN"/bin/python3 global-land-mask > /dev/null 2>&1
       rv=$?
       fi
 spinner.stop
