@@ -72,6 +72,19 @@ _e $rv "error updating DDT"
 
 
 
+
+spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
+        ble@git+https://github.com/LowellInstruments/mat.git\
+        > /dev/null 2>&1
+rv=$?
+spinner.stop
+_e $rv "installing DDH new LI MAT libraries"
+((i_num++))
+
+
+
+
 #spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
 #$BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
 #rm -rf $F_CLONE_MAT
