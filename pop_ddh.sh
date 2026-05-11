@@ -76,7 +76,7 @@ _e $rv "error updating DDT"
 
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
-"$FOL_VEN"/bin/python3 -c "import mat" 2> /dev/null
+    "$FOL_VEN"/bin/python3 -c "import mat" 2> /dev/null
 rv=$?
 if [ $rv -ne 0 ]; then
     $BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
@@ -209,6 +209,8 @@ _e $rv "installing closed source moana plugin"
 
 # careful trying to install "global_land_mask" broke a lot of things
 spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
+    "$FOL_VEN"/bin/pip3 list | grep global_land_mask > /dev/null
+    rv=$?
 spinner.stop
 _e $rv "installing DDT extra"
 source /home/pi/.bashrc > /dev/null
