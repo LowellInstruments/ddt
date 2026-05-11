@@ -75,30 +75,34 @@ _e $rv "error updating DDT"
 
 
 spinner.start "  $i_num / $NUM_TASKS Install " "LI MAT library"
-$BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
-rm -rf $F_CLONE_MAT
-git clone --quiet https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1 > /dev/null
+"$FOL_VEN"/bin/python3 -c "import mat" 2> /dev/null
 rv=$?
 if [ $rv -ne 0 ]; then
+    $BIN_PIP uninstall --python "$FOL_VEN"/bin/python3 mat > /dev/null
+    rm -rf $F_CLONE_MAT
+    git clone --quiet https://github.com/lowellinstruments/mat.git $F_CLONE_MAT --depth 1 > /dev/null
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        spinner.stop
+        _e $rv "error cloning library MAT"
+    fi
+    cp $F_CLONE_MAT/tools/_pyproject_wo_reqs.toml $F_CLONE_MAT/pyproject.toml
+    rm $F_CLONE_MAT/setup.py || true
+    $BIN_PIP install --python "$FOL_VEN"/bin/python3 --no-deps $F_CLONE_MAT > /dev/null
+    rv=$?
     spinner.stop
-    _e $rv "error cloning library MAT"
+    _e $rv "error installing library MAT"
+    COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master)
+    rv=$?
+    _e $rv "cannot get MAT local commit file"
+    if [ ${#COM_MAT_LOC} -ne 40 ]; then
+        _e 1 "bad MAT $COM_MAT_LOC local commit file"
+        exit 1
+    fi
+    sudo echo "$COM_MAT_LOC" | sudo tee /etc/com_mat_loc.txt > /dev/null
+    rv=$?
+    _e $rv "cannot copy MAT commit file to /etc/"
 fi
-cp $F_CLONE_MAT/tools/_pyproject_wo_reqs.toml $F_CLONE_MAT/pyproject.toml
-rm $F_CLONE_MAT/setup.py || true
-$BIN_PIP install --python "$FOL_VEN"/bin/python3 --no-deps $F_CLONE_MAT > /dev/null
-rv=$?
-spinner.stop
-_e $rv "error installing library MAT"
-COM_MAT_LOC=$(cd "$F_CLONE_MAT" && git rev-parse master)
-rv=$?
-_e $rv "cannot get MAT local commit file"
-if [ ${#COM_MAT_LOC} -ne 40 ]; then
-    _e 1 "bad MAT $COM_MAT_LOC local commit file"
-    exit 1
-fi
-sudo echo "$COM_MAT_LOC" | sudo tee /etc/com_mat_loc.txt > /dev/null
-rv=$?
-_e $rv "cannot copy MAT commit file to /etc/"
 ((i_num++))
 
 
