@@ -26,7 +26,7 @@ clear
 echo
 echo
 FTS=/tmp/ddh_stash
-NUM_TASKS=11
+NUM_TASKS=12
 
 
 
