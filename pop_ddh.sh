@@ -2,7 +2,7 @@
 
 
 
-source /home/pi/li/ddh/scripts/utils.sh
+source /home/pi/li/ddt/dt_utils.sh
 source /home/pi/li/ddt/bash_sdk/src/say.sh
 source /home/pi/li/ddt/bash_sdk/src/spinner.sh
 
@@ -15,6 +15,7 @@ rv=$?
 if [ $rv -eq 0 ]; then
     source /home/kaz/PycharmProjects/ddt/bash_sdk/src/spinner.sh
 else
+    # to be able to use this _e function
     source "dt_utils.sh"
     _e 3 "this is not a raspberry"
 fi
