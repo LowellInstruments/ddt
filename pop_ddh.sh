@@ -207,11 +207,11 @@ _e $rv "installing closed source moana plugin"
 
 
 spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
-"$FOL_VEN"/bin/python3 -c "from global_land_mask import is_land" 2> /dev/null
+"$FOL_VEN"/bin/python3 -c "import global_land_mask" 2> /dev/null
 rv=$?
 if [ $rv -ne 0 ]; then
     # for the "is_land" functionality
-    "$FOL_VEN"/bin/pip -q install global_land_mask
+    "$FOL_VEN"/bin/pip install global_land_mask
     rv=$?
 fi
 spinner.stop
