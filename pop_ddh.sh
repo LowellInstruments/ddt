@@ -207,14 +207,8 @@ _e $rv "installing closed source moana plugin"
 
 
 
-# careful trying to install "global_land_mask" broke a lot of things
+# careful trying to install "global-land-mask" broke a lot of things
 spinner.start " $i_num / $NUM_TASKS Install " "DDT extra"
-    "$FOL_VEN"/bin/pip3 list | grep global-land-mask > /dev/null
-    rv=$?
-    if [ $rv -ne 0 ]; then
-      $BIN_PIP install --python "$FOL_VEN"/bin/python3 global-land-mask > /dev/null 2>&1
-      rv=$?
-      fi
 spinner.stop
 _e $rv "installing DDT extra"
 source /home/pi/.bashrc > /dev/null
