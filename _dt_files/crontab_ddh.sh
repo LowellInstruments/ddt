@@ -11,6 +11,15 @@ if [ $rv -eq 0 ]; then
 fi
 
 
+
+# when already shutting down SAILOR-HAT, don't try to run
+if [ -f /tmp/.ddh_prevent_run ]; then
+    printf "we are shutting down box, don't run DDH GUI\n"
+    exit 0
+fi
+
+
+
 # run DDH if NOT already running
 pgrep -f run_ddh.sh
 rv=$?

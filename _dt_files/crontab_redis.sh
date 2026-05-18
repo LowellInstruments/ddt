@@ -8,6 +8,14 @@ sudo kill -9 `ps -aux | grep NX | grep update | grep -v grep | awk '{print $2}'`
 
 
 
+# when already shutting down SAILOR-HAT, don't try to run
+if [ -f /tmp/.ddh_prevent_run ]; then
+    printf "we are shutting down box, don't run redis\n"
+    exit 0
+fi
+
+
+
 echo "is redis already running?"
 systemctl is-active redis
 rv=$?
