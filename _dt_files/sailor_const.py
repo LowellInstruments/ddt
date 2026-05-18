@@ -8,7 +8,8 @@ I2C_BUS = 1
 I2C_ADDR = 0x6D
 
 # After this many seconds of blackout, the daemon will shut down the Pi
-DEFAULT_BLACKOUT_TIME_LIMIT = 10.0
+# ~ we changed this from 10 to 5
+DEFAULT_BLACKOUT_TIME_LIMIT = 5.0
 
 # This is the input voltage limit that counts as a blackout
 DEFAULT_BLACKOUT_VOLTAGE_LIMIT = 9.0

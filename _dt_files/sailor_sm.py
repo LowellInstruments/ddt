@@ -31,9 +31,14 @@ async def run_state_machine(
             if dcin_voltage < blackout_voltage_limit:
                 logger.warning("Detected blackout")
                 # added by Lowell Instruments
-                time.sleep(2)
+                time.sleep(1.5)
                 dcin_voltage = shrpi_device.dcin_voltage()
                 if dcin_voltage < blackout_voltage_limit:
+                    # helps with disk integrity on DDH v5
+                    os.system('touch /tmp/.ddh_prevent_run')
+                    os.system('redis-cli shutdown nosave')
+                    os.system('sudo fuser -mk /dev/sda3')
+                    time.sleep(.5)
                     os.system('/home/pi/li/sailorhat/popup_sah.sh &')
                     blackout_time = time.time()
                     state = "BLACKOUT"
