@@ -34,7 +34,7 @@ async def run_state_machine(
                 time.sleep(1.5)
                 dcin_voltage = shrpi_device.dcin_voltage()
                 if dcin_voltage < blackout_voltage_limit:
-                    # helps with disk integrity on DDH v5
+                    # helps with disk integrity on DDH v5, does nothing on DDH v4
                     os.system('touch /tmp/.ddh_prevent_run')
                     os.system('redis-cli shutdown nosave')
                     os.system('sudo fuser -mk /dev/sda3')
