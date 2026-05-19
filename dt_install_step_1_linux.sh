@@ -298,6 +298,12 @@ function install_step_1 {
     if [ $rv -ne 0 ]; then
         echo "alias olr=\"sudo overlayroot-chroot\"" >> $F_RC
     fi
+    grep 'alias sar' $F_RC
+    rv=$?
+    if [ $rv -ne 0 ]; then
+        # stands for "SAilor-hat Reset"
+        echo "alias sar=\"touch /tmp/.ddh_prevent_run; redis-cli shutdown nosave; sudo fuser -mk /dev/sda3; sudo reboot\"" >> $F_RC
+    fi
 }
 
 
