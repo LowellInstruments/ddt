@@ -7,22 +7,6 @@ from shrpi.i2c import SHRPiDevice
 
 
 
-async def _li_shutdown():
-    # helps with disk integrity on DDH v5, does nothing on DDH v4
-    os.system('touch /tmp/.ddh_prevent_run')
-    os.system('redis-cli shutdown nosave')
-    os.system('sudo fuser -mk /dev/sda3')
-    await asyncio.sleep(1)
-
-
-
-def _li_popup():
-    # shown, but it is not definitive
-    os.system('/home/pi/li/sailorhat/popup_sah.sh &')
-
-
-
-
 async def run_state_machine(
     shrpi_device: SHRPiDevice,
     blackout_time_limit: float,
@@ -30,8 +14,6 @@ async def run_state_machine(
     dry_run: bool = False,
     poweroff: str = "/sbin/poweroff",
 ) -> None:
-
-
     state = "START"
     blackout_time = 0.0
 
@@ -47,52 +29,43 @@ async def run_state_machine(
         elif state == "OK":
             if dcin_voltage < blackout_voltage_limit:
                 logger.warning("Detected blackout")
+                # added by Lowell Instruments
+                time.sleep(1.5)
                 dcin_voltage = shrpi_device.dcin_voltage()
                 if dcin_voltage < blackout_voltage_limit:
+                    # helps with disk integrity on DDH v5, does nothing on DDH v4
+                    os.system('touch /tmp/.ddh_prevent_run')
+                    os.system('redis-cli shutdown nosave')
+                    os.system('sudo fuser -mk /dev/sda3')
+                    time.sleep(.5)
+                    os.system('/home/pi/li/sailorhat/popup_sah.sh &')
                     blackout_time = time.time()
                     state = "BLACKOUT"
-                    _li_popup()
                 else:
                     state = "OK"
             if os.path.exists("/tmp/.ddh_reboot_sailorhat"):
-                # --------------------------------------------------------
-                # skips state BLACKOUT, does NOT wait blackout_time_limit
-                # --------------------------------------------------------
                 state = "SHUTDOWN"
 
-
         elif state == "BLACKOUT":
-            # not critical, yet
             if dcin_voltage > blackout_voltage_limit:
                 logger.info("Power resumed")
                 state = "OK"
             elif time.time() - blackout_time > blackout_time_limit:
-                # ------------------------------
                 # didn't get power back in time
-                # -------------------------------
                 logger.warning(
                     f"Blacked out for {blackout_time_limit} s, shutting down"
                 )
                 state = "SHUTDOWN"
-
-
         elif state == "SHUTDOWN":
-            # this one IS CRITICAL
             if dry_run:
                 logger.warning(f"Would execute {poweroff}")
             else:
-                # our code
-                _li_popup()
-                await _li_shutdown()
-
                 # inform the hat about this sad state of affairs
                 shrpi_device.request_shutdown()
                 logger.info(f"Executing {poweroff}")
                 check_call(["sudo", poweroff])
             state = "DEAD"
-
-
         elif state == "DEAD":
             # just wait for the inevitable
             pass
-        await asyncio.sleep(0.2)
+        await asyncio.sleep(0.1)
