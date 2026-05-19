@@ -120,6 +120,7 @@ function install_step_1 {
         sudo systemctl start shrpid
         sudo systemctl is-active shrpid.service | grep -w active
         _e $? "sailor_hat service NOT active"
+    fi
 
 
     # juice4halt
