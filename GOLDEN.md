@@ -4,7 +4,7 @@ A golden board is $${\color{red}NOT}$$ meant to run but be used as source to clo
 
 ## Use your laptop
 
-Download the latest RaspberryOS Bookworm [2025 image](https://downloads.raspberrypi.com/raspios_oldstable_arm64/images/raspios_oldstable_arm64-2025-11-24/2025-11-24-raspios-bookworm-arm64.img.xz).
+Download this RaspberryOS Bookworm [2025 image](https://downloads.raspberrypi.com/raspios_oldstable_arm64/images/raspios_oldstable_arm64-2025-11-24/2025-11-24-raspios-bookworm-arm64.img.xz).
 
 Connect a **blank** microSD card or SSD disk via USB.
 
