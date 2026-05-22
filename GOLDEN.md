@@ -4,7 +4,7 @@ A golden board is $${\color{red}NOT}$$ meant to run but be used as source to clo
 
 ## Use your laptop
 
-Download the latest RaspberryOS Bookworm [2025 image](https://downloads.raspberrypi.com/raspios_oldstable_arm64/images/raspios_oldstable_arm64-2025-11-24/2025-11-24-raspios-bookworm-arm64.img.xz).
+Download this RaspberryOS Bookworm [2025 image](https://downloads.raspberrypi.com/raspios_oldstable_arm64/images/raspios_oldstable_arm64-2025-11-24/2025-11-24-raspios-bookworm-arm64.img.xz).
 
 Connect a **blank** microSD card or SSD disk via USB.
 
@@ -69,7 +69,7 @@ sudo apt-get -y install overlayroot joe gparted
 PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,sync,nofail   0 0
 /li     /home/pi/li     none bind
 ```
-👆 **Ensure** you did not forget the last line starting with `/li` and its **newline**. It's essential.
+👆 **Ensure** you did not forget the last line starting with `/li` and its **newline**. It's $\color{red}{essential}$.
 
 🌐 **Install nomachine**.
 
@@ -79,7 +79,7 @@ wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm6
 sudo dpkg -i nomachine_9.3.7_1_arm64.deb
 ```
 
-#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Control Centre > Display`.
+#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Raspberry Pi Configuration > Display`.
 
 Also ensure to switch on **Bluetooth icon** in the panel if its greyed out.
 
@@ -136,11 +136,6 @@ git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
 
 ⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH` ▶️ `gor/run_mnt.sh`.
 
-🌐 Set **timezone** with:
-
-```sh
-sudo dpkg-reconfigure tzdata
-```
 
 🪟 For DWS (installed later) to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
 
