@@ -136,11 +136,6 @@ git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
 
 ⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH` ▶️ `gor/run_mnt.sh`.
 
-🌐 Set **timezone** with:
-
-```sh
-sudo dpkg-reconfigure tzdata
-```
 
 🪟 For DWS (installed later) to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
 
