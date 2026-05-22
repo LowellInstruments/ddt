@@ -34,6 +34,8 @@ pinval = 1
 while pinval == 1:
     pinval = GPIO.input(25)
     time.sleep(.2)
+    if os.path.exists("/tmp/.ddh_reboot_j4h"):
+        break
 
 
 print("power lost")
