@@ -28,16 +28,23 @@ print("Interface complete")
 GPIO.setup(25, GPIO.IN)
 time.sleep(.1)
 
+
 print("Waiting for power to go away")
 pinval = 1
 while pinval == 1:
     pinval = GPIO.input(25)
     time.sleep(.2)
 
+
 print("power lost")
 GPIO.setup(25, GPIO.OUT)
 GPIO.output(25, GPIO.LOW)
+
+
 os.system("/home/pi/li/juice4halt/bin/popup_j4h.sh &")
+os.system('touch /tmp/.ddh_prevent_run')
+os.system('redis-cli shutdown nosave')
+os.system('sudo fuser -mk /dev/sda3')
 os.system("rm -f /home/pi/li/juice4halt/bin/j4h_halt_flag")
 os.system("touch /home/pi/li/juice4halt/bin/j4h_halt_flag")
 time.sleep(2)
