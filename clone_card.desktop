@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=script_clone_card
+Comment=Runs clone_card
+Exec=/home/kaz/Downloads/script_clone_card.sh
+Terminal=true
+Icon=utilities-terminal
