@@ -33,7 +33,7 @@ fi
 # ask again
 read -p "This will erase your card on /dev/sda, proceed? (y/n): " yn
 case $yn in
-    [Yy]* ) echo "Proceeding..."; break;;
+    [Yy]* ) echo "Proceeding..."; ;;
     [Nn]* ) echo "Exiting..."; exit;;
     * ) echo "Please answer yes or no.";;
 esac
@@ -42,8 +42,8 @@ esac
 
 # we are PRETTY safe here
 echo "copying IMAGE file to SD card on /dev/sda..."
-sudo if=$HOME/Desktop/sd.img of=/dev/sda bs=4M status=progress
-
+sudo dd if=$HOME/Desktop/sd.img of=/dev/sda bs=4M status=progress
+rv=$?
 if [ $rv -eq 0 ]; then
         echo "image cloning to SD card OK!"
 else
@@ -52,4 +52,5 @@ fi
 
 echo "press return to finish"
 read
+
 
