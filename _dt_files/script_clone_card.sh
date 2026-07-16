@@ -34,8 +34,7 @@ fi
 read -p "This will erase your card on /dev/sda, proceed? (y/n): " yn
 case $yn in
     [Yy]* ) echo "Proceeding..."; ;;
-    [Nn]* ) echo "Exiting..."; exit;;
-    * ) echo "Please answer yes or no.";;
+    * ) echo "Bye"; exit 1;;
 esac
 
 
