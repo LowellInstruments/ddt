@@ -47,4 +47,6 @@ mkdir /li/redis
 sudo chown -R redis:redis /li/redis
 cd /li/redis
 redis-server --dir /li/redis &
+
+# to use NO disk, using redis as only volatile cache
 # redis-server --save "" --appendonly no
