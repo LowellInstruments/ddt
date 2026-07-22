@@ -2,6 +2,15 @@
 
 
 
+# quit if DDU is running
+pgrep -f pop_ddh.sh
+rv=$?
+if [ $rv -ne 0 ]; then
+    exit 0
+fi
+
+
+
 # don't run when BRT tool is running
 ps -aux | grep main_brt | grep -v grep
 rv=$?

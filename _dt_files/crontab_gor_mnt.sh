@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
-/home/pi/run_mnt.sh
+# we disabled this in DDH v.5054
+
+# /home/pi/run_mnt.sh
