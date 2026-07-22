@@ -10,7 +10,7 @@ sudo kill -9 `ps -aux | grep NX | grep update | grep -v grep | awk '{print $2}'`
 # quit if DDU is running
 pgrep -f pop_ddh.sh
 rv=$?
-if [ $rv -ne 0 ]; then
+if [ $rv -eq 0 ]; then
     exit 0
 fi
 
