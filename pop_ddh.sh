@@ -195,9 +195,9 @@ _e $rv "un-stashing DDH current configuration files"
 # might be there or not
 cp $FTS/db_his.json "$FOL_DDH"/ddh/db 2> /dev/null
 cp $FTS/.decided_scf_*.toml "$FOL_DDH" 2> /dev/null
-mkdir "$FOL_DDH"/upload
+mkdir "$FOL_DDH"/upload 2> /dev/null
 # -P copies the symlink, o/wise it would try to copy the real file
-cp -P $FTS/upload/* "$FOL_DDH"/upload
+cp -P $FTS/upload/* "$FOL_DDH"/upload 2> /dev/null
 ((i_num++))
 
 
