@@ -113,7 +113,7 @@ spinner.stop
 
 
 
-spinner.start "  $i_num / $NUM_TASKS Save" "DDH settings"
+spinner.start "  $i_num / $NUM_TASKS  Save" "DDH settings"
 rm -rf $FTS
 mkdir $FTS && \
 # TOML files: config.toml, all_macs.toml, rerun_flag.toml
@@ -221,7 +221,7 @@ _e $rv "sourcing bashrc"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Kill" "DDH, will auto-start"
+spinner.start " $i_num / $NUM_TASKS  Kill" "DDH, will auto-start"
     killall -q ddh_main || true
     sleep 1
     killall -9 -q ddh_main || true
