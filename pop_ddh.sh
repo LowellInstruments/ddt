@@ -125,6 +125,8 @@ _e $rv "stashing DDH current configuration files"
 # might be there or not
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS 2> /dev/null
 cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
+
+# this copies the whole folder, with symlinks, not the real files
 cp -r "$FOL_DDH"/upload $FTS 2> /dev/null
 ((i_num++))
 
@@ -190,11 +192,12 @@ spinner.start "  $i_num / $NUM_TASKS  Load" "DDH settings"
     rv=$?
 spinner.stop
 _e $rv "un-stashing DDH current configuration files"
-    # might be there or not
-    cp $FTS/db_his.json "$FOL_DDH"/ddh/db 2> /dev/null
-    cp $FTS/.decided_scf_*.toml "$FOL_DDH" 2> /dev/null
-    mkdir "$FOL_DDH"/upload
-    cp $FTS/upload/* "$FOL_DDH"/upload
+# might be there or not
+cp $FTS/db_his.json "$FOL_DDH"/ddh/db 2> /dev/null
+cp $FTS/.decided_scf_*.toml "$FOL_DDH" 2> /dev/null
+mkdir "$FOL_DDH"/upload
+# -P copies the symlink, o/wise it would try to copy the real file
+cp -P $FTS/upload/* "$FOL_DDH"/upload
 ((i_num++))
 
 
