@@ -66,7 +66,7 @@ spinner.start "  $i_num / $NUM_TASKS   Get" "DDH tools"
     (cd "$FOL_DDT" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "error updating DDT"
 ((i_num++))
@@ -114,17 +114,18 @@ spinner.stop
 
 
 spinner.start "  $i_num / $NUM_TASKS  Save" "DDH settings"
-rm -rf $FTS
-mkdir $FTS && \
-# TOML files: config.toml, all_macs.toml, rerun_flag.toml
-cp "$FOL_DDH"/settings/*.toml $FTS && \
-cp "$FOL_DDH"/scripts/script_logger_dox_deploy_cfg.json $FTS
-rv=$?
+    rm -rf $FTS
+    mkdir $FTS && \
+    # TOML files: config.toml, all_macs.toml, rerun_flag.toml
+    cp "$FOL_DDH"/settings/*.toml $FTS && \
+    cp "$FOL_DDH"/scripts/script_logger_dox_deploy_cfg.json $FTS
+    rv=$?
 spinner.stop
 _e $rv "stashing DDH current configuration files"
 # might be there or not
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS 2> /dev/null
 cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
+cp -r "$FOL_DDH"/upload $FTS 2> /dev/null
 ((i_num++))
 
 
@@ -135,7 +136,7 @@ spinner.start "  $i_num / $NUM_TASKS   Get" "DDH code"
     (cd "$FOL_DDH" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "updating DDH code open source"
 ((i_num++))
@@ -149,7 +150,7 @@ spinner.start "  $i_num / $NUM_TASKS   Get" "Library BLE"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         ble@git+https://github.com/LowellInstruments/ble.git\
         > /dev/null 2>&1
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "installing DDH new LI BLE libraries"
 ((i_num++))
@@ -162,7 +163,7 @@ spinner.start "  $i_num / $NUM_TASKS   Get" "Library GPS"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         gps@git+https://github.com/LowellInstruments/gps.git\
         > /dev/null 2>&1
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "installing DDH new LI GPS libraries"
 ((i_num++))
@@ -175,7 +176,7 @@ spinner.start "  $i_num / $NUM_TASKS   Get" "Library LIX"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         lix@git+https://github.com/LowellInstruments/lix.git\
         > /dev/null 2>&1
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "installing DDH new LI LIX libraries"
 ((i_num++))
@@ -186,20 +187,22 @@ _e $rv "installing DDH new LI LIX libraries"
 spinner.start "  $i_num / $NUM_TASKS  Load" "DDH settings"
     cp $FTS/*.toml "$FOL_DDH"/settings && \
     cp $FTS/script_logger_dox_deploy_cfg.json "$FOL_DDH"/scripts
-rv=$?
+    rv=$?
 spinner.stop
 _e $rv "un-stashing DDH current configuration files"
     # might be there or not
     cp $FTS/db_his.json "$FOL_DDH"/ddh/db 2> /dev/null
     cp $FTS/.decided_scf_*.toml "$FOL_DDH" 2> /dev/null
+    mkdir "$FOL_DDH"/upload
+    cp $FTS/upload/* "$FOL_DDH"/upload
 ((i_num++))
 
 
 
 
 spinner.start "  $i_num / $NUM_TASKS   Get" "Manufacturers closed source"
-cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
-rv=$?
+    cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
+    rv=$?
 spinner.stop
 _e $rv "installing closed source moana plugin"
 ((i_num++))
@@ -209,7 +212,7 @@ _e $rv "installing closed source moana plugin"
 
 # careful trying to install package "global-land-mask" BROKE a lot of things
 spinner.start " $i_num / $NUM_TASKS  Load" "Sourcing bashrc"
-sleep .1
+    sleep .1
 spinner.stop
 _e $rv "installing DDT extra"
 source /home/pi/.bashrc > /dev/null
