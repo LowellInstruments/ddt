@@ -62,7 +62,7 @@ fi
 
 
 i_num=1
-spinner.start "  $i_num / $NUM_TASKS  Get" "DDH tools"
+spinner.start "  $i_num / $NUM_TASKS   Get" "DDH tools"
     (cd "$FOL_DDT" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
@@ -75,7 +75,7 @@ _e $rv "error updating DDT"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "Library MAT"
+spinner.start "  $i_num / $NUM_TASKS   Get" "Library MAT"
     "$FOL_VEN"/bin/python3 -c "import mat" 2> /dev/null
     rv=$?
     if [ $rv -ne 0 ]; then
@@ -131,7 +131,7 @@ cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "DDH code"
+spinner.start "  $i_num / $NUM_TASKS   Get" "DDH code"
     (cd "$FOL_DDH" && \
     git reset --hard && \
     git pull --quiet) > /dev/null
@@ -145,7 +145,7 @@ _e $rv "updating DDH code open source"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "Library BLE"
+spinner.start "  $i_num / $NUM_TASKS   Get" "Library BLE"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         ble@git+https://github.com/LowellInstruments/ble.git\
         > /dev/null 2>&1
@@ -158,7 +158,7 @@ _e $rv "installing DDH new LI BLE libraries"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "Library GPS"
+spinner.start "  $i_num / $NUM_TASKS   Get" "Library GPS"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         gps@git+https://github.com/LowellInstruments/gps.git\
         > /dev/null 2>&1
@@ -171,7 +171,7 @@ _e $rv "installing DDH new LI GPS libraries"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "Library LIX"
+spinner.start "  $i_num / $NUM_TASKS   Get" "Library LIX"
     $BIN_PIP install --python "$FOL_VEN"/bin/python3 --reinstall --no-deps \
         lix@git+https://github.com/LowellInstruments/lix.git\
         > /dev/null 2>&1
@@ -197,8 +197,8 @@ _e $rv "un-stashing DDH current configuration files"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS  Get" "Manufacturers closed source"
-    cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
+spinner.start "  $i_num / $NUM_TASKS   Get" "Manufacturers closed source"
+cp "$FOL_DDT"/_dt_files/ble_dl_moana.py "$FOL_DDH"/ddh
 rv=$?
 spinner.stop
 _e $rv "installing closed source moana plugin"
@@ -209,6 +209,7 @@ _e $rv "installing closed source moana plugin"
 
 # careful trying to install package "global-land-mask" BROKE a lot of things
 spinner.start " $i_num / $NUM_TASKS  Load" "Sourcing bashrc"
+sleep .1
 spinner.stop
 _e $rv "installing DDT extra"
 source /home/pi/.bashrc > /dev/null
@@ -220,7 +221,7 @@ _e $rv "sourcing bashrc"
 
 
 
-spinner.start "  $i_num / $NUM_TASKS Kill" "DDH app, will auto-start"
+spinner.start "  $i_num / $NUM_TASKS  Kill" "DDH, will auto-start"
     killall -q ddh_main || true
     sleep 1
     killall -9 -q ddh_main || true
