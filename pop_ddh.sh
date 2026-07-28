@@ -55,6 +55,9 @@ if [ $rv -ne 0 ]; then
     # we have no UV, just pip then, slower
     # --------------------------------------
     BIN_PIP="$FOL_VEN/bin/pip -q"
+    say "Using standard PIP"
+else
+    say "Using UV pip"
 fi
 
 
