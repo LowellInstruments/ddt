@@ -210,7 +210,7 @@ _e $rv "installing closed source moana plugin"
 
 
 # careful trying to install package "global-land-mask" BROKE a lot of things
-spinner.start " $i_num / $NUM_TASKS  Load" "alias bashrc "
+spinner.start " $i_num / $NUM_TASKS  Load" "alias bashrc  "
     sleep .1
 spinner.stop
 _e $rv "installing DDT extra"
@@ -222,7 +222,7 @@ _e $rv "sourcing bashrc"
 
 
 
-spinner.start " $i_num / $NUM_TASKS  Kill" "DDH & restart  "
+spinner.start " $i_num / $NUM_TASKS  Kill" "DDH & restart"
     killall -q ddh_main || true
     sleep 1
     killall -9 -q ddh_main || true
@@ -253,7 +253,7 @@ spinner.stop
 
 
 
-spinner.start " $i_num / $NUM_TASKS  Kill" "API & restart  "
+spinner.start " $i_num / $NUM_TASKS  Kill" "API & restart"
     killall -q main_api  || true
     killall -q main_api_controller || true
 spinner.stop
