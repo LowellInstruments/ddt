@@ -71,13 +71,6 @@ PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,s
 ```
 👆 **Ensure** you did not forget the last line starting with `/li` and its **newline**. It's $\color{red}{essential}$.
 
-🌐 **Install nomachine**.
-
-```sh
-cd /home/pi/Downloads                                                                    && \
-wget https://web9001.nomachine.com/download/9.3/Raspberry/nomachine_9.3.7_1_arm64.deb    && \
-sudo dpkg -i nomachine_9.3.7_1_arm64.deb
-```
 
 #⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Raspberry Pi Configuration > Display`.
 
@@ -106,18 +99,6 @@ cd /li/ddt                                                                  && \
 echo -e "\n\neverything went smooth for install_step_2_and_3\n\n"
 ```
 
-**Install GOR virtual environment** for alarm script, type:
-
-```sh
-python3 -m venv /home/pi/venv_gor                                 && \
-source /home/pi/venv_gor/bin/activate                             && \
-/home/pi/venv_gor/bin/pip3 install boto3 pyserial                 && \
-deactivate                                                        && \
-cp /li/ddt/_dt_files/main_mnt.cpython-311.pyc /home/pi            && \
-cp /li/ddt/_dt_files/run_mnt.sh /home/pi                          && \
-echo -e "\n\neverything went smooth for install_gor\n\n"
-```
-
 **Download DWS** but not install it yet.
 
 ```sh
@@ -134,7 +115,7 @@ git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
 
 
 
-⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH` ▶️ `gor/run_mnt.sh`.
+⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH`. Comment the one for gor_mnt.sh.
 
 
 🪟 For DWS (installed later) to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
