@@ -21,7 +21,7 @@ def gps_hat_get_firmware_version(usb_port):
         # todo: test this dummy read
         ser = serial.Serial(usb_port, baudrate=115200, timeout=0)
         _gps_hat_flush(ser)
-        for i in range(3):
+        for _ in range(3):
             # probably echo activated so will receive back this
             ser.write(b'AT+CVERSION\r')
             time.sleep(.1)
@@ -34,18 +34,19 @@ def gps_hat_get_firmware_version(usb_port):
     finally:
         if ser:
             ser.close()
-        return rv
+
+    return rv
 
 
 
 def gps_hat_detect_list_of_usb_ports():
-    ls = []
+    _ls = []
     for port, _, vp in sorted(list(list_ports.comports())):
         if not VID_PID_GPS_HAT in vp:
             continue
-        ls.append(port)
+        _ls.append(port)
         # ls: ['/dev/ttyUSB0' ... '/dev/ttyUSB3']
-    return ls
+    return _ls
 
 
 

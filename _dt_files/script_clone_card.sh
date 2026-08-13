@@ -41,7 +41,7 @@ esac
 
 # we are PRETTY safe here
 echo "copying IMAGE file to SD card on /dev/sda..."
-sudo dd if=$HOME/Desktop/sd.img of=/dev/sda bs=4M status=progress
+sudo dd if=$HOME/Desktop/sd.img of=/dev/sda bs=4M status=progress conv=fdatasync
 rv=$?
 if [ $rv -eq 0 ]; then
         echo "image cloning to SD card OK!"
