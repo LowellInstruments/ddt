@@ -55,6 +55,8 @@ Ensure **SSH is enabled** by typing:
 sudo systemctl start ssh && sudo systemctl enable ssh
 ```
 
+
+
 To start with a fresh package base in this OS, you might need:
 
 ```sh
@@ -63,20 +65,26 @@ sudo apt update                                         && \
 sudo apt-get -y install overlayroot joe gparted
 ```
 
+
+
+
 🇵 **Add the following at the end of file** `/etc/fstab`:
 
 ```sh
 PARTUUID=<_____copythis_from_above_lines_______>-03  /li ext4 defaults noatime,sync,nofail   0 0
 /li     /home/pi/li     none bind
 ```
+
+
+
+
 👆 **Ensure** you did not forget the last line starting with `/li` and its **newline**. It's $\color{red}{essential}$.
 
+⚡️ Reboot RPi too apply changes in `/etc/fstab`.
 
-#⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Raspberry Pi Configuration > Display`.
 
-Also ensure to switch on **Bluetooth icon** in the panel if its greyed out.
 
-⚡️ Reboot RPi.
+
 
 **Install DDTv5 required Linux libraries on RW partition /li** with:
 
@@ -90,6 +98,10 @@ cd /li/ddt                                                                  && \
 echo -e "\n\neverything went smooth for install_step_1_linux\n\n"
 ```
 
+
+
+
+
 **Install DDTv5 required DDH and API on RW partition /li** with:
 
 ```sh
@@ -98,6 +110,10 @@ cd /li/ddt                                                                  && \
 ./dt_install_step_3_api.sh                                                  && \
 echo -e "\n\neverything went smooth for install_step_2_and_3\n\n"
 ```
+
+
+
+
 
 **Download DWS** but not install it yet.
 
@@ -115,14 +131,22 @@ git clone https://github.com/lowellinstruments/ddt_quectel.git --depth 1
 
 
 
-⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH`. Comment the one for gor_mnt.sh.
+⌛ **Edit file** `/etc/crontab` and **uncomment entries** for ▶️ `redis` ▶️ `DDH`. Comment one for gor_mnt.sh.
+
 
 
 🪟 For DWS (installed later) to not complain, you might need to run `raspi-config` and choose **X11 instead of Wayland** inside ``Advanced Options``.
 
 ⚡️ **Reboot for the X11 change to make effect**. Let it full boot. 
 
-🗑️ Connect via Nomachine or presentially and **remove Bluetooth, software updater and ejecter upper panel icons** by right-clicking on them.
+
+
+
+⃣️ If **On-Screen Keyboard** is in the way, **disable it** in `Menu > Preferences > Raspberry Pi Configuration > Display`.
+
+Also ensure to **switch on Bluetooth icon** in the panel if it appears greyed out.
+
+🗑️ Connect presentially and **remove Bluetooth, software updater and ejecter upper panel icons** by right-clicking on them.
 
 **Disable screensaver** by `Click menu / Preferences / Screen Saver`. Next to `mode`, you can disable it. Use a mouse if the drop-down does not open properly.
 
