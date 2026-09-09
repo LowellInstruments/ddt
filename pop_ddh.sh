@@ -27,8 +27,8 @@ clear
 echo
 echo
 FTS=/tmp/ddh_stash
-NUM_TASKS=12
 F_CLONE_MAT=/tmp/mat
+NUM_TASKS=13
 
 
 
@@ -247,7 +247,7 @@ spinner.stop
 
 
 
-spinner.start " $i_num / $NUM_TASKS  Kill " "services & restart"
+spinner.start " $i_num / $NUM_TASKS  Load" "DDH services"
 # does not work because /etc/ might be overlay
 # sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
 # sudo cp "$FOL_DDT"/_dt_files/unit_my_info.service /etc/systemd/system/ && \
