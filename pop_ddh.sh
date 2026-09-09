@@ -247,7 +247,7 @@ spinner.stop
 
 
 
-spinner.start " $i_num / $NUM_TASKS  Load" "DDH services"
+spinner.start " $i_num / $NUM_TASKS  Load" "DDH services  "
 # does not work because /etc/ might be overlay
 # sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
 # sudo cp "$FOL_DDT"/_dt_files/unit_my_info.service /etc/systemd/system/ && \
