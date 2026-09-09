@@ -238,28 +238,29 @@ spinner.stop
 
 
 
-#spinner.start " $i_num / $NUM_TASKS Restart " "systemctl for new services"
-#    # this would not work because /etc/ might be overlay
-#    # sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
-#    # sudo cp "$FOL_DDT"/_dt_files/unit_my_info.service /etc/systemd/system/ && \
-#    sudo systemctl daemon-reload
-#    sudo systemctl restart unit_switch_net.service
-#    sudo systemctl enable unit_switch_net.service
-#    sudo systemctl restart unit_my_info.service
-#    sudo systemctl enable unit_my_info.service
-#rv=$?
-#spinner.stop
-#_e $rv "restarting systemctl for new services"
-#((i_num++))
-
-
-
-
 spinner.start " $i_num / $NUM_TASKS  Kill" "API & restart "
     killall -q main_api  || true
     killall -q main_api_controller || true
 spinner.stop
 ((i_num++))
+
+
+
+
+spinner.start " $i_num / $NUM_TASKS  Kill " "services & restart"
+# does not work because /etc/ might be overlay
+# sudo cp "$FOL_DDT"/_dt_files/unit_switch_net.service /etc/systemd/system/ && \
+# sudo cp "$FOL_DDT"/_dt_files/unit_my_info.service /etc/systemd/system/ && \
+# sudo systemctl daemon-reload
+sudo systemctl restart unit_switch_net.service
+#sudo systemctl enable unit_switch_net.service
+#    sudo systemctl restart unit_my_info.service
+#    sudo systemctl enable unit_my_info.service
+rv=$?
+spinner.stop
+_e $rv "restarting systemctl for new services"
+((i_num++))
+
 
 
 echo
