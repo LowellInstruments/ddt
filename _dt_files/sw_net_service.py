@@ -58,6 +58,7 @@ def main() -> int:
     wlan_via = _sh(f'ping -w {TIMEOUT_NO_DNS} -I wlan0 {IP}')
     wlan_used = _sh(f'ip route get {IP} | grep wlan0')
 
+
     if time.perf_counter() - g_ts > 600:
         g_ts = time.perf_counter()
         dns_works_wifi = _sh(f'ping -w {TIMEOUT_W_DNS} -I wlan0 {URL}')
@@ -65,9 +66,11 @@ def main() -> int:
         if not dns_works_wifi and not dns_works_cell:
             _p('* DNS error *')
 
+
     if wlan_via and wlan_used:
         _p('wifi')
         return _z('wifi')
+
 
     if wlan_via and not wlan_used:
         _sh(f'{CMD_IFMETRIC} ppp0 400')
@@ -75,12 +78,15 @@ def main() -> int:
         _p('* wifi *')
         return _z('wifi')
 
+
     cell_via = _sh(f'ping -w {TIMEOUT_NO_DNS} -I ppp0 {IP}')
     cell_used = _sh(f'ip route get {IP} | grep ppp0')
+
 
     if cell_via and cell_used:
         _p('cell')
         return _z('cell')
+
 
     # do NOT move this inside the condition
     _sh(f'{CMD_IFMETRIC} wlan0 400')
@@ -91,6 +97,8 @@ def main() -> int:
 
     _p('none')
     return _z('none')
+
+
 
 
 if __name__ == '__main__':
