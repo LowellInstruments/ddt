@@ -59,7 +59,7 @@ def main() -> int:
     wlan_used = _sh(f'ip route get {IP} | grep wlan0')
 
     if time.perf_counter() - g_ts > 600:
-        g_ts = time.perf_counter
+        g_ts = time.perf_counter()
         dns_works_wifi = _sh(f'ping -w {TIMEOUT_W_DNS} -I wlan0 {URL}')
         dns_works_cell = _sh(f'ping -w {TIMEOUT_W_DNS} -I ppp0 {URL}')
         if not dns_works_wifi and not dns_works_cell:
