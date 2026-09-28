@@ -263,4 +263,9 @@ _e $rv "restarting systemctl for new services"
 
 
 
+# so DDH shows a new icon
+redis-cli set ddh:gui:gui_was_updated 1
+
+
+
 echo
