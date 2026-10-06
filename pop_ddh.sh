@@ -28,7 +28,7 @@ echo
 echo
 FTS=/tmp/ddh_stash
 F_CLONE_MAT=/tmp/mat
-NUM_TASKS=13
+NUM_TASKS=14
 
 
 
@@ -220,6 +220,17 @@ source /home/pi/.bashrc > /dev/null
 rv=$?
 _e $rv "sourcing bashrc"
 ((i_num++))
+
+
+
+
+spinner.start " $i_num / $NUM_TASKS  Load" "CSF conversion  "
+$FOL_VEN/bin/python3 $FOL_DDH/main_csf.py > /tmp/ddu_log 2>&1
+rv=$?
+spinner.stop
+_e $rv "CSF conversion"
+((i_num++))
+
 
 
 
