@@ -111,6 +111,7 @@ spinner.stop
 
 
 
+# MUST BE THERE
 spinner.start "  $i_num / $NUM_TASKS  Save" "DDH settings  "
     rm -rf $FTS
     mkdir $FTS && \
@@ -120,10 +121,13 @@ spinner.start "  $i_num / $NUM_TASKS  Save" "DDH settings  "
     rv=$?
 spinner.stop
 _e $rv "stashing DDH current configuration files"
-# might be there or not
+
+# MIGHT BE THERE or not
 cp "$FOL_DDH"/ddh/db/db_his.json $FTS 2> /dev/null
 cp "$FOL_DDH"/ddh/db/db_history_v3.txt $FTS 2> /dev/null
 cp "$FOL_DDH"/.decided_scf_*.toml $FTS 2> /dev/null
+cp "$FOL_DDH"/dl_files/.flag_need_csf $FTS 2> /dev/null
+
 
 # this copies the whole folder, with symlinks, not the real files
 cp -r "$FOL_DDH"/upload $FTS 2> /dev/null
@@ -189,12 +193,15 @@ spinner.start "  $i_num / $NUM_TASKS  Load" "DDH settings  "
     rv=$?
 spinner.stop
 _e $rv "un-stashing DDH current configuration files"
+
 # might be there or not
 cp $FTS/db_his.json "$FOL_DDH"/ddh/db 2> /dev/null
 cp $FTS/db_history_v3.txt "$FOL_DDH"/ddh/db 2> /dev/null
 cp $FTS/.decided_scf_*.toml "$FOL_DDH" 2> /dev/null
-mkdir "$FOL_DDH"/upload 2> /dev/null
+cp $FTS/.flag_need_csf "$FOL_DDH"/dl_files 2> /dev/null
+
 # -P copies the symlink, o/wise it would try to copy the real file
+mkdir "$FOL_DDH"/upload 2> /dev/null
 cp -P $FTS/upload/* "$FOL_DDH"/upload 2> /dev/null
 ((i_num++))
 
