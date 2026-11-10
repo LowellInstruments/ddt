@@ -233,7 +233,6 @@ _e $rv "sourcing bashrc"
 
 spinner.start " $i_num / $NUM_TASKS  Save" "create CSF db "
 if [ -f "$FOL_DDH"/main_csf.py ]; then
-    echo "    DDH v6 detected, checking need to generate CSF database"
     if [ -f "$FOL_DDH"/dl_files/.flag_need_csf ]; then
         echo "    DDH v6 file flag_need_csf EXISTS, no need to generate database"
     else
