@@ -239,10 +239,12 @@ if [ -f "$FOL_DDH"/main_csf.py ]; then
         "$FOL_VEN"/bin/python3 "$FOL_DDH"/main_csf.py > /tmp/ddu_log 2>&1
     fi
     rv=$?
+    sleep .1
     spinner.stop
     _e $rv "CSF conversion"
 else
     spinner.start " $i_num / $NUM_TASKS  Skip" "create CSF v5 "
+    sleep .1
     spinner.stop
 fi
 ((i_num++))
