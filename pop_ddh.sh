@@ -231,22 +231,22 @@ _e $rv "sourcing bashrc"
 
 
 
-spinner.start " $i_num / $NUM_TASKS  Save" "create CSF db "
 if [ -f "$FOL_DDH"/main_csf.py ]; then
     if [ -f "$FOL_DDH"/dl_files/.flag_need_csf ]; then
-        echo "    DDH v6 file flag_need_csf EXISTS, no need to generate database"
+        spinner.start " $i_num / $NUM_TASKS  Skip" "create CSF v6 "
     else
-        echo "    DDH v6 needs to generate new CSF database... please wait"
+        spinner.start " $i_num / $NUM_TASKS  Save" "create CSF v6 "
         "$FOL_VEN"/bin/python3 "$FOL_DDH"/main_csf.py > /tmp/ddu_log 2>&1
     fi
     rv=$?
     spinner.stop
     _e $rv "CSF conversion"
 else
-    echo "    DDH v5, no need to generate CSF database"
+    spinner.start " $i_num / $NUM_TASKS  Skip" "create CSF v5 "
     spinner.stop
 fi
 ((i_num++))
+
 
 
 
