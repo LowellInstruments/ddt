@@ -233,13 +233,18 @@ _e $rv "sourcing bashrc"
 
 spinner.start " $i_num / $NUM_TASKS  Save" "create CSF db "
 if [ -f "$FOL_DDH"/main_csf.py ]; then
-    echo "generating new CSF database... please wait"
-    "$FOL_VEN"/bin/python3 "$FOL_DDH"/main_csf.py > /tmp/ddu_log 2>&1
+    echo "v6 detected, checking need to generate CSF database"
+    if [ -f "$FOL_DDH"/dl_files/.flag_need_csf ]; then
+        echo "v6 file flag_need_csf EXISTS, no need to generate database"
+    else
+        echo "generating new CSF database... please wait"
+        "$FOL_VEN"/bin/python3 "$FOL_DDH"/main_csf.py > /tmp/ddu_log 2>&1
+    fi
     rv=$?
     spinner.stop
     _e $rv "CSF conversion"
 else
-    echo "no need to generate CSF database"
+    echo "v5, no need to generate CSF database"
     spinner.stop
 fi
 ((i_num++))
